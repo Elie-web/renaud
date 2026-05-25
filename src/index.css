@@ -1,0 +1,327 @@
+/* ─── Design Tokens ──────────────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --c-noir:    #060D0B;
+  --c-brun:    #0D2320;
+  --c-brun-md: #163328;
+  --c-or:      #C4A040;
+  --c-or-pale: #D8BE70;
+  --c-or-dim:  #8A7228;
+  --c-creme:   #F0F4F2;
+  --c-ivoire:  #F5F9F7;
+  --c-pierre:  #4A6880;
+  --c-texte:   #0C1410;
+  --c-texte-2: #3A5448;
+  --c-vert:    #5BAF78;
+  --c-bleu:    #0C0E88;
+  --bleu-15:   rgba(12,14,136,0.15);
+  --bleu-25:   rgba(12,14,136,0.25);
+  --bleu-50:   rgba(12,14,136,0.50);
+
+  /* Opacity aliases — eliminates hardcoded rgba throughout */
+  --or-10: rgba(196,160,64,0.10);
+  --or-15: rgba(196,160,64,0.15);
+  --or-20: rgba(196,160,64,0.20);
+  --or-25: rgba(196,160,64,0.25);
+  --or-40: rgba(196,160,64,0.40);
+  --cr-35: rgba(245,249,247,0.35);
+  --cr-50: rgba(245,249,247,0.50);
+  --cr-65: rgba(245,249,247,0.65);
+
+  /* Fonts */
+  --f-serif: 'Fraunces', Georgia, serif;
+  --f-sc:    'Fraunces', Georgia, serif;
+  --f-sans:  'DM Sans', system-ui, sans-serif;
+
+  /* Spacing (4 pt grid) */
+  --sp-1:  4px;  --sp-2:  8px;  --sp-3:  12px;
+  --sp-4:  16px; --sp-5:  20px; --sp-6:  24px;
+  --sp-8:  32px; --sp-10: 40px; --sp-12: 48px;
+  --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+
+  /* Border radius */
+  --r-pill: 100px;
+  --r-sm:   3px;
+  --r-md:   6px;
+
+  /* Layout */
+  --max-w:      1400px;
+  --px:         clamp(28px, 6vw, 128px);
+  --section-py: clamp(96px, 11vw, 176px);
+
+  /* Motion */
+  --ease:     cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur-mid:  340ms;
+  --dur-slow: 620ms;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--f-sans);
+  color: var(--c-texte);
+  background: var(--c-ivoire);
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a   { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+ul     { list-style: none; }
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar-track { background: var(--c-brun); }
+::-webkit-scrollbar-thumb { background: var(--c-or); border-radius: 2px; }
+
+/* ─── Typography utilities ───────────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--f-sc);
+  font-size: clamp(0.62rem, 0.9vw, 0.72rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-or);
+}
+.eyebrow--light { color: var(--c-or-pale); opacity: 0.9; }
+.eyebrow--dark  { color: var(--c-or-dim); }
+
+.display {
+  font-family: var(--f-serif);
+  font-size: clamp(3.2rem, 7vw, 8.5rem);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+}
+
+.h1 {
+  font-family: var(--f-serif);
+  font-size: clamp(2.4rem, 4.5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.h2 {
+  font-family: var(--f-serif);
+  font-size: clamp(1.9rem, 3.2vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.h3 {
+  font-family: var(--f-serif);
+  font-size: clamp(1.25rem, 1.8vw, 1.7rem);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.lead {
+  font-family: var(--f-sans);
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--c-texte-2);
+}
+
+/* ─── Layout utilities ───────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--px);
+}
+
+.section { padding: var(--section-py) 0; }
+
+/* ─── Gold accent line ───────────────────────────────────────────────── */
+.gold-line {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--c-or);
+  flex-shrink: 0;
+}
+
+/* ─── Button System ──────────────────────────────────────────────────── */
+
+/* Shared base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--f-sc);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 17px 42px;
+  border-radius: var(--r-pill);
+  transition: all var(--dur-mid) var(--ease);
+  white-space: nowrap;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  border: none;
+}
+
+/* Gold filled — primary CTA */
+.btn--gold {
+  background: var(--c-or);
+  color: var(--c-noir);
+}
+.btn--gold:hover {
+  background: var(--c-or-pale);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(196, 154, 108, 0.30), 0 0 0 1px rgba(12,14,136,0.22);
+}
+.btn--gold:active { transform: translateY(0); box-shadow: none; }
+
+/* Gold outline — on light bg */
+.btn--outline {
+  background: transparent;
+  color: var(--c-or);
+  border: 1px solid var(--or-40);
+}
+.btn--outline:hover {
+  background: var(--c-or);
+  color: var(--c-noir);
+  border-color: var(--c-or);
+}
+
+/* Light outline — on dark bg */
+.btn--outline-light {
+  background: transparent;
+  color: var(--cr-65);
+  border: 1px solid var(--cr-35);
+}
+.btn--outline-light:hover {
+  border-color: var(--cr-50);
+  background: rgba(245, 239, 230, 0.06);
+  color: var(--c-creme);
+}
+
+/* Full-width variant */
+.btn--full { width: 100%; justify-content: center; }
+
+/* ─── Arrow (inside .btn or standalone) ─────────────────────────────── */
+.arrow {
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  position: relative;
+  flex-shrink: 0;
+  transition: width var(--dur-mid) var(--ease);
+}
+.arrow::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+.btn:hover .arrow,
+.link-arrow:hover .arrow { width: 28px; }
+
+/* ─── Text link with arrow ───────────────────────────────────────────── */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--f-sc);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: inherit;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ─── Icon circle button ─────────────────────────────────────────────── */
+.btn-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--or-40);
+  background: transparent;
+  color: var(--c-or);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all var(--dur-mid) var(--ease);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.btn-circle:hover {
+  background: var(--c-or);
+  color: var(--c-noir);
+  border-color: var(--c-or);
+}
+
+/* dark bg version */
+.btn-circle--light {
+  border-color: var(--cr-35);
+  color: var(--c-creme);
+}
+.btn-circle--light:hover {
+  background: var(--c-creme);
+  color: var(--c-noir);
+  border-color: var(--c-creme);
+}
+
+/* ─── Grain texture overlay ──────────────────────────────────────────── */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%       { transform: translate(-2%, -3%); }
+  20%       { transform: translate(3%,  2%); }
+  30%       { transform: translate(-1%, 4%); }
+  40%       { transform: translate(4%, -1%); }
+  50%       { transform: translate(-3%, 3%); }
+  60%       { transform: translate(2%, -4%); }
+  70%       { transform: translate(-4%, 1%); }
+  80%       { transform: translate(1%, -2%); }
+  90%       { transform: translate(-2%, 4%); }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .grain::before { animation: none; }
+}
