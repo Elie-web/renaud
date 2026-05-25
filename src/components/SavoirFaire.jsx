@@ -177,7 +177,7 @@ export default function SavoirFaire() {
           style={{ position: 'relative' }}
           className="sf-image-wrap"
         >
-          <div style={{
+          <div className="sf-deco-border" style={{
             position: 'absolute',
             inset: '-16px',
             border: '1px solid rgba(196,160,64,0.25)',
@@ -222,9 +222,10 @@ export default function SavoirFaire() {
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
           .sf-grid { grid-template-columns: 1fr !important; }
-          .sf-image-wrap { order: -1; max-height: 320px; overflow: hidden; }
+          .sf-image-wrap { order: -1; max-height: 300px; overflow: hidden; }
+          .sf-deco-border { display: none; }
         }
       `}</style>
     </section>

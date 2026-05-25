@@ -165,7 +165,8 @@ export default function Hero() {
           style={{
             marginTop: 'clamp(52px, 9vh, 100px)',
             display: 'flex',
-            gap: 'clamp(36px, 5vw, 88px)',
+            flexWrap: 'wrap',
+            gap: 'clamp(24px, 5vw, 88px)',
             borderTop: '1px solid var(--or-20)',
             paddingTop: 'var(--sp-8)',
           }}
@@ -203,6 +204,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.2, duration: 0.8 }}
+        className="hero-scroll-indicator"
         style={{
           position: 'absolute',
           bottom: '36px',
@@ -228,10 +230,9 @@ export default function Hero() {
           style={{ width: '1px', height: '44px', background: 'linear-gradient(to bottom, var(--c-or), transparent)' }}
         />
       </motion.div>
+      <style>{`
+        @media (max-width: 600px) { .hero-scroll-indicator { display: none; } }
+      `}</style>
     </section>
   )
 }
-
-
-
-

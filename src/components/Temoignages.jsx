@@ -196,6 +196,9 @@ export default function Temoignages() {
         @media (max-width: 768px) {
           .temo-grid { grid-template-columns: 1fr !important; }
         }
+        @media (max-width: 500px) {
+          .btn-circle { width: 44px; height: 44px; }
+        }
       `}</style>
     </section>
   )

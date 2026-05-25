@@ -41,7 +41,7 @@ export default function FloatingCTA() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '13px 22px',
+                padding: '15px 22px',
                 borderRadius: 'var(--r-pill)',
                 border: '1px solid var(--or-25)',
                 color: 'var(--c-or)',

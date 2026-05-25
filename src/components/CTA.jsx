@@ -60,10 +60,10 @@ export default function CTA() {
               transition={{ duration: 1.0, ease: [0.25, 0.1, 0.25, 1] }}
               style={{
                 fontFamily: 'var(--f-serif)',
-                fontSize: 'clamp(2.4rem, 5vw, 6rem)',
+                fontSize: 'clamp(1.9rem, 5vw, 6rem)',
                 fontWeight: 400,
                 color: 'var(--c-ivoire)',
-                lineHeight: 1.02,
+                lineHeight: 1.08,
                 letterSpacing: '-0.02em',
                 marginBottom: 'var(--sp-8)',
               }}

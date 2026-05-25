@@ -98,7 +98,7 @@ export default function Materiaux() {
           {/* Left: tabs + detail */}
           <div>
             {/* Wood tabs */}
-            <div style={{
+            <div className="mat-tabs" style={{
               display: 'flex',
               gap: 'var(--sp-2)',
               marginBottom: 'var(--sp-10)',
@@ -264,6 +264,9 @@ export default function Materiaux() {
         @media (max-width: 900px) {
           .mat-grid { grid-template-columns: 1fr !important; }
           .mat-img { display: none; }
+        }
+        @media (max-width: 600px) {
+          .mat-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap !important; padding-bottom: 2px; }
         }
       `}</style>
     </section>

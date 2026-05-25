@@ -124,7 +124,7 @@ export default function Contact() {
                   }}
                 >
                   <div style={{
-                    width: '40px', height: '40px',
+                    width: '44px', height: '44px',
                     borderRadius: '50%',
                     border: '1px solid var(--or-20)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -229,7 +229,7 @@ export default function Contact() {
 
       <style>{`
         @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr !important; } }
-        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr !important; } }
+        @media (max-width: 560px) { .form-row { grid-template-columns: 1fr !important; } }
       `}</style>
     </section>
   )

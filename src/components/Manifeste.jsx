@@ -20,10 +20,10 @@ export default function Manifeste() {
           Ce que je crois
         </motion.span>
 
-        <div style={{ overflow: 'hidden' }}>
+        <div>
           <motion.h2
-            initial={{ y: '100%', opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportSettings}
             transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
             style={{

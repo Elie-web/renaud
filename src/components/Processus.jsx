@@ -85,6 +85,7 @@ export default function Processus() {
         >
           {/* Connecting line */}
           <motion.div
+            className="steps-connector"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={viewportSettings}
@@ -152,6 +153,7 @@ export default function Processus() {
         @media (max-width: 900px) {
           .steps-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .steps-grid > div:nth-child(1) { display: none; }
+          .steps-connector { display: none; }
         }
         @media (max-width: 560px) {
           .steps-grid { grid-template-columns: 1fr !important; }
