@@ -131,7 +131,7 @@ export default function Hero() {
             marginBottom: 'var(--sp-12)',
           }}
         >
-          Vingt ans d'atelier. Je dessine votre projet, je le modélise en 3D, et on démarre seulement quand ça vous convient.
+          9 ans d'atelier. Je dessine votre projet, je le modélise en 3D, et on démarre seulement quand ça vous convient.
         </motion.p>
 
         {/* CTAs */}
@@ -172,7 +172,7 @@ export default function Hero() {
           }}
         >
           {[
-            { to: 20,  suffix: '+',  label: "Années d'expérience", dur: 2 },
+            { to: 9,   suffix: ' ans', label: "D'expérience",        dur: 1.5 },
             { to: 300, suffix: '+',  label: 'Pièces créées',       dur: 2.5 },
             { to: 98,  suffix: '%',  label: 'Clients satisfaits',  dur: 2 },
           ].map(({ to, suffix, label, dur }) => (

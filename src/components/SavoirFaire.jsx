@@ -215,7 +215,7 @@ export default function SavoirFaire() {
               zIndex: 2,
             }}
           >
-            <div style={{ fontFamily: 'var(--f-serif)', fontSize: '2.4rem', fontWeight: 400, lineHeight: 1 }}>20</div>
+            <div style={{ fontFamily: 'var(--f-serif)', fontSize: '2.4rem', fontWeight: 400, lineHeight: 1 }}>9</div>
             <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.8 }}>ans d'atelier</div>
           </motion.div>
         </motion.div>

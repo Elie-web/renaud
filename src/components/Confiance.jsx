@@ -28,7 +28,7 @@ const logos = [
   { label: 'BMA\nÉbéniste', sub: 'Lycée des Métiers d\'Art, Coarraze' },
   { label: 'DNMADE\nMobilier', sub: 'Lyon SEPR' },
   { label: 'Bois\nFrançais', sub: 'Sélectionnés en scierie' },
-  { label: '20 ans\nd\'atelier', sub: 'Sur mesure & agencement' },
+  { label: '9 ans\nd\'atelier', sub: 'Sur mesure & agencement' },
 ]
 
 export default function Confiance() {
