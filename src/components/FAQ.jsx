@@ -54,7 +54,7 @@ export default function FAQ() {
         }} className="faq-grid">
 
           {/* Left — sticky label */}
-          <div style={{ position: 'sticky', top: '120px' }}>
+          <div className="faq-sticky" style={{ position: 'sticky', top: '120px' }}>
             <motion.span
               className="eyebrow eyebrow--dark"
               initial={{ opacity: 0, x: -24 }}
@@ -200,6 +200,7 @@ export default function FAQ() {
       <style>{`
         @media (max-width: 900px) {
           .faq-grid { grid-template-columns: 1fr !important; }
+          .faq-sticky { position: static !important; }
         }
       `}</style>
     </section>
