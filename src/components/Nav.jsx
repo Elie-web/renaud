@@ -23,6 +23,8 @@ export default function Nav() {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
+  const onLight = scrolled && !open
+
   return (
     <>
       <motion.nav
@@ -38,10 +40,18 @@ export default function Nav() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: open ? 'var(--c-brun)' : scrolled ? 'rgba(15,10,6,0.88)' : 'transparent',
-          backdropFilter: open ? 'none' : scrolled ? 'blur(20px) saturate(1.4)' : 'none',
-          WebkitBackdropFilter: open ? 'none' : scrolled ? 'blur(20px) saturate(1.4)' : 'none',
-          borderBottom: open ? '1px solid var(--or-20)' : scrolled ? '1px solid var(--or-15)' : 'none',
+          background: open
+            ? 'var(--c-brun)'
+            : scrolled
+              ? 'rgba(250,250,248,0.95)'
+              : 'transparent',
+          backdropFilter: open ? 'none' : scrolled ? 'blur(20px) saturate(1.3)' : 'none',
+          WebkitBackdropFilter: open ? 'none' : scrolled ? 'blur(20px) saturate(1.3)' : 'none',
+          borderBottom: open
+            ? '1px solid rgba(123,92,56,0.15)'
+            : scrolled
+              ? '1px solid var(--c-pierre)'
+              : 'none',
           transition: 'height 0.5s var(--ease), background 0.4s var(--ease), border-color 0.4s var(--ease)',
         }}
       >
@@ -51,14 +61,15 @@ export default function Nav() {
             fontFamily: 'var(--f-serif)',
             fontSize: 'clamp(1.35rem, 2vw, 1.65rem)',
             fontWeight: 400,
-            color: 'var(--c-ivoire)',
+            color: onLight ? 'var(--c-texte)' : 'var(--c-ivoire)',
             lineHeight: 1,
             letterSpacing: '-0.01em',
+            transition: 'color 0.4s var(--ease)',
           }}>Achard</span>
           <span style={{
             fontFamily: 'var(--f-sc)',
             fontSize: '0.52rem',
-            letterSpacing: '0.28em',
+            letterSpacing: '0.24em',
             color: 'var(--c-or)',
             textTransform: 'uppercase',
           }}>Ébénisteries & Créations</span>
@@ -68,19 +79,33 @@ export default function Nav() {
         <ul className="nav-links" style={{ display: 'flex', gap: 'clamp(24px, 3vw, 52px)' }}>
           {links.map((l) => (
             <li key={l.href}>
-              <NavLink href={l.href}>{l.label}</NavLink>
+              <NavLink href={l.href} light={!onLight}>{l.label}</NavLink>
             </li>
           ))}
         </ul>
 
         {/* Right: CTA + hamburger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-5)' }}>
-          <a href="#contact" className="btn btn--outline nav-cta" style={{ padding: '12px 28px', fontSize: '0.65rem' }}>
-            <span>Votre projet</span>
-            <span className="arrow" />
+          <a
+            href="#contact"
+            className="nav-cta"
+            style={{
+              fontFamily: 'var(--f-sc)',
+              fontSize: '0.62rem',
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              color: onLight ? 'var(--c-or-dim)' : 'var(--cr-65)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              transition: 'color 0.4s var(--ease)',
+            }}
+          >
+            Votre projet
+            <span className="arrow" style={{ width: '16px' }} />
           </a>
 
-          <HamburgerBtn open={open} onClick={() => setOpen(!open)} />
+          <HamburgerBtn open={open} light={!onLight} onClick={() => setOpen(!open)} />
         </div>
       </motion.nav>
 
@@ -128,7 +153,7 @@ export default function Nav() {
                       gap: 'var(--sp-4)',
                     }}
                   >
-                    <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.6rem', color: 'var(--c-or)', letterSpacing: '0.15em', marginTop: '4px' }}>
+                    <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', color: 'var(--c-or)', letterSpacing: '0.14em', marginTop: '4px' }}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     {l.label}
@@ -137,7 +162,7 @@ export default function Nav() {
               ))}
             </ul>
 
-            <div style={{ marginTop: 'var(--sp-16)', borderTop: '1px solid var(--or-20)', paddingTop: 'var(--sp-8)' }}>
+            <div style={{ marginTop: 'var(--sp-16)', borderTop: '1px solid rgba(184,144,64,0.2)', paddingTop: 'var(--sp-8)' }}>
               <a href="#contact" className="btn btn--gold" onClick={() => setOpen(false)}>
                 <span>Démarrer un projet</span>
                 <span className="arrow" />
@@ -159,29 +184,32 @@ export default function Nav() {
   )
 }
 
-function NavLink({ href, children }) {
+function NavLink({ href, children, light }) {
+  const base  = light ? 'var(--cr-65)' : 'var(--c-texte-2)'
+  const hover = 'var(--c-or)'
   return (
     <a
       href={href}
       style={{
         fontFamily: 'var(--f-sc)',
-        fontSize: '0.66rem',
-        letterSpacing: '0.2em',
+        fontSize: '0.64rem',
+        letterSpacing: '0.18em',
         textTransform: 'uppercase',
-        color: 'var(--cr-65)',
+        color: base,
         position: 'relative',
         paddingBottom: '4px',
         transition: 'color 0.2s ease',
       }}
-      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--c-or)' }}
-      onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--cr-65)' }}
+      onMouseEnter={(e) => { e.currentTarget.style.color = hover }}
+      onMouseLeave={(e) => { e.currentTarget.style.color = base }}
     >
       {children}
     </a>
   )
 }
 
-function HamburgerBtn({ open, onClick }) {
+function HamburgerBtn({ open, light, onClick }) {
+  const barColor = open ? 'var(--c-ivoire)' : light ? 'var(--c-ivoire)' : 'var(--c-texte)'
   return (
     <button
       onClick={onClick}
@@ -198,7 +226,7 @@ function HamburgerBtn({ open, onClick }) {
             opacity: open && i === 1 ? 0 : 1,
           }}
           transition={{ duration: 0.3 }}
-          style={{ display: 'block', width: '22px', height: '1px', background: 'var(--c-ivoire)' }}
+          style={{ display: 'block', width: '22px', height: '1px', background: barColor, transition: 'background 0.4s' }}
         />
       ))}
     </button>

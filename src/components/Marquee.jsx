@@ -7,11 +7,11 @@ export default function Marquee({ dark = false }) {
 
   return (
     <div style={{
-      background: dark ? 'var(--c-or)' : 'var(--c-brun)',
+      background: dark ? 'var(--c-or)' : 'var(--c-pierre)',
       overflow: 'hidden',
       padding: '18px 0',
-      borderTop: dark ? 'none' : '1px solid rgba(196,160,64,0.12)',
-      borderBottom: dark ? 'none' : '1px solid rgba(196,160,64,0.12)',
+      borderTop: dark ? 'none' : '1px solid var(--c-pierre)',
+      borderBottom: dark ? 'none' : '1px solid var(--c-pierre)',
     }}>
       <motion.div
         animate={{ x: ['0%', '-50%'] }}
@@ -35,7 +35,7 @@ export default function Marquee({ dark = false }) {
               fontSize: item === '✦' ? '0.5rem' : '0.72rem',
               letterSpacing: item === '✦' ? '0' : '0.22em',
               textTransform: 'uppercase',
-              color: dark ? 'var(--c-noir)' : 'rgba(196,160,64,0.55)',
+              color: dark ? 'var(--c-noir)' : 'var(--c-texte-2)',
               whiteSpace: 'nowrap',
               opacity: item === '✦' ? 0.5 : 1,
             }}

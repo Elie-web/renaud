@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 
@@ -37,7 +37,7 @@ export default function SavoirFaire() {
     <section
       id="savoirfaire"
       style={{
-        background: 'var(--c-brun)',
+        background: 'var(--c-ivoire)',
         padding: 'var(--section-py) var(--px)',
         overflow: 'hidden',
       }}
@@ -55,14 +55,14 @@ export default function SavoirFaire() {
         {/* Left — text */}
         <div>
           <motion.span
-            className="eyebrow eyebrow--light"
+            className="eyebrow eyebrow--dark"
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={viewportSettings}
             transition={{ duration: 0.7 }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-8)' }}
           >
-            <span className="gold-line" />
+            <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
             Savoir-faire
           </motion.span>
 
@@ -71,12 +71,9 @@ export default function SavoirFaire() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportSettings}
             transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
+            className="h2"
             style={{
-              fontFamily: 'var(--f-serif)',
-              fontSize: 'clamp(2rem, 3.5vw, 3.8rem)',
-              fontWeight: 400,
-              color: 'var(--c-ivoire)',
-              lineHeight: 1.1,
+              color: 'var(--c-texte)',
               marginBottom: 'var(--sp-12)',
               maxWidth: '18ch',
             }}
@@ -97,9 +94,8 @@ export default function SavoirFaire() {
                 key={e.n}
                 variants={staggerItem}
                 onClick={() => setActive(active === i ? null : i)}
-                data-cursor
                 style={{
-                  borderTop: '1px solid rgba(196,160,64,0.15)',
+                  borderTop: '1px solid var(--c-pierre)',
                   padding: 'var(--sp-6) 0',
                   cursor: 'pointer',
                 }}
@@ -113,8 +109,8 @@ export default function SavoirFaire() {
                   <div style={{ display: 'flex', gap: 'var(--sp-6)', alignItems: 'flex-start' }}>
                     <span style={{
                       fontFamily: 'var(--f-sc)',
-                      fontSize: '0.65rem',
-                      color: 'var(--c-or)',
+                      fontSize: '0.62rem',
+                      color: 'var(--c-or-dim)',
                       letterSpacing: '0.1em',
                       marginTop: '4px',
                       minWidth: '24px',
@@ -124,7 +120,7 @@ export default function SavoirFaire() {
                         fontFamily: 'var(--f-serif)',
                         fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)',
                         fontWeight: 400,
-                        color: active === i ? 'var(--c-or)' : 'var(--c-ivoire)',
+                        color: active === i ? 'var(--c-or-dim)' : 'var(--c-texte)',
                         transition: 'color 0.3s ease',
                         marginBottom: '0',
                       }}>{e.title}</h3>
@@ -137,10 +133,10 @@ export default function SavoirFaire() {
                             transition={{ duration: 0.4 }}
                             style={{
                               fontFamily: 'var(--f-sans)',
-                              fontSize: '0.9rem',
+                              fontSize: '0.95rem',
                               fontWeight: 400,
-                              color: 'rgba(245,249,247,0.65)',
-                              lineHeight: 1.65,
+                              color: 'var(--c-texte-2)',
+                              lineHeight: 1.7,
                               overflow: 'hidden',
                             }}
                           >
@@ -154,7 +150,7 @@ export default function SavoirFaire() {
                     animate={{ rotate: active === i ? 45 : 0 }}
                     transition={{ duration: 0.3 }}
                     style={{
-                      color: 'var(--c-or)',
+                      color: 'var(--c-or-dim)',
                       fontSize: '1.2rem',
                       lineHeight: 1,
                       flexShrink: 0,
@@ -164,7 +160,7 @@ export default function SavoirFaire() {
                 </div>
               </motion.li>
             ))}
-            <li style={{ borderTop: '1px solid rgba(196,160,64,0.15)' }} />
+            <li style={{ borderTop: '1px solid var(--c-pierre)' }} />
           </motion.ul>
         </div>
 
@@ -180,7 +176,7 @@ export default function SavoirFaire() {
           <div className="sf-deco-border" style={{
             position: 'absolute',
             inset: '-16px',
-            border: '1px solid rgba(196,160,64,0.25)',
+            border: '1px solid var(--c-pierre)',
             pointerEvents: 'none',
             zIndex: 0,
           }} />
@@ -216,7 +212,7 @@ export default function SavoirFaire() {
             }}
           >
             <div style={{ fontFamily: 'var(--f-serif)', fontSize: '2.4rem', fontWeight: 400, lineHeight: 1 }}>9</div>
-            <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.8 }}>ans d'atelier</div>
+            <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', letterSpacing: '0.18em', textTransform: 'uppercase', opacity: 0.8 }}>ans d'atelier</div>
           </motion.div>
         </motion.div>
       </div>
@@ -231,7 +227,3 @@ export default function SavoirFaire() {
     </section>
   )
 }
-
-
-
-

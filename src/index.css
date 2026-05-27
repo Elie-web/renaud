@@ -1,32 +1,35 @@
 /* ─── Design Tokens ──────────────────────────────────────────────────── */
 :root {
-  /* Colors */
-  --c-noir:    #060D0B;
-  --c-brun:    #0D2320;
-  --c-brun-md: #163328;
-  --c-or:      #C4A040;
-  --c-or-pale: #D8BE70;
-  --c-or-dim:  #8A7228;
-  --c-creme:   #F0F4F2;
-  --c-ivoire:  #F5F9F7;
-  --c-pierre:  #4A6880;
-  --c-texte:   #0C1410;
-  --c-texte-2: #3A5448;
-  --c-vert:    #5BAF78;
-  --c-bleu:    #0C0E88;
-  --bleu-15:   rgba(12,14,136,0.15);
-  --bleu-25:   rgba(12,14,136,0.25);
-  --bleu-50:   rgba(12,14,136,0.50);
+  /* Colors — warm natural palette */
+  --c-noir:    #1A1510;   /* warm charcoal — dark sections, footer */
+  --c-brun:    #231C14;   /* warm espresso — nav drawer */
+  --c-brun-md: #3D3126;   /* warm medium brown */
+  --c-or:      #B89040;   /* muted warm gold */
+  --c-or-pale: #CEAA60;   /* pale warm gold */
+  --c-or-dim:  #8A6B2A;   /* dark gold — eyebrows on light */
+  --c-creme:   #F0E8D8;   /* warm cream — text on dark, alt sections */
+  --c-ivoire:  #F7F2E8;   /* warm ivory — light section bg, text on dark */
+  --c-fond:    #FAFAF8;   /* near white — pure light sections */
+  --c-pierre:  #DDD4C2;   /* warm stone — borders on light bg */
+  --c-texte:   #1A1510;   /* warm near-black — main text */
+  --c-texte-2: #6B5D4F;   /* warm gray-brown — secondary text */
+  --c-vert:    #7A9B5A;   /* olive — availability dot */
+  --c-bleu:    #7B5C38;   /* wood brown — replaces electric blue */
+  --c-bois:    #7B5C38;   /* alias */
 
-  /* Opacity aliases — eliminates hardcoded rgba throughout */
-  --or-10: rgba(196,160,64,0.10);
-  --or-15: rgba(196,160,64,0.15);
-  --or-20: rgba(196,160,64,0.20);
-  --or-25: rgba(196,160,64,0.25);
-  --or-40: rgba(196,160,64,0.40);
-  --cr-35: rgba(245,249,247,0.35);
-  --cr-50: rgba(245,249,247,0.50);
-  --cr-65: rgba(245,249,247,0.65);
+  /* Opacity aliases */
+  --bleu-15:   rgba(123,92,56,0.12);
+  --bleu-25:   rgba(123,92,56,0.20);
+  --bleu-50:   rgba(123,92,56,0.38);
+
+  --or-10: rgba(184,144,64,0.10);
+  --or-15: rgba(184,144,64,0.15);
+  --or-20: rgba(184,144,64,0.20);
+  --or-25: rgba(184,144,64,0.25);
+  --or-40: rgba(184,144,64,0.40);
+  --cr-35: rgba(247,242,232,0.35);
+  --cr-50: rgba(247,242,232,0.50);
+  --cr-65: rgba(247,242,232,0.65);
 
   /* Fonts */
   --f-serif: 'Fraunces', Georgia, serif;
@@ -71,7 +74,7 @@ html {
 body {
   font-family: var(--f-sans);
   color: var(--c-texte);
-  background: var(--c-ivoire);
+  background: var(--c-fond);
   overflow-x: hidden;
 }
 
@@ -82,15 +85,15 @@ ul     { list-style: none; }
 
 /* ─── Scrollbar ──────────────────────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 3px; }
-::-webkit-scrollbar-track { background: var(--c-brun); }
+::-webkit-scrollbar-track { background: var(--c-creme); }
 ::-webkit-scrollbar-thumb { background: var(--c-or); border-radius: 2px; }
 
 /* ─── Typography utilities ───────────────────────────────────────────── */
 .eyebrow {
   font-family: var(--f-sc);
-  font-size: clamp(0.65rem, 2vw, 0.72rem);
+  font-size: clamp(0.62rem, 2vw, 0.68rem);
   font-weight: 400;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--c-or);
 }
@@ -149,23 +152,21 @@ ul     { list-style: none; }
 /* ─── Gold accent line ───────────────────────────────────────────────── */
 .gold-line {
   display: block;
-  width: 36px;
+  width: 32px;
   height: 1px;
   background: var(--c-or);
   flex-shrink: 0;
 }
 
 /* ─── Button System ──────────────────────────────────────────────────── */
-
-/* Shared base */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 14px;
   font-family: var(--f-sc);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 400;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 17px 42px;
   border-radius: var(--r-pill);
@@ -185,14 +186,14 @@ ul     { list-style: none; }
 .btn--gold:hover {
   background: var(--c-or-pale);
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(196, 154, 108, 0.30), 0 0 0 1px rgba(12,14,136,0.22);
+  box-shadow: 0 12px 40px rgba(184,144,64,0.28), 0 0 0 1px rgba(123,92,56,0.18);
 }
 .btn--gold:active { transform: translateY(0); box-shadow: none; }
 
 /* Gold outline — on light bg */
 .btn--outline {
   background: transparent;
-  color: var(--c-or);
+  color: var(--c-or-dim);
   border: 1px solid var(--or-40);
 }
 .btn--outline:hover {
@@ -209,14 +210,14 @@ ul     { list-style: none; }
 }
 .btn--outline-light:hover {
   border-color: var(--cr-50);
-  background: rgba(245, 239, 230, 0.06);
+  background: rgba(247,242,232,0.06);
   color: var(--c-creme);
 }
 
 /* Full-width variant */
 .btn--full { width: 100%; justify-content: center; }
 
-/* ─── Arrow (inside .btn or standalone) ─────────────────────────────── */
+/* ─── Arrow ──────────────────────────────────────────────────────────── */
 .arrow {
   display: inline-block;
   width: 18px;
@@ -246,8 +247,8 @@ ul     { list-style: none; }
   align-items: center;
   gap: 14px;
   font-family: var(--f-sc);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: inherit;
   text-decoration: none;
@@ -264,7 +265,7 @@ ul     { list-style: none; }
   border-radius: 50%;
   border: 1px solid var(--or-40);
   background: transparent;
-  color: var(--c-or);
+  color: var(--c-or-dim);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -279,7 +280,6 @@ ul     { list-style: none; }
   border-color: var(--c-or);
 }
 
-/* dark bg version */
 .btn-circle--light {
   border-color: var(--cr-35);
   color: var(--c-creme);
@@ -298,7 +298,7 @@ ul     { list-style: none; }
   width: 400%;
   height: 400%;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.028;
+  opacity: 0.022;
   pointer-events: none;
   z-index: 9999;
   animation: grain 8s steps(10) infinite;
@@ -321,8 +321,8 @@ ul     { list-style: none; }
 @media (max-width: 480px) {
   .btn {
     padding: 15px 28px;
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
+    font-size: 0.65rem;
+    letter-spacing: 0.13em;
     white-space: normal;
   }
   .btn--full { width: 100%; justify-content: center; }

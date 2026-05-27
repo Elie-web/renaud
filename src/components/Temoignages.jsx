@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 
@@ -42,7 +42,7 @@ export default function Temoignages() {
   const next = () => setCurrent((c) => (c + 1) % temoignages.length)
 
   return (
-    <section style={{ background: 'var(--c-brun)', padding: 'var(--section-py) var(--px)', overflow: 'hidden' }}>
+    <section style={{ background: 'var(--c-fond)', padding: 'var(--section-py) var(--px)', overflow: 'hidden' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <div className="temo-grid" style={{
           display: 'grid',
@@ -54,14 +54,14 @@ export default function Temoignages() {
           {/* Left */}
           <div>
             <motion.span
-              className="eyebrow eyebrow--light"
+              className="eyebrow eyebrow--dark"
               initial={{ opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={viewportSettings}
               transition={{ duration: 0.7 }}
               style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-6)' }}
             >
-              <span className="gold-line" />
+              <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
               Témoignages
             </motion.span>
 
@@ -70,35 +70,20 @@ export default function Temoignages() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportSettings}
               transition={{ duration: 0.9 }}
-              style={{
-                fontFamily: 'var(--f-serif)',
-                fontSize: 'clamp(2rem, 3vw, 3.4rem)',
-                fontWeight: 400,
-                color: 'var(--c-ivoire)',
-                lineHeight: 1.12,
-                marginBottom: 'var(--sp-10)',
-              }}
+              className="h2"
+              style={{ color: 'var(--c-texte)', marginBottom: 'var(--sp-10)' }}
             >
               Ce que disent
               <br />ceux qui vivent
-              <br /><em style={{ color: 'var(--c-or)' }}>avec mes pièces.</em>
+              <br /><em style={{ color: 'var(--c-or-dim)', fontStyle: 'italic' }}>avec mes pièces.</em>
             </motion.h2>
 
-            {/* Navigation circles */}
+            {/* Navigation */}
             <div style={{ display: 'flex', gap: 'var(--sp-3)', alignItems: 'center' }}>
-              <button
-                onClick={prev}
-                aria-label="Précédent"
-                className="btn-circle"
-              >←</button>
-              <button
-                onClick={next}
-                aria-label="Suivant"
-                className="btn-circle"
-              >→</button>
+              <button onClick={prev} aria-label="Précédent" className="btn-circle">←</button>
+              <button onClick={next} aria-label="Suivant" className="btn-circle">→</button>
             </div>
 
-            {/* Progress dots */}
             <div style={{ display: 'flex', gap: 'var(--sp-2)', marginTop: 'var(--sp-6)', alignItems: 'center' }}>
               {temoignages.map((_, i) => (
                 <button
@@ -108,7 +93,7 @@ export default function Temoignages() {
                   style={{
                     width: i === current ? '28px' : '6px',
                     height: '2px',
-                    background: i === current ? 'var(--c-or)' : 'var(--or-25)',
+                    background: i === current ? 'var(--c-or)' : 'var(--c-pierre)',
                     border: 'none',
                     borderRadius: 'var(--r-pill)',
                     transition: 'all 0.4s var(--ease)',
@@ -130,14 +115,13 @@ export default function Temoignages() {
                 exit={{ opacity: 0, x: -36 }}
                 transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                 style={{
-                  background: 'rgba(196,160,64,0.05)',
-                  border: '1px solid var(--or-15)',
+                  background: 'var(--c-ivoire)',
+                  border: '1px solid var(--c-pierre)',
                   borderRadius: 'var(--r-sm)',
                   padding: 'clamp(32px, 4vw, 52px)',
                   position: 'relative',
                 }}
               >
-                {/* Decorative quote */}
                 <div aria-hidden="true" style={{
                   position: 'absolute',
                   top: '-16px',
@@ -146,7 +130,7 @@ export default function Temoignages() {
                   fontSize: '5rem',
                   lineHeight: 1,
                   color: 'var(--c-or)',
-                  opacity: 0.18,
+                  opacity: 0.2,
                   userSelect: 'none',
                 }}>"</div>
 
@@ -158,7 +142,7 @@ export default function Temoignages() {
                   fontWeight: 400,
                   fontStyle: 'italic',
                   lineHeight: 1.65,
-                  color: 'var(--c-creme)',
+                  color: 'var(--c-texte)',
                   marginBottom: 'var(--sp-8)',
                 }}>
                   "{temoignages[current].text}"
@@ -178,10 +162,10 @@ export default function Temoignages() {
                     {temoignages[current].initial}
                   </div>
                   <div>
-                    <div style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', fontWeight: 500, color: 'var(--c-creme)' }}>
+                    <div style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', fontWeight: 500, color: 'var(--c-texte)' }}>
                       {temoignages[current].name}
                     </div>
-                    <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.6rem', letterSpacing: '0.14em', color: 'var(--c-or)', textTransform: 'uppercase' }}>
+                    <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', letterSpacing: '0.14em', color: 'var(--c-or-dim)', textTransform: 'uppercase' }}>
                       {temoignages[current].project}
                     </div>
                   </div>
@@ -203,6 +187,3 @@ export default function Temoignages() {
     </section>
   )
 }
-
-
-

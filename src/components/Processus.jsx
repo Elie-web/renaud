@@ -200,9 +200,9 @@ export default function Processus() {
                 width: '56px', height: '56px',
                 borderRadius: '50%',
                 border: '1px solid var(--c-bleu)',
-                background: 'linear-gradient(rgba(12,14,136,0.15),rgba(12,14,136,0.15)),var(--c-ivoire)',
+                background: 'linear-gradient(rgba(123,92,56,0.10),rgba(123,92,56,0.10)),var(--c-ivoire)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: '0 0 0 8px rgba(12,14,136,0.05)',
+                boxShadow: '0 0 0 8px rgba(123,92,56,0.06)',
                 opacity: stepOpacities[i],
                 y: stepY[i],
               }}
@@ -259,9 +259,9 @@ export default function Processus() {
               <div style={{
                 flexShrink: 0, width: '48px', height: '48px',
                 borderRadius: '50%', border: '1px solid var(--c-bleu)',
-                background: 'linear-gradient(rgba(12,14,136,0.15),rgba(12,14,136,0.15)),var(--c-ivoire)',
+                background: 'linear-gradient(rgba(123,92,56,0.10),rgba(123,92,56,0.10)),var(--c-ivoire)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: '0 0 0 6px rgba(12,14,136,0.05)',
+                boxShadow: '0 0 0 6px rgba(123,92,56,0.06)',
               }}>
                 <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.64rem', letterSpacing: '0.14em', color: 'var(--c-bleu)' }}>
                   {step.n}

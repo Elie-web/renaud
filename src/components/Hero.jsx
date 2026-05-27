@@ -68,7 +68,7 @@ export default function Hero() {
         />
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'linear-gradient(108deg, rgba(6,13,11,0.97) 0%, rgba(6,13,11,0.90) 38%, rgba(6,13,11,0.50) 68%, rgba(6,13,11,0.12) 100%)',
+          background: 'linear-gradient(108deg, rgba(26,21,16,0.96) 0%, rgba(26,21,16,0.86) 38%, rgba(26,21,16,0.44) 68%, rgba(26,21,16,0.08) 100%)',
         }} />
       </motion.div>
 

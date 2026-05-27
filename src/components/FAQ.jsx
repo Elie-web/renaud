@@ -157,7 +157,7 @@ export default function FAQ() {
                     animate={{ rotate: open === i ? 45 : 0 }}
                     transition={{ duration: 0.3 }}
                     style={{
-                      color: open === i ? 'var(--c-bleu)' : 'var(--c-or-dim)',
+                      color: 'var(--c-or-dim)',
                       fontSize: '1.4rem',
                       lineHeight: 1,
                       flexShrink: 0,

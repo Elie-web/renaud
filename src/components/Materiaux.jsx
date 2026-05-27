@@ -1,6 +1,6 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
+import { viewportSettings } from '../lib/motion'
 
 const woods = [
   {
@@ -49,7 +49,7 @@ export default function Materiaux() {
     <section
       id="materiaux"
       style={{
-        background: 'var(--c-noir)',
+        background: 'var(--c-ivoire)',
         padding: 'var(--section-py) var(--px)',
         overflow: 'hidden',
       }}
@@ -58,14 +58,14 @@ export default function Materiaux() {
         {/* Header */}
         <div style={{ marginBottom: 'clamp(48px, 6vw, 80px)' }}>
           <motion.span
-            className="eyebrow eyebrow--light"
+            className="eyebrow eyebrow--dark"
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={viewportSettings}
             transition={{ duration: 0.7 }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-4)' }}
           >
-            <span className="gold-line" />
+            <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
             Les matériaux
           </motion.span>
           <motion.h2
@@ -73,17 +73,12 @@ export default function Materiaux() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportSettings}
             transition={{ duration: 0.9 }}
-            style={{
-              fontFamily: 'var(--f-serif)',
-              fontSize: 'clamp(2rem, 3.5vw, 3.8rem)',
-              fontWeight: 400,
-              color: 'var(--c-ivoire)',
-              lineHeight: 1.1,
-            }}
+            className="h2"
+            style={{ color: 'var(--c-texte)' }}
           >
             Les bois que j'utilise,
             <br />
-            <em style={{ color: 'var(--c-or)', fontStyle: 'italic' }}>et pourquoi.</em>
+            <em style={{ color: 'var(--c-or-dim)', fontStyle: 'italic' }}>et pourquoi.</em>
           </motion.h2>
         </div>
 
@@ -102,20 +97,19 @@ export default function Materiaux() {
               display: 'flex',
               gap: 'var(--sp-2)',
               marginBottom: 'var(--sp-10)',
-              borderBottom: '1px solid rgba(196,160,64,0.15)',
+              borderBottom: '1px solid var(--c-pierre)',
               paddingBottom: '0',
             }}>
               {woods.map((w, i) => (
                 <button
                   key={w.name}
                   onClick={() => setActive(i)}
-                  data-cursor
                   style={{
                     fontFamily: 'var(--f-sc)',
-                    fontSize: '0.7rem',
-                    letterSpacing: '0.15em',
+                    fontSize: '0.66rem',
+                    letterSpacing: '0.14em',
                     textTransform: 'uppercase',
-                    color: active === i ? 'var(--c-or)' : 'rgba(245,249,247,0.35)',
+                    color: active === i ? 'var(--c-or-dim)' : 'var(--c-texte-2)',
                     padding: '12px 20px 14px',
                     transition: 'color 0.3s ease',
                     position: 'relative',
@@ -157,7 +151,7 @@ export default function Materiaux() {
                     height: '32px',
                     borderRadius: '50%',
                     background: wood.color,
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(0,0,0,0.08)',
                     flexShrink: 0,
                   }} />
                   <div>
@@ -165,14 +159,14 @@ export default function Materiaux() {
                       fontFamily: 'var(--f-serif)',
                       fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
                       fontWeight: 400,
-                      color: 'var(--c-ivoire)',
+                      color: 'var(--c-texte)',
                       lineHeight: 1,
                     }}>{wood.name}</div>
                     <div style={{
                       fontFamily: 'var(--f-sc)',
-                      fontSize: '0.62rem',
-                      letterSpacing: '0.15em',
-                      color: 'var(--c-or)',
+                      fontSize: '0.6rem',
+                      letterSpacing: '0.14em',
+                      color: 'var(--c-or-dim)',
                       textTransform: 'uppercase',
                     }}>{wood.character}</div>
                   </div>
@@ -183,7 +177,7 @@ export default function Materiaux() {
                   fontSize: 'clamp(0.9rem, 1.1vw, 1rem)',
                   fontWeight: 400,
                   lineHeight: 1.75,
-                  color: 'rgba(245,249,247,0.72)',
+                  color: 'var(--c-texte-2)',
                   marginBottom: 'var(--sp-8)',
                   maxWidth: '44ch',
                 }}>
@@ -196,12 +190,12 @@ export default function Materiaux() {
                   gap: 'var(--sp-3)',
                   marginBottom: 'var(--sp-4)',
                 }}>
-                  <span className="gold-line" style={{ width: '20px' }} />
+                  <span className="gold-line" style={{ width: '20px', background: 'var(--c-or-dim)' }} />
                   <span style={{
                     fontFamily: 'var(--f-sc)',
-                    fontSize: '0.62rem',
-                    letterSpacing: '0.2em',
-                    color: 'rgba(245,249,247,0.4)',
+                    fontSize: '0.6rem',
+                    letterSpacing: '0.18em',
+                    color: 'var(--c-texte-2)',
                     textTransform: 'uppercase',
                   }}>Utilisations</span>
                 </div>
@@ -210,22 +204,22 @@ export default function Materiaux() {
                   {wood.uses.map((u) => (
                     <span key={u} style={{
                       fontFamily: 'var(--f-sc)',
-                      fontSize: '0.62rem',
+                      fontSize: '0.6rem',
                       letterSpacing: '0.12em',
                       textTransform: 'uppercase',
-                      color: 'var(--c-or)',
-                      border: '1px solid rgba(196,160,64,0.3)',
+                      color: 'var(--c-bois)',
+                      border: '1px solid var(--c-pierre)',
                       padding: '5px 14px',
                     }}>{u}</span>
                   ))}
                 </div>
 
-                <div style={{ marginTop: 'var(--sp-6)', paddingTop: 'var(--sp-6)', borderTop: '1px solid rgba(196,160,64,0.12)' }}>
+                <div style={{ marginTop: 'var(--sp-6)', paddingTop: 'var(--sp-6)', borderTop: '1px solid var(--c-pierre)' }}>
                   <span style={{
                     fontFamily: 'var(--f-sc)',
-                    fontSize: '0.6rem',
-                    letterSpacing: '0.18em',
-                    color: 'rgba(245,249,247,0.3)',
+                    fontSize: '0.58rem',
+                    letterSpacing: '0.16em',
+                    color: 'var(--c-texte-2)',
                     textTransform: 'uppercase',
                   }}>Origine · {wood.origin}</span>
                 </div>
@@ -249,11 +243,10 @@ export default function Materiaux() {
                 alt={`Bois de ${wood.name}`}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
-              {/* Color swatch overlay */}
               <div style={{
                 position: 'absolute',
                 inset: 0,
-                background: `linear-gradient(135deg, ${wood.color}33 0%, transparent 60%)`,
+                background: `linear-gradient(135deg, ${wood.color}22 0%, transparent 60%)`,
               }} />
             </motion.div>
           </AnimatePresence>
@@ -272,7 +265,3 @@ export default function Materiaux() {
     </section>
   )
 }
-
-
-
-

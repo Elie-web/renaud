@@ -1,4 +1,4 @@
-﻿import { motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 
 const garanties = [
@@ -34,27 +34,24 @@ const logos = [
 export default function Confiance() {
   return (
     <section style={{
-      background: 'var(--c-brun)',
+      background: 'var(--c-creme)',
       padding: 'var(--section-py) var(--px)',
       overflow: 'hidden',
     }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         {/* Header */}
-        <div style={{
-          textAlign: 'center',
-          marginBottom: 'clamp(48px, 7vw, 96px)',
-        }}>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(48px, 7vw, 96px)' }}>
           <motion.span
-            className="eyebrow eyebrow--light"
+            className="eyebrow eyebrow--dark"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={viewportSettings}
             transition={{ duration: 0.7 }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-4)' }}
           >
-            <span className="gold-line" />
+            <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
             Engagements
-            <span className="gold-line" />
+            <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
           </motion.span>
 
           <motion.h2
@@ -62,17 +59,12 @@ export default function Confiance() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportSettings}
             transition={{ duration: 0.9 }}
-            style={{
-              fontFamily: 'var(--f-serif)',
-              fontSize: 'clamp(2rem, 3.5vw, 3.8rem)',
-              fontWeight: 400,
-              color: 'var(--c-ivoire)',
-              lineHeight: 1.1,
-            }}
+            className="h2"
+            style={{ color: 'var(--c-texte)' }}
           >
             Ce que je garantis
             <br />
-            <em style={{ color: 'var(--c-or)' }}>sur chaque projet.</em>
+            <em style={{ color: 'var(--c-or-dim)', fontStyle: 'italic' }}>sur chaque projet.</em>
           </motion.h2>
         </div>
 
@@ -96,19 +88,19 @@ export default function Confiance() {
               variants={staggerItem}
               style={{
                 padding: 'clamp(24px, 3vw, 40px)',
-                border: '1px solid var(--or-15)',
+                border: '1px solid var(--c-pierre)',
                 borderRadius: 'var(--r-sm)',
-                background: 'rgba(196,160,64,0.03)',
+                background: 'rgba(255,255,255,0.6)',
                 transition: 'border-color 0.3s, background 0.3s',
               }}
               whileHover={{
-                borderColor: 'rgba(196,160,64,0.3)',
-                backgroundColor: 'rgba(196,160,64,0.07)',
+                borderColor: 'var(--c-or)',
+                backgroundColor: 'rgba(255,255,255,0.9)',
               }}
             >
               <div style={{
                 fontSize: '1.4rem',
-                color: 'var(--c-or)',
+                color: 'var(--c-or-dim)',
                 marginBottom: 'var(--sp-5)',
                 display: 'block',
               }}>{g.icon}</div>
@@ -116,7 +108,7 @@ export default function Confiance() {
                 fontFamily: 'var(--f-serif)',
                 fontSize: 'clamp(1.1rem, 1.5vw, 1.3rem)',
                 fontWeight: 400,
-                color: 'var(--c-ivoire)',
+                color: 'var(--c-texte)',
                 marginBottom: 'var(--sp-3)',
                 lineHeight: 1.25,
               }}>{g.title}</h3>
@@ -125,7 +117,7 @@ export default function Confiance() {
                 fontSize: '0.88rem',
                 fontWeight: 400,
                 lineHeight: 1.7,
-                color: 'rgba(245,249,247,0.62)',
+                color: 'var(--c-texte-2)',
               }}>{g.desc}</p>
             </motion.div>
           ))}
@@ -138,8 +130,8 @@ export default function Confiance() {
           viewport={viewportSettings}
           transition={{ duration: 0.9, delay: 0.2 }}
           style={{
-            borderTop: '1px solid var(--or-15)',
-            borderBottom: '1px solid var(--or-15)',
+            borderTop: '1px solid var(--c-pierre)',
+            borderBottom: '1px solid var(--c-pierre)',
             padding: 'var(--sp-8) 0',
             display: 'flex',
             justifyContent: 'space-around',
@@ -154,7 +146,7 @@ export default function Confiance() {
                 fontFamily: 'var(--f-serif)',
                 fontSize: 'clamp(0.9rem, 1.3vw, 1.1rem)',
                 fontWeight: 400,
-                color: 'var(--c-or)',
+                color: 'var(--c-texte)',
                 lineHeight: 1.2,
                 whiteSpace: 'pre-line',
                 marginBottom: '4px',
@@ -163,7 +155,7 @@ export default function Confiance() {
                 fontFamily: 'var(--f-sc)',
                 fontSize: '0.55rem',
                 letterSpacing: '0.15em',
-                color: 'rgba(245,249,247,0.42)',
+                color: 'var(--c-texte-2)',
                 textTransform: 'uppercase',
               }}>{l.sub}</div>
             </div>
@@ -182,7 +174,3 @@ export default function Confiance() {
     </section>
   )
 }
-
-
-
-

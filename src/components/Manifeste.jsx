@@ -108,7 +108,7 @@ export default function Manifeste() {
                     width: '6px',
                     height: '6px',
                     borderRadius: '50%',
-                    background: 'var(--c-bleu)',
+                    background: 'var(--c-bois)',
                     flexShrink: 0,
                     marginTop: '7px',
                   }} />
@@ -162,7 +162,7 @@ export default function Manifeste() {
                     display: 'block',
                     width: '28px',
                     height: '1px',
-                    background: 'var(--c-bleu)',
+                    background: 'var(--c-bois)',
                     flexShrink: 0,
                   }} />
                   <h3 style={{

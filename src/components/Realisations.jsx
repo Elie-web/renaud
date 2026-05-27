@@ -138,7 +138,7 @@ function Card({ project, index }) {
           position: 'absolute',
           top: 'var(--sp-4)',
           left: 'var(--sp-4)',
-          background: 'rgba(12,14,136,0.65)',
+          background: 'rgba(26,21,16,0.62)',
           backdropFilter: 'blur(8px)',
           padding: '5px 12px',
         }}
@@ -154,7 +154,7 @@ export default function Realisations() {
     <section
       id="realisations"
       style={{
-        background: 'var(--c-creme)',
+        background: 'var(--c-fond)',
         padding: 'var(--section-py) var(--px)',
       }}
     >
