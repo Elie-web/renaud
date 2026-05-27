@@ -1,5 +1,4 @@
 import FloatingCTA from './components/FloatingCTA'
-import Cursor from './components/Cursor'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Manifeste from './components/Manifeste'
@@ -19,7 +18,6 @@ export default function App() {
   return (
     <>
       <div className="grain" aria-hidden="true" />
-      <Cursor />
       <FloatingCTA />
       <Nav />
       <main>
