@@ -5,40 +5,38 @@ const steps = [
   {
     n: '01',
     title: 'La rencontre',
-    desc: "Une conversation, chez vous ou à l'atelier. Je regarde l'espace, j'écoute ce que vous avez en tête. Je ne dessine rien avant d'avoir compris.",
+    desc: "Une conversation chez vous ou à l'atelier. Je regarde l'espace, j'écoute ce que vous avez en tête. Je ne dessine rien avant d'avoir compris.",
   },
   {
     n: '02',
     title: 'La conception',
-    desc: "Croquis à la main d'abord, puis un rendu 3D réaliste pour que vous voyiez exactement ce que vous aurez. On choisit les essences ensemble, on arrête les finitions. Rien n'est commandé avant votre accord.",
+    desc: "Croquis d'abord, puis un rendu 3D pour que vous voyiez exactement ce que vous aurez. On choisit les essences ensemble. Rien n'est commandé avant votre accord.",
   },
   {
     n: '03',
     title: 'La fabrication',
-    desc: "Tout se passe à l'atelier. À la main pour les assemblages, à la machine pour les débits. Je n'externalise pas. Aucune pièce ne part avant d'être juste.",
+    desc: "Tout se passe à l'atelier — à la main pour les assemblages, à la machine pour les débits. Je n'externalise pas. Aucune pièce ne part avant d'être juste.",
   },
   {
     n: '04',
     title: 'La livraison',
-    desc: "Je livre et j'installe moi-même. Je vérifie l'aplomb, les jours, les finitions. Et je suis joignable si quelque chose n'est pas parfait après.",
+    desc: "Je livre et j'installe moi-même. Je vérifie l'aplomb, les jours, les finitions. Joignable si quelque chose n'est pas parfait après.",
   },
 ]
 
-// Desktop layout — container: 960px tall
-// Even steps (01,03): left side  → circle at left:5%  → center x ≈ 78 in SVG 0-1000
-// Odd  steps (02,04): right side → circle at left:55% → center x ≈ 578
-// Row tops: 20, 260, 500, 740  → circle centers y: 48, 288, 528, 768
-
+// Desktop: 4 rows × 280px = 1120px container
+// Even steps (01,03): left  → circle left:5%  → SVG center x≈78
+// Odd  steps (02,04): right → circle left:55% → SVG center x≈578
+// Circle center y: top+28 → 48, 328, 608, 888
 const POSITIONS = [
   { side: 'left',  top: 20,  delay: 0.3  },
-  { side: 'right', top: 260, delay: 1.05 },
-  { side: 'left',  top: 500, delay: 1.65 },
-  { side: 'right', top: 740, delay: 2.2  },
+  { side: 'right', top: 300, delay: 1.05 },
+  { side: 'left',  top: 580, delay: 1.65 },
+  { side: 'right', top: 860, delay: 2.2  },
 ]
 
-// SVG smooth S-curve through all four circle centers
-const PATH = 'M 78,48 C 220,48 470,288 578,288 C 578,408 78,408 78,528 C 78,648 578,648 578,768'
-const NODES = [[78, 48], [578, 288], [78, 528], [578, 768]]
+const PATH  = 'M 78,48 C 220,48 470,328 578,328 C 578,468 78,468 78,608 C 78,748 578,748 578,888'
+const NODES = [[78, 48], [578, 328], [78, 608], [578, 888]]
 
 export default function Processus() {
   return (
@@ -75,11 +73,11 @@ export default function Processus() {
         </div>
 
         {/* ── Desktop ───────────────────────────────────────────── */}
-        <div className="process-desktop" style={{ position: 'relative', height: '960px' }}>
+        <div className="process-desktop" style={{ position: 'relative', height: '1120px' }}>
 
           {/* Animated winding path */}
           <svg
-            viewBox="0 0 1000 960"
+            viewBox="0 0 1000 1120"
             preserveAspectRatio="none"
             aria-hidden="true"
             style={{
@@ -111,7 +109,7 @@ export default function Processus() {
             ))}
           </svg>
 
-          {/* Decorative large numbers (opposite side from content) */}
+          {/* Decorative large numbers */}
           {steps.map((step, i) => {
             const isLeft = i % 2 === 0
             return (
@@ -188,22 +186,22 @@ export default function Processus() {
                   position: 'absolute',
                   left: isLeft ? 'calc(5% + 68px)' : 'calc(55% + 68px)',
                   top: `${top}px`,
-                  maxWidth: '260px',
+                  maxWidth: '300px',
                   zIndex: 1,
                 }}
               >
                 <h3 style={{
                   fontFamily: 'var(--f-serif)',
-                  fontSize: 'clamp(1.4rem, 1.9vw, 2rem)',
+                  fontSize: 'clamp(1.4rem, 2vw, 2.2rem)',
                   fontWeight: 400,
                   color: 'var(--c-texte)',
-                  marginBottom: '10px',
-                  lineHeight: 1.15,
+                  marginBottom: '12px',
+                  lineHeight: 1.1,
                 }}>{step.title}</h3>
                 <p style={{
                   fontFamily: 'var(--f-sans)',
-                  fontSize: 'clamp(0.8rem, 0.92vw, 0.9rem)',
-                  lineHeight: 1.78,
+                  fontSize: '1.05rem',
+                  lineHeight: 1.65,
                   color: 'var(--c-texte-2)',
                 }}>{step.desc}</p>
               </motion.div>
