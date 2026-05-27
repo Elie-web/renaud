@@ -1,32 +1,44 @@
-﻿import { motion } from 'framer-motion'
-import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
+import { motion } from 'framer-motion'
+import { viewportSettings } from '../lib/motion'
 
 const steps = [
   {
     n: '01',
     title: 'La rencontre',
-    desc: 'Une conversation, chez vous ou à l\'atelier. Je regarde l\'espace, j\'écoute ce que vous avez en tête. Je ne dessine rien avant d\'avoir compris.',
-    icon: '◌',
+    desc: "Une conversation, chez vous ou à l'atelier. Je regarde l'espace, j'écoute ce que vous avez en tête. Je ne dessine rien avant d'avoir compris.",
   },
   {
     n: '02',
     title: 'La conception',
-    desc: 'Croquis à la main d\'abord, puis un rendu 3D réaliste pour que vous voyiez exactement ce que vous aurez. On choisit les essences ensemble, on arrête les finitions. Rien n\'est commandé avant votre accord.',
-    icon: '△',
+    desc: "Croquis à la main d'abord, puis un rendu 3D réaliste pour que vous voyiez exactement ce que vous aurez. On choisit les essences ensemble, on arrête les finitions. Rien n'est commandé avant votre accord.",
   },
   {
     n: '03',
     title: 'La fabrication',
-    desc: 'Tout se passe à l\'atelier. À la main pour les assemblages, à la machine pour les débits. Je n\'externalise pas. Aucune pièce ne part avant d\'être juste.',
-    icon: '□',
+    desc: "Tout se passe à l'atelier. À la main pour les assemblages, à la machine pour les débits. Je n'externalise pas. Aucune pièce ne part avant d'être juste.",
   },
   {
     n: '04',
     title: 'La livraison',
-    desc: 'Je livre et j\'installe moi-même. Je vérifie l\'aplomb, les jours, les finitions. Et je suis joignable si quelque chose n\'est pas parfait après.',
-    icon: '◇',
+    desc: "Je livre et j'installe moi-même. Je vérifie l'aplomb, les jours, les finitions. Et je suis joignable si quelque chose n'est pas parfait après.",
   },
 ]
+
+// Desktop layout — container: 960px tall
+// Even steps (01,03): left side  → circle at left:5%  → center x ≈ 78 in SVG 0-1000
+// Odd  steps (02,04): right side → circle at left:55% → center x ≈ 578
+// Row tops: 20, 260, 500, 740  → circle centers y: 48, 288, 528, 768
+
+const POSITIONS = [
+  { side: 'left',  top: 20,  delay: 0.3  },
+  { side: 'right', top: 260, delay: 1.05 },
+  { side: 'left',  top: 500, delay: 1.65 },
+  { side: 'right', top: 740, delay: 2.2  },
+]
+
+// SVG smooth S-curve through all four circle centers
+const PATH = 'M 78,48 C 220,48 470,288 578,288 C 578,408 78,408 78,528 C 78,648 578,648 578,768'
+const NODES = [[78, 48], [578, 288], [78, 528], [578, 768]]
 
 export default function Processus() {
   return (
@@ -36,130 +48,212 @@ export default function Processus() {
       overflow: 'hidden',
     }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-end',
-          marginBottom: 'clamp(48px, 7vw, 96px)',
-          flexWrap: 'wrap',
-          gap: 'var(--sp-8)',
-        }}>
-          <div>
-            <motion.span
-              className="eyebrow eyebrow--dark"
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={viewportSettings}
-              transition={{ duration: 0.7 }}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-4)' }}
-            >
-              <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
-              Comment je travaille
-            </motion.span>
-            <motion.h2
-              className="h2"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewportSettings}
-              transition={{ duration: 0.9 }}
-              style={{ color: 'var(--c-texte)', maxWidth: '20ch' }}
-            >
-              De l'idée à la pièce finie.
-            </motion.h2>
-          </div>
+
+        {/* Header */}
+        <div style={{ marginBottom: 'clamp(56px, 7vw, 96px)' }}>
+          <motion.span
+            className="eyebrow eyebrow--dark"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={viewportSettings}
+            transition={{ duration: 0.7 }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-4)' }}
+          >
+            <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
+            Comment je travaille
+          </motion.span>
+          <motion.h2
+            className="h2"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportSettings}
+            transition={{ duration: 0.9 }}
+            style={{ color: 'var(--c-texte)', maxWidth: '22ch' }}
+          >
+            De l'idée à la pièce finie.
+          </motion.h2>
         </div>
 
-        {/* Steps grid */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportSettings}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 'var(--sp-3)',
-            position: 'relative',
-          }}
-          className="steps-grid"
-        >
-          {/* Connecting line */}
-          <motion.div
-            className="steps-connector"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={viewportSettings}
-            transition={{ duration: 1.4, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+        {/* ── Desktop ───────────────────────────────────────────── */}
+        <div className="process-desktop" style={{ position: 'relative', height: '960px' }}>
+
+          {/* Animated winding path */}
+          <svg
+            viewBox="0 0 1000 960"
+            preserveAspectRatio="none"
+            aria-hidden="true"
             style={{
-              position: 'absolute',
-              top: '28px',
-              left: 'calc(12.5% + 24px)',
-              right: 'calc(12.5% + 24px)',
-              height: '1px',
-              background: 'linear-gradient(90deg, var(--c-or-dim), var(--c-bleu), var(--c-or-dim))',
-              transformOrigin: 'left center',
-              zIndex: 0,
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%',
+              pointerEvents: 'none', overflow: 'visible',
             }}
-          />
+          >
+            <motion.path
+              d={PATH}
+              fill="none"
+              stroke="var(--c-or-dim)"
+              strokeWidth="1"
+              strokeLinecap="round"
+              opacity="0.45"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 3.2, ease: [0.4, 0, 0.2, 1] }}
+            />
+            {NODES.map(([cx, cy], i) => (
+              <motion.circle
+                key={i} cx={cx} cy={cy} r={5}
+                fill="var(--c-or)"
+                initial={{ opacity: 0 }} whileInView={{ opacity: 0.7 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: POSITIONS[i].delay - 0.05 }}
+              />
+            ))}
+          </svg>
 
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.n}
-              variants={staggerItem}
-              style={{ position: 'relative', zIndex: 1 }}
-            >
-              {/* Number circle */}
-              <div style={{
-                width: '56px',
-                height: '56px',
-                border: '1px solid var(--c-bleu)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: 'var(--bleu-15)',
-                marginBottom: 'var(--sp-6)',
-              }}>
-                <span style={{
-                  fontFamily: 'var(--f-sc)',
-                  fontSize: '0.7rem',
-                  letterSpacing: '0.12em',
+          {/* Decorative large numbers (opposite side from content) */}
+          {steps.map((step, i) => {
+            const isLeft = i % 2 === 0
+            return (
+              <div
+                key={`d-${step.n}`}
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  top: `${POSITIONS[i].top - 10}px`,
+                  ...(isLeft
+                    ? { right: '4%', textAlign: 'right' }
+                    : { left: '4%',  textAlign: 'left'  }),
+                  fontFamily: 'var(--f-serif)',
+                  fontSize: 'clamp(80px, 10vw, 140px)',
+                  fontWeight: 400,
+                  lineHeight: 1,
                   color: 'var(--c-bleu)',
-                }}>{s.n}</span>
+                  opacity: 0.055,
+                  letterSpacing: '-0.02em',
+                  userSelect: 'none',
+                  pointerEvents: 'none',
+                  width: '42%',
+                  overflow: 'hidden',
+                }}
+              >
+                {step.n}
               </div>
+            )
+          })}
 
-              <h3 style={{
-                fontFamily: 'var(--f-serif)',
-                fontSize: 'clamp(1.2rem, 1.8vw, 1.6rem)',
-                fontWeight: 400,
-                color: 'var(--c-texte)',
-                marginBottom: 'var(--sp-4)',
-                lineHeight: 1.2,
-              }}>{s.title}</h3>
+          {/* Circles */}
+          {steps.map((step, i) => {
+            const isLeft = i % 2 === 0
+            const { top, delay } = POSITIONS[i]
+            return (
+              <motion.div
+                key={`c-${step.n}`}
+                initial={{ opacity: 0, scale: 0.4 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay, ease: [0.34, 1.4, 0.64, 1] }}
+                style={{
+                  position: 'absolute',
+                  left: isLeft ? '5%' : '55%',
+                  top: `${top}px`,
+                  zIndex: 2,
+                  width: '56px', height: '56px',
+                  borderRadius: '50%',
+                  border: '1px solid var(--c-bleu)',
+                  background: 'linear-gradient(rgba(12,14,136,0.15),rgba(12,14,136,0.15)),var(--c-ivoire)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  boxShadow: '0 0 0 8px rgba(12,14,136,0.05)',
+                }}
+              >
+                <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.68rem', letterSpacing: '0.14em', color: 'var(--c-bleu)' }}>
+                  {step.n}
+                </span>
+              </motion.div>
+            )
+          })}
 
-              <p style={{
-                fontFamily: 'var(--f-sans)',
-                fontSize: 'clamp(0.85rem, 1vw, 0.95rem)',
-                fontWeight: 400,
-                lineHeight: 1.7,
-                color: 'var(--c-texte-2)',
-              }}>{s.desc}</p>
+          {/* Text cards */}
+          {steps.map((step, i) => {
+            const isLeft = i % 2 === 0
+            const { top, delay } = POSITIONS[i]
+            return (
+              <motion.div
+                key={`t-${step.n}`}
+                initial={{ opacity: 0, x: isLeft ? -16 : 16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: delay + 0.15 }}
+                style={{
+                  position: 'absolute',
+                  left: isLeft ? 'calc(5% + 68px)' : 'calc(55% + 68px)',
+                  top: `${top}px`,
+                  maxWidth: '260px',
+                  zIndex: 1,
+                }}
+              >
+                <h3 style={{
+                  fontFamily: 'var(--f-serif)',
+                  fontSize: 'clamp(1.4rem, 1.9vw, 2rem)',
+                  fontWeight: 400,
+                  color: 'var(--c-texte)',
+                  marginBottom: '10px',
+                  lineHeight: 1.15,
+                }}>{step.title}</h3>
+                <p style={{
+                  fontFamily: 'var(--f-sans)',
+                  fontSize: 'clamp(0.8rem, 0.92vw, 0.9rem)',
+                  lineHeight: 1.78,
+                  color: 'var(--c-texte-2)',
+                }}>{step.desc}</p>
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* ── Mobile ────────────────────────────────────────────── */}
+        <div className="process-mobile">
+          {steps.map((step, i) => (
+            <motion.div
+              key={`m-${step.n}`}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              style={{ display: 'flex', gap: '20px', marginBottom: '40px', alignItems: 'flex-start' }}
+            >
+              <div style={{
+                flexShrink: 0, width: '48px', height: '48px',
+                borderRadius: '50%', border: '1px solid var(--c-bleu)',
+                background: 'linear-gradient(rgba(12,14,136,0.15),rgba(12,14,136,0.15)),var(--c-ivoire)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 0 0 6px rgba(12,14,136,0.05)',
+              }}>
+                <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.64rem', letterSpacing: '0.14em', color: 'var(--c-bleu)' }}>
+                  {step.n}
+                </span>
+              </div>
+              <div>
+                <h3 style={{ fontFamily: 'var(--f-serif)', fontSize: '1.2rem', fontWeight: 400, color: 'var(--c-texte)', marginBottom: '8px', lineHeight: 1.15 }}>
+                  {step.title}
+                </h3>
+                <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.88rem', lineHeight: 1.78, color: 'var(--c-texte-2)' }}>
+                  {step.desc}
+                </p>
+              </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
-          .steps-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          .steps-grid > div:nth-child(1) { display: none; }
-          .steps-connector { display: none; }
-        }
-        @media (max-width: 560px) {
-          .steps-grid { grid-template-columns: 1fr !important; }
+        .process-desktop { display: block; }
+        .process-mobile  { display: none; }
+        @media (max-width: 860px) {
+          .process-desktop { display: none !important; }
+          .process-mobile  { display: block !important; }
         }
       `}</style>
     </section>
   )
 }
-
