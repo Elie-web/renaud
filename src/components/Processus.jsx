@@ -16,7 +16,7 @@ const steps = [
   {
     n: '03',
     title: 'La fabrication',
-    desc: "Tout se passe à l'atelier — à la main pour les assemblages, à la machine pour les débits. Je n'externalise pas. Aucune pièce ne part avant d'être juste.",
+    desc: "Tout se passe à l'atelier : à la main pour les assemblages, à la machine pour les débits. Je n'externalise pas. Aucune pièce ne part avant d'être juste.",
   },
   {
     n: '04',
@@ -93,6 +93,7 @@ export default function Processus() {
 
   return (
     <section
+      id="processus"
       ref={sectionRef}
       style={{
         background: 'var(--c-ivoire)',
@@ -130,7 +131,7 @@ export default function Processus() {
         {/* ── Desktop ───────────────────────────────────────────── */}
         <div className="process-desktop" style={{ position: 'relative', height: '1120px' }}>
 
-          {/* SVG — scroll-driven path + dots */}
+          {/* SVG - scroll-driven path + dots */}
           <svg
             viewBox="0 0 1000 1120"
             preserveAspectRatio="none"
@@ -188,7 +189,7 @@ export default function Processus() {
             </div>
           ))}
 
-          {/* Circles — scroll-driven reveal */}
+          {/* Circles - scroll-driven reveal */}
           {steps.map((step, i) => (
             <motion.div
               key={`c-${step.n}`}
@@ -213,7 +214,7 @@ export default function Processus() {
             </motion.div>
           ))}
 
-          {/* Text cards — scroll-driven reveal */}
+          {/* Text cards - scroll-driven reveal */}
           {steps.map((step, i) => (
             <motion.div
               key={`t-${step.n}`}

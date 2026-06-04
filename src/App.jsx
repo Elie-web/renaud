@@ -1,41 +1,38 @@
-import FloatingCTA from './components/FloatingCTA'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
-import Manifeste from './components/Manifeste'
-import Marquee from './components/Marquee'
-import SavoirFaire from './components/SavoirFaire'
+import Services from './components/Services'
 import Realisations from './components/Realisations'
+import ImageBand from './components/ImageBand'
+import Metier from './components/Metier'
 import Processus from './components/Processus'
-import Confiance from './components/Confiance'
 import Materiaux from './components/Materiaux'
+import Engagements from './components/Engagements'
 import Temoignages from './components/Temoignages'
 import FAQ from './components/FAQ'
-import CTA from './components/CTA'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import FloatingCTA from './components/FloatingCTA'
 
 export default function App() {
   return (
     <>
       <div className="grain" aria-hidden="true" />
-      <FloatingCTA />
       <Nav />
       <main>
         <Hero />
-        <Manifeste />
-        <Marquee />
-        <SavoirFaire />
+        <Services />
         <Realisations />
-        <Marquee dark />
+        <ImageBand />
+        <Metier />
         <Processus />
-        <Confiance />
         <Materiaux />
+        <Engagements />
         <Temoignages />
         <FAQ />
-        <CTA />
         <Contact />
       </main>
       <Footer />
+      <FloatingCTA />
     </>
   )
 }

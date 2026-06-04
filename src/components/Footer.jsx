@@ -1,84 +1,40 @@
-﻿import { motion } from 'framer-motion'
-import { viewportSettings } from '../lib/motion'
-
-const links = [
+const nav = [
   { label: 'Réalisations', href: '#realisations' },
-  { label: 'Savoir-faire', href: '#savoirfaire' },
-  { label: 'Matériaux', href: '#materiaux' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Savoir-faire', href: '#savoir-faire' },
+  { label: 'Le déroulé',   href: '#processus' },
+  { label: 'Avis',         href: '#avis' },
+  { label: 'Contact',      href: '#contact' },
 ]
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'var(--c-noir)', padding: 'clamp(48px, 7vw, 96px) var(--px) 32px' }}>
+    <footer style={{ background: 'var(--c-noir)', padding: 'clamp(56px, 7vw, 96px) var(--px) 32px' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        {/* Top row */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
-          gap: 'var(--sp-8)',
-          paddingBottom: 'clamp(40px, 5vw, 64px)',
-          borderBottom: '1px solid rgba(196,160,64,0.1)',
-          marginBottom: 'var(--sp-8)',
-        }} className="footer-top">
-
-          {/* Brand */}
+        <div className="foot-top" style={{
+          display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', gap: 'var(--sp-8)',
+          paddingBottom: 'clamp(36px, 5vw, 56px)', borderBottom: '1px solid var(--or-15)', marginBottom: 'var(--sp-8)',
+        }}>
+          {/* Marque + accroche + CTA */}
           <div>
-            <div style={{
-              fontFamily: 'var(--f-serif)',
-              fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)',
-              fontWeight: 400,
-              color: 'var(--c-ivoire)',
-              marginBottom: '4px',
-              lineHeight: 1,
-            }}>Achard</div>
-            <div style={{
-              fontFamily: 'var(--f-sc)',
-              fontSize: '0.58rem',
-              letterSpacing: '0.22em',
-              color: 'var(--c-or)',
-              textTransform: 'uppercase',
-              marginBottom: 'var(--sp-6)',
-            }}>Ébénisteries & Créations</div>
-            <p style={{
-              fontFamily: 'var(--f-sans)',
-              fontSize: '0.85rem',
-              fontWeight: 400,
-              lineHeight: 1.7,
-              color: 'rgba(245,249,247,0.48)',
-              maxWidth: '28ch',
-            }}>
-              Mobilier sur mesure, fabriqué à l'atelier. De l'esquisse au rendu 3D.
+            <div style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.6rem, 2.4vw, 2.1rem)', color: 'var(--c-ivoire)', lineHeight: 1, marginBottom: '4px' }}>Achard</div>
+            <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', fontWeight: 500, letterSpacing: '0.22em', color: 'var(--c-or-pale)', textTransform: 'uppercase', marginBottom: 'var(--sp-6)' }}>Ébéniste · sur mesure</div>
+            <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', lineHeight: 1.7, color: 'var(--cr-50)', maxWidth: '30ch', marginBottom: 'var(--sp-6)' }}>
+              Mobilier, cuisines et escaliers sur mesure, dessinés et fabriqués à l'atelier en Île-de-France.
             </p>
+            <a href="#contact" className="btn btn--gold" style={{ padding: '13px 28px', fontSize: '0.64rem' }}>
+              <span>Demander un devis</span><span className="arrow" />
+            </a>
           </div>
 
-          {/* Nav links */}
+          {/* Navigation */}
           <div>
-            <div style={{
-              fontFamily: 'var(--f-sc)',
-              fontSize: '0.6rem',
-              letterSpacing: '0.2em',
-              color: 'rgba(245,249,247,0.25)',
-              textTransform: 'uppercase',
-              marginBottom: 'var(--sp-5)',
-            }}>Navigation</div>
+            <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', fontWeight: 500, letterSpacing: '0.2em', color: 'var(--cr-35)', textTransform: 'uppercase', marginBottom: 'var(--sp-5)' }}>Navigation</div>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)' }}>
-              {links.map((l) => (
+              {nav.map((l) => (
                 <li key={l.href}>
-                  <a
-                    href={l.href}
-                    style={{
-                      fontFamily: 'var(--f-sans)',
-                      fontSize: '0.9rem',
-                      fontWeight: 400,
-                      color: 'rgba(245,249,247,0.45)',
-                      transition: 'color 0.2s ease',
-                    }}
-                    onMouseEnter={(e) => e.target.style.color = 'var(--c-or)'}
-                    onMouseLeave={(e) => e.target.style.color = 'rgba(245,249,247,0.45)'}
-                  >
-                    {l.label}
-                  </a>
+                  <a href={l.href} style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', color: 'var(--cr-50)', transition: 'color .2s' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--c-or-pale)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--cr-50)'}>{l.label}</a>
                 </li>
               ))}
             </ul>
@@ -86,92 +42,40 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <div style={{
-              fontFamily: 'var(--f-sc)',
-              fontSize: '0.6rem',
-              letterSpacing: '0.2em',
-              color: 'rgba(245,249,247,0.25)',
-              textTransform: 'uppercase',
-              marginBottom: 'var(--sp-5)',
-            }}>Contact</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)' }}>
+            <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', fontWeight: 500, letterSpacing: '0.2em', color: 'var(--cr-35)', textTransform: 'uppercase', marginBottom: 'var(--sp-5)' }}>Contact</div>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)' }}>
               {[
                 { label: '06 00 00 00 00', href: 'tel:+33600000000' },
-                { label: 'renaud@ebenistemuisier.fr', href: 'mailto:renaud@ebenistemuisier.fr' },
-                { label: '371 route de la vigne', href: '#' },
-              ].map(({ label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  style={{
-                    fontFamily: 'var(--f-sans)',
-                    fontSize: '0.9rem',
-                    fontWeight: 400,
-                    color: 'rgba(245,249,247,0.45)',
-                    transition: 'color 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => e.target.style.color = 'var(--c-or)'}
-                  onMouseLeave={(e) => e.target.style.color = 'rgba(245,249,247,0.45)'}
-                >
-                  {label}
-                </a>
+                { label: 'contact@achard-ebenisterie.fr', href: 'mailto:contact@achard-ebenisterie.fr' },
+                { label: 'Île-de-France', href: null },
+              ].map((c) => (
+                <li key={c.label}>
+                  {c.href
+                    ? <a href={c.href} style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', color: 'var(--cr-50)', transition: 'color .2s' }}
+                        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--c-or-pale)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--cr-50)'}>{c.label}</a>
+                    : <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', color: 'var(--cr-50)' }}>{c.label}</span>}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
 
-        {/* Bottom row */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 'var(--sp-4)',
-        }}>
-          <span style={{
-            fontFamily: 'var(--f-sc)',
-            fontSize: '0.6rem',
-            letterSpacing: '0.15em',
-            color: 'rgba(245,249,247,0.32)',
-            textTransform: 'uppercase',
-          }}>
-            © {new Date().getFullYear()} Achard ébénisteries & créations. Tous droits réservés.
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--sp-3)' }}>
+          <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', letterSpacing: '0.12em', color: 'var(--cr-35)', textTransform: 'uppercase' }}>
+            © {new Date().getFullYear()} Achard ébénisterie. Tous droits réservés.
           </span>
           <div style={{ display: 'flex', gap: 'var(--sp-6)' }}>
             {['Mentions légales', 'Confidentialité'].map((l) => (
-              <a
-                key={l}
-                href="#"
-                style={{
-                  fontFamily: 'var(--f-sc)',
-                  fontSize: '0.58rem',
-                  letterSpacing: '0.15em',
-                  color: 'rgba(245,249,247,0.32)',
-                  textTransform: 'uppercase',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => e.target.style.color = 'rgba(245,249,247,0.5)'}
-                onMouseLeave={(e) => e.target.style.color = 'rgba(245,249,247,0.2)'}
-              >
-                {l}
-              </a>
+              <a key={l} href="#" style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', letterSpacing: '0.12em', color: 'var(--cr-35)', textTransform: 'uppercase' }}>{l}</a>
             ))}
           </div>
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
-          .footer-top { grid-template-columns: 1fr 1fr !important; }
-        }
-        @media (max-width: 480px) {
-          .footer-top { grid-template-columns: 1fr !important; }
-        }
+        @media (max-width: 760px) { .foot-top { grid-template-columns: 1fr 1fr !important; } }
+        @media (max-width: 480px) { .foot-top { grid-template-columns: 1fr !important; } }
       `}</style>
     </footer>
   )
 }
-
-
-
-

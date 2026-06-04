@@ -1,266 +1,51 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { viewportSettings } from '../lib/motion'
+import { motion } from 'framer-motion'
+import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 
 const woods = [
-  {
-    name: 'Chêne',
-    origin: 'France, Europe centrale',
-    character: 'Dur, stable, marqué',
-    desc: 'Le chêne est dur et stable. Ses veines sont prononcées : certains aiment ça, d\'autres moins. Il ne cherche pas à plaire, il est là. Pour tout ce qui doit tenir sans entretien particulier.',
-    color: '#8B6A3E',
-    img: 'https://images.unsplash.com/photo-1542621334-a254cf47733d?auto=format&fit=crop&w=600&q=80',
-    uses: ['Tables', 'Bibliothèques', 'Armoires', 'Cuisines'],
-  },
-  {
-    name: 'Noyer',
-    origin: 'France, Amérique du Nord',
-    character: 'Foncé, rare, exigeant',
-    desc: 'Foncé, presque chocolat quand il est frais. Il s\'éclaircit légèrement avec la lumière. Rare, long à pousser, plus cher que le chêne. Pour les pièces où le bois est le sujet.',
-    color: '#4A3728',
-    img: 'https://images.unsplash.com/photo-1736506159893-22cca29b8018?auto=format&fit=crop&w=600&q=80',
-    uses: ['Mobilier de salon', 'Cuisines', 'Bibliothèques'],
-  },
-  {
-    name: 'Frêne',
-    origin: 'Europe du Nord',
-    character: 'Clair, régulier, discret',
-    desc: 'Clair, aux fibres régulières, moins de présence que le chêne. Pour des intérieurs qui cherchent la légèreté plutôt que le caractère. S\'associe bien au métal et au béton.',
-    color: '#C4A882',
-    img: 'https://images.unsplash.com/photo-1611072337226-1140ab367200?auto=format&fit=crop&w=600&q=80',
-    uses: ['Escaliers', 'Portes', 'Mobilier contemporain'],
-  },
-  {
-    name: 'Merisier',
-    origin: 'France',
-    character: 'Rosé, chaleureux, évolutif',
-    desc: 'Part rosé, vire à l\'or dans les premières années sous l\'effet de la lumière. Agréable à travailler, chaleureux en résultat. Pour les espaces de vie et les chambres.',
-    color: '#C47D5E',
-    img: 'https://images.unsplash.com/photo-1632199495802-18f7d21f323b?auto=format&fit=crop&w=600&q=80',
-    uses: ['Chambre', 'Salon', 'Cuisine'],
-  },
+  { name: 'Chêne',    character: 'Dur, stable, marqué',    desc: 'Des veines franches. Pour tout ce qui doit durer sans entretien.', img: 'https://images.unsplash.com/photo-1542621334-a254cf47733d?auto=format&fit=crop&w=700&q=80' },
+  { name: 'Noyer',    character: 'Foncé, rare, précieux',  desc: 'Presque chocolat. Pour les pièces où le bois est le sujet.',        img: 'https://images.unsplash.com/photo-1736506159893-22cca29b8018?auto=format&fit=crop&w=700&q=80' },
+  { name: 'Frêne',    character: 'Clair, régulier, discret', desc: 'Léger et lumineux. S\'associe bien au métal et au béton.',         img: 'https://images.unsplash.com/photo-1611072337226-1140ab367200?auto=format&fit=crop&w=700&q=80' },
+  { name: 'Merisier', character: 'Rosé, chaleureux',       desc: 'Vire à l\'or avec la lumière. Pour les espaces de vie.',            img: 'https://images.unsplash.com/photo-1632199495802-18f7d21f323b?auto=format&fit=crop&w=700&q=80' },
 ]
 
 export default function Materiaux() {
-  const [active, setActive] = useState(0)
-  const wood = woods[active]
-
   return (
-    <section
-      id="materiaux"
-      style={{
-        background: 'var(--c-ivoire)',
-        padding: 'var(--section-py) var(--px)',
-        overflow: 'hidden',
-      }}
-    >
+    <section id="materiaux" style={{ background: 'var(--c-fond)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        {/* Header */}
-        <div style={{ marginBottom: 'clamp(48px, 6vw, 80px)' }}>
-          <motion.span
-            className="eyebrow eyebrow--dark"
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={viewportSettings}
-            transition={{ duration: 0.7 }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-4)' }}
-          >
+        <div style={{ marginBottom: 'clamp(40px, 5vw, 64px)', maxWidth: '40ch' }}>
+          <motion.span className="eyebrow eyebrow--dark"
+            initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={viewportSettings} transition={{ duration: 0.7 }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-5)' }}>
             <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
             Les matériaux
           </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportSettings}
-            transition={{ duration: 0.9 }}
-            className="h2"
-            style={{ color: 'var(--c-texte)' }}
-          >
-            Les bois que j'utilise,
-            <br />
-            <em style={{ color: 'var(--c-or-dim)', fontStyle: 'italic' }}>et pourquoi.</em>
+          <motion.h2 className="h2"
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportSettings} transition={{ duration: 0.9 }}
+            style={{ color: 'var(--c-texte)' }}>
+            Des bois français, choisis en scierie.
           </motion.h2>
         </div>
 
-        {/* Wood selector + detail */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 'clamp(32px, 5vw, 80px)',
-          alignItems: 'center',
-        }} className="mat-grid">
-
-          {/* Left: tabs + detail */}
-          <div>
-            {/* Wood tabs */}
-            <div className="mat-tabs" style={{
-              display: 'flex',
-              gap: 'var(--sp-2)',
-              marginBottom: 'var(--sp-10)',
-              borderBottom: '1px solid var(--c-pierre)',
-              paddingBottom: '0',
-            }}>
-              {woods.map((w, i) => (
-                <button
-                  key={w.name}
-                  onClick={() => setActive(i)}
-                  style={{
-                    fontFamily: 'var(--f-sc)',
-                    fontSize: '0.66rem',
-                    letterSpacing: '0.14em',
-                    textTransform: 'uppercase',
-                    color: active === i ? 'var(--c-or-dim)' : 'var(--c-texte-2)',
-                    padding: '12px 20px 14px',
-                    transition: 'color 0.3s ease',
-                    position: 'relative',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {w.name}
-                  {active === i && (
-                    <motion.div
-                      layoutId="wood-underline"
-                      style={{
-                        position: 'absolute',
-                        bottom: '-1px',
-                        left: 0,
-                        right: 0,
-                        height: '2px',
-                        background: 'var(--c-or)',
-                      }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Detail */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-4)', marginBottom: 'var(--sp-6)' }}>
-                  <div style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: wood.color,
-                    border: '1px solid rgba(0,0,0,0.08)',
-                    flexShrink: 0,
-                  }} />
-                  <div>
-                    <div style={{
-                      fontFamily: 'var(--f-serif)',
-                      fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
-                      fontWeight: 400,
-                      color: 'var(--c-texte)',
-                      lineHeight: 1,
-                    }}>{wood.name}</div>
-                    <div style={{
-                      fontFamily: 'var(--f-sc)',
-                      fontSize: '0.6rem',
-                      letterSpacing: '0.14em',
-                      color: 'var(--c-or-dim)',
-                      textTransform: 'uppercase',
-                    }}>{wood.character}</div>
-                  </div>
-                </div>
-
-                <p style={{
-                  fontFamily: 'var(--f-sans)',
-                  fontSize: 'clamp(0.9rem, 1.1vw, 1rem)',
-                  fontWeight: 400,
-                  lineHeight: 1.75,
-                  color: 'var(--c-texte-2)',
-                  marginBottom: 'var(--sp-8)',
-                  maxWidth: '44ch',
-                }}>
-                  {wood.desc}
-                </p>
-
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--sp-3)',
-                  marginBottom: 'var(--sp-4)',
-                }}>
-                  <span className="gold-line" style={{ width: '20px', background: 'var(--c-or-dim)' }} />
-                  <span style={{
-                    fontFamily: 'var(--f-sc)',
-                    fontSize: '0.6rem',
-                    letterSpacing: '0.18em',
-                    color: 'var(--c-texte-2)',
-                    textTransform: 'uppercase',
-                  }}>Utilisations</span>
-                </div>
-
-                <div style={{ display: 'flex', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
-                  {wood.uses.map((u) => (
-                    <span key={u} style={{
-                      fontFamily: 'var(--f-sc)',
-                      fontSize: '0.6rem',
-                      letterSpacing: '0.12em',
-                      textTransform: 'uppercase',
-                      color: 'var(--c-bois)',
-                      border: '1px solid var(--c-pierre)',
-                      padding: '5px 14px',
-                    }}>{u}</span>
-                  ))}
-                </div>
-
-                <div style={{ marginTop: 'var(--sp-6)', paddingTop: 'var(--sp-6)', borderTop: '1px solid var(--c-pierre)' }}>
-                  <span style={{
-                    fontFamily: 'var(--f-sc)',
-                    fontSize: '0.58rem',
-                    letterSpacing: '0.16em',
-                    color: 'var(--c-texte-2)',
-                    textTransform: 'uppercase',
-                  }}>Origine · {wood.origin}</span>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Right: image */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.03 }}
-              transition={{ duration: 0.6 }}
-              style={{ aspectRatio: '1', overflow: 'hidden', position: 'relative' }}
-              className="mat-img"
-            >
-              <img
-                src={wood.img}
-                alt={`Bois de ${wood.name}`}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: `linear-gradient(135deg, ${wood.color}22 0%, transparent 60%)`,
-              }} />
+        <motion.div
+          variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSettings}
+          className="wood-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'clamp(16px, 2vw, 28px)' }}>
+          {woods.map((w) => (
+            <motion.div key={w.name} variants={staggerItem}>
+              <div style={{ aspectRatio: '3 / 4', overflow: 'hidden', marginBottom: 'var(--sp-4)' }}>
+                <img src={w.img} alt={`Bois de ${w.name}`} loading="lazy" decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+              <h3 style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.3rem, 1.8vw, 1.7rem)', fontWeight: 400, color: 'var(--c-texte)', lineHeight: 1, marginBottom: '4px' }}>{w.name}</h3>
+              <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--c-or-dim)', marginBottom: '10px' }}>{w.character}</div>
+              <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.88rem', lineHeight: 1.6, color: 'var(--c-texte-2)' }}>{w.desc}</p>
             </motion.div>
-          </AnimatePresence>
-        </div>
+          ))}
+        </motion.div>
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
-          .mat-grid { grid-template-columns: 1fr !important; }
-          .mat-img { display: none; }
-        }
-        @media (max-width: 600px) {
-          .mat-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap !important; padding-bottom: 2px; }
-        }
+        @media (max-width: 860px) { .wood-grid { grid-template-columns: repeat(2, 1fr) !important; gap: clamp(20px, 4vw, 32px) !important; } }
+        @media (max-width: 440px) { .wood-grid { grid-template-columns: 1fr 1fr !important; } }
       `}</style>
     </section>
   )

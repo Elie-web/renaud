@@ -1,35 +1,51 @@
-/* ─── Design Tokens ──────────────────────────────────────────────────── */
+/* ─── Design Tokens ──────────────────────────────────────────────────────
+   Art direction « Atelier lumineux » - papier chaud, encre, argile.
+   Inspiration : Bruno Dumoulin (luxe discret, lumineux) + tasteskill (éditorial).
+   On laisse la MATIÈRE (le bois, les photos) être l'accent. L'or criard est
+   remplacé par une terracotta/argile sourde, utilisée avec parcimonie.
+   ───────────────────────────────────────────────────────────────────────── */
 :root {
-  /* Colors — warm natural palette */
-  --c-noir:    #1A1510;   /* warm charcoal — dark sections, footer */
-  --c-brun:    #231C14;   /* warm espresso — nav drawer */
-  --c-brun-md: #3D3126;   /* warm medium brown */
-  --c-or:      #B89040;   /* muted warm gold */
-  --c-or-pale: #CEAA60;   /* pale warm gold */
-  --c-or-dim:  #8A6B2A;   /* dark gold — eyebrows on light */
-  --c-creme:   #F0E8D8;   /* warm cream — text on dark, alt sections */
-  --c-ivoire:  #F7F2E8;   /* warm ivory — light section bg, text on dark */
-  --c-fond:    #FAFAF8;   /* near white — pure light sections */
-  --c-pierre:  #DDD4C2;   /* warm stone — borders on light bg */
-  --c-texte:   #1A1510;   /* warm near-black — main text */
-  --c-texte-2: #6B5D4F;   /* warm gray-brown — secondary text */
-  --c-vert:    #7A9B5A;   /* olive — availability dot */
-  --c-bleu:    #7B5C38;   /* wood brown — replaces electric blue */
-  --c-bois:    #7B5C38;   /* alias */
+  /* Surfaces sombres (ancre basse : footer / CTA / drawer) - encre chaude, pas de noir pur */
+  --c-noir:    #1E1811;   /* encre chaude profonde */
+  --c-brun:    #281F16;   /* espresso - drawer mobile, cartes sombres */
+  --c-brun-md: #3A2D20;   /* brun moyen - fond image placeholder */
 
-  /* Opacity aliases */
-  --bleu-15:   rgba(123,92,56,0.12);
-  --bleu-25:   rgba(123,92,56,0.20);
-  --bleu-50:   rgba(123,92,56,0.38);
+  /* Accent - argile / terracotta sourde (remplace l'or) */
+  --c-or:      #A85D3C;   /* argile - accent principal, boutons, marques */
+  --c-or-pale: #C2744E;   /* argile claire - hover */
+  --c-or-dim:  #8A4A2C;   /* terre cuite foncée - eyebrows sur fond clair */
 
-  --or-10: rgba(184,144,64,0.10);
-  --or-15: rgba(184,144,64,0.15);
-  --or-20: rgba(184,144,64,0.20);
-  --or-25: rgba(184,144,64,0.25);
-  --or-40: rgba(184,144,64,0.40);
-  --cr-35: rgba(247,242,232,0.35);
-  --cr-50: rgba(247,242,232,0.50);
-  --cr-65: rgba(247,242,232,0.65);
+  /* Tons clairs - papier chaud lumineux */
+  --c-creme:   #EDE5D5;   /* crème - alt sections / texte sur sombre */
+  --c-ivoire:  #F2EBDD;   /* ivoire - sections claires / texte sur sombre */
+  --c-fond:    #F6F1E7;   /* papier - base lumineuse principale */
+  --c-pierre:  #DBD1BF;   /* pierre chaude - filets / bordures sur clair */
+
+  /* Texte */
+  --c-texte:   #231C15;   /* encre chaude - texte principal */
+  --c-texte-2: #6E6253;   /* taupe chaud - texte secondaire */
+
+  /* Naturels */
+  --c-vert:    #7C8B57;   /* olive - point disponibilité */
+  --c-bleu:    #7A5638;   /* noyer - process, détails */
+  --c-bois:    #7A5638;   /* alias noyer */
+
+  /* Opacités noyer */
+  --bleu-15:   rgba(122,86,56,0.12);
+  --bleu-25:   rgba(122,86,56,0.20);
+  --bleu-50:   rgba(122,86,56,0.38);
+
+  /* Opacités argile (rgb 168,93,60) */
+  --or-10: rgba(168,93,60,0.10);
+  --or-15: rgba(168,93,60,0.15);
+  --or-20: rgba(168,93,60,0.20);
+  --or-25: rgba(168,93,60,0.26);
+  --or-40: rgba(168,93,60,0.42);
+
+  /* Ivoire en surimpression (sur fond sombre) */
+  --cr-35: rgba(242,235,221,0.35);
+  --cr-50: rgba(242,235,221,0.52);
+  --cr-65: rgba(242,235,221,0.68);
 
   /* Fonts */
   --f-serif: 'Fraunces', Georgia, serif;
@@ -47,10 +63,15 @@
   --r-sm:   3px;
   --r-md:   6px;
 
-  /* Layout */
-  --max-w:      1400px;
-  --px:         clamp(28px, 6vw, 128px);
-  --section-py: clamp(96px, 11vw, 176px);
+  /* Layout - plus d'air */
+  --max-w:      1440px;
+  --px:         clamp(28px, 6vw, 132px);
+  --section-py: clamp(104px, 12vw, 200px);
+
+  /* Ombres teintées (jamais de noir pur) */
+  --shadow-sm: 0 2px 8px rgba(46,33,20,0.06);
+  --shadow-md: 0 18px 50px -18px rgba(46,33,20,0.22);
+  --shadow-clay: 0 14px 44px -14px rgba(168,93,60,0.34);
 
   /* Motion */
   --ease:     cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -83,6 +104,16 @@ a   { text-decoration: none; color: inherit; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 ul     { list-style: none; }
 
+/* Sélection */
+::selection { background: var(--or-25); color: var(--c-texte); }
+
+/* Accessibilité clavier */
+:focus-visible {
+  outline: 2px solid var(--c-or-dim);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 /* ─── Scrollbar ──────────────────────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--c-creme); }
@@ -91,37 +122,40 @@ ul     { list-style: none; }
 /* ─── Typography utilities ───────────────────────────────────────────── */
 .eyebrow {
   font-family: var(--f-sc);
-  font-size: clamp(0.62rem, 2vw, 0.68rem);
-  font-weight: 400;
-  letter-spacing: 0.18em;
+  font-size: clamp(0.62rem, 2vw, 0.7rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--c-or);
 }
-.eyebrow--light { color: var(--c-or-pale); opacity: 0.9; }
+.eyebrow--light { color: var(--c-or-pale); opacity: 0.92; }
 .eyebrow--dark  { color: var(--c-or-dim); }
 
 .display {
   font-family: var(--f-serif);
-  font-size: clamp(3.2rem, 7vw, 8.5rem);
+  font-size: clamp(3.4rem, 7.6vw, 9rem);
   font-weight: 400;
-  line-height: 1.0;
-  letter-spacing: -0.015em;
+  line-height: 0.98;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
 }
 
 .h1 {
   font-family: var(--f-serif);
-  font-size: clamp(2.4rem, 4.5vw, 5rem);
+  font-size: clamp(2.5rem, 4.8vw, 5.4rem);
   font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
 }
 
 .h2 {
   font-family: var(--f-serif);
-  font-size: clamp(2.2rem, 3.5vw, 4rem);
+  font-size: clamp(2.2rem, 3.6vw, 4.2rem);
   font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
 }
 
 .h3 {
@@ -129,14 +163,16 @@ ul     { list-style: none; }
   font-size: clamp(1.15rem, 2.5vw, 1.7rem);
   font-weight: 400;
   line-height: 1.25;
+  text-wrap: balance;
 }
 
 .lead {
   font-family: var(--f-sans);
-  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-size: clamp(1rem, 2vw, 1.12rem);
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.78;
   color: var(--c-texte-2);
+  text-wrap: pretty;
 }
 
 /* ─── Layout utilities ───────────────────────────────────────────────── */
@@ -149,10 +185,10 @@ ul     { list-style: none; }
 
 .section { padding: var(--section-py) 0; }
 
-/* ─── Gold accent line ───────────────────────────────────────────────── */
+/* ─── Accent line ────────────────────────────────────────────────────── */
 .gold-line {
   display: block;
-  width: 32px;
+  width: 34px;
   height: 1px;
   background: var(--c-or);
   flex-shrink: 0;
@@ -164,11 +200,11 @@ ul     { list-style: none; }
   align-items: center;
   gap: 14px;
   font-family: var(--f-sc);
-  font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 17px 42px;
+  padding: 18px 44px;
   border-radius: var(--r-pill);
   transition: all var(--dur-mid) var(--ease);
   white-space: nowrap;
@@ -178,19 +214,19 @@ ul     { list-style: none; }
   border: none;
 }
 
-/* Gold filled — primary CTA */
+/* Argile plein - CTA primaire */
 .btn--gold {
   background: var(--c-or);
-  color: var(--c-noir);
+  color: var(--c-ivoire);
 }
 .btn--gold:hover {
-  background: var(--c-or-pale);
+  background: var(--c-or-dim);
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(184,144,64,0.28), 0 0 0 1px rgba(123,92,56,0.18);
+  box-shadow: var(--shadow-clay);
 }
 .btn--gold:active { transform: translateY(0); box-shadow: none; }
 
-/* Gold outline — on light bg */
+/* Contour argile - sur fond clair */
 .btn--outline {
   background: transparent;
   color: var(--c-or-dim);
@@ -198,11 +234,12 @@ ul     { list-style: none; }
 }
 .btn--outline:hover {
   background: var(--c-or);
-  color: var(--c-noir);
+  color: var(--c-ivoire);
   border-color: var(--c-or);
+  transform: translateY(-2px);
 }
 
-/* Light outline — on dark bg */
+/* Contour clair - sur fond sombre */
 .btn--outline-light {
   background: transparent;
   color: var(--cr-65);
@@ -210,11 +247,11 @@ ul     { list-style: none; }
 }
 .btn--outline-light:hover {
   border-color: var(--cr-50);
-  background: rgba(247,242,232,0.06);
+  background: rgba(242,235,221,0.06);
   color: var(--c-creme);
 }
 
-/* Full-width variant */
+/* Pleine largeur */
 .btn--full { width: 100%; justify-content: center; }
 
 /* ─── Arrow ──────────────────────────────────────────────────────────── */
@@ -239,7 +276,7 @@ ul     { list-style: none; }
   transform: rotate(45deg);
 }
 .btn:hover .arrow,
-.link-arrow:hover .arrow { width: 28px; }
+.link-arrow:hover .arrow { width: 30px; }
 
 /* ─── Text link with arrow ───────────────────────────────────────────── */
 .link-arrow {
@@ -247,8 +284,9 @@ ul     { list-style: none; }
   align-items: center;
   gap: 14px;
   font-family: var(--f-sc);
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: inherit;
   text-decoration: none;
@@ -276,7 +314,7 @@ ul     { list-style: none; }
 }
 .btn-circle:hover {
   background: var(--c-or);
-  color: var(--c-noir);
+  color: var(--c-ivoire);
   border-color: var(--c-or);
 }
 
@@ -298,7 +336,7 @@ ul     { list-style: none; }
   width: 400%;
   height: 400%;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.022;
+  opacity: 0.03;
   pointer-events: none;
   z-index: 9999;
   animation: grain 8s steps(10) infinite;
@@ -320,9 +358,9 @@ ul     { list-style: none; }
 /* ─── Mobile responsive ──────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .btn {
-    padding: 15px 28px;
-    font-size: 0.65rem;
-    letter-spacing: 0.13em;
+    padding: 16px 30px;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
     white-space: normal;
   }
   .btn--full { width: 100%; justify-content: center; }
