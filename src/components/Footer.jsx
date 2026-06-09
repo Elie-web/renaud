@@ -9,16 +9,18 @@ const nav = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'var(--c-noir)', padding: 'clamp(56px, 7vw, 96px) var(--px) 32px' }}>
-      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
+    <footer style={{ background: 'var(--c-noir)', padding: 'clamp(56px, 7vw, 96px) var(--px) 32px', position: 'relative', overflow: 'hidden' }}>
+      {/* Grand logo en filigrane, pleine hauteur, ancré à gauche, assombri par un voile */}
+      <div className="foot-logo" aria-hidden="true">
+        <img src={logo} alt="" />
+      </div>
+      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div className="foot-top" style={{
           display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', gap: 'var(--sp-8)',
           paddingBottom: 'clamp(36px, 5vw, 56px)', borderBottom: '1px solid var(--or-15)', marginBottom: 'var(--sp-8)',
         }}>
           {/* Marque + accroche + CTA */}
           <div>
-            <img src={logo} alt="Logo Achard Créa" width="52" height="52"
-              style={{ height: '52px', width: 'auto', display: 'block', marginBottom: 'var(--sp-4)' }} />
             <div style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.6rem, 2.4vw, 2.1rem)', color: 'var(--c-ivoire)', lineHeight: 1, marginBottom: '4px' }}>Achard Créa</div>
             <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', fontWeight: 500, letterSpacing: '0.22em', color: 'var(--c-or-pale)', textTransform: 'uppercase', marginBottom: 'var(--sp-6)' }}>Ébéniste · sur mesure</div>
             <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', lineHeight: 1.7, color: 'var(--cr-50)', maxWidth: '30ch', marginBottom: 'var(--sp-6)' }}>
@@ -86,7 +88,28 @@ export default function Footer() {
       </div>
 
       <style>{`
+        /* Logo calé dans le coin bas-gauche, collé aux bords */
+        .foot-logo {
+          position: absolute;
+          top: 0; bottom: 0; left: 0;
+          display: flex; align-items: flex-end;
+          z-index: 0; pointer-events: none; user-select: none;
+        }
+        .foot-logo img {
+          height: 118%;
+          width: auto;
+          object-fit: contain;
+          object-position: left bottom;
+          opacity: 0.42;
+        }
+        /* Voile dégradé : protège la lisibilité du texte côté droit */
+        .foot-logo::after {
+          content: '';
+          position: absolute; inset: 0;
+          background: linear-gradient(90deg, rgba(30,24,17,0.28) 0%, rgba(30,24,17,0.74) 56%, var(--c-noir) 100%);
+        }
         @media (max-width: 760px) {
+          .foot-logo img { opacity: 0.20; }
           .foot-top { grid-template-columns: 1fr 1fr !important; }
           /* La barre flottante fixe (FloatingCTA) recouvre le bas : on dégage l'espace
              pour que le copyright, le crédit et les mentions légales restent lisibles */

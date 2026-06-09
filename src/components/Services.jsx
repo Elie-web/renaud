@@ -72,19 +72,22 @@ function Row({ s, reverse, index }) {
         className="serv-row-txt"
         style={{ gridColumn: reverse ? 1 : 2, gridRow: 1 }}
       >
-        {/* Puce numéro */}
-        <div style={{
-          width: '46px', height: '46px', borderRadius: '10px',
-          background: 'var(--or-10)', border: '1px solid var(--or-20)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: 'var(--f-sc)', fontSize: '0.78rem', fontWeight: 500, color: 'var(--c-or-dim)',
-          marginBottom: 'var(--sp-6)',
-        }}>{s.n}</div>
+        {/* En-tête : numéro + titre (groupés sur mobile pour une lecture nette) */}
+        <div className="serv-head">
+          {/* Puce numéro */}
+          <div className="serv-num" style={{
+            width: '46px', height: '46px', borderRadius: '10px', flexShrink: 0,
+            background: 'var(--or-10)', border: '1px solid var(--or-20)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: 'var(--f-sc)', fontSize: '0.78rem', fontWeight: 500, color: 'var(--c-or-dim)',
+            marginBottom: 'var(--sp-6)',
+          }}>{s.n}</div>
 
-        <h3 style={{
-          fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.8rem, 3vw, 2.8rem)', fontWeight: 400,
-          color: 'var(--c-texte)', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 'var(--sp-5)',
-        }}>{s.title}</h3>
+          <h3 style={{
+            fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.8rem, 3vw, 2.8rem)', fontWeight: 400,
+            color: 'var(--c-texte)', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 'var(--sp-5)',
+          }}>{s.title}</h3>
+        </div>
 
         <p style={{
           fontFamily: 'var(--f-sans)', fontSize: 'clamp(1rem, 1.2vw, 1.12rem)', lineHeight: 1.72,
@@ -117,7 +120,7 @@ export default function Services() {
         />
 
         {/* Lignes alternées */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(64px, 10vw, 144px)' }}>
+        <div className="serv-list" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(64px, 10vw, 144px)' }}>
           {services.map((s, i) => (
             <Row key={s.n} s={s} reverse={i % 2 === 1} index={i} />
           ))}
@@ -126,10 +129,26 @@ export default function Services() {
 
       <style>{`
         @media (max-width: 820px) {
-          .serv-row { grid-template-columns: 1fr !important; gap: var(--sp-8) !important; }
+          .serv-row { grid-template-columns: 1fr !important; gap: var(--sp-6) !important; }
           .serv-row-img, .serv-row-txt { grid-column: 1 !important; }
           .serv-row-img { grid-row: 1 !important; }
           .serv-row-txt { grid-row: 2 !important; }
+
+          /* Séparation nette entre services + en-tête numéro/titre groupé */
+          .serv-list { gap: 0 !important; }
+          .serv-row + .serv-row {
+            border-top: 1px solid var(--c-pierre);
+            margin-top: clamp(40px, 9vw, 56px);
+            padding-top: clamp(40px, 9vw, 56px);
+          }
+          .serv-head {
+            display: flex !important;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: var(--sp-5);
+          }
+          .serv-num { width: 40px !important; height: 40px !important; margin-bottom: 0 !important; }
+          .serv-head h3 { margin-bottom: 0 !important; }
         }
         @media (max-width: 440px) {
           .serv-points { grid-template-columns: 1fr !important; }
