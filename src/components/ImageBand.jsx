@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import bandImg from '../assets/working/DSC09086.webp'
 
 export default function ImageBand() {
   const ref = useRef(null)
@@ -15,26 +16,25 @@ export default function ImageBand() {
       {/* Photo bois chaude, parallaxe douce */}
       <motion.div style={{ position: 'absolute', inset: '-8% 0', y, zIndex: 0 }}>
         <img
-          src="https://images.unsplash.com/photo-1542621334-a254cf47733d?auto=format&fit=crop&w=2000&q=85"
-          alt="Détail de veines de bois massif travaillé en atelier"
+          src={bandImg}
+          alt="Placage de noyer assemblé et maintenu avant collage à l'atelier"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
         />
       </motion.div>
 
-      {/* Voiles : assombrissement global + dégradé fort à gauche (lisibilité garantie) */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'rgba(26,20,13,0.42)' }} />
+      {/* Voiles : assombrissement global + dégradé vertical (centré) */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'rgba(22,16,10,0.56)' }} />
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(100deg, rgba(20,15,9,0.92) 0%, rgba(20,15,9,0.74) 38%, rgba(20,15,9,0.30) 72%, rgba(20,15,9,0.12) 100%)',
+        background: 'linear-gradient(180deg, rgba(20,15,9,0.5) 0%, rgba(20,15,9,0.18) 50%, rgba(20,15,9,0.5) 100%)',
       }} />
 
-      <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%', textAlign: 'center' }}>
         <motion.div
-          initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.4 }}
+          initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8 }}
-          style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-5)' }}>
-          <span className="gold-line" style={{ background: 'var(--c-or-pale)' }} />
-          <span className="eyebrow eyebrow--light">L'atelier · Île-de-France</span>
+          style={{ marginBottom: 'var(--sp-5)' }}>
+          <span className="eyebrow eyebrow--light">L'atelier · Vallée de Chamonix</span>
         </motion.div>
 
         <motion.p
@@ -42,7 +42,7 @@ export default function ImageBand() {
           transition={{ duration: 0.9, delay: 0.1 }}
           style={{
             fontFamily: 'var(--f-serif)', fontSize: 'clamp(2rem, 4.4vw, 3.8rem)', fontWeight: 400,
-            lineHeight: 1.08, letterSpacing: '-0.02em', color: 'var(--c-ivoire)', maxWidth: '18ch',
+            lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--c-ivoire)', maxWidth: '20ch', margin: '0 auto',
             textShadow: '0 2px 30px rgba(20,15,9,0.6)',
           }}>
           Rien n'est sous-traité.{' '}

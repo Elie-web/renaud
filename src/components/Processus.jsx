@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { viewportSettings } from '../lib/motion'
+import SectionHeader, { Accent } from './SectionHeader'
 
 const steps = [
   {
@@ -11,7 +12,7 @@ const steps = [
   {
     n: '02',
     title: 'La conception',
-    desc: "Croquis d'abord, puis un rendu 3D pour que vous voyiez exactement ce que vous aurez. On choisit les essences ensemble. Rien n'est commandé avant votre accord.",
+    desc: "Croquis d'abord, puis un rendu 3D pour que vous voyiez exactement ce que vous aurez. Je vous présente les bois et les finitions, et rien n'est commandé avant votre accord.",
   },
   {
     n: '03',
@@ -103,30 +104,12 @@ export default function Processus() {
     >
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
 
-        {/* Header */}
-        <div style={{ marginBottom: 'clamp(56px, 7vw, 96px)' }}>
-          <motion.span
-            className="eyebrow eyebrow--dark"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={viewportSettings}
-            transition={{ duration: 0.7 }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-4)' }}
-          >
-            <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
-            Comment je travaille
-          </motion.span>
-          <motion.h2
-            className="h2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportSettings}
-            transition={{ duration: 0.9 }}
-            style={{ color: 'var(--c-texte)', maxWidth: '22ch' }}
-          >
-            De l'idée à la pièce finie.
-          </motion.h2>
-        </div>
+        {/* Header centré */}
+        <SectionHeader
+          eyebrow="Comment je travaille"
+          title={<>De l'idée à <Accent>la pièce finie.</Accent></>}
+          style={{ marginBottom: 'clamp(56px, 7vw, 96px)' }}
+        />
 
         {/* ── Desktop ───────────────────────────────────────────── */}
         <div className="process-desktop" style={{ position: 'relative', height: '1120px' }}>

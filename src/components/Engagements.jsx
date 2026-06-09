@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
+import SectionHeader, { Accent } from './SectionHeader'
+import atelierImg from '../assets/working/DSC09101.webp'
 
 const points = [
   { title: 'Devis gratuit et fixe', desc: 'Le prix annoncé est le prix final. Aucune ligne qui apparaît en fin de chantier.' },
@@ -19,6 +21,11 @@ export default function Engagements() {
   return (
     <section style={{ background: 'var(--c-creme)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
+        <SectionHeader
+          eyebrow="Pourquoi me confier votre projet"
+          title={<>Du sur-mesure, <Accent>sans mauvaise surprise.</Accent></>}
+        />
+
         <div className="eng-grid" style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 'clamp(40px, 6vw, 96px)', alignItems: 'center' }}>
           {/* Image */}
           <motion.div
@@ -26,26 +33,14 @@ export default function Engagements() {
             transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             className="eng-img" style={{ position: 'relative' }}>
             <div style={{ aspectRatio: '4 / 5', overflow: 'hidden', boxShadow: 'var(--shadow-md)' }}>
-              <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=1000&q=82"
-                alt="Artisan ébéniste au travail dans son atelier" loading="lazy"
+              <img src={atelierImg}
+                alt="Ajustement au millimètre d'un gabarit sur une pièce courbe" loading="lazy"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           </motion.div>
 
-          {/* Texte */}
+          {/* Points */}
           <div>
-            <motion.span className="eyebrow eyebrow--dark"
-              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={viewportSettings} transition={{ duration: 0.7 }}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-5)' }}>
-              <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
-              Pourquoi me confier votre projet
-            </motion.span>
-            <motion.h2 className="h2"
-              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportSettings} transition={{ duration: 0.9 }}
-              style={{ color: 'var(--c-texte)', marginBottom: 'var(--sp-8)', maxWidth: '18ch' }}>
-              Du sur-mesure, sans mauvaise surprise.
-            </motion.h2>
-
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSettings}>
               {points.map((p) => (
                 <motion.div key={p.title} variants={staggerItem}

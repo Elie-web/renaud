@@ -1,8 +1,9 @@
+import logo from '../assets/logos/logo principale.png'
+
 const nav = [
   { label: 'Réalisations', href: '#realisations' },
   { label: 'Savoir-faire', href: '#savoir-faire' },
-  { label: 'Le déroulé',   href: '#processus' },
-  { label: 'Avis',         href: '#avis' },
+  { label: 'À propos',     href: '#metier' },
   { label: 'Contact',      href: '#contact' },
 ]
 
@@ -16,10 +17,12 @@ export default function Footer() {
         }}>
           {/* Marque + accroche + CTA */}
           <div>
-            <div style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.6rem, 2.4vw, 2.1rem)', color: 'var(--c-ivoire)', lineHeight: 1, marginBottom: '4px' }}>Achard</div>
+            <img src={logo} alt="Logo Achard Créa" width="52" height="52"
+              style={{ height: '52px', width: 'auto', display: 'block', marginBottom: 'var(--sp-4)' }} />
+            <div style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.6rem, 2.4vw, 2.1rem)', color: 'var(--c-ivoire)', lineHeight: 1, marginBottom: '4px' }}>Achard Créa</div>
             <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', fontWeight: 500, letterSpacing: '0.22em', color: 'var(--c-or-pale)', textTransform: 'uppercase', marginBottom: 'var(--sp-6)' }}>Ébéniste · sur mesure</div>
             <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', lineHeight: 1.7, color: 'var(--cr-50)', maxWidth: '30ch', marginBottom: 'var(--sp-6)' }}>
-              Mobilier, cuisines et escaliers sur mesure, dessinés et fabriqués à l'atelier en Île-de-France.
+              Mobilier, cuisines et escaliers sur mesure, dessinés et fabriqués à l'atelier dans la vallée de Chamonix.
             </p>
             <a href="#contact" className="btn btn--gold" style={{ padding: '13px 28px', fontSize: '0.64rem' }}>
               <span>Demander un devis</span><span className="arrow" />
@@ -45,9 +48,9 @@ export default function Footer() {
             <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', fontWeight: 500, letterSpacing: '0.2em', color: 'var(--cr-35)', textTransform: 'uppercase', marginBottom: 'var(--sp-5)' }}>Contact</div>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)' }}>
               {[
-                { label: '06 00 00 00 00', href: 'tel:+33600000000' },
-                { label: 'contact@achard-ebenisterie.fr', href: 'mailto:contact@achard-ebenisterie.fr' },
-                { label: 'Île-de-France', href: null },
+                { label: '06 34 08 46 90', href: 'tel:+33634084690' },
+                { label: 'contact@achard-crea.fr', href: 'mailto:contact@achard-crea.fr' },
+                { label: 'Vallée de Chamonix', href: null },
               ].map((c) => (
                 <li key={c.label}>
                   {c.href
@@ -60,10 +63,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--sp-3)' }}>
+        <div className="foot-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--sp-3) var(--sp-6)' }}>
           <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', letterSpacing: '0.12em', color: 'var(--cr-35)', textTransform: 'uppercase' }}>
-            © {new Date().getFullYear()} Achard ébénisterie. Tous droits réservés.
+            © {new Date().getFullYear()} Achard Créa. Tous droits réservés.
           </span>
+
+          <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', letterSpacing: '0.12em', color: 'var(--cr-35)', textTransform: 'uppercase' }}>
+            Site réalisé par{' '}
+            <a href="https://elieageron.com" target="_blank" rel="noopener"
+              style={{ color: 'var(--c-or-pale)', borderBottom: '1px solid var(--or-40)', transition: 'color .2s' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--c-ivoire)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--c-or-pale)'}
+            >Elie Ageron</a>
+          </span>
+
           <div style={{ display: 'flex', gap: 'var(--sp-6)' }}>
             {['Mentions légales', 'Confidentialité'].map((l) => (
               <a key={l} href="#" style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', letterSpacing: '0.12em', color: 'var(--cr-35)', textTransform: 'uppercase' }}>{l}</a>

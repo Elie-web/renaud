@@ -25,7 +25,7 @@ export default function FloatingCTA() {
               borderTop: '1px solid var(--c-pierre)',
             }}
           >
-            <a href="tel:+33600000000" style={{
+            <a href="tel:+33634084690" style={{
               flex: '0 0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
               padding: '15px 20px', borderRadius: 'var(--r-pill)', border: '1px solid var(--or-40)',
               color: 'var(--c-or-dim)', fontFamily: 'var(--f-sc)', fontSize: '0.64rem', fontWeight: 500,

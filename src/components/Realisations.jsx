@@ -1,14 +1,21 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
+import SectionHeader, { Accent } from './SectionHeader'
+import imgConsole from '../assets/créations renaud/20190302_174312136_iOS.webp'
+import imgTableJeu from '../assets/créations renaud/rendu.webp'
+import imgChevet from '../assets/créations renaud/rendu 7 (6 fermé).webp'
+import imgAppoint from '../assets/créations renaud/20190302_175141500_iOS.webp'
+import imgTreteaux from '../assets/créations renaud/TRETEAUX.webp'
+import imgMarqueterie from '../assets/créations renaud/console japo dessus.webp'
 
 const projects = [
-  { id: 1, cat: 'Cuisine',      title: 'Cuisine en noyer massif',        lieu: 'Versailles',          img: 'https://images.unsplash.com/photo-1631396326838-de37e5f8bcbc?auto=format&fit=crop&w=800&q=80' },
-  { id: 2, cat: 'Bibliothèque', title: 'Bibliothèque sur mesure',        lieu: 'Paris 11e',           img: 'https://images.unsplash.com/photo-1547609434-b732edfee020?auto=format&fit=crop&w=800&q=80' },
-  { id: 3, cat: 'Mobilier',     title: 'Table de salle à manger',        lieu: 'Boulogne',            img: 'https://images.unsplash.com/photo-1497218770144-3fea6dbc33fe?auto=format&fit=crop&w=800&q=80' },
-  { id: 4, cat: 'Escalier',     title: 'Escalier balancé en chêne',      lieu: 'Maison de campagne',  img: 'https://images.unsplash.com/photo-1683115096447-5d01c11d3ead?auto=format&fit=crop&w=800&q=80' },
-  { id: 5, cat: 'Agencement',   title: 'Dressing & rangements',          lieu: 'Neuilly',             img: 'https://images.unsplash.com/photo-1659930087003-2d64e33181f7?auto=format&fit=crop&w=800&q=80' },
-  { id: 6, cat: 'Mobilier',     title: 'Buffet contemporain',            lieu: 'Paris 16e',           img: 'https://images.unsplash.com/photo-1678184096514-d28596346091?auto=format&fit=crop&w=800&q=80' },
+  { id: 1, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',  img: imgConsole },
+  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer & laiton',       img: imgTableJeu },
+  { id: 3, cat: 'Mobilier',    title: 'Chevet « vague & soleil »',  meta: 'Frêne & laque',        img: imgChevet },
+  { id: 4, cat: 'Table',       title: "Table d'appoint marquetée",  meta: 'Marqueterie sur frêne', img: imgAppoint },
+  { id: 5, cat: 'Mobilier',    title: 'Tréteaux sculptés',          meta: 'Frêne massif',         img: imgTreteaux },
+  { id: 6, cat: 'Marqueterie', title: 'Plateau « trident »',        meta: 'Marqueterie de bois',  img: imgMarqueterie },
 ]
 
 function Card({ p, index }) {
@@ -32,7 +39,7 @@ function Card({ p, index }) {
         <h3 style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', fontWeight: 400, color: 'var(--c-texte)', lineHeight: 1.25 }}>{p.title}</h3>
         <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--c-or-dim)', whiteSpace: 'nowrap' }}>{p.cat}</span>
       </figcaption>
-      <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.82rem', color: 'var(--c-texte-2)' }}>{p.lieu}</span>
+      <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.82rem', color: 'var(--c-texte-2)' }}>{p.meta}</span>
     </motion.figure>
   )
 }
@@ -41,35 +48,24 @@ export default function Realisations() {
   return (
     <section id="realisations" style={{ background: 'var(--c-fond)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 'var(--sp-6)', marginBottom: 'clamp(40px, 5vw, 72px)' }}>
-          <div>
-            <motion.span className="eyebrow eyebrow--dark"
-              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
-              viewport={viewportSettings} transition={{ duration: 0.7 }}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-5)' }}
-            >
-              <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
-              Réalisations
-            </motion.span>
-            <motion.h2 className="h2"
-              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewportSettings} transition={{ duration: 0.9 }}
-              style={{ color: 'var(--c-texte)', maxWidth: '16ch' }}
-            >
-              Quelques pièces sorties de l'atelier.
-            </motion.h2>
-          </div>
-          <motion.a href="#contact" className="btn btn--outline"
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-            viewport={viewportSettings} transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            <span>Votre projet</span><span className="arrow" />
-          </motion.a>
-        </div>
+        <SectionHeader
+          eyebrow="Réalisations"
+          title={<>Quelques pièces <Accent>sorties de l'atelier.</Accent></>}
+        />
 
         <div className="real-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(24px, 3vw, 48px)' }}>
           {projects.map((p, i) => <Card key={p.id} p={p} index={i} />)}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+          viewport={viewportSettings} transition={{ duration: 0.7 }}
+          style={{ display: 'flex', justifyContent: 'center', marginTop: 'clamp(40px, 5vw, 72px)' }}
+        >
+          <a href="#contact" className="btn btn--outline">
+            <span>Parlons de votre projet</span><span className="arrow" />
+          </a>
+        </motion.div>
       </div>
 
       <style>{`

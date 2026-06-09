@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
+import SectionHeader, { Accent } from './SectionHeader'
 
 const avis = [
   {
@@ -20,23 +21,10 @@ export default function Temoignages() {
   return (
     <section id="avis" style={{ background: 'var(--c-ivoire)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        <div style={{ marginBottom: 'clamp(40px, 5vw, 72px)', maxWidth: '40ch' }}>
-          <motion.span className="eyebrow eyebrow--dark"
-            initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={viewportSettings} transition={{ duration: 0.7 }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-5)' }}
-          >
-            <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
-            Ils m'ont fait confiance
-          </motion.span>
-          <motion.h2 className="h2"
-            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportSettings} transition={{ duration: 0.9 }}
-            style={{ color: 'var(--c-texte)' }}
-          >
-            Ce qu'en disent mes clients.
-          </motion.h2>
-        </div>
+        <SectionHeader
+          eyebrow="Ils m'ont fait confiance"
+          title={<>Ce qu'en disent <Accent>mes clients.</Accent></>}
+        />
 
         <motion.div
           variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSettings}

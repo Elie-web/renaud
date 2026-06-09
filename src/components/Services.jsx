@@ -1,38 +1,44 @@
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
+import SectionHeader, { Accent } from './SectionHeader'
+import imgMobilier from '../assets/créations renaud/c_est_elle_mec_2022-May-29_01-34-13PM-000_CustomizedView24060457088_jpg.webp'
+import imgCuisines from '../assets/working/DSC09010.webp'
+import imgBiblio from '../assets/working/DSC09111.webp'
+import imgEscaliers from '../assets/working/124979027_5294257680600333_1820063589436393798_n.webp'
+import imgPortes from '../assets/working/DSC09096.webp'
 
 const ease = [0.25, 0.1, 0.25, 1]
 
 const services = [
   {
     n: '01', title: 'Mobilier sur mesure',
-    intro: "Des pièces dessinées pour votre espace et votre usage, pas pour un catalogue. On part de vos mesures et de vos contraintes.",
+    intro: "Des pièces dessinées pour votre espace et votre usage, pas pour un catalogue. Je pars de vos mesures et de vos contraintes.",
     points: ['Tables, bureaux & consoles', 'Buffets & enfilades', 'Dressings & rangements', 'Meubles TV sur mesure'],
-    img: 'https://images.unsplash.com/photo-1631396326838-de37e5f8bcbc?auto=format&fit=crop&w=1000&q=82',
+    img: imgMobilier,
   },
   {
     n: '02', title: 'Cuisines',
     intro: "Une cuisine pensée autour de votre façon de cuisiner. Six mois de vie quotidienne dessinés à l'avance, au centimètre.",
     points: ['Façades en bois massif', 'Plans de travail adaptés', 'Îlots & rangements optimisés', 'Conception + pose comprises'],
-    img: 'https://images.unsplash.com/photo-1547609434-b732edfee020?auto=format&fit=crop&w=1000&q=82',
+    img: imgCuisines,
   },
   {
     n: '03', title: 'Bibliothèques',
     intro: "Du sol au plafond ou en meuble indépendant. Pensées pour la pièce, la lumière et le poids réel des livres.",
     points: ['Sur-mesure jusqu\'au plafond', 'Niches & éclairage intégré', 'Portes coulissantes', 'Bois massif ou plaqué'],
-    img: 'https://images.unsplash.com/photo-1659930087003-2d64e33181f7?auto=format&fit=crop&w=1000&q=82',
+    img: imgBiblio,
   },
   {
     n: '04', title: 'Escaliers & garde-corps',
     intro: "L'escalier structure la circulation d'une maison. Je le conçois solide, stable, et pensé pour ne pas craquer avec le temps.",
     points: ['Droits, tournants, balancés', 'Garde-corps bois & métal', 'Marches en bois massif', 'Étudié sur place'],
-    img: 'https://images.unsplash.com/photo-1683115096447-5d01c11d3ead?auto=format&fit=crop&w=1000&q=82',
+    img: imgEscaliers,
   },
   {
     n: '05', title: 'Portes & menuiseries',
     intro: "Souvent négligés, ce sont pourtant eux qui changent l'aspect d'un intérieur quand ils sont bien faits.",
     points: ['Portes intérieures', 'Encadrements & plinthes', 'Boiseries & lambris', 'Habillages sur mesure'],
-    img: 'https://images.unsplash.com/photo-1497218770144-3fea6dbc33fe?auto=format&fit=crop&w=1000&q=82',
+    img: imgPortes,
   },
 ]
 
@@ -102,25 +108,13 @@ export default function Services() {
   return (
     <section id="savoir-faire" style={{ background: 'var(--c-ivoire)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        {/* Header */}
-        <div style={{ maxWidth: '46ch', marginBottom: 'clamp(56px, 8vw, 120px)' }}>
-          <motion.span className="eyebrow eyebrow--dark"
-            initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={viewportSettings} transition={{ duration: 0.7 }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-5)' }}>
-            <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
-            Savoir-faire
-          </motion.span>
-          <motion.h2 className="h2"
-            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportSettings} transition={{ duration: 0.9 }}
-            style={{ color: 'var(--c-texte)', marginBottom: 'var(--sp-5)' }}>
-            Ce que je fabrique.
-          </motion.h2>
-          <motion.p className="lead"
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={viewportSettings} transition={{ duration: 0.8, delay: 0.15 }}>
-            Tout est dessiné, fabriqué et posé par mes soins. Un seul interlocuteur,
-            du premier croquis à l'installation chez vous.
-          </motion.p>
-        </div>
+        {/* Header centré */}
+        <SectionHeader
+          eyebrow="Savoir-faire"
+          title={<>Ce que <Accent>je fabrique.</Accent></>}
+          lead="Tout est dessiné, fabriqué et posé par mes soins. Un seul interlocuteur, du premier croquis à l'installation chez vous."
+          style={{ marginBottom: 'clamp(56px, 8vw, 120px)' }}
+        />
 
         {/* Lignes alternées */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(64px, 10vw, 144px)' }}>

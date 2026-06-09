@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import logo from '../assets/logos/logo principale.png'
 
 const links = [
   { label: 'Réalisations', href: '#realisations' },
   { label: 'Savoir-faire', href: '#savoir-faire' },
-  { label: 'Le déroulé',   href: '#processus' },
-  { label: 'Avis',         href: '#avis' },
+  { label: 'À propos',     href: '#metier' },
+  { label: 'Contact',      href: '#contact' },
 ]
 
 export default function Nav() {
@@ -42,30 +43,40 @@ export default function Nav() {
         }}
       >
         {/* Logo */}
-        <a href="#top" style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-          <span style={{
-            fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.4rem, 2vw, 1.7rem)', fontWeight: 400,
-            color: 'var(--c-texte)', lineHeight: 1, letterSpacing: '-0.01em',
-          }}>Achard</span>
-          <span style={{
-            fontFamily: 'var(--f-sc)', fontSize: '0.52rem', fontWeight: 500, letterSpacing: '0.24em',
-            color: 'var(--c-or-dim)', textTransform: 'uppercase',
-          }}>Ébéniste · sur mesure</span>
+        <a href="#top" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img src={logo} alt="Logo Achard Créa" width="40" height="40"
+            style={{ height: 'clamp(34px, 4vw, 44px)', width: 'auto', display: 'block', flexShrink: 0 }} />
+          <span style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+            <span style={{
+              fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.4rem, 2vw, 1.7rem)', fontWeight: 400,
+              color: scrolled ? 'var(--c-texte)' : 'var(--c-ivoire)', lineHeight: 1, letterSpacing: '-0.01em',
+              transition: 'color .4s var(--ease)',
+            }}>Achard Créa</span>
+            <span style={{
+              fontFamily: 'var(--f-sc)', fontSize: '0.52rem', fontWeight: 500, letterSpacing: '0.24em',
+              color: scrolled ? 'var(--c-or-dim)' : 'var(--c-or-pale)', textTransform: 'uppercase',
+              transition: 'color .4s var(--ease)',
+            }}>Ébéniste · sur mesure</span>
+          </span>
         </a>
 
         {/* Liens desktop */}
         <ul className="nav-links" style={{ display: 'flex', gap: 'clamp(22px, 2.6vw, 44px)' }}>
-          {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} style={{
-                fontFamily: 'var(--f-sans)', fontSize: '0.92rem', color: 'var(--c-texte-2)',
-                transition: 'color .2s ease',
-              }}
-                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--c-texte)'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--c-texte-2)'}
-              >{l.label}</a>
-            </li>
-          ))}
+          {links.map((l) => {
+            const base = scrolled ? 'var(--c-texte-2)' : 'rgba(242,235,221,0.82)'
+            const hover = scrolled ? 'var(--c-texte)' : 'var(--c-ivoire)'
+            return (
+              <li key={l.href}>
+                <a href={l.href} style={{
+                  fontFamily: 'var(--f-sans)', fontSize: '0.92rem', color: base,
+                  transition: 'color .2s ease',
+                }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = hover}
+                  onMouseLeave={(e) => e.currentTarget.style.color = base}
+                >{l.label}</a>
+              </li>
+            )
+          })}
         </ul>
 
         {/* CTA + burger */}
@@ -87,7 +98,7 @@ export default function Nav() {
                   opacity: open && i === 1 ? 0 : 1,
                 }}
                 transition={{ duration: 0.3 }}
-                style={{ display: 'block', width: '24px', height: '1.5px', background: open ? 'var(--c-ivoire)' : 'var(--c-texte)' }}
+                style={{ display: 'block', width: '24px', height: '1.5px', background: open || !scrolled ? 'var(--c-ivoire)' : 'var(--c-texte)' }}
               />
             ))}
           </button>

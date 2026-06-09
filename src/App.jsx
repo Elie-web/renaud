@@ -5,7 +5,6 @@ import Realisations from './components/Realisations'
 import ImageBand from './components/ImageBand'
 import Metier from './components/Metier'
 import Processus from './components/Processus'
-import Materiaux from './components/Materiaux'
 import Engagements from './components/Engagements'
 import Temoignages from './components/Temoignages'
 import FAQ from './components/FAQ'
@@ -25,7 +24,6 @@ export default function App() {
         <ImageBand />
         <Metier />
         <Processus />
-        <Materiaux />
         <Engagements />
         <Temoignages />
         <FAQ />

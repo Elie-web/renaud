@@ -1,133 +1,187 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import heroBg from '../assets/Renaud/hero.webp'
 
-const ease = [0.25, 0.1, 0.25, 1]
+const ease = [0.22, 1, 0.36, 1]
 
-const proof = [
-  '9 ans d\'atelier',
-  'Devis gratuit sous 5 jours',
-  'Garantie 5 ans',
-  'Bois français massif',
+const PHONE_DISPLAY = '06 34 08 46 90'
+const PHONE_HREF = 'tel:+33634084690'
+
+/* Image de fond du hero : src/assets/Renaud/hero.webp (fournie par le client). */
+const HERO_BG = heroBg
+
+const stats = [
+  { value: '9 ans', label: "d'atelier" },
+  { value: '+300', label: 'projets' },
+  { value: '5 ans', label: 'garantie' },
+]
+
+const coords = [
+  { label: 'Téléphone', val: '06 34 08 46 90',          href: 'tel:+33634084690' },
+  { label: 'Email',     val: 'contact@achard-crea.fr',  href: 'mailto:contact@achard-crea.fr' },
+  { label: 'Atelier',   val: 'Vallée de Chamonix · sur RDV', href: '#contact' },
 ]
 
 export default function Hero() {
+  const ref = useRef(null)
+  const reduce = useReducedMotion()
+
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '16%'])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -40])
+
   return (
-    <section id="top" style={{
-      background: 'var(--c-fond)', position: 'relative', overflow: 'hidden',
-      padding: 'clamp(124px, 16vh, 188px) var(--px) clamp(48px, 7vh, 88px)',
-    }}>
-      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        <div className="hero-grid" style={{
-          display: 'grid', gridTemplateColumns: '1.05fr 0.95fr',
-          gap: 'clamp(40px, 6vw, 96px)', alignItems: 'center',
+    <section
+      id="top"
+      ref={ref}
+      style={{
+        position: 'relative', overflow: 'hidden',
+        minHeight: '100dvh', display: 'flex', flexDirection: 'column',
+        background: 'var(--c-noir)',
+      }}
+    >
+      {/* Photo de fond - parallaxe douce */}
+      <motion.div style={{ position: 'absolute', inset: '-8% 0', zIndex: 0, y: reduce ? 0 : bgY }}>
+        <img
+          src={HERO_BG}
+          alt="Atelier d'ébénisterie Achard Créa : mobilier en bois massif en cours de fabrication"
+          fetchpriority="high" decoding="async"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+        />
+      </motion.div>
+
+      {/* Voiles chauds pour la lisibilité du texte + de la nav */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'rgba(24,18,12,0.48)' }} />
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, zIndex: 1,
+        background: 'linear-gradient(180deg, rgba(20,15,9,0.84) 0%, rgba(20,15,9,0.56) 36%, rgba(20,15,9,0.66) 72%, rgba(20,15,9,0.95) 100%)',
+      }} />
+
+      {/* Contenu centré */}
+      <motion.div
+        style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', opacity: reduce ? 1 : contentOpacity, y: reduce ? 0 : contentY }}
+      >
+        <div style={{
+          width: '100%', maxWidth: '900px', margin: '0 auto',
+          padding: 'clamp(120px, 18vh, 200px) var(--px) clamp(28px, 5vh, 56px)',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+          gap: 'clamp(18px, 2.6vh, 30px)',
         }}>
-          {/* Texte */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, ease }}
-              style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--sp-6)' }}
-            >
-              <span className="gold-line" style={{ background: 'var(--c-or-dim)' }} />
-              <span className="eyebrow eyebrow--dark">Ébéniste · Île-de-France</span>
-            </motion.div>
+          {/* Eyebrow */}
+          <motion.span
+            initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease }}
+            className="eyebrow"
+            style={{ color: 'var(--c-or-pale)' }}
+          >
+            Ébéniste &amp; créations sur mesure · Vallée de Chamonix
+          </motion.span>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease }}
-              style={{
-                fontFamily: 'var(--f-serif)', fontSize: 'clamp(2.9rem, 5.6vw, 5.4rem)', fontWeight: 400,
-                lineHeight: 1.02, letterSpacing: '-0.022em', color: 'var(--c-texte)',
-                marginBottom: 'var(--sp-6)', maxWidth: '15ch',
-              }}
-            >
-              Le meuble que vous avez en tête, <em style={{ fontStyle: 'italic', color: 'var(--c-or-dim)' }}>fait pour durer.</em>
-            </motion.h1>
+          {/* Titre */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.08, ease }}
+            className="hero-title"
+            style={{
+              fontFamily: 'var(--f-serif)', fontWeight: 400,
+              fontSize: 'clamp(2.15rem, 5.6vw, 5.4rem)', lineHeight: 1.08,
+              letterSpacing: '-0.022em', color: 'var(--c-ivoire)',
+              maxWidth: '16ch', paddingBottom: '0.08em', textShadow: '0 2px 30px rgba(20,15,9,0.55)',
+            }}
+          >
+            Votre intérieur sur mesure,{' '}
+            <em style={{ fontStyle: 'italic', color: 'var(--c-or-pale)' }}>fait pour durer.</em>
+          </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.1, ease }}
-              className="lead"
-              style={{ maxWidth: '46ch', marginBottom: 'var(--sp-8)' }}
-            >
-              Mobilier, cuisines, bibliothèques et escaliers sur mesure. Je dessine
-              votre projet, je vous le montre en 3D, et je ne commence à fabriquer
-              qu'une fois que tout vous convient.
-            </motion.p>
+          {/* Sous-titre */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.18, ease }}
+            style={{
+              fontFamily: 'var(--f-sans)', fontSize: 'clamp(1rem, 1.5vw, 1.18rem)',
+              lineHeight: 1.7, color: 'rgba(242,235,221,0.86)', maxWidth: '46ch',
+            }}
+          >
+            Mobilier, cuisines et escaliers sur mesure, dessinés, fabriqués et
+            posés par mes soins dans la vallée de Chamonix.
+          </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.2, ease }}
-              style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-6)', flexWrap: 'wrap', marginBottom: 'var(--sp-10)' }}
-            >
-              <a href="#contact" className="btn btn--gold">
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.28, ease }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--sp-3)', marginTop: 'var(--sp-1)' }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-4)', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <a href="#contact" className="btn btn--gold" style={{ fontSize: '0.84rem' }}>
                 <span>Demander un devis gratuit</span><span className="arrow" />
               </a>
-              <a href="#realisations" className="link-arrow" style={{ color: 'var(--c-texte-2)' }}>
-                <span>Voir les réalisations</span><span className="arrow" />
+              <a href={PHONE_HREF} className="btn btn--outline-light hero-phone" aria-label={`Appeler le ${PHONE_DISPLAY}`} style={{ fontSize: '0.84rem', gap: '12px' }}>
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3.2 2h2.8l1.4 3.2-1.6 1.3a8.8 8.8 0 0 0 3.6 3.6l1.3-1.6 3.2 1.4v2.8A1 1 0 0 1 13 14C5.82 14 2 8.18 2 3a1 1 0 0 1 1-1z" fill="currentColor"/>
+                </svg>
+                <span style={{ fontSize: '1.08rem', letterSpacing: '0.04em' }}>{PHONE_DISPLAY}</span>
               </a>
-            </motion.div>
-
-            {/* Preuves */}
-            <motion.ul
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-3) var(--sp-6)' }}
-            >
-              {proof.map((p) => (
-                <li key={p} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ color: 'var(--c-or-dim)', fontSize: '0.85rem' }}>✓</span>
-                  <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.85rem', color: 'var(--c-texte-2)' }}>{p}</span>
-                </li>
-              ))}
-            </motion.ul>
-          </div>
-
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.15, ease }}
-            className="hero-img"
-            style={{ position: 'relative' }}
-          >
-            <div style={{ aspectRatio: '4 / 5', overflow: 'hidden', boxShadow: 'var(--shadow-md)' }}>
-              <img
-                src="https://images.unsplash.com/photo-1631396326838-de37e5f8bcbc?auto=format&fit=crop&w=1100&q=82"
-                alt="Pièce de mobilier en bois massif en cours de fabrication à l'atelier"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
             </div>
-            {/* Carte flottante - réassurance */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="hero-badge"
-              style={{
-                position: 'absolute', bottom: '-22px', left: '-22px',
-                background: 'var(--c-fond)', border: '1px solid var(--c-pierre)',
-                padding: 'var(--sp-5) var(--sp-6)', boxShadow: 'var(--shadow-sm)', maxWidth: '230px',
-              }}
-            >
-              <div style={{ display: 'flex', gap: '3px', marginBottom: '6px' }}>
-                {Array(5).fill(0).map((_, i) => <span key={i} style={{ color: 'var(--c-or)', fontSize: '0.8rem' }}>★</span>)}
+            <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.82rem', color: 'rgba(242,235,221,0.6)' }}>
+              Réponse sous 24 h, sans engagement.
+            </span>
+          </motion.div>
+
+          {/* Social proof - chiffres */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.42, ease }}
+            className="hero-stats"
+            style={{ display: 'flex', alignItems: 'center', gap: 'clamp(20px, 4vw, 48px)', marginTop: 'var(--sp-2)' }}
+          >
+            {stats.map((s, i) => (
+              <div key={s.label} className="hero-stat" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(20px, 4vw, 48px)' }}>
+                {i > 0 && <span aria-hidden="true" style={{ width: '1px', height: '30px', background: 'rgba(242,235,221,0.22)' }} />}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                  <span style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.4rem, 2.4vw, 2rem)', color: 'var(--c-ivoire)', lineHeight: 1 }}>{s.value}</span>
+                  <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(242,235,221,0.55)' }}>{s.label}</span>
+                </div>
               </div>
-              <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.82rem', lineHeight: 1.5, color: 'var(--c-texte)' }}>
-                « Un travail soigné, exactement ce qu'on imaginait. »
-              </p>
-              <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--c-texte-2)' }}>
-                Sophie L. · Paris 11e
-              </span>
-            </motion.div>
+            ))}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
+
+      {/* Barre de coordonnées - visible dès la première page */}
+      <motion.div
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        style={{
+          position: 'relative', zIndex: 2,
+          borderTop: '1px solid rgba(242,235,221,0.16)',
+          background: 'rgba(22,17,11,0.32)', backdropFilter: 'blur(2px)', WebkitBackdropFilter: 'blur(2px)',
+        }}
+      >
+        <ul className="hero-coords" style={{
+          maxWidth: 'var(--max-w)', margin: '0 auto', padding: '16px var(--px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap',
+          gap: '8px clamp(28px, 6vw, 72px)',
+        }}>
+          {coords.map((c) => (
+            <li key={c.label} style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
+              <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--c-or-pale)' }}>{c.label}</span>
+              <a href={c.href} style={{ fontFamily: 'var(--f-sans)', fontSize: '0.95rem', color: 'var(--c-ivoire)', transition: 'color .2s ease' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--c-or-pale)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--c-ivoire)'}
+              >{c.val}</a>
+            </li>
+          ))}
+        </ul>
+      </motion.div>
 
       <style>{`
-        @media (max-width: 860px) {
-          .hero-grid { grid-template-columns: 1fr !important; }
-          .hero-img { order: -1; max-width: 460px; }
-        }
-        @media (max-width: 480px) {
-          .hero-badge { left: 0 !important; bottom: -16px !important; }
+        @media (max-width: 560px) {
+          .hero-title { font-size: 1.7rem !important; max-width: 20ch !important; }
+          .hero-stats { gap: 16px !important; }
+          .hero-stat  { gap: 16px !important; }
+          .hero-coords { flex-direction: column; align-items: flex-start !important; gap: 10px !important; }
         }
       `}</style>
     </section>
