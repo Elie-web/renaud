@@ -1,14 +1,15 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
-import heroBg from '../assets/Renaud/hero.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 
 const PHONE_DISPLAY = '06 34 08 46 90'
 const PHONE_HREF = 'tel:+33634084690'
 
-/* Image de fond du hero : src/assets/Renaud/hero.webp (fournie par le client). */
-const HERO_BG = heroBg
+/* Image de fond du hero : public/hero.webp.
+   Servie depuis /public avec une URL stable, préchargée dans index.html (<link rel="preload">)
+   pour démarrer son téléchargement dès le HTML, sans attendre le bundle JS (LCP). */
+const HERO_BG = '/hero.webp'
 
 const stats = [
   { value: '9 ans', label: "d'atelier" },
@@ -62,7 +63,7 @@ export default function Hero() {
       <motion.div
         style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', opacity: reduce ? 1 : contentOpacity, y: reduce ? 0 : contentY }}
       >
-        <div style={{
+        <div className="hero-inner" style={{
           width: '100%', maxWidth: '900px', margin: '0 auto',
           padding: 'clamp(120px, 18vh, 200px) var(--px) clamp(28px, 5vh, 56px)',
           display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
@@ -98,6 +99,7 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18, ease }}
+            className="hero-sub"
             style={{
               fontFamily: 'var(--f-sans)', fontSize: 'clamp(1rem, 1.5vw, 1.18rem)',
               lineHeight: 1.7, color: 'rgba(242,235,221,0.86)', maxWidth: '46ch',
@@ -113,7 +115,7 @@ export default function Hero() {
             transition={{ duration: 0.55, delay: 0.28, ease }}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--sp-3)', marginTop: 'var(--sp-1)' }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-4)', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div className="hero-cta-row" style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-4)', flexWrap: 'wrap', justifyContent: 'center' }}>
               <a href="#contact" className="btn btn--gold" style={{ fontSize: '0.84rem' }}>
                 <span>Demander un devis gratuit</span><span className="arrow" />
               </a>
@@ -153,6 +155,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.6 }}
+        className="hero-coords-bar"
         style={{
           position: 'relative', zIndex: 2,
           borderTop: '1px solid rgba(242,235,221,0.16)',
@@ -177,11 +180,40 @@ export default function Hero() {
       </motion.div>
 
       <style>{`
-        @media (max-width: 560px) {
-          .hero-title { font-size: 1.7rem !important; max-width: 20ch !important; }
-          .hero-stats { gap: 16px !important; }
-          .hero-stat  { gap: 16px !important; }
-          .hero-coords { flex-direction: column; align-items: flex-start !important; gap: 10px !important; }
+        @media (max-width: 760px) {
+          /* On laisse le hero respirer : plus de hauteur forcée, on dégage la nav fixe */
+          .hero-inner {
+            padding-top: 104px !important;
+            padding-bottom: 44px !important;
+            gap: 22px !important;
+          }
+          .hero-title { font-size: clamp(1.95rem, 8.4vw, 2.7rem) !important; max-width: 16ch !important; }
+          .hero-sub   { font-size: 1rem !important; line-height: 1.6 !important; max-width: 38ch !important; }
+
+          /* CTA : deux boutons pleine largeur empilés, largeurs identiques */
+          .hero-cta-row {
+            flex-direction: column !important;
+            flex-wrap: nowrap !important;
+            width: 100%;
+            max-width: 360px;
+            gap: 12px !important;
+          }
+          .hero-cta-row .btn {
+            width: 100% !important;
+            justify-content: center !important;
+            font-size: 0.72rem !important;
+            letter-spacing: 0.12em !important;
+            padding: 16px 24px !important;
+            white-space: nowrap !important;
+          }
+          .hero-phone span { font-size: 1rem !important; }
+
+          .hero-stats { gap: 18px !important; }
+          .hero-stat  { gap: 18px !important; }
+
+          /* La barre de coordonnées duplique le tel/email et la barre flottante (FloatingCTA)
+             la remplace après scroll → on la masque sur mobile pour un hero propre sur un écran */
+          .hero-coords-bar { display: none !important; }
         }
       `}</style>
     </section>

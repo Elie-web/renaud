@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import bandImg from '../assets/working/DSC09086.webp'
+import bandImg from '../assets/working/DSC09086-opt.webp'
 
 export default function ImageBand() {
   const ref = useRef(null)

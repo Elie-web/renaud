@@ -86,7 +86,13 @@ export default function Footer() {
       </div>
 
       <style>{`
-        @media (max-width: 760px) { .foot-top { grid-template-columns: 1fr 1fr !important; } }
+        @media (max-width: 760px) {
+          .foot-top { grid-template-columns: 1fr 1fr !important; }
+          /* La barre flottante fixe (FloatingCTA) recouvre le bas : on dégage l'espace
+             pour que le copyright, le crédit et les mentions légales restent lisibles */
+          footer { padding-bottom: 96px !important; }
+          .foot-bottom { justify-content: flex-start !important; gap: var(--sp-4) !important; }
+        }
         @media (max-width: 480px) { .foot-top { grid-template-columns: 1fr !important; } }
       `}</style>
     </footer>
