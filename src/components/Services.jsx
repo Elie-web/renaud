@@ -58,7 +58,7 @@ function Row({ s, reverse, index }) {
         style={{ gridColumn: reverse ? 2 : 1, gridRow: 1 }}
       >
         <div style={{ aspectRatio: '5 / 4', overflow: 'hidden', borderRadius: '8px', boxShadow: 'var(--shadow-md)' }}>
-          <img src={s.img} alt={s.title} loading="lazy" decoding="async"
+          <img src={s.img} alt={`${s.title} sur mesure — Achard Créa, ébéniste dans la vallée de Chamonix`} loading="lazy" decoding="async"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
       </motion.div>

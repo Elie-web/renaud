@@ -4,60 +4,228 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Achard Créa, mobilier sur mesure, ébénisterie et agencement dans la vallée de Chamonix. De l'esquisse au rendu 3D, fabriqué à l'atelier." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#161109" />
+
+    <!-- Primary SEO -->
+    <title>Ébéniste à Chamonix · Mobilier & agencement sur mesure · Achard Créa</title>
+    <meta name="description" content="Ébéniste à Chamonix : mobilier, cuisines, bibliothèques et escaliers sur mesure, fabriqués à l'atelier dans la vallée de Chamonix et en Haute-Savoie (Les Houches, Sallanches, Saint-Gervais, Megève). Devis gratuit sous 24 h." />
+    <meta name="author" content="Renaud Achard — Achard Créa" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://achard-crea.fr/" />
+    <link rel="alternate" hreflang="fr" href="https://achard-crea.fr/" />
+    <link rel="alternate" hreflang="x-default" href="https://achard-crea.fr/" />
+
+    <!-- Géolocalisation (référencement local Chamonix) -->
+    <meta name="geo.region" content="FR-74" />
+    <meta name="geo.placename" content="Chamonix-Mont-Blanc" />
+    <meta name="geo.position" content="45.92375;6.86943" />
+    <meta name="ICBM" content="45.92375, 6.86943" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://achard-crea.fr/" />
+    <meta property="og:title" content="Ébéniste à Chamonix · Mobilier & agencement sur mesure · Achard Créa" />
+    <meta property="og:description" content="Mobilier, cuisines, bibliothèques et escaliers sur mesure. De l'esquisse au rendu 3D, dessinés, fabriqués et posés à l'atelier par Renaud Achard, ébéniste à Chamonix." />
+    <meta property="og:image" content="https://achard-crea.fr/hero.webp" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1280" />
+    <meta property="og:image:alt" content="Atelier d'ébénisterie Achard Créa, mobilier en bois massif en fabrication" />
+    <meta property="og:site_name" content="Achard Créa" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ébéniste à Chamonix · Mobilier & agencement sur mesure · Achard Créa" />
+    <meta name="twitter:description" content="Ébéniste à Chamonix. Mobilier, cuisines, bibliothèques et escaliers sur mesure, fabriqués à l'atelier. Devis gratuit sous 24 h." />
+    <meta name="twitter:image" content="https://achard-crea.fr/hero.webp" />
+    <meta name="twitter:image:alt" content="Atelier d'ébénisterie Achard Créa, mobilier en bois massif en fabrication" />
+
     <!-- Préchargement de l'image du hero (LCP) : le navigateur la télécharge dès le HTML, sans attendre le bundle JS -->
     <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
-    <title>Achard Créa · Mobilier sur mesure · Vallée de Chamonix</title>
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="Achard Créa · Mobilier sur mesure · Vallée de Chamonix" />
-    <meta property="og:description" content="Mobilier sur mesure, ébénisterie et agencement. De l'esquisse au rendu 3D, fabriqué à l'atelier. BMA ébéniste, DNMADE Mobilier Contemporain." />
-    <meta property="og:type" content="website" />
+
+    <!--
+      Données structurées (JSON-LD) en @graph :
+      - LocalBusiness/HomeAndConstructionBusiness : la fiche entreprise (NAP, zone, horaires, offres)
+      - Person : Renaud Achard, l'artisan (signal E-E-A-T : expérience, diplômes)
+      - WebSite : l'entité site
+      - FAQPage : alimente la citation par les moteurs IA (ChatGPT, Perplexity, AI Overviews).
+        Note : depuis août 2023, FAQPage ne génère plus de rich results Google pour les
+        sites commerciaux ; conservé ici pour le bénéfice de citation IA / GEO.
+    -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "https://achard-crea.fr",
-      "name": "Achard Créa",
-      "description": "Ébéniste et menuisier sur mesure. Mobilier, cuisines, bibliothèques, escaliers. Fabriqués à l'atelier dans la vallée de Chamonix.",
-      "image": "https://achard-crea.fr/hero.webp",
-      "telephone": "+33634084690",
-      "email": "contact@achard-crea.fr",
-      "areaServed": "Vallée de Chamonix, Haute-Savoie",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Chamonix-Mont-Blanc",
-        "postalCode": "74400",
-        "addressRegion": "Auvergne-Rhône-Alpes",
-        "addressCountry": "FR"
-      },
-      "openingHoursSpecification": [
+      "@graph": [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-          "opens": "08:00",
-          "closes": "18:00"
+          "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+          "@id": "https://achard-crea.fr/#business",
+          "name": "Achard Créa",
+          "alternateName": "Achard Créa — Ébéniste",
+          "url": "https://achard-crea.fr/",
+          "description": "Ébéniste à Chamonix. Mobilier, cuisines, bibliothèques et escaliers sur mesure, dessinés, fabriqués et posés à l'atelier dans la vallée de Chamonix.",
+          "image": "https://achard-crea.fr/hero.webp",
+          "logo": "https://achard-crea.fr/favicon.png",
+          "telephone": "+33634084690",
+          "email": "contact@achard-crea.fr",
+          "foundingDate": "2017",
+          "priceRange": "€€€",
+          "currenciesAccepted": "EUR",
+          "areaServed": [
+            { "@type": "City", "name": "Chamonix-Mont-Blanc" },
+            { "@type": "City", "name": "Les Houches" },
+            { "@type": "City", "name": "Servoz" },
+            { "@type": "City", "name": "Argentière" },
+            { "@type": "City", "name": "Vallorcine" },
+            { "@type": "City", "name": "Sallanches" },
+            { "@type": "City", "name": "Passy" },
+            { "@type": "City", "name": "Saint-Gervais-les-Bains" },
+            { "@type": "City", "name": "Megève" },
+            { "@type": "City", "name": "Combloux" },
+            { "@type": "AdministrativeArea", "name": "Vallée de Chamonix" },
+            { "@type": "AdministrativeArea", "name": "Haute-Savoie" }
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Chamonix-Mont-Blanc",
+            "postalCode": "74400",
+            "addressRegion": "Auvergne-Rhône-Alpes",
+            "addressCountry": "FR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 45.92375,
+            "longitude": 6.86943
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "08:00",
+              "closes": "18:00"
+            }
+          ],
+          "founder": { "@id": "https://achard-crea.fr/#renaud" },
+          "knowsAbout": ["Ébénisterie", "Mobilier sur mesure", "Cuisines sur mesure", "Bibliothèques", "Escaliers en bois", "Marqueterie", "Agencement intérieur"],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Créations sur mesure",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobilier sur mesure" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cuisine sur mesure" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bibliothèques sur mesure" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Escaliers & garde-corps" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Portes & menuiseries" } }
+            ]
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://achard-crea.fr/#renaud",
+          "name": "Renaud Achard",
+          "jobTitle": "Ébéniste",
+          "worksFor": { "@id": "https://achard-crea.fr/#business" },
+          "url": "https://achard-crea.fr/",
+          "knowsAbout": ["Ébénisterie", "Mobilier contemporain", "Marqueterie", "Agencement sur mesure"],
+          "hasCredential": [
+            { "@type": "EducationalOccupationalCredential", "credentialCategory": "CAP Ébéniste" },
+            { "@type": "EducationalOccupationalCredential", "credentialCategory": "BMA Ébéniste" },
+            { "@type": "EducationalOccupationalCredential", "credentialCategory": "DNMADE Mobilier contemporain" }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://achard-crea.fr/#website",
+          "url": "https://achard-crea.fr/",
+          "name": "Achard Créa",
+          "inLanguage": "fr-FR",
+          "publisher": { "@id": "https://achard-crea.fr/#business" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://achard-crea.fr/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Combien coûte une création sur mesure ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Comptez entre 1 500 € et 5 000 € pour un meuble de qualité, davantage pour un agencement complet. Le prix dépend des matériaux, du volume et de la complexité. Vous recevez un devis détaillé et fixe avant tout engagement." }
+            },
+            {
+              "@type": "Question",
+              "name": "Quel est le délai pour un projet ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Une table prend 3 à 6 semaines, une cuisine complète 2 à 4 mois. Je travaille sur commande, et je vous donne une date précise avant de commencer." }
+            },
+            {
+              "@type": "Question",
+              "name": "Comment se passe la première rencontre ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Je vous reçois chez vous ou à l'atelier. Rien n'est signé ce jour-là : vous repartez avec mes idées et recevez une proposition détaillée sous 5 jours." }
+            },
+            {
+              "@type": "Question",
+              "name": "Quels bois utilisez-vous ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Des bois massifs français, choisis en scierie selon votre projet. Jamais de panneaux de particules." }
+            },
+            {
+              "@type": "Question",
+              "name": "Quelles sont vos zones d'intervention ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Toute la vallée de Chamonix — Chamonix-Mont-Blanc, Les Houches, Servoz, Argentière, Vallorcine — et plus largement la Haute-Savoie : Sallanches, Passy, Saint-Gervais, Megève, Combloux. Pour le mobilier transportable, je peux intervenir au-delà, parlons-en." }
+            },
+            {
+              "@type": "Question",
+              "name": "Proposez-vous une garantie ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Oui, cinq ans sur les assemblages et les finitions. Si une finition s'altère trop tôt, je viens la reprendre." }
+            }
+          ]
         }
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Créations sur mesure",
-        "itemListElement": [
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Mobilier sur mesure"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cuisine sur mesure"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Bibliothèques sur mesure"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Escaliers & garde-corps"}}
-        ]
-      },
-      "priceRange": "€€€"
+      ]
     }
     </script>
   </head>
   <body>
+    <!-- Lien d'évitement (accessibilité clavier + signal de structure pour les crawlers) -->
+    <a
+      href="#top"
+      style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;"
+      onfocus="this.style.cssText='position:fixed;top:1rem;left:1rem;z-index:9999;padding:0.75rem 1.25rem;background:#f6f1e7;color:#161109;font-weight:600;border-radius:6px;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,0.2);'"
+      onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;'"
+    >
+      Aller au contenu
+    </a>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!--
+      Repli sans JavaScript : contenu réel pour les robots qui n'exécutent pas le JS
+      (crawlers IA, partage social). Ne duplique pas le rendu React, résume l'essentiel.
+    -->
+    <noscript>
+      <main style="max-width:720px;margin:0 auto;padding:3rem 1.25rem;font-family:system-ui,-apple-system,sans-serif;color:#221a10;line-height:1.6">
+        <h1>Achard Créa — Mobilier sur mesure dans la vallée de Chamonix</h1>
+        <p>
+          <strong>Renaud Achard</strong>, ébéniste depuis 2017, conçoit, fabrique et pose
+          du mobilier, des cuisines, des bibliothèques, des escaliers et des menuiseries
+          sur mesure à l'atelier, dans la vallée de Chamonix (Haute-Savoie).
+        </p>
+        <h2>Créations</h2>
+        <ul>
+          <li>Mobilier sur mesure</li>
+          <li>Cuisines sur mesure</li>
+          <li>Bibliothèques sur mesure</li>
+          <li>Escaliers &amp; garde-corps</li>
+          <li>Portes &amp; menuiseries</li>
+        </ul>
+        <h2>Contact</h2>
+        <p>
+          Téléphone : <a href="tel:+33634084690">06 34 08 46 90</a><br />
+          Email : <a href="mailto:contact@achard-crea.fr">contact@achard-crea.fr</a><br />
+          Atelier : Vallée de Chamonix — sur rendez-vous · Lun–Ven, 8h–18h
+        </p>
+        <p><em>Ce site nécessite JavaScript pour l'expérience complète.</em></p>
+      </main>
+    </noscript>
   </body>
 </html>

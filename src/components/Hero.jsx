@@ -76,7 +76,7 @@ export default function Hero() {
             className="eyebrow"
             style={{ color: 'var(--c-or-pale)' }}
           >
-            Ébéniste &amp; créations sur mesure · Vallée de Chamonix
+            Mobilier &amp; agencement sur mesure · depuis 2017
           </motion.span>
 
           {/* Titre */}
@@ -91,7 +91,7 @@ export default function Hero() {
               maxWidth: '16ch', paddingBottom: '0.08em', textShadow: '0 2px 30px rgba(20,15,9,0.55)',
             }}
           >
-            Votre intérieur sur mesure,{' '}
+            Ébéniste à Chamonix, votre intérieur sur mesure{' '}
             <em style={{ fontStyle: 'italic', color: 'var(--c-or-pale)' }}>fait pour durer.</em>
           </motion.h1>
 
@@ -106,7 +106,7 @@ export default function Hero() {
             }}
           >
             Mobilier, cuisines et escaliers sur mesure, dessinés, fabriqués et
-            posés par mes soins dans la vallée de Chamonix.
+            posés par mes soins dans la vallée de Chamonix et toute la Haute-Savoie.
           </motion.p>
 
           {/* CTA */}

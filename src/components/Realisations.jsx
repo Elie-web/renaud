@@ -30,7 +30,7 @@ function Card({ p, index }) {
     >
       <div style={{ aspectRatio: '4 / 3', overflow: 'hidden', background: 'var(--c-brun-md)', marginBottom: 'var(--sp-4)' }}>
         <motion.img
-          src={p.img} alt={p.title} loading="lazy" decoding="async"
+          src={p.img} alt={`${p.title} — ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Chamonix)`} loading="lazy" decoding="async"
           animate={{ scale: hov ? 1.05 : 1 }} transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
