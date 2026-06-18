@@ -91,8 +91,8 @@ export default function Hero() {
               maxWidth: '16ch', paddingBottom: '0.08em', textShadow: '0 2px 30px rgba(20,15,9,0.55)',
             }}
           >
-            Ébéniste à Chamonix, votre intérieur sur mesure{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--c-or-pale)' }}>fait pour durer.</em>
+            Votre intérieur sur mesure, par un{' '}
+            <em style={{ fontStyle: 'italic', color: 'var(--c-or-pale)' }}>ébéniste à Chamonix.</em>
           </motion.h1>
 
           {/* Sous-titre */}

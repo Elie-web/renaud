@@ -18,6 +18,7 @@ export default function ImageBand() {
         <img
           src={bandImg}
           alt="Placage de noyer assemblé et maintenu avant collage à l'atelier"
+          loading="lazy" decoding="async"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
         />
       </motion.div>

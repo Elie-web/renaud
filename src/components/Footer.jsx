@@ -80,8 +80,13 @@ export default function Footer() {
           </span>
 
           <div style={{ display: 'flex', gap: 'var(--sp-6)' }}>
-            {['Mentions légales', 'Confidentialité'].map((l) => (
-              <a key={l} href="#" style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', letterSpacing: '0.12em', color: 'var(--cr-35)', textTransform: 'uppercase' }}>{l}</a>
+            {[
+              { label: 'Mentions légales', href: '/mentions-legales.html' },
+              { label: 'Confidentialité', href: '/confidentialite.html' },
+            ].map((l) => (
+              <a key={l.label} href={l.href} style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', letterSpacing: '0.12em', color: 'var(--cr-35)', textTransform: 'uppercase', transition: 'color .2s' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--c-or-pale)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--cr-35)'}>{l.label}</a>
             ))}
           </div>
         </div>

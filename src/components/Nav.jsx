@@ -73,6 +73,8 @@ export default function Nav() {
                 }}
                   onMouseEnter={(e) => e.currentTarget.style.color = hover}
                   onMouseLeave={(e) => e.currentTarget.style.color = base}
+                  onFocus={(e) => e.currentTarget.style.color = hover}
+                  onBlur={(e) => e.currentTarget.style.color = base}
                 >{l.label}</a>
               </li>
             )

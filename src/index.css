@@ -15,11 +15,16 @@
   --c-or-pale: #C2744E;   /* argile claire - hover */
   --c-or-dim:  #8A4A2C;   /* terre cuite foncée - eyebrows sur fond clair */
 
-  /* Tons clairs - papier chaud lumineux */
-  --c-creme:   #EDE5D5;   /* crème - alt sections / texte sur sombre */
-  --c-ivoire:  #F2EBDD;   /* ivoire - sections claires / texte sur sombre */
-  --c-fond:    #F6F1E7;   /* papier - base lumineuse principale */
-  --c-pierre:  #DBD1BF;   /* pierre chaude - filets / bordures sur clair */
+  /* Or des étoiles d'avis - doré chaud, contraste ≥ 3:1 sur blanc (WCAG 1.4.11) */
+  --c-etoile:  #C58415;
+
+  /* Tons clairs - échelle d'élévation basse saturation (façon Solar Fusion / VM)
+     base douce → carte plus claire → tout est calme, les cartes "lèvent" proprement. */
+  --c-blanc:   #FDFCFA;   /* blanc chaud quasi pur - CARTES + sections lumineuses */
+  --c-creme:   #F0ECE4;   /* greige doux - sections alternées (les cartes y ressortent) */
+  --c-ivoire:  #F2EBDD;   /* ivoire - texte clair sur fond sombre */
+  --c-fond:    #F6F2EC;   /* papier - base / champs de formulaire */
+  --c-pierre:  #E5DFD4;   /* filets / bordures sur clair - discrets */
 
   /* Texte */
   --c-texte:   #231C15;   /* encre chaude - texte principal */
@@ -68,9 +73,9 @@
   --px:         clamp(28px, 6vw, 132px);
   --section-py: clamp(104px, 12vw, 200px);
 
-  /* Ombres teintées (jamais de noir pur) */
-  --shadow-sm: 0 2px 8px rgba(46,33,20,0.06);
-  --shadow-md: 0 18px 50px -18px rgba(46,33,20,0.22);
+  /* Ombres teintées (jamais de noir pur) - douces et larges pour un "lift" propre */
+  --shadow-sm: 0 2px 6px rgba(46,33,20,0.05), 0 12px 28px -14px rgba(46,33,20,0.12);
+  --shadow-md: 0 6px 18px -6px rgba(46,33,20,0.10), 0 22px 55px -20px rgba(46,33,20,0.20);
   --shadow-clay: 0 14px 44px -14px rgba(168,93,60,0.34);
 
   /* Motion */
@@ -339,7 +344,8 @@ ul     { list-style: none; }
   opacity: 0.03;
   pointer-events: none;
   z-index: 9999;
-  animation: grain 8s steps(10) infinite;
+  /* Grain statique : la texture reste, mais on évite une animation infinie
+     qui tourne en permanence (CPU/batterie) pour un mouvement imperceptible à 3 %. */
 }
 
 @keyframes grain {

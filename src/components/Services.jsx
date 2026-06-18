@@ -12,31 +12,31 @@ const ease = [0.25, 0.1, 0.25, 1]
 const services = [
   {
     n: '01', title: 'Mobilier sur mesure',
-    intro: "Des pièces dessinées pour votre espace et votre usage, pas pour un catalogue. Je pars de vos mesures et de vos contraintes.",
+    intro: "Dessiné pour votre espace et votre usage — jamais pour un catalogue.",
     points: ['Tables, bureaux & consoles', 'Buffets & enfilades', 'Dressings & rangements', 'Meubles TV sur mesure'],
     img: imgMobilier,
   },
   {
     n: '02', title: 'Cuisines',
-    intro: "Une cuisine pensée autour de votre façon de cuisiner. Six mois de vie quotidienne dessinés à l'avance, au centimètre.",
+    intro: "Pensée autour de votre façon de cuisiner, dessinée au centimètre avant la première découpe.",
     points: ['Façades en bois massif', 'Plans de travail adaptés', 'Îlots & rangements optimisés', 'Conception + pose comprises'],
     img: imgCuisines,
   },
   {
     n: '03', title: 'Bibliothèques',
-    intro: "Du sol au plafond ou en meuble indépendant. Pensées pour la pièce, la lumière et le poids réel des livres.",
+    intro: "Du sol au plafond ou en meuble libre, pensées pour la lumière et le poids réel des livres.",
     points: ['Sur-mesure jusqu\'au plafond', 'Niches & éclairage intégré', 'Portes coulissantes', 'Bois massif ou plaqué'],
     img: imgBiblio,
   },
   {
     n: '04', title: 'Escaliers & garde-corps',
-    intro: "L'escalier structure la circulation d'une maison. Je le conçois solide, stable, et pensé pour ne pas craquer avec le temps.",
+    intro: "Conçu solide et stable, pensé pour ne pas craquer avec le temps.",
     points: ['Droits, tournants, balancés', 'Garde-corps bois & métal', 'Marches en bois massif', 'Étudié sur place'],
     img: imgEscaliers,
   },
   {
     n: '05', title: 'Portes & menuiseries',
-    intro: "Souvent négligés, ce sont pourtant eux qui changent l'aspect d'un intérieur quand ils sont bien faits.",
+    intro: "Souvent négligées, ce sont pourtant elles qui changent un intérieur quand elles sont bien faites.",
     points: ['Portes intérieures', 'Encadrements & plinthes', 'Boiseries & lambris', 'Habillages sur mesure'],
     img: imgPortes,
   },
@@ -57,7 +57,7 @@ function Row({ s, reverse, index }) {
         className="serv-row-img"
         style={{ gridColumn: reverse ? 2 : 1, gridRow: 1 }}
       >
-        <div style={{ aspectRatio: '5 / 4', overflow: 'hidden', borderRadius: '8px', boxShadow: 'var(--shadow-md)' }}>
+        <div style={{ aspectRatio: '5 / 4', overflow: 'hidden', borderRadius: '16px', boxShadow: 'var(--shadow-md)' }}>
           <img src={s.img} alt={`${s.title} sur mesure — Achard Créa, ébéniste dans la vallée de Chamonix`} loading="lazy" decoding="async"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
@@ -76,7 +76,7 @@ function Row({ s, reverse, index }) {
         <div className="serv-head">
           {/* Puce numéro */}
           <div className="serv-num" style={{
-            width: '46px', height: '46px', borderRadius: '10px', flexShrink: 0,
+            width: '46px', height: '46px', borderRadius: '14px', flexShrink: 0,
             background: 'var(--or-10)', border: '1px solid var(--or-20)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontFamily: 'var(--f-sc)', fontSize: '0.78rem', fontWeight: 500, color: 'var(--c-or-dim)',
@@ -84,8 +84,8 @@ function Row({ s, reverse, index }) {
           }}>{s.n}</div>
 
           <h3 style={{
-            fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.8rem, 3vw, 2.8rem)', fontWeight: 400,
-            color: 'var(--c-texte)', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 'var(--sp-5)',
+            fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.45rem, 2.1vw, 2rem)', fontWeight: 400,
+            color: 'var(--c-texte)', lineHeight: 1.1, letterSpacing: '-0.015em', marginBottom: 'var(--sp-5)',
           }}>{s.title}</h3>
         </div>
 
@@ -109,7 +109,7 @@ function Row({ s, reverse, index }) {
 
 export default function Services() {
   return (
-    <section id="savoir-faire" style={{ background: 'var(--c-ivoire)', padding: 'var(--section-py) var(--px)' }}>
+    <section id="savoir-faire" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         {/* Header centré */}
         <SectionHeader

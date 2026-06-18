@@ -12,16 +12,20 @@ const faqs = [
   { q: 'Proposez-vous une garantie ?', a: "Oui, cinq ans sur les assemblages et les finitions. Si une finition s'altère trop tôt, je viens la reprendre." },
 ]
 
-function Item({ faq, isOpen, onToggle }) {
+function Item({ faq, isOpen, onToggle, index }) {
+  const btnId = `faq-btn-${index}`
+  const panelId = `faq-panel-${index}`
   return (
     <motion.div variants={staggerItem} style={{ borderTop: '1px solid var(--c-pierre)' }}>
-      <button onClick={onToggle} style={{ width: '100%', textAlign: 'left', padding: 'var(--sp-5) 0', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 'var(--sp-4)', background: 'none', cursor: 'pointer' }}>
+      <button id={btnId} onClick={onToggle} aria-expanded={isOpen} aria-controls={panelId}
+        style={{ width: '100%', textAlign: 'left', padding: 'var(--sp-5) 0', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 'var(--sp-4)', background: 'none', cursor: 'pointer' }}>
         <span style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.05rem, 1.4vw, 1.25rem)', fontWeight: 400, color: 'var(--c-texte)', lineHeight: 1.35, flex: 1 }}>{faq.q}</span>
-        <motion.span animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.3 }} style={{ color: 'var(--c-or-dim)', fontSize: '1.35rem', lineHeight: 1, flexShrink: 0, marginTop: '2px' }}>+</motion.span>
+        <motion.span aria-hidden="true" animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.3 }} style={{ color: 'var(--c-or-dim)', fontSize: '1.35rem', lineHeight: 1, flexShrink: 0, marginTop: '2px' }}>+</motion.span>
       </button>
       <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }} style={{ overflow: 'hidden' }}>
+          <motion.div id={panelId} role="region" aria-labelledby={btnId}
+            initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }} style={{ overflow: 'hidden' }}>
             <p style={{ fontFamily: 'var(--f-sans)', fontSize: 'clamp(0.9rem, 1.05vw, 1rem)', lineHeight: 1.72, color: 'var(--c-texte-2)', paddingBottom: 'var(--sp-5)', maxWidth: '56ch' }}>{faq.a}</p>
           </motion.div>
         )}
@@ -33,10 +37,9 @@ function Item({ faq, isOpen, onToggle }) {
 export default function FAQ() {
   const [open, setOpen] = useState(0)
   return (
-    <section style={{ background: 'var(--c-fond)', padding: 'var(--section-py) var(--px)' }}>
+    <section style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <SectionHeader
-          eyebrow="Questions fréquentes"
           title={<>Ce que mes clients <Accent>me demandent souvent.</Accent></>}
         />
 
@@ -44,7 +47,7 @@ export default function FAQ() {
         <motion.div
           variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSettings}
           style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'left' }}>
-          {faqs.map((faq, i) => <Item key={i} faq={faq} isOpen={open === i} onToggle={() => setOpen(open === i ? null : i)} />)}
+          {faqs.map((faq, i) => <Item key={i} index={i} faq={faq} isOpen={open === i} onToggle={() => setOpen(open === i ? null : i)} />)}
           <div style={{ borderTop: '1px solid var(--c-pierre)' }} />
         </motion.div>
 

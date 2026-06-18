@@ -21,8 +21,8 @@ export default function App() {
         <Hero />
         <Services />
         <Realisations />
-        <ImageBand />
         <Metier />
+        <ImageBand />
         <Processus />
         <Engagements />
         <Temoignages />
