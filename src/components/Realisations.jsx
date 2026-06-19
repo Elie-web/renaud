@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
@@ -11,32 +11,48 @@ import imgMarqueterie from '../assets/créations renaud/console japo dessus.webp
 
 const ease = [0.22, 1, 0.36, 1]
 
+// ar = ratio largeur/hauteur de la photo → le cadre s'adapte (pas de recadrage)
 const projects = [
-  { id: 1, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',   img: imgConsole },
-  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer & laiton',        img: imgTableJeu },
-  { id: 3, cat: 'Mobilier',    title: 'Chevet « vague & soleil »',  meta: 'Frêne & laque',         img: imgChevet },
-  { id: 4, cat: 'Table',       title: "Table d'appoint marquetée",  meta: 'Marqueterie sur frêne', img: imgAppoint },
-  { id: 5, cat: 'Mobilier',    title: 'Tréteaux sculptés',          meta: 'Frêne massif',          img: imgTreteaux },
-  { id: 6, cat: 'Marqueterie', title: 'Plateau « trident »',        meta: 'Marqueterie de bois',   img: imgMarqueterie },
+  { id: 1, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',   img: imgConsole,     ar: 0.92 },
+  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer & laiton',        img: imgTableJeu,    ar: 1.42 },
+  { id: 3, cat: 'Mobilier',    title: 'Chevet « vague & soleil »',  meta: 'Frêne & laque',         img: imgChevet,      ar: 1.33 },
+  { id: 4, cat: 'Table',       title: "Table d'appoint marquetée",  meta: 'Marqueterie sur frêne', img: imgAppoint,     ar: 0.78 },
+  { id: 5, cat: 'Mobilier',    title: 'Tréteaux sculptés',          meta: 'Frêne massif',          img: imgTreteaux,    ar: 0.94 },
+  { id: 6, cat: 'Marqueterie', title: 'Plateau « trident »',        meta: 'Marqueterie de bois',   img: imgMarqueterie, ar: 0.75 },
 ]
 
 const pad = (n) => String(n).padStart(2, '0')
 
 export default function Realisations() {
   const reduce = useReducedMotion()
-  const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
+  // Table échiquier (index 1) affichée par défaut — c'est la plus belle pièce.
+  const [active, setActive] = useState(1)
   const count = projects.length
   const p = projects[active]
 
   const select = useCallback((i) => setActive(((i % count) + count) % count), [count])
 
-  // Défilement lent au repos — vivant dès le chargement, en pause au survol/focus.
+  // Swipe au doigt sur mobile
+  const touchX = useRef(null)
+  const onTouchStart = (e) => { touchX.current = e.touches[0].clientX }
+  const onTouchEnd = (e) => {
+    const sx = touchX.current
+    touchX.current = null
+    if (sx == null) return
+    const dx = e.changedTouches[0].clientX - sx
+    if (Math.abs(dx) > 40) select(active + (dx < 0 ? 1 : -1))
+  }
+
+  // Sur mobile l'index défile horizontalement → on garde la vignette active visible
+  const indexRef = useRef(null)
   useEffect(() => {
-    if (reduce || paused) return
-    const t = setInterval(() => setActive((a) => (a + 1) % count), 5200)
-    return () => clearInterval(t)
-  }, [reduce, paused, count])
+    const ul = indexRef.current
+    if (!ul || ul.scrollWidth <= ul.clientWidth + 4) return // pas de défilement (desktop)
+    const li = ul.children[active]
+    if (!li) return
+    const target = li.offsetLeft - (ul.clientWidth - li.offsetWidth) / 2
+    ul.scrollTo({ left: Math.max(0, target), behavior: 'smooth' })
+  }, [active])
 
   return (
     <section id="realisations" style={{ background: 'var(--c-creme)', padding: 'var(--section-py) var(--px)' }}>
@@ -50,11 +66,9 @@ export default function Realisations() {
           initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportSettings} transition={{ duration: 0.8, ease }}
           className="real-stage-wrap"
-          onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
-          onFocusCapture={() => setPaused(true)} onBlurCapture={() => setPaused(false)}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.55fr) minmax(280px, 0.92fr)',
+            gridTemplateColumns: 'minmax(0, 1.35fr) minmax(280px, 1fr)',
             gap: 'clamp(20px, 2.6vw, 52px)',
             alignItems: 'start',
           }}
@@ -62,33 +76,41 @@ export default function Realisations() {
           {/* ── Scène : la pièce en grand ── */}
           <div
             className="real-stage"
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
             style={{
               position: 'relative', borderRadius: '20px', overflow: 'hidden',
-              background: 'var(--c-brun-md)', aspectRatio: '4 / 3',
+              background: 'var(--c-brun-md)', aspectRatio: String(p.ar),
               boxShadow: 'var(--shadow-md)',
+              transition: 'aspect-ratio 0.5s var(--ease)',
             }}
           >
             <AnimatePresence>
-              <motion.img
+              <motion.div
                 key={p.id}
-                src={p.img}
-                alt={`${p.title} — ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Chamonix)`}
-                decoding="async"
-                initial={{ opacity: 0, scale: reduce ? 1 : 1.0 }}
-                animate={{ opacity: 1, scale: reduce ? 1 : 1.09 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{
-                  opacity: { duration: 0.7, ease },
-                  scale: { duration: 7.5, ease: 'linear' },
-                }}
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-              />
+                transition={{ opacity: { duration: 0.7, ease } }}
+                style={{ position: 'absolute', inset: 0 }}
+              >
+                {/* La pièce en plein cadre */}
+                <motion.img
+                  src={p.img}
+                  alt={`${p.title} — ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Chamonix)`}
+                  decoding="async"
+                  initial={{ scale: reduce ? 1 : 1.04 }}
+                  animate={{ scale: reduce ? 1 : 1.08 }}
+                  transition={{ scale: { duration: 7.5, ease: 'linear' } }}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+                />
+              </motion.div>
             </AnimatePresence>
 
             {/* Voile bas pour la lisibilité de la légende */}
             <div aria-hidden="true" style={{
               position: 'absolute', inset: 0, zIndex: 1,
-              background: 'linear-gradient(180deg, rgba(20,15,9,0) 38%, rgba(20,15,9,0.16) 60%, rgba(20,15,9,0.82) 100%)',
+              background: 'linear-gradient(180deg, rgba(20,15,9,0.28) 0%, rgba(20,15,9,0) 30%, rgba(20,15,9,0.34) 58%, rgba(20,15,9,0.92) 100%)',
             }} />
 
             {/* Numéro filigrane */}
@@ -98,12 +120,12 @@ export default function Realisations() {
                   key={p.id}
                   initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.4, ease }}
-                  style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(2.4rem, 5vw, 4rem)', lineHeight: 1, color: 'rgba(242,235,221,0.9)', textShadow: '0 2px 18px rgba(20,15,9,0.5)' }}
+                  style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(2.4rem, 5vw, 4rem)', lineHeight: 1, color: 'var(--c-ivoire)', textShadow: '0 2px 20px rgba(20,15,9,0.85), 0 1px 3px rgba(20,15,9,0.9)' }}
                 >
                   {pad(active + 1)}
                 </motion.span>
               </AnimatePresence>
-              <span style={{ fontFamily: 'var(--f-serif)', fontSize: '1rem', color: 'rgba(242,235,221,0.55)' }}>/ {pad(count)}</span>
+              <span style={{ fontFamily: 'var(--f-serif)', fontSize: '1rem', color: 'rgba(242,235,221,0.8)', textShadow: '0 1px 8px rgba(20,15,9,0.8)' }}>/ {pad(count)}</span>
             </div>
 
             {/* Légende */}
@@ -115,15 +137,23 @@ export default function Realisations() {
                   transition={{ duration: 0.45, ease }}
                 >
                   <span className="eyebrow eyebrow--light" style={{ display: 'block', marginBottom: '10px' }}>{p.cat}</span>
-                  <h3 style={{ fontFamily: 'var(--f-serif)', fontWeight: 400, fontSize: 'clamp(1.5rem, 2.8vw, 2.4rem)', lineHeight: 1.12, color: 'var(--c-ivoire)', marginBottom: '6px' }}>{p.title}</h3>
-                  <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', color: 'rgba(242,235,221,0.78)' }}>{p.meta}</span>
+                  <h3 style={{ fontFamily: 'var(--f-serif)', fontWeight: 400, fontSize: 'clamp(1.7rem, 3vw, 2.6rem)', lineHeight: 1.1, color: 'var(--c-ivoire)', marginBottom: '6px', textShadow: '0 2px 18px rgba(20,15,9,0.7)' }}>{p.title}</h3>
+                  <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.92rem', color: 'rgba(242,235,221,0.85)', textShadow: '0 1px 10px rgba(20,15,9,0.7)' }}>{p.meta}</span>
                 </motion.div>
               </AnimatePresence>
             </div>
+
+            {/* Flèches de navigation */}
+            <button type="button" className="real-nav real-nav--prev" aria-label="Pièce précédente" onClick={() => select(active - 1)}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+            </button>
+            <button type="button" className="real-nav real-nav--next" aria-label="Pièce suivante" onClick={() => select(active + 1)}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            </button>
           </div>
 
           {/* ── Index : vignettes navigables ── */}
-          <ul className="real-index" role="tablist" aria-label="Pièces de l'atelier">
+          <ul className="real-index" ref={indexRef} role="tablist" aria-label="Pièces de l'atelier">
             {projects.map((proj, i) => {
               const isActive = i === active
               return (
@@ -174,6 +204,20 @@ export default function Realisations() {
       </div>
 
       <style>{`
+        .real-nav {
+          position: absolute; top: 50%; transform: translateY(-50%);
+          z-index: 3; width: 44px; height: 44px; border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+          border: 1px solid rgba(242,235,221,0.45);
+          background: rgba(20,15,9,0.34); backdrop-filter: blur(6px);
+          color: var(--c-ivoire); cursor: pointer;
+          transition: background var(--dur-mid) var(--ease), border-color var(--dur-mid) var(--ease), transform var(--dur-mid) var(--ease);
+        }
+        .real-nav:hover { background: var(--c-or); border-color: var(--c-or); }
+        .real-nav:active { transform: translateY(-50%) scale(0.94); }
+        .real-nav--prev { left: clamp(12px, 1.6vw, 20px); }
+        .real-nav--next { right: clamp(12px, 1.6vw, 20px); }
+
         .real-index {
           display: flex; flex-direction: column;
           gap: 6px; margin: 0; padding: 0; list-style: none;
@@ -238,6 +282,9 @@ export default function Realisations() {
             padding-bottom: 6px;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            /* dégradé sur les bords : on devine qu'il y a d'autres pièces à faire défiler */
+            -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 34px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 34px), transparent 100%);
           }
           .real-index::-webkit-scrollbar { display: none; }
           .real-row {
@@ -249,10 +296,18 @@ export default function Realisations() {
           .real-thumb { width: 100%; height: 90px; }
           .real-row-text { width: 100%; }
           .real-title { font-size: 0.92rem; white-space: normal; }
+
+          /* Flèches sans contour : on devine juste qu'on peut slider */
+          .real-nav {
+            width: 40px; height: 40px;
+            background: transparent; border: none; backdrop-filter: none;
+          }
+          .real-nav:hover { background: transparent; border-color: transparent; }
+          .real-nav:active { background: transparent; }
+          .real-nav svg { filter: drop-shadow(0 1px 6px rgba(20,15,9,0.9)); }
         }
 
         @media (max-width: 480px) {
-          .real-stage { aspect-ratio: 3 / 4 !important; }
           .real-row { width: 132px; }
         }
       `}</style>

@@ -17,12 +17,6 @@ const stats = [
   { value: '5 ans', label: 'garantie' },
 ]
 
-const coords = [
-  { label: 'Téléphone', val: '06 34 08 46 90',          href: 'tel:+33634084690' },
-  { label: 'Email',     val: 'contact@achard-crea.fr',  href: 'mailto:contact@achard-crea.fr' },
-  { label: 'Atelier',   val: 'Vallée de Chamonix · sur RDV', href: '#contact' },
-]
-
 export default function Hero() {
   const ref = useRef(null)
   const reduce = useReducedMotion()
@@ -73,7 +67,7 @@ export default function Hero() {
           <motion.span
             initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease }}
-            className="eyebrow"
+            className="eyebrow hero-eyebrow"
             style={{ color: 'var(--c-or-pale)' }}
           >
             Mobilier &amp; agencement sur mesure · depuis 2017
@@ -151,33 +145,6 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Barre de coordonnées - visible dès la première page */}
-      <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-        className="hero-coords-bar"
-        style={{
-          position: 'relative', zIndex: 2,
-          borderTop: '1px solid rgba(242,235,221,0.16)',
-          background: 'rgba(22,17,11,0.32)', backdropFilter: 'blur(2px)', WebkitBackdropFilter: 'blur(2px)',
-        }}
-      >
-        <ul className="hero-coords" style={{
-          maxWidth: 'var(--max-w)', margin: '0 auto', padding: '16px var(--px)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap',
-          gap: '8px clamp(28px, 6vw, 72px)',
-        }}>
-          {coords.map((c) => (
-            <li key={c.label} style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
-              <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--c-or-pale)' }}>{c.label}</span>
-              <a href={c.href} style={{ fontFamily: 'var(--f-sans)', fontSize: '0.95rem', color: 'var(--c-ivoire)', transition: 'color .2s ease' }}
-                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--c-or-pale)'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--c-ivoire)'}
-              >{c.val}</a>
-            </li>
-          ))}
-        </ul>
-      </motion.div>
 
       <style>{`
         @media (max-width: 760px) {
@@ -185,10 +152,12 @@ export default function Hero() {
           .hero-inner {
             padding-top: 104px !important;
             padding-bottom: 44px !important;
-            gap: 22px !important;
+            gap: 20px !important;
           }
-          .hero-title { font-size: clamp(1.95rem, 8.4vw, 2.7rem) !important; max-width: 16ch !important; }
-          .hero-sub   { font-size: 1rem !important; line-height: 1.6 !important; max-width: 38ch !important; }
+          /* eyebrow masqué sur mobile : trop d'infos sur le hero */
+          .hero-eyebrow { display: none !important; }
+          .hero-title { font-size: clamp(2.4rem, 9.4vw, 3.3rem) !important; line-height: 1.1 !important; max-width: 14ch !important; }
+          .hero-sub   { font-size: 0.98rem !important; line-height: 1.6 !important; max-width: 38ch !important; }
 
           /* CTA : deux boutons pleine largeur empilés, largeurs identiques */
           .hero-cta-row {
@@ -200,20 +169,19 @@ export default function Hero() {
           }
           .hero-cta-row .btn {
             width: 100% !important;
+            display: flex !important;
+            align-items: center !important;
             justify-content: center !important;
-            font-size: 0.72rem !important;
+            min-height: 54px !important;
+            padding: 0 24px !important;
+            font-size: 0.78rem !important;
             letter-spacing: 0.12em !important;
-            padding: 16px 24px !important;
             white-space: nowrap !important;
           }
-          .hero-phone span { font-size: 1rem !important; }
+          .hero-phone span { font-size: 0.92rem !important; letter-spacing: 0.04em !important; }
 
           .hero-stats { gap: 18px !important; }
           .hero-stat  { gap: 18px !important; }
-
-          /* La barre de coordonnées duplique le tel/email et la barre flottante (FloatingCTA)
-             la remplace après scroll → on la masque sur mobile pour un hero propre sur un écran */
-          .hero-coords-bar { display: none !important; }
         }
       `}</style>
     </section>

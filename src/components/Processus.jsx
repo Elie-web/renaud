@@ -45,14 +45,14 @@ function Step({ step, flip }) {
   return (
     <div className={`proc-row ${flip ? 'proc-row--rev' : ''}`} style={{
       display: 'grid', gridTemplateColumns: '1fr 1fr',
-      gap: 'clamp(40px, 7vw, 110px)', alignItems: 'center',
+      gap: 'clamp(36px, 4.5vw, 80px)', alignItems: 'center',
     }}>
       {/* Visuel (mockup) */}
       <motion.div
         initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={viewportSettings} transition={{ duration: 0.9, ease }}
         className="proc-visual"
-        style={{ gridColumn: flip ? 2 : 1, gridRow: 1, display: 'flex', justifyContent: 'center' }}
+        style={{ gridColumn: flip ? 2 : 1, gridRow: 1, display: 'flex' }}
       >
         <ProcessusMockup id={step.id} />
       </motion.div>
@@ -64,15 +64,19 @@ function Step({ step, flip }) {
         className="proc-txt"
         style={{ gridColumn: flip ? 1 : 2, gridRow: 1 }}
       >
-        <span style={{
-          display: 'block', fontFamily: 'var(--f-serif)', fontWeight: 400,
-          fontSize: 'clamp(2.6rem, 5vw, 4rem)', lineHeight: 1, color: 'var(--c-or)',
-          opacity: 0.85, letterSpacing: '-0.02em', marginBottom: 'var(--sp-3)',
-        }}>{step.n}</span>
+        <span className="proc-kicker" style={{
+          display: 'inline-flex', alignItems: 'center', gap: '12px',
+          fontFamily: 'var(--f-sc)', fontWeight: 600, fontSize: '0.72rem',
+          letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--c-or-dim)',
+          marginBottom: 'var(--sp-3)',
+        }}>
+          <span>Étape {step.n}</span>
+          <span aria-hidden="true" style={{ width: '30px', height: '1px', background: 'var(--or-40)' }} />
+        </span>
 
         <h3 style={{
-          fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', fontWeight: 400,
-          color: 'var(--c-texte)', lineHeight: 1.12, letterSpacing: '-0.015em', marginBottom: 'var(--sp-3)',
+          fontFamily: 'var(--f-serif)', fontSize: 'clamp(2rem, 3.4vw, 3rem)', fontWeight: 400,
+          color: 'var(--c-texte)', lineHeight: 1.06, letterSpacing: '-0.02em', marginBottom: 'var(--sp-4)',
         }}>{step.title}</h3>
 
         <p style={{
@@ -132,9 +136,19 @@ export default function Processus() {
       </div>
 
       <style>{`
+        .proc-txt { max-width: 46ch; }
+
+        /* image et texte se rapprochent du centre → paire image+texte, jamais collée aux bords */
+        .proc-row .proc-visual { justify-content: flex-end; }
+        .proc-row .proc-txt { justify-self: start; }
+        .proc-row--rev .proc-visual { justify-content: flex-start; }
+        .proc-row--rev .proc-txt { justify-self: end; }
+
         @media (max-width: 880px) {
           .proc-row { grid-template-columns: 1fr !important; gap: var(--sp-10) !important; }
           .proc-visual, .proc-txt { grid-column: 1 !important; }
+          .proc-row .proc-visual, .proc-row--rev .proc-visual { justify-content: center !important; }
+          .proc-row .proc-txt, .proc-row--rev .proc-txt { justify-self: center !important; max-width: 100% !important; }
           .proc-visual { grid-row: 1 !important; }
           .proc-txt { grid-row: 2 !important; text-align: center; }
           .proc-txt p, .proc-txt ul { margin-left: auto; margin-right: auto; }

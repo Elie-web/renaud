@@ -1,109 +1,60 @@
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
-import imgMobilier from '../assets/créations renaud/c_est_elle_mec_2022-May-29_01-34-13PM-000_CustomizedView24060457088_jpg.webp'
-import imgCuisines from '../assets/working/DSC09010-opt.webp'
-import imgBiblio from '../assets/working/DSC09111.webp'
-import imgEscaliers from '../assets/working/124979027_5294257680600333_1820063589436393798_n.webp'
-import imgPortes from '../assets/working/DSC09096.webp'
+import imgMatiere from '../assets/working/DSC09034.webp'
+import imgCintrage from '../assets/working/DSC09096.webp'
+import imgAssemblage from '../assets/créations renaud/124786510_417682035900216_6567680258826415206_n.webp'
+import imgLaiton from '../assets/working/286228920_556145752805131_3350369565849358194_n.webp'
+import imgAtelier from '../assets/Renaud/DSC08872.webp'
+import imgEtabli from '../assets/Renaud/DSC08929.webp'
 
-const ease = [0.25, 0.1, 0.25, 1]
+const ease = [0.22, 1, 0.36, 1]
 
-const services = [
-  {
-    n: '01', title: 'Mobilier sur mesure',
-    intro: "Dessiné pour votre espace et votre usage — jamais pour un catalogue.",
-    points: ['Tables, bureaux & consoles', 'Buffets & enfilades', 'Dressings & rangements', 'Meubles TV sur mesure'],
-    img: imgMobilier,
-  },
-  {
-    n: '02', title: 'Cuisines',
-    intro: "Pensée autour de votre façon de cuisiner, dessinée au centimètre avant la première découpe.",
-    points: ['Façades en bois massif', 'Plans de travail adaptés', 'Îlots & rangements optimisés', 'Conception + pose comprises'],
-    img: imgCuisines,
-  },
-  {
-    n: '03', title: 'Bibliothèques',
-    intro: "Du sol au plafond ou en meuble libre, pensées pour la lumière et le poids réel des livres.",
-    points: ['Sur-mesure jusqu\'au plafond', 'Niches & éclairage intégré', 'Portes coulissantes', 'Bois massif ou plaqué'],
-    img: imgBiblio,
-  },
-  {
-    n: '04', title: 'Escaliers & garde-corps',
-    intro: "Conçu solide et stable, pensé pour ne pas craquer avec le temps.",
-    points: ['Droits, tournants, balancés', 'Garde-corps bois & métal', 'Marches en bois massif', 'Étudié sur place'],
-    img: imgEscaliers,
-  },
-  {
-    n: '05', title: 'Portes & menuiseries',
-    intro: "Souvent négligées, ce sont pourtant elles qui changent un intérieur quand elles sont bien faites.",
-    points: ['Portes intérieures', 'Encadrements & plinthes', 'Boiseries & lambris', 'Habillages sur mesure'],
-    img: imgPortes,
-  },
+// Savoir-faire : le geste, la matière, le détail (pas les pièces finies → c'est Réalisations).
+const pieces = [
+  { cat: 'Le bois',     title: 'Bois massifs',     line: 'Essences françaises choisies en scierie, jamais de panneaux.', img: imgMatiere },
+  { cat: 'Cintrage',    title: 'Courbes en noyer', line: 'Pièces cintrées, taillées et poncées à la main.',              img: imgCintrage },
+  { cat: 'Assemblages', title: "Queue-d'aronde",   line: 'Assemblages traditionnels, sans vis ni clou.',                 img: imgAssemblage },
+  { cat: 'Le détail',   title: 'Laiton tourné',    line: 'Pièces métalliques façonnées et intégrées à la main.',         img: imgLaiton },
+  { cat: "L'atelier",   title: 'Rien sous-traité', line: "Tout sort d'un seul atelier, de la découpe à la finition.",    img: imgAtelier },
+  { cat: "À l'établi",  title: 'Monté & contrôlé', line: 'Chaque pièce assemblée et vérifiée avant de partir.',          img: imgEtabli },
 ]
 
-function Row({ s, reverse, index }) {
+function Arrow() {
   return (
-    <div className={`serv-row ${reverse ? 'serv-row--rev' : ''}`} style={{
-      display: 'grid', gridTemplateColumns: '1fr 1fr',
-      gap: 'clamp(32px, 5vw, 88px)', alignItems: 'center',
-    }}>
-      {/* Image */}
-      <motion.div
-        initial={{ opacity: 0, x: reverse ? 60 : -60 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={viewportSettings}
-        transition={{ duration: 1, ease }}
-        className="serv-row-img"
-        style={{ gridColumn: reverse ? 2 : 1, gridRow: 1 }}
-      >
-        <div style={{ aspectRatio: '5 / 4', overflow: 'hidden', borderRadius: '16px', boxShadow: 'var(--shadow-md)' }}>
-          <img src={s.img} alt={`${s.title} sur mesure — Achard Créa, ébéniste dans la vallée de Chamonix`} loading="lazy" decoding="async"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </div>
-      </motion.div>
+    <svg className="sf-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  )
+}
 
-      {/* Texte */}
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={viewportSettings}
-        transition={{ duration: 0.9, delay: 0.1, ease }}
-        className="serv-row-txt"
-        style={{ gridColumn: reverse ? 1 : 2, gridRow: 1 }}
-      >
-        {/* En-tête : numéro + titre (groupés sur mobile pour une lecture nette) */}
-        <div className="serv-head">
-          {/* Puce numéro */}
-          <div className="serv-num" style={{
-            width: '46px', height: '46px', borderRadius: '14px', flexShrink: 0,
-            background: 'var(--or-10)', border: '1px solid var(--or-20)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: 'var(--f-sc)', fontSize: '0.78rem', fontWeight: 500, color: 'var(--c-or-dim)',
-            marginBottom: 'var(--sp-6)',
-          }}>{s.n}</div>
-
-          <h3 style={{
-            fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.45rem, 2.1vw, 2rem)', fontWeight: 400,
-            color: 'var(--c-texte)', lineHeight: 1.1, letterSpacing: '-0.015em', marginBottom: 'var(--sp-5)',
-          }}>{s.title}</h3>
-        </div>
-
-        <p style={{
-          fontFamily: 'var(--f-sans)', fontSize: 'clamp(1rem, 1.2vw, 1.12rem)', lineHeight: 1.72,
-          color: 'var(--c-texte-2)', maxWidth: '44ch', marginBottom: 'var(--sp-7)',
-        }}>{s.intro}</p>
-
-        <ul style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3) var(--sp-6)' }} className="serv-points">
-          {s.points.map((p) => (
-            <li key={p} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ width: '16px', height: '1px', background: 'var(--c-or-dim)', flexShrink: 0 }} />
-              <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.92rem', color: 'var(--c-texte)' }}>{p}</span>
-            </li>
-          ))}
-        </ul>
-      </motion.div>
-    </div>
+function Card({ s, index }) {
+  return (
+    <motion.a
+      className="sf-link"
+      href="#contact"
+      aria-label={`${s.title} — parlons de votre projet`}
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={viewportSettings}
+      transition={{ duration: 0.65, delay: Math.min(index * 0.07, 0.28), ease }}
+    >
+      <img
+        className="sf-img"
+        src={s.img}
+        alt={`${s.title} — savoir-faire de Renaud Achard, ébéniste dans la vallée de Chamonix`}
+        loading="lazy" decoding="async"
+      />
+      <span className="sf-over" aria-hidden="false">
+        <span className="sf-cat">{s.cat}</span>
+        <span className="sf-titrow">
+          <h3 className="sf-title">{s.title}</h3>
+          <Arrow />
+        </span>
+        <p className="sf-line">{s.line}</p>
+      </span>
+    </motion.a>
   )
 }
 
@@ -111,47 +62,104 @@ export default function Services() {
   return (
     <section id="savoir-faire" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        {/* Header centré */}
         <SectionHeader
           eyebrow="Savoir-faire"
-          title={<>Ce que <Accent>je fabrique.</Accent></>}
-          lead="Tout est dessiné, fabriqué et posé par mes soins. Un seul interlocuteur, du premier croquis à l'installation chez vous."
-          style={{ marginBottom: 'clamp(56px, 8vw, 120px)' }}
+          title={<>Le soin du <Accent>détail.</Accent></>}
+          lead="Bois massifs choisis en scierie, assemblages traditionnels, finitions à la main. Chaque pièce est façonnée et contrôlée par mes soins, à l'atelier."
+          style={{ marginBottom: 'clamp(56px, 7vw, 96px)' }}
         />
 
-        {/* Lignes alternées */}
-        <div className="serv-list" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(64px, 10vw, 144px)' }}>
-          {services.map((s, i) => (
-            <Row key={s.n} s={s} reverse={i % 2 === 1} index={i} />
+        <div className="sf-gallery">
+          {pieces.map((s, i) => (
+            <Card key={s.title} s={s} index={i} />
           ))}
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 820px) {
-          .serv-row { grid-template-columns: 1fr !important; gap: var(--sp-6) !important; }
-          .serv-row-img, .serv-row-txt { grid-column: 1 !important; }
-          .serv-row-img { grid-row: 1 !important; }
-          .serv-row-txt { grid-row: 2 !important; }
-
-          /* Séparation nette entre services + en-tête numéro/titre groupé */
-          .serv-list { gap: 0 !important; }
-          .serv-row + .serv-row {
-            border-top: 1px solid var(--c-pierre);
-            margin-top: clamp(40px, 9vw, 56px);
-            padding-top: clamp(40px, 9vw, 56px);
-          }
-          .serv-head {
-            display: flex !important;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: var(--sp-5);
-          }
-          .serv-num { width: 40px !important; height: 40px !important; margin-bottom: 0 !important; }
-          .serv-head h3 { margin-bottom: 0 !important; }
+        /* galerie masonry : chaque image garde son format naturel */
+        .sf-gallery {
+          column-count: 4;
+          column-gap: clamp(18px, 2vw, 30px);
         }
-        @media (max-width: 440px) {
-          .serv-points { grid-template-columns: 1fr !important; }
+        @media (max-width: 1100px) { .sf-gallery { column-count: 3; } }
+        @media (max-width: 760px)  { .sf-gallery { column-count: 2; } }
+        @media (max-width: 480px)  { .sf-gallery { column-count: 1; } }
+
+        .sf-link {
+          position: relative; display: block;
+          break-inside: avoid; -webkit-column-break-inside: avoid;
+          margin-bottom: clamp(20px, 2.4vw, 36px);
+          border-radius: 14px; overflow: hidden;
+          box-shadow: var(--shadow-sm); outline: 1px solid rgba(20,15,9,0.06); outline-offset: -1px;
+          transition: box-shadow var(--dur-mid) var(--ease), transform var(--dur-mid) var(--ease);
+        }
+        .sf-link:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+        .sf-link:active { transform: translateY(-4px) scale(0.99); }
+        .sf-link:focus-visible { outline: 2px solid var(--c-or-dim); outline-offset: 3px; }
+
+        .sf-img {
+          width: 100%; height: auto; display: block;
+          background: var(--c-brun-md);
+          transition: transform 700ms var(--ease); will-change: transform;
+        }
+        .sf-link:hover .sf-img,
+        .sf-link:focus-visible .sf-img { transform: scale(1.05); }
+
+        /* texte : invisible au repos, révélé au survol sur un voile dégradé */
+        .sf-over {
+          position: absolute; inset: 0; z-index: 1;
+          display: flex; flex-direction: column; justify-content: flex-end;
+          padding: clamp(16px, 1.7vw, 26px);
+          background: linear-gradient(to top,
+            rgba(20,15,9,0.88) 0%, rgba(20,15,9,0.62) 26%,
+            rgba(20,15,9,0.18) 50%, rgba(20,15,9,0) 72%);
+          opacity: 0;
+          transition: opacity var(--dur-mid) var(--ease);
+        }
+        .sf-link:hover .sf-over,
+        .sf-link:focus-visible .sf-over { opacity: 1; }
+
+        /* petit décalage staggeré du texte à l'apparition */
+        .sf-over > * {
+          transform: translateY(12px);
+          transition: transform var(--dur-mid) var(--ease);
+        }
+        .sf-link:hover .sf-over > *,
+        .sf-link:focus-visible .sf-over > * { transform: none; }
+        .sf-over > .sf-cat    { transition-delay: 0ms; }
+        .sf-over > .sf-titrow { transition-delay: 45ms; }
+        .sf-over > .sf-line   { transition-delay: 90ms; }
+
+        .sf-cat {
+          font-family: var(--f-sc); font-size: 0.68rem; font-weight: 600;
+          letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-or-pale);
+          margin-bottom: 12px;
+          text-shadow: 0 1px 8px rgba(20,15,9,0.6);
+        }
+        .sf-titrow { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+        .sf-title {
+          font-family: var(--f-serif); font-weight: 400;
+          font-size: clamp(1.8rem, 2.5vw, 2.7rem); line-height: 1.08; letter-spacing: -0.02em;
+          color: var(--c-ivoire); text-wrap: balance;
+          text-shadow: 0 1px 2px rgba(20,15,9,0.5), 0 2px 18px rgba(20,15,9,0.5);
+        }
+        .sf-arrow {
+          flex-shrink: 0; width: 26px; height: 26px;
+          color: var(--c-or-pale); filter: drop-shadow(0 1px 8px rgba(20,15,9,0.6));
+        }
+        .sf-line {
+          margin-top: 11px;
+          font-family: var(--f-sans); font-size: 1.04rem; line-height: 1.5;
+          color: rgba(242,235,221,0.94); text-wrap: pretty; max-width: 42ch;
+          text-shadow: 0 1px 10px rgba(20,15,9,0.7);
+        }
+
+        /* mobile / tablette (tactile, pas de survol) : on affiche le texte en
+           permanence — le voile dégradé en bas garantit la lisibilité */
+        @media (max-width: 880px) {
+          .sf-over { opacity: 1; }
+          .sf-over > * { transform: none; }
         }
       `}</style>
     </section>

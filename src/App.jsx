@@ -11,6 +11,7 @@ import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import FloatingCTA from './components/FloatingCTA'
+import FloatingWhatsApp from './components/FloatingWhatsApp'
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
       </main>
       <Footer />
       <FloatingCTA />
+      <FloatingWhatsApp />
     </>
   )
 }
