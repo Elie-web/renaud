@@ -44,18 +44,33 @@ export default function Metier() {
             transition={{ duration: 0.9, delay: 0.12, ease }}
             className="metier-text"
           >
-            <span className="metier-kicker">Renaud Achard — Ébéniste</span>
+            <div className="metier-head">
+              <span className="metier-kicker">Renaud Achard · Ébéniste</span>
 
-            <h2 className="metier-statement">
-              Je vous reçois, je dessine, je fabrique{' '}
-              <em>et je pose.</em>
-            </h2>
+              <h2 className="metier-statement">
+                Le&nbsp;bois, ma&nbsp;matière.{' '}
+                <em>Votre&nbsp;intérieur, ma&nbsp;raison.</em>
+              </h2>
 
-            <p className="metier-lead">
-              Seul, à l'atelier. Pas de sous-traitance, pas d'intermédiaire&nbsp;:
-              vous savez toujours qui s'occupe de votre projet.
-            </p>
+              <p className="metier-lead">
+                Un seul artisan, du premier croquis à la pose. De mes mains aux vôtres,
+                sans intermédiaire&nbsp;: vous savez toujours qui prend soin de votre projet.
+              </p>
 
+              <p className="metier-story">
+                J'ai grandi avec le bois. Son odeur, sa chaleur, le temps qu'il faut
+                pour bien le travailler. Avec les années, j'ai appris à le lire&nbsp;:
+                à suivre son fil plutôt qu'à le forcer.
+              </p>
+
+              <p className="metier-story">
+                Création artisanale pure. Je travaille à la lumière du jour, sur
+                des pièces qui trouvent leur place chez vous pour vous accompagner. Vous
+                m'apportez une idée, je la concrétise.
+              </p>
+            </div>
+
+            <div className="metier-body">
             <div className="metier-parcours">
               <div className="metier-parcours-head">
                 <span className="metier-parcours-label">Formation</span>
@@ -75,6 +90,7 @@ export default function Metier() {
               <span className="metier-sign-name">Renaud</span>
               <span className="metier-sign-rule" aria-hidden="true" />
               <span className="metier-sign-meta">Dessiné, fabriqué &amp; posé par mes soins</span>
+            </div>
             </div>
           </motion.div>
         </div>
@@ -109,6 +125,7 @@ export default function Metier() {
         .metier-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-vert); flex-shrink: 0; }
 
         .metier-text { display: flex; flex-direction: column; align-items: flex-start; }
+        .metier-head, .metier-body { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
         .metier-kicker {
           font-family: var(--f-sc); font-size: 0.66rem; font-weight: 500;
           letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-or-dim);
@@ -124,8 +141,15 @@ export default function Metier() {
         .metier-lead {
           font-family: var(--f-sans); font-size: clamp(1rem, 1.2vw, 1.12rem);
           line-height: 1.7; color: var(--c-texte-2); max-width: 42ch;
-          margin-bottom: var(--sp-8);
+          margin-bottom: var(--sp-6);
         }
+        .metier-story {
+          font-family: var(--f-sans); font-size: clamp(0.95rem, 1.1vw, 1.04rem);
+          line-height: 1.78; color: var(--c-texte-2); max-width: 46ch;
+          margin-bottom: var(--sp-5);
+        }
+        .metier-story:last-of-type { margin-bottom: var(--sp-8); }
+        .metier-story em { font-style: italic; color: var(--c-or-dim); }
 
         .metier-parcours {
           display: flex; flex-direction: column; gap: var(--sp-5);
@@ -169,8 +193,22 @@ export default function Metier() {
         .metier-sign-meta { font-family: var(--f-sc); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-texte-2); }
 
         @media (max-width: 860px) {
-          .metier-grid { grid-template-columns: 1fr !important; gap: var(--sp-12) !important; }
-          .metier-img { max-width: 380px; margin: 0 auto; }
+          .metier-grid { grid-template-columns: 1fr !important; gap: var(--sp-10) !important; }
+          /* sur mobile : titre + sous-titre, PUIS la photo, PUIS le reste.
+             display:contents fait remonter .metier-head et .metier-body comme
+             éléments de la grille, ce qui permet d'insérer la photo entre les deux. */
+          .metier-text { display: contents; }
+          /* Titre centré comme les autres sections… */
+          .metier-head { order: 1; align-items: center; text-align: center; }
+          .metier-statement { max-width: 22ch; }
+          /* …mais les paragraphes de lecture restent alignés à gauche. */
+          .metier-head .metier-lead,
+          .metier-head .metier-story {
+            align-self: stretch; text-align: left; max-width: none;
+          }
+          .metier-img { order: 2; max-width: 380px; margin: 0 auto; }
+          .metier-body { order: 3; }
+          .metier-head .metier-story:last-of-type { margin-bottom: 0; }
           .metier-badge { left: 0; }
         }
       `}</style>

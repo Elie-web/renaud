@@ -180,6 +180,17 @@ ul     { list-style: none; }
   text-wrap: pretty;
 }
 
+/* Mot d'accent (italique argile) dans les titres : insécable sur desktop, pour
+   éviter les coupures disgracieuses (ex. « sans / mauvaise surprise »). Sur
+   mobile, on laisse le texte se replier mot à mot pour ne jamais déborder. */
+@media (min-width: 760px) {
+  .display em,
+  .h1 em,
+  .h2 em {
+    white-space: nowrap;
+  }
+}
+
 /* ─── Layout utilities ───────────────────────────────────────────────── */
 .container {
   width: 100%;

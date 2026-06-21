@@ -138,11 +138,11 @@ function FabricationMockup() {
       alt="Montage d'une pièce sur mesure à l'établi — fabrication artisanale, vallée de Chamonix">
       <PillChip accent={a} icon={<Plane />} label="Fait main"
         pos={{ top: '-16px', right: '-20px' }} rest={{ rotate: 5 }} hover={{ x: 10, y: -6, rotate: 11 }} />
-      {/* chip « rien sous-traité » (validation verte) */}
+      {/* chip « de mes mains » (validation verte) */}
       <motion.div variants={chip({ rotate: -3 }, { x: -8, y: 6, rotate: -10 })} transition={spring}
         style={{ position: 'absolute', bottom: '-14px', left: '-18px', display: 'flex', alignItems: 'center', gap: '7px', borderRadius: 'var(--r-pill)', background: 'var(--c-ivoire)', border: '1px solid var(--c-pierre)', boxShadow: 'var(--shadow-md)', padding: '6px 13px 6px 6px' }}>
         <span style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'var(--c-vert)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><Check size={12} /></span>
-        <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.7rem', fontWeight: 600, color: 'var(--c-texte)' }}>Rien sous-traité</span>
+        <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.7rem', fontWeight: 600, color: 'var(--c-texte)' }}>De mes mains</span>
       </motion.div>
     </Frame>
   )

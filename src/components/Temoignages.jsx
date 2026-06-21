@@ -155,8 +155,26 @@ export default function Temoignages() {
         @media (max-width: 900px) { .avis-grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 600px) {
           .avis-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
-          .avis-trust { gap: 8px 12px; padding: 12px 18px; }
-          .avis-trust-label, .avis-trust-link { flex-basis: 100%; text-align: center; padding-left: 0; }
+          /* carte arrondie (plus la pilule étirée) : note centrée, puis libellé,
+             puis le lien détaché par un fin séparateur → bloc net et lisible */
+          .avis-trust {
+            justify-content: center;
+            gap: 10px 12px;
+            width: 100%; max-width: 320px;
+            padding: 18px 22px;
+            border-radius: 20px;
+            text-align: center;
+          }
+          .avis-trust-label {
+            flex-basis: 100%; text-align: center;
+            font-size: 0.86rem;
+          }
+          .avis-trust-link {
+            flex-basis: 100%; text-align: center;
+            padding: 12px 0 2px;
+            margin-top: 2px;
+            border-top: 1px solid var(--c-pierre);
+          }
         }
       `}</style>
     </section>

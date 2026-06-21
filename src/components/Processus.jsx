@@ -20,14 +20,14 @@ const steps = [
   },
   {
     n: '03', id: 'fabrication', title: 'La fabrication',
-    tagline: "Tout sort de l'atelier, rien n'est sous-traité.",
+    tagline: 'Chaque pièce prend forme sous mes mains, à l\'atelier.',
     desc: "À la main pour les assemblages, à la machine pour les débits. Aucune pièce ne part avant d'être juste.",
     points: ['Assemblages traditionnels', 'Contrôle à chaque étape'],
   },
   {
     n: '04', id: 'livraison', title: 'La livraison',
     tagline: 'Je livre et j\'installe moi-même.',
-    desc: "Je vérifie l'aplomb, les jours, les finitions — et je reste joignable après la pose.",
+    desc: "Je vérifie l'aplomb, les jours, les finitions. Et je reste joignable après la pose.",
     points: ['Pose soignée sur place', 'Garantie 5 ans'],
   },
 ]
@@ -145,12 +145,15 @@ export default function Processus() {
         .proc-row--rev .proc-txt { justify-self: end; }
 
         @media (max-width: 880px) {
+          /* plus d'air entre le sous-titre de section et « Étape 01 » */
+          .proc-list { margin-top: clamp(44px, 13vw, 80px); }
           .proc-row { grid-template-columns: 1fr !important; gap: var(--sp-10) !important; }
           .proc-visual, .proc-txt { grid-column: 1 !important; }
           .proc-row .proc-visual, .proc-row--rev .proc-visual { justify-content: center !important; }
           .proc-row .proc-txt, .proc-row--rev .proc-txt { justify-self: center !important; max-width: 100% !important; }
-          .proc-visual { grid-row: 1 !important; }
-          .proc-txt { grid-row: 2 !important; text-align: center; }
+          /* sur mobile : le titre d'abord, l'image ensuite (sinon on voit l'image avant de savoir de quelle étape il s'agit) */
+          .proc-txt { grid-row: 1 !important; text-align: center; }
+          .proc-visual { grid-row: 2 !important; }
           .proc-txt p, .proc-txt ul { margin-left: auto; margin-right: auto; }
           .proc-txt ul { width: fit-content; align-items: flex-start; }
         }

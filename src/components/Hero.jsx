@@ -58,7 +58,7 @@ export default function Hero() {
         style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', opacity: reduce ? 1 : contentOpacity, y: reduce ? 0 : contentY }}
       >
         <div className="hero-inner" style={{
-          width: '100%', maxWidth: '900px', margin: '0 auto',
+          width: '100%', maxWidth: '1180px', margin: '0 auto',
           padding: 'clamp(120px, 18vh, 200px) var(--px) clamp(28px, 5vh, 56px)',
           display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
           gap: 'clamp(18px, 2.6vh, 30px)',
@@ -80,13 +80,15 @@ export default function Hero() {
             className="hero-title"
             style={{
               fontFamily: 'var(--f-serif)', fontWeight: 400,
-              fontSize: 'clamp(2.15rem, 5.6vw, 5.4rem)', lineHeight: 1.08,
+              fontSize: 'clamp(2.4rem, 5vw, 4.8rem)', lineHeight: 1.1,
               letterSpacing: '-0.022em', color: 'var(--c-ivoire)',
-              maxWidth: '16ch', paddingBottom: '0.08em', textShadow: '0 2px 30px rgba(20,15,9,0.55)',
+              maxWidth: 'none', whiteSpace: 'nowrap',
+              paddingBottom: '0.08em', textShadow: '0 2px 30px rgba(20,15,9,0.55)',
             }}
           >
-            Votre intérieur sur mesure, par un{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--c-or-pale)' }}>ébéniste à Chamonix.</em>
+            Votre intérieur<br />
+            sur mesure,<br />
+            <em style={{ fontStyle: 'italic', color: 'var(--c-or-pale)' }}>par un ébéniste<br />à Chamonix.</em>
           </motion.h1>
 
           {/* Sous-titre */}
@@ -156,7 +158,8 @@ export default function Hero() {
           }
           /* eyebrow masqué sur mobile : trop d'infos sur le hero */
           .hero-eyebrow { display: none !important; }
-          .hero-title { font-size: clamp(2.4rem, 9.4vw, 3.3rem) !important; line-height: 1.1 !important; max-width: 14ch !important; }
+          /* sur mobile la 1re ligne est trop longue pour tenir : on autorise le retour naturel */
+          .hero-title { font-size: clamp(2.4rem, 9vw, 3.4rem) !important; line-height: 1.12 !important; max-width: none !important; white-space: normal !important; }
           .hero-sub   { font-size: 0.98rem !important; line-height: 1.6 !important; max-width: 38ch !important; }
 
           /* CTA : deux boutons pleine largeur empilés, largeurs identiques */

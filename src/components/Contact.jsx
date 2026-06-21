@@ -18,7 +18,7 @@ const infos = [
   { label: 'Téléphone', val: '06 34 08 46 90',            href: 'tel:+33634084690',            icon: IcoPhone },
   { label: 'Email',     val: 'contact@achard-crea.fr',    href: 'mailto:contact@achard-crea.fr', icon: IcoMail },
   { label: 'Atelier',   val: 'Vallée de Chamonix · sur RDV', href: null,                        icon: IcoPin },
-  { label: 'Horaires',  val: 'Lun – Ven · 8h – 18h',       href: null,                          icon: IcoClock },
+  { label: 'Horaires',  val: 'Lun. au ven. · 8h-18h',      href: null,                          icon: IcoClock },
 ]
 
 const inputStyle = {
@@ -96,7 +96,7 @@ export default function Contact() {
               <div style={{ fontSize: '2rem', color: 'var(--c-or-dim)', marginBottom: 'var(--sp-4)' }}>✉</div>
               <h3 style={{ fontFamily: 'var(--f-serif)', fontSize: '1.6rem', color: 'var(--c-texte)', marginBottom: 'var(--sp-3)' }}>Votre messagerie s'ouvre</h3>
               <p style={{ fontFamily: 'var(--f-sans)', color: 'var(--c-texte-2)', maxWidth: '38ch', margin: '0 auto var(--sp-5)' }}>
-                Votre message est pré-rempli dans votre logiciel d'email. <strong style={{ color: 'var(--c-texte)', fontWeight: 600 }}>Cliquez sur « Envoyer »</strong> pour finaliser — je vous réponds sous 24 h.
+                Votre message est pré-rempli dans votre logiciel d'email. <strong style={{ color: 'var(--c-texte)', fontWeight: 600 }}>Cliquez sur « Envoyer »</strong> pour finaliser. Je vous réponds sous 24 h.
               </p>
               <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.85rem', color: 'var(--c-texte-2)' }}>
                 Rien ne s'est ouvert ?{' '}

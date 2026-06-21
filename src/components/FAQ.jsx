@@ -8,7 +8,7 @@ const faqs = [
   { q: 'Quel est le délai pour un projet ?', a: "Une table prend 3 à 6 semaines, une cuisine complète 2 à 4 mois. Je travaille sur commande, et je vous donne une date précise avant de commencer." },
   { q: 'Comment se passe la première rencontre ?', a: "Je vous reçois chez vous ou à l'atelier. Rien n'est signé ce jour-là : vous repartez avec mes idées et recevez une proposition détaillée sous 5 jours." },
   { q: 'Quels bois utilisez-vous ?', a: "Des bois massifs français, choisis en scierie selon votre projet. Jamais de panneaux de particules." },
-  { q: "Quelles sont vos zones d'intervention ?", a: "Toute la vallée de Chamonix — Chamonix, Les Houches, Servoz, Argentière, Vallorcine — et plus largement la Haute-Savoie : Sallanches, Passy, Saint-Gervais, Megève, Combloux. Pour le mobilier transportable, je peux intervenir au-delà, parlons-en." },
+  { q: "Quelles sont vos zones d'intervention ?", a: "Toute la vallée de Chamonix (Chamonix, Les Houches, Servoz, Argentière, Vallorcine) et plus largement la Haute-Savoie : Sallanches, Passy, Saint-Gervais, Megève, Combloux. Pour le mobilier transportable, je peux intervenir au-delà, parlons-en." },
   { q: 'Proposez-vous une garantie ?', a: "Oui, cinq ans sur les assemblages et les finitions. Si une finition s'altère trop tôt, je viens la reprendre." },
 ]
 

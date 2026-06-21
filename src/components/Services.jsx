@@ -25,7 +25,7 @@ const pieces = [
   { cat: 'Le galbe',    title: 'Piètement fuselé',  line: 'Pieds galbés taillés dans la masse, fil du bois respecté.',     img: imgGalbe },
   { cat: 'Le détail',   title: 'Laiton tourné',     line: 'Pièces métalliques façonnées et intégrées à la main.',          img: imgLaiton },
   { cat: 'La découpe',  title: 'Débit & calibrage', line: 'Chaque planche débitée et calibrée avant façonnage.',           img: imgDebit, crop: true },
-  { cat: "L'atelier",   title: 'Rien sous-traité',  line: "Tout sort d'un seul atelier, de la découpe à la finition.",     img: imgAtelier },
+  { cat: "L'atelier",   title: 'Façonné ici',       line: 'De la découpe à la finition, chaque pièce prend forme sous mes mains.', img: imgAtelier },
   { cat: "À l'établi",  title: 'Monté & contrôlé',  line: 'Chaque pièce assemblée et vérifiée avant de partir.',           img: imgEtabli },
 ]
 

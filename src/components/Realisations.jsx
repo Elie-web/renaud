@@ -53,6 +53,29 @@ export default function Realisations() {
     ul.scrollTo({ left: Math.max(0, target), behavior: 'smooth' })
   }, [active])
 
+  // Flèches du rail mobile : on n'affiche que celles qui mènent quelque part
+  // (rien à gauche si on est tout à gauche, rien à droite si on est au bout).
+  const [rail, setRail] = useState({ start: true, end: false, scrollable: false })
+  const updateRail = useCallback(() => {
+    const ul = indexRef.current
+    if (!ul) return
+    const scrollable = ul.scrollWidth > ul.clientWidth + 4
+    setRail({
+      scrollable,
+      start: ul.scrollLeft <= 2,
+      end: ul.scrollLeft + ul.clientWidth >= ul.scrollWidth - 2,
+    })
+  }, [])
+  useEffect(() => {
+    updateRail()
+    window.addEventListener('resize', updateRail)
+    return () => window.removeEventListener('resize', updateRail)
+  }, [updateRail])
+  const scrollRail = (dir) => {
+    const ul = indexRef.current
+    if (ul) ul.scrollBy({ left: dir * ul.clientWidth * 0.8, behavior: 'smooth' })
+  }
+
   return (
     <section id="realisations" style={{ background: 'var(--c-creme)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
@@ -69,7 +92,7 @@ export default function Realisations() {
             display: 'grid',
             gridTemplateColumns: 'minmax(0, 1.35fr) minmax(280px, 1fr)',
             gap: 'clamp(20px, 2.6vw, 52px)',
-            alignItems: 'start',
+            alignItems: 'stretch',
           }}
         >
           {/* ── Scène : la pièce en grand ── */}
@@ -151,7 +174,8 @@ export default function Realisations() {
           </div>
 
           {/* ── Index : vignettes navigables ── */}
-          <ul className="real-index" ref={indexRef} role="tablist" aria-label="Pièces de l'atelier">
+          <div className="real-index-wrap">
+          <ul className="real-index" ref={indexRef} onScroll={updateRail} role="tablist" aria-label="Pièces de l'atelier">
             {projects.map((proj, i) => {
               const isActive = i === active
               return (
@@ -188,6 +212,25 @@ export default function Realisations() {
               )
             })}
           </ul>
+
+          {/* Flèches du rail (mobile) — affichées seulement si on peut aller par là */}
+          <button
+            type="button"
+            className={`rail-arrow rail-arrow--prev${rail.scrollable && !rail.start ? '' : ' is-off'}`}
+            aria-label="Faire défiler vers la gauche" tabIndex={-1}
+            onClick={() => scrollRail(-1)}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+          </button>
+          <button
+            type="button"
+            className={`rail-arrow rail-arrow--next${rail.scrollable && !rail.end ? '' : ' is-off'}`}
+            aria-label="Faire défiler vers la droite" tabIndex={-1}
+            onClick={() => scrollRail(1)}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+          </button>
+          </div>
         </motion.div>
 
         <motion.div
@@ -202,8 +245,10 @@ export default function Realisations() {
       </div>
 
       <style>{`
-        /* cadre à ratio fixe → la hauteur ne change jamais d'une pièce à l'autre */
-        .real-stage { aspect-ratio: 1 / 1; max-height: 76vh; }
+        /* hauteur bornée (pas d'aspect-ratio) → l'image remplit TOUTE la largeur
+           de sa colonne, même sur un écran large mais peu haut. Sinon le ratio
+           1/1 + max-height rétrécissait l'image en petit carré, laissant un vide. */
+        .real-stage { height: clamp(440px, 62vh, 660px); }
 
         .real-nav {
           position: absolute; top: 50%; transform: translateY(-50%);
@@ -219,14 +264,22 @@ export default function Realisations() {
         .real-nav--prev { left: clamp(12px, 1.6vw, 20px); }
         .real-nav--next { right: clamp(12px, 1.6vw, 20px); }
 
+        .real-index-wrap { position: relative; height: 100%; min-width: 0; }
+        .rail-arrow { display: none; }
         .real-index {
           display: flex; flex-direction: column;
           gap: 6px; margin: 0; padding: 0; list-style: none;
+          height: 100%;
+        }
+        .real-index > li {
+          /* chaque vignette occupe une part égale de la hauteur de l'image
+             → la colonne de droite remplit toute la hauteur, plus de vide */
+          flex: 1 1 0; min-height: 0; display: flex;
         }
         .real-row {
           position: relative;
           display: flex; align-items: center; gap: 16px;
-          width: 100%; text-align: left;
+          width: 100%; height: 100%; text-align: left;
           padding: 10px 14px 10px 18px;
           border: none; background: transparent; cursor: pointer;
           border-radius: 12px;
@@ -239,7 +292,8 @@ export default function Realisations() {
           width: 3px; border-radius: 3px; background: var(--c-or);
         }
         .real-thumb {
-          flex-shrink: 0; width: 78px; height: 60px;
+          flex-shrink: 0; width: 92px; height: 100%;
+          max-height: 104px; min-height: 56px;
           border-radius: 8px; overflow: hidden; background: var(--c-brun-md);
         }
         .real-thumb img {
@@ -275,8 +329,12 @@ export default function Realisations() {
 
         @media (max-width: 920px) {
           .real-stage-wrap { grid-template-columns: 1fr !important; }
-          .real-stage { aspect-ratio: 4 / 5; max-height: 70vh; }
+          .real-stage { height: auto; aspect-ratio: 4 / 5; max-height: 70vh; }
+          /* on annule la répartition verticale du desktop : ici c'est un rail horizontal */
+          .real-index > li { flex: 0 0 auto; }
+          .real-row { height: auto; }
           .real-index {
+            height: auto;
             flex-direction: row;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
@@ -295,7 +353,7 @@ export default function Realisations() {
             scroll-snap-align: start;
           }
           .real-marker { top: auto; bottom: 0; left: 10px; right: 10px; width: auto; height: 3px; }
-          .real-thumb { width: 100%; height: 90px; }
+          .real-thumb { width: 100%; height: 90px; max-height: none; min-height: 0; }
           .real-row-text { width: 100%; }
           .real-title { font-size: 0.92rem; white-space: normal; }
 
@@ -311,6 +369,24 @@ export default function Realisations() {
 
         @media (max-width: 480px) {
           .real-row { width: 132px; }
+        }
+
+        /* Flèches du rail — uniquement sur mobile (là où le rail défile) */
+        @media (max-width: 920px) {
+          .rail-arrow {
+            display: flex; align-items: center; justify-content: center;
+            position: absolute; top: 55px; transform: translateY(-50%);
+            z-index: 4; width: 38px; height: 38px; border-radius: 50%;
+            border: 1px solid var(--or-20);
+            background: rgba(247,242,232,0.92); backdrop-filter: blur(4px);
+            color: var(--c-texte); cursor: pointer;
+            box-shadow: 0 3px 12px rgba(20,15,9,0.18);
+            transition: opacity var(--dur-mid) var(--ease), transform var(--dur-mid) var(--ease);
+          }
+          .rail-arrow--prev { left: -4px; }
+          .rail-arrow--next { right: -4px; }
+          .rail-arrow.is-off { opacity: 0; pointer-events: none; }
+          .rail-arrow:active { transform: translateY(-50%) scale(0.9); }
         }
       `}</style>
     </section>
