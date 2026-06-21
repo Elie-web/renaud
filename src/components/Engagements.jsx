@@ -17,16 +17,9 @@ const IcoBois = <Ico d={<><path d="M11 21c-4.4 0-7-3-7-8 0-6.6 5.5-10 13-10 0 8.
 
 const points = [
   { icon: IcoDevis,    title: 'Devis gratuit et fixe', desc: 'Le prix annoncé est le prix final.' },
-  { icon: Ico3D,       title: 'Validé en 3D',          desc: 'Vous voyez la pièce avant la première découpe.' },
   { icon: IcoGarantie, title: 'Garantie 5 ans',        desc: 'Sur les assemblages et finitions. Je reviens si ça bouge.' },
+  { icon: Ico3D,       title: 'Validé en 3D',          desc: 'Vous voyez la pièce avant la première découpe.' },
   { icon: IcoBois,     title: 'Bois français massif',  desc: 'Choisi en scierie. Jamais d\'aggloméré.' },
-]
-
-const credentials = [
-  { k: 'BMA', v: 'Ébéniste diplômé' },
-  { k: 'DNMADE', v: 'Mobilier contemporain' },
-  { k: '100%', v: "Fait à l'atelier" },
-  { k: 'Bois français', v: 'Massif, choisi en scierie' },
 ]
 
 export default function Engagements() {
@@ -64,20 +57,6 @@ export default function Engagements() {
             ))}
           </motion.div>
         </div>
-
-        {/* Crédibilité */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportSettings} transition={{ duration: 0.8 }}
-          className="eng-creds"
-          style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 'var(--sp-8)',
-            borderTop: '1px solid var(--c-pierre)', marginTop: 'clamp(40px, 5vw, 72px)', paddingTop: 'clamp(32px, 4vw, 48px)' }}>
-          {credentials.map((c) => (
-            <div key={c.k}>
-              <div style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.6rem, 2.6vw, 2.4rem)', fontWeight: 400, color: 'var(--c-texte)', lineHeight: 1, marginBottom: '6px', letterSpacing: '-0.01em' }}>{c.k}</div>
-              <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.6rem', fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--c-texte-2)' }}>{c.v}</div>
-            </div>
-          ))}
-        </motion.div>
       </div>
 
       <style>{`

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
@@ -7,18 +8,31 @@ import imgAssemblage from '../assets/créations renaud/124786510_417682035900216
 import imgLaiton from '../assets/working/286228920_556145752805131_3350369565849358194_n.webp'
 import imgAtelier from '../assets/Renaud/DSC08872.webp'
 import imgEtabli from '../assets/Renaud/DSC08929.webp'
+import imgTenons from '../assets/working/124979027_5294257680600333_1820063589436393798_n.webp'
+import imgArtisan from '../assets/Renaud/bo gosss qui bosss.webp'
+import imgGalbe from '../assets/working/125923338_379859523234117_6351789028901921509_n.webp'
+import imgDebit from '../assets/working/DSC09010-opt.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 
 // Savoir-faire : le geste, la matière, le détail (pas les pièces finies → c'est Réalisations).
 const pieces = [
-  { cat: 'Le bois',     title: 'Bois massifs',     line: 'Essences françaises choisies en scierie, jamais de panneaux.', img: imgMatiere },
-  { cat: 'Cintrage',    title: 'Courbes en noyer', line: 'Pièces cintrées, taillées et poncées à la main.',              img: imgCintrage },
-  { cat: 'Assemblages', title: "Queue-d'aronde",   line: 'Assemblages traditionnels, sans vis ni clou.',                 img: imgAssemblage },
-  { cat: 'Le détail',   title: 'Laiton tourné',    line: 'Pièces métalliques façonnées et intégrées à la main.',         img: imgLaiton },
-  { cat: "L'atelier",   title: 'Rien sous-traité', line: "Tout sort d'un seul atelier, de la découpe à la finition.",    img: imgAtelier },
-  { cat: "À l'établi",  title: 'Monté & contrôlé', line: 'Chaque pièce assemblée et vérifiée avant de partir.',          img: imgEtabli },
+  { cat: 'Le bois',     title: 'Bois massifs',      line: 'Essences françaises choisies en scierie, jamais de panneaux.',  img: imgMatiere },
+  { cat: 'Le geste',    title: 'Tenons & mortaises', line: 'Ajustés un à un, à blanc, avant le moindre collage.',          img: imgTenons },
+  { cat: 'Cintrage',    title: 'Courbes en noyer',  line: 'Pièces cintrées, taillées et poncées à la main.',               img: imgCintrage },
+  { cat: "L'artisan",   title: 'Une seule main',    line: 'Du dessin à la pose, chaque pièce sort de mes mains.',          img: imgArtisan },
+  { cat: 'Assemblages', title: "Queue-d'aronde",    line: 'Assemblages traditionnels, sans vis ni clou.',                  img: imgAssemblage },
+  { cat: 'Le galbe',    title: 'Piètement fuselé',  line: 'Pieds galbés taillés dans la masse, fil du bois respecté.',     img: imgGalbe },
+  { cat: 'Le détail',   title: 'Laiton tourné',     line: 'Pièces métalliques façonnées et intégrées à la main.',          img: imgLaiton },
+  { cat: 'La découpe',  title: 'Débit & calibrage', line: 'Chaque planche débitée et calibrée avant façonnage.',           img: imgDebit, crop: true },
+  { cat: "L'atelier",   title: 'Rien sous-traité',  line: "Tout sort d'un seul atelier, de la découpe à la finition.",     img: imgAtelier },
+  { cat: "À l'établi",  title: 'Monté & contrôlé',  line: 'Chaque pièce assemblée et vérifiée avant de partir.',           img: imgEtabli },
 ]
+
+// 3 phases : on affiche 1 carte sur 3 → deux cartes "texte visible" ne sont
+// jamais voisines, et l'ensemble se décale d'une phase toutes les ~4 s.
+const PHASES = 3
+const ROTATE_MS = 4000
 
 function Arrow() {
   return (
@@ -29,10 +43,10 @@ function Arrow() {
   )
 }
 
-function Card({ s, index }) {
+function Card({ s, index, featured }) {
   return (
     <motion.a
-      className="sf-link"
+      className={`sf-link${featured ? ' sf-link--featured' : ''}`}
       href="#contact"
       aria-label={`${s.title} — parlons de votre projet`}
       initial={{ opacity: 0, y: 26 }}
@@ -41,7 +55,7 @@ function Card({ s, index }) {
       transition={{ duration: 0.65, delay: Math.min(index * 0.07, 0.28), ease }}
     >
       <img
-        className="sf-img"
+        className={`sf-img${s.crop ? ' sf-img--crop' : ''}`}
         src={s.img}
         alt={`${s.title} — savoir-faire de Renaud Achard, ébéniste dans la vallée de Chamonix`}
         loading="lazy" decoding="async"
@@ -59,6 +73,15 @@ function Card({ s, index }) {
 }
 
 export default function Services() {
+  const [phase, setPhase] = useState(0)
+
+  useEffect(() => {
+    // pas de rotation si l'utilisateur préfère réduire les animations
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
+    const id = setInterval(() => setPhase((p) => (p + 1) % PHASES), ROTATE_MS)
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <section id="savoir-faire" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
@@ -71,7 +94,7 @@ export default function Services() {
 
         <div className="sf-gallery">
           {pieces.map((s, i) => (
-            <Card key={s.title} s={s} index={i} />
+            <Card key={s.title} s={s} index={i} featured={(i + phase) % PHASES === 0} />
           ))}
         </div>
       </div>
@@ -83,8 +106,9 @@ export default function Services() {
           column-gap: clamp(18px, 2vw, 30px);
         }
         @media (max-width: 1100px) { .sf-gallery { column-count: 3; } }
-        @media (max-width: 760px)  { .sf-gallery { column-count: 2; } }
-        @media (max-width: 480px)  { .sf-gallery { column-count: 1; } }
+        /* mobile : on reste en 2 colonnes (galerie compacte) plutôt qu'un long
+           défilé pleine largeur en file indienne */
+        @media (max-width: 880px)  { .sf-gallery { column-count: 2; column-gap: 12px; } }
 
         .sf-link {
           position: relative; display: block;
@@ -103,6 +127,12 @@ export default function Services() {
           background: var(--c-brun-md);
           transition: transform 700ms var(--ease); will-change: transform;
         }
+        /* images paysages : recadrées en portrait pour donner de la hauteur
+           à la carte → le texte tient dans le dégradé sombre, sans déborder */
+        .sf-img--crop {
+          aspect-ratio: 4 / 5; height: auto;
+          object-fit: cover; object-position: center 38%;
+        }
         .sf-link:hover .sf-img,
         .sf-link:focus-visible .sf-img { transform: scale(1.05); }
 
@@ -119,6 +149,10 @@ export default function Services() {
         }
         .sf-link:hover .sf-over,
         .sf-link:focus-visible .sf-over { opacity: 1; }
+
+        /* cartes mises en avant : le texte reste affiché en permanence */
+        .sf-link--featured .sf-over { opacity: 1; }
+        .sf-link--featured .sf-over > * { transform: none; }
 
         /* petit décalage staggeré du texte à l'apparition */
         .sf-over > * {
@@ -155,11 +189,17 @@ export default function Services() {
           text-shadow: 0 1px 10px rgba(20,15,9,0.7);
         }
 
-        /* mobile / tablette (tactile, pas de survol) : on affiche le texte en
-           permanence — le voile dégradé en bas garantit la lisibilité */
+        /* mobile / tablette (tactile, pas de survol) : texte affiché en
+           permanence mais allégé — sur de petites vignettes en 2 colonnes,
+           on garde la catégorie + le titre (réduit), on retire le paragraphe. */
         @media (max-width: 880px) {
-          .sf-over { opacity: 1; }
+          .sf-over { opacity: 1; padding: 14px; }
           .sf-over > * { transform: none; }
+          .sf-cat { margin-bottom: 6px; font-size: 0.58rem; }
+          .sf-title { font-size: clamp(1.05rem, 4.4vw, 1.45rem); }
+          .sf-line { display: none; }
+          .sf-arrow { display: none; }
+          .sf-link { margin-bottom: 12px; border-radius: 12px; }
         }
       `}</style>
     </section>

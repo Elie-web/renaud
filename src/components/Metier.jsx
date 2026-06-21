@@ -4,7 +4,12 @@ import portrait from '../assets/Renaud/DSC09023.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 
-const formation = ['CAP', 'BMA', 'DNMADE']
+// Diplômes mis en avant ici (et non plus dans une bande de stats qu'on scrolle).
+const formation = [
+  { k: 'CAP', v: 'Ébénisterie' },
+  { k: 'BMA', v: 'Ébéniste diplômé' },
+  { k: 'DNMADE', v: 'Mobilier contemporain' },
+]
 
 export default function Metier() {
   return (
@@ -52,10 +57,17 @@ export default function Metier() {
             </p>
 
             <div className="metier-parcours">
-              <span className="metier-parcours-label">Formation</span>
-              <div className="metier-chips">
-                {formation.map((f) => <span key={f} className="metier-chip">{f}</span>)}
+              <div className="metier-parcours-head">
+                <span className="metier-parcours-label">Formation</span>
                 <span className="metier-parcours-place">Coarraze, puis Lyon</span>
+              </div>
+              <div className="metier-diplomas">
+                {formation.map((f) => (
+                  <div key={f.k} className="metier-diploma">
+                    <span className="metier-diploma-k">{f.k}</span>
+                    <span className="metier-diploma-v">{f.v}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -116,25 +128,39 @@ export default function Metier() {
         }
 
         .metier-parcours {
-          display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
-          width: 100%; padding-top: var(--sp-6); margin-bottom: var(--sp-7);
+          display: flex; flex-direction: column; gap: var(--sp-5);
+          width: 100%; padding-top: var(--sp-6); margin-bottom: var(--sp-10);
           border-top: 1px solid var(--c-pierre);
+        }
+        .metier-parcours-head {
+          display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
         }
         .metier-parcours-label {
           font-family: var(--f-sc); font-size: 0.6rem; font-weight: 500;
           letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-texte-2);
-          flex-shrink: 0;
-        }
-        .metier-chips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .metier-chip {
-          font-family: var(--f-sc); font-size: 0.66rem; font-weight: 600;
-          letter-spacing: 0.08em; color: var(--c-or-dim);
-          padding: 6px 13px; border-radius: var(--r-pill);
-          background: var(--or-10); border: 1px solid var(--or-20);
         }
         .metier-parcours-place {
           font-family: var(--f-sans); font-size: 0.82rem; color: var(--c-texte-2);
-          margin-left: 4px;
+        }
+        .metier-diplomas {
+          display: flex; flex-wrap: wrap;
+          gap: clamp(22px, 3.2vw, 52px) clamp(30px, 4.2vw, 64px);
+        }
+        .metier-diploma {
+          display: flex; flex-direction: column; gap: 7px;
+          max-width: 22ch;
+        }
+        /* acronyme = niveau fort (serif, encre), intitulé = descripteur (sans, taupe) :
+           deux familles distinctes pour une hiérarchie nette, sans soulignage. */
+        .metier-diploma-k {
+          font-family: var(--f-serif); font-weight: 400;
+          font-size: clamp(1.5rem, 2.2vw, 1.95rem); line-height: 1;
+          letter-spacing: -0.01em; color: var(--c-texte);
+        }
+        .metier-diploma-v {
+          font-family: var(--f-sans); font-weight: 400;
+          font-size: 0.82rem; line-height: 1.4;
+          color: var(--c-texte-2); text-wrap: balance;
         }
 
         .metier-sign { display: flex; align-items: center; gap: 16px; }

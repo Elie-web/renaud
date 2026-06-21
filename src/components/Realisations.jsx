@@ -7,18 +7,17 @@ import imgTableJeu from '../assets/créations renaud/rendu.webp'
 import imgChevet from '../assets/créations renaud/rendu 7 (6 fermé).webp'
 import imgAppoint from '../assets/créations renaud/20190302_175141500_iOS.webp'
 import imgTreteaux from '../assets/créations renaud/TRETEAUX.webp'
-import imgMarqueterie from '../assets/créations renaud/console japo dessus.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 
-// ar = ratio largeur/hauteur de la photo → le cadre s'adapte (pas de recadrage)
+// Cadre de taille fixe (object-fit: cover) → aucun décalage de mise en page
+// quand on passe d'une pièce à l'autre, quel que soit le format de la photo.
 const projects = [
-  { id: 1, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',   img: imgConsole,     ar: 0.92 },
-  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer & laiton',        img: imgTableJeu,    ar: 1.42 },
-  { id: 3, cat: 'Mobilier',    title: 'Chevet « vague & soleil »',  meta: 'Frêne & laque',         img: imgChevet,      ar: 1.33 },
-  { id: 4, cat: 'Table',       title: "Table d'appoint marquetée",  meta: 'Marqueterie sur frêne', img: imgAppoint,     ar: 0.78 },
-  { id: 5, cat: 'Mobilier',    title: 'Tréteaux sculptés',          meta: 'Frêne massif',          img: imgTreteaux,    ar: 0.94 },
-  { id: 6, cat: 'Marqueterie', title: 'Plateau « trident »',        meta: 'Marqueterie de bois',   img: imgMarqueterie, ar: 0.75 },
+  { id: 1, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',   img: imgConsole },
+  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer & laiton',        img: imgTableJeu },
+  { id: 3, cat: 'Mobilier',    title: 'Chevet « vague & soleil »',  meta: 'Frêne & laque',         img: imgChevet },
+  { id: 4, cat: 'Table',       title: "Table d'appoint marquetée",  meta: 'Marqueterie sur frêne', img: imgAppoint },
+  { id: 5, cat: 'Mobilier',    title: 'Tréteaux sculptés',          meta: 'Frêne massif',          img: imgTreteaux },
 ]
 
 const pad = (n) => String(n).padStart(2, '0')
@@ -80,9 +79,8 @@ export default function Realisations() {
             onTouchEnd={onTouchEnd}
             style={{
               position: 'relative', borderRadius: '20px', overflow: 'hidden',
-              background: 'var(--c-brun-md)', aspectRatio: String(p.ar),
+              background: 'var(--c-brun-md)',
               boxShadow: 'var(--shadow-md)',
-              transition: 'aspect-ratio 0.5s var(--ease)',
             }}
           >
             <AnimatePresence>
@@ -204,6 +202,9 @@ export default function Realisations() {
       </div>
 
       <style>{`
+        /* cadre à ratio fixe → la hauteur ne change jamais d'une pièce à l'autre */
+        .real-stage { aspect-ratio: 1 / 1; max-height: 76vh; }
+
         .real-nav {
           position: absolute; top: 50%; transform: translateY(-50%);
           z-index: 3; width: 44px; height: 44px; border-radius: 50%;
@@ -274,6 +275,7 @@ export default function Realisations() {
 
         @media (max-width: 920px) {
           .real-stage-wrap { grid-template-columns: 1fr !important; }
+          .real-stage { aspect-ratio: 4 / 5; max-height: 70vh; }
           .real-index {
             flex-direction: row;
             overflow-x: auto;
