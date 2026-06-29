@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Choix de police — Achard Créa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Marcellus&family=Gilda+Display&family=Cardo:ital,wght@0,400;1,400&family=Bitter:ital,wght@0,400;0,500;1,400&family=PT+Serif:ital,wght@0,400;1,400&family=Frank+Ruhl+Libre:wght@400;500&family=Italiana&family=Cormorant:ital,wght@0,400;0,500;1,400&family=Tenor+Sans&family=Inter:wght@400;500&family=Work+Sans:wght@400;500&family=Mulish:wght@400;500&family=Jost:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#F6F2EC; --card:#FDFCFA; --ink:#231C15; --ink2:#6E6253;
+    --clay:#A85D3C; --clay-pale:#C2744E; --clay-dim:#8A4A2C;
+    --stone:#E5DFD4; --cream:#F0ECE4;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'DM Sans',system-ui,sans-serif; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding:clamp(24px,5vw,72px) clamp(18px,5vw,72px) 120px;
+  }
+  .wrap{max-width:1180px; margin:0 auto;}
+
+  /* En-tête du document */
+  header{margin-bottom:clamp(40px,6vw,80px); max-width:760px;}
+  .kicker{
+    font-family:'Fraunces',serif; font-size:.72rem; font-weight:500;
+    letter-spacing:.24em; text-transform:uppercase; color:var(--clay-dim);
+    margin-bottom:18px;
+  }
+  header h1{
+    font-family:'Fraunces',serif; font-weight:400;
+    font-size:clamp(2rem,5vw,3.2rem); line-height:1.08;
+    letter-spacing:-.02em; margin-bottom:18px;
+  }
+  header h1 em{font-style:italic; color:var(--clay);}
+  header p{color:var(--ink2); font-size:1.05rem; max-width:60ch;}
+  header .how{
+    margin-top:28px; padding:18px 22px; background:var(--card);
+    border:1px solid var(--stone); border-radius:8px;
+    font-size:.95rem; color:var(--ink);
+    box-shadow:0 2px 6px rgba(46,33,20,.05), 0 12px 28px -14px rgba(46,33,20,.12);
+  }
+  header .how b{color:var(--clay-dim);}
+
+  /* Grille de cartes */
+  .grid{display:grid; gap:clamp(20px,2.5vw,32px); grid-template-columns:1fr;}
+  @media(min-width:900px){.grid{grid-template-columns:1fr 1fr;}}
+
+  .card{
+    background:var(--card); border:1px solid var(--stone); border-radius:12px;
+    padding:clamp(24px,3vw,38px);
+    box-shadow:0 2px 6px rgba(46,33,20,.05), 0 12px 28px -14px rgba(46,33,20,.12);
+    display:flex; flex-direction:column; position:relative; overflow:hidden;
+  }
+  .card.current{border-color:var(--clay); box-shadow:0 0 0 1px var(--clay), 0 14px 44px -14px rgba(168,93,60,.34);}
+  .badge{
+    position:absolute; top:0; right:0;
+    background:var(--clay); color:#fff; font-family:'DM Sans',sans-serif;
+    font-size:.6rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase;
+    padding:6px 14px; border-bottom-left-radius:10px;
+  }
+  .meta{
+    display:flex; align-items:baseline; gap:12px; margin-bottom:22px;
+    padding-bottom:18px; border-bottom:1px solid var(--cream);
+  }
+  .num{
+    font-family:'Fraunces',serif; font-size:1.5rem; color:var(--clay);
+    line-height:1; min-width:1.6em;
+  }
+  .names{font-size:.85rem; color:var(--ink2); line-height:1.4;}
+  .names b{color:var(--ink); font-weight:500;}
+  .names .lbl{
+    display:block; font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--clay-dim); margin-bottom:3px;
+  }
+
+  /* Specimen — rendu réel avec le contenu du site */
+  .eyebrow{
+    font-size:.66rem; font-weight:500; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--clay-dim); margin-bottom:14px;
+  }
+  .display{
+    font-weight:400; font-size:clamp(1.7rem,3.6vw,2.5rem); line-height:1.12;
+    letter-spacing:-.015em; margin-bottom:18px; color:var(--ink);
+  }
+  .display em{font-style:italic; color:var(--clay-pale);}
+  .subhead{
+    font-weight:400; font-size:1.18rem; line-height:1.3; margin-bottom:12px;
+    color:var(--ink);
+  }
+  .body{font-size:.96rem; color:var(--ink2); line-height:1.65; max-width:52ch;}
+  .smallcaps{
+    margin-top:18px; font-size:.62rem; font-weight:500; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--clay-dim);
+  }
+
+  footer{
+    margin-top:70px; padding-top:28px; border-top:1px solid var(--stone);
+    color:var(--ink2); font-size:.9rem; text-align:center;
+  }
+
+  @media print{
+    body{background:#fff; padding:0;}
+    .card{break-inside:avoid; box-shadow:none; border:1px solid #ccc;}
+    header .how{box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Achard Créa · Ébéniste à Chamonix</div>
+    <h1>Choisis ta police, <em>Renaud.</em></h1>
+    <p>Voici 20 propositions qui gardent l'esprit du site — chaleureux, artisanal, éditorial — mais avec une autre personnalité de caractère. Chaque bloc est affiché <em>en vrai</em>, avec le vrai texte du site, pour que tu voies exactement le rendu.</p>
+    <div class="how"><b>Comment faire :</b> regarde, compare, et dis-moi simplement le <b>numéro</b> (ou deux ou trois) que tu préfères. Le n° 1 est la police actuelle, pour comparer.</div>
+  </header>
+
+  <div class="grid">
+
+    <!-- 1 — ACTUELLE -->
+    <div class="card current">
+      <div class="badge">Police actuelle</div>
+      <div class="meta">
+        <div class="num">01</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Fraunces</b> + <b>DM Sans</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Fraunces',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Fraunces',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Fraunces',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'DM Sans',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Fraunces',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">02</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Cormorant Garamond</b> + <b>Mulish</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Cormorant Garamond',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4.2vw,3rem)">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Cormorant Garamond',serif; font-size:1.4rem">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Mulish',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Cormorant Garamond',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">03</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>EB Garamond</b> + <b>Inter</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'EB Garamond',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'EB Garamond',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'EB Garamond',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Inter',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'EB Garamond',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">04</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Lora</b> + <b>Inter</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Lora',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Lora',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Lora',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Inter',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Lora',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">05</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Spectral</b> + <b>DM Sans</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Spectral',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Spectral',serif; font-weight:300">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Spectral',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'DM Sans',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Spectral',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">06</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Newsreader</b> + <b>DM Sans</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Newsreader',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Newsreader',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Newsreader',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'DM Sans',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Newsreader',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">07</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Source Serif 4</b> + <b>IBM Plex Sans</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Source Serif 4',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Source Serif 4',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Source Serif 4',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'IBM Plex Sans',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Source Serif 4',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">08</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Crimson Pro</b> + <b>Work Sans</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Crimson Pro',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Crimson Pro',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Crimson Pro',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Work Sans',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Crimson Pro',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">09</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Playfair Display</b> + <b>Mulish</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Playfair Display',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Playfair Display',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Playfair Display',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Mulish',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Playfair Display',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">10</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Bodoni Moda</b> + <b>Inter</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Bodoni Moda',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Bodoni Moda',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Bodoni Moda',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Inter',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Bodoni Moda',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 11 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">11</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Libre Caslon Text</b> + <b>Inter</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Libre Caslon Text',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Libre Caslon Text',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Libre Caslon Text',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Inter',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Libre Caslon Text',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 12 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">12</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Marcellus</b> + <b>Jost</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Marcellus',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Marcellus',serif">Votre intérieur sur mesure, par un ébéniste à&nbsp;Chamonix.</div>
+      <div class="subhead" style="font-family:'Marcellus',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Jost',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Marcellus',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 13 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">13</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Gilda Display</b> + <b>Work Sans</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Gilda Display',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Gilda Display',serif">Votre intérieur sur mesure, par un ébéniste à&nbsp;Chamonix.</div>
+      <div class="subhead" style="font-family:'Gilda Display',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Work Sans',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Gilda Display',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 14 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">14</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Cardo</b> + <b>Inter</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Cardo',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Cardo',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Cardo',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Inter',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Cardo',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 15 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">15</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Bitter</b> + <b>Inter</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Bitter',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Bitter',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Bitter',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Inter',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Bitter',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 16 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">16</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>PT Serif</b> + <b>PT Sans</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'PT Serif',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'PT Serif',serif">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'PT Serif',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'PT Sans',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'PT Serif',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 17 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">17</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Frank Ruhl Libre</b> + <b>Inter</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Frank Ruhl Libre',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Frank Ruhl Libre',serif">Votre intérieur sur mesure, par un ébéniste à&nbsp;Chamonix.</div>
+      <div class="subhead" style="font-family:'Frank Ruhl Libre',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Inter',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Frank Ruhl Libre',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 18 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">18</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Italiana</b> + <b>Jost</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Italiana',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Italiana',serif">Votre intérieur sur mesure, par un ébéniste à&nbsp;Chamonix.</div>
+      <div class="subhead" style="font-family:'Italiana',serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Jost',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Italiana',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 19 -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">19</div>
+        <div class="names"><span class="lbl">Titres / Texte</span><b>Cormorant</b> + <b>Jost</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Cormorant',serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Cormorant',serif; font-size:clamp(2rem,4.2vw,3rem)">Votre intérieur sur mesure, <em>par un ébéniste à&nbsp;Chamonix.</em></div>
+      <div class="subhead" style="font-family:'Cormorant',serif; font-size:1.4rem">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Jost',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Cormorant',serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+    <!-- 20 — sans en titre -->
+    <div class="card">
+      <div class="meta">
+        <div class="num">20</div>
+        <div class="names"><span class="lbl">Titres / Texte (sans serif)</span><b>Tenor Sans</b> + <b>Work Sans</b></div>
+      </div>
+      <div class="eyebrow" style="font-family:'Tenor Sans',sans-serif">Ébéniste · sur mesure</div>
+      <div class="display" style="font-family:'Tenor Sans',sans-serif; letter-spacing:.01em">Votre intérieur sur mesure, par un ébéniste à&nbsp;Chamonix.</div>
+      <div class="subhead" style="font-family:'Tenor Sans',sans-serif">Le mobilier que vous ne trouverez nulle part ailleurs.</div>
+      <div class="body" style="font-family:'Work Sans',sans-serif">Je ne dessine rien avant d'avoir compris. Chaque pièce prend forme sous mes mains, à l'atelier, dans la vallée de Chamonix — du croquis à la pose.</div>
+      <div class="smallcaps" style="font-family:'Tenor Sans',sans-serif">Renaud Achard · Ébénisterie</div>
+    </div>
+
+  </div>
+
+  <footer>
+    Document de sélection typographique — Achard Créa · préparé par Elie.<br />
+    Toutes les polices sont gratuites (Google Fonts) et adaptées au web. Dis-moi le numéro qui te plaît.
+  </footer>
+
+</div>
+</body>
+</html>
