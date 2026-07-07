@@ -191,7 +191,7 @@ ul     { list-style: none; }
   }
 }
 
-/* Accent de titre / de phrase — piloté par CLASSE (jamais en style inline) pour
+/* Accent de titre / de phrase - piloté par CLASSE (jamais en style inline) pour
    pouvoir être re-thémé par version. Sur les versions dont la police n'a pas de
    vraie italique (Marcellus) ou en capitales (Archivo), l'italique est remplacé
    par un simple contraste de couleur, droit. Voir surcharges .ver-3 / .ver-5. */
@@ -407,7 +407,7 @@ ul     { list-style: none; }
 @font-face { font-family: 'Relicta';     src: url('/fonts/Relicta-Light.otf') format('opentype'); font-weight: 300 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Relicta';     src: url('/fonts/Relicta-UltraboldItalic.otf') format('opentype'); font-weight: 700 800; font-style: italic; font-display: swap; }
 
-/* V2 — QUICKSAND (⭐ la préférée de Renaud) : géométrique arrondie, chaleureuse,
+/* V2 - QUICKSAND (⭐ la préférée de Renaud) : géométrique arrondie, chaleureuse,
    moderne. Elle assure titres ET texte → une seule police sur la page. */
 .ver-2 {
   --f-serif: 'Quicksand', system-ui, sans-serif;
@@ -427,7 +427,7 @@ ul     { list-style: none; }
 .ver-2 .btn { letter-spacing: 0.1em; font-weight: 600; }
 .ver-2 .eyebrow { letter-spacing: 0.24em; font-weight: 600; }
 
-/* V3 — LEKTON : monospace « atelier / plans / technique ». Titres en Lekton gras ;
+/* V3 - LEKTON : monospace « atelier / plans / technique ». Titres en Lekton gras ;
    le corps repasse en Inter (une monospace fatigue en texte long → la 2e police
    « si ça rentre pas »). Boutons carrés, noyer neutre. */
 .ver-3 {
@@ -447,7 +447,7 @@ ul     { list-style: none; }
 .ver-3 .btn { border-radius: 0; letter-spacing: 0.14em; font-weight: 700; }
 .ver-3 .eyebrow { letter-spacing: 0.26em; font-weight: 700; }
 
-/* V4 — KATAS : display géométrique art-déco en CAPITALES. Titres Katas ; corps
+/* V4 - KATAS : display géométrique art-déco en CAPITALES. Titres Katas ; corps
    Inter (Katas est une police d'affichage). Palette argile racine. */
 .ver-4 {
   --f-serif: 'Katas', system-ui, sans-serif;
@@ -463,7 +463,7 @@ ul     { list-style: none; }
 .ver-4 .btn { letter-spacing: 0.16em; }
 .ver-4 .eyebrow { letter-spacing: 0.3em; }
 
-/* V5 — NISABA : display très fin, tout en finesse → il éclate sur fond SOMBRE.
+/* V5 - NISABA : display très fin, tout en finesse → il éclate sur fond SOMBRE.
    CAPITALES + corps Inter. Thème nocturne terre cuite. */
 .ver-5 {
   --f-serif: 'Nisaba', system-ui, sans-serif;
@@ -490,7 +490,7 @@ ul     { list-style: none; }
 .ver-5 .btn { border-radius: 2px; letter-spacing: 0.2em; }
 .ver-5 .eyebrow { letter-spacing: 0.32em; }
 
-/* V6 — RELICTA : sans élégant contrasté (graisse Light). Titres Relicta ; corps
+/* V6 - RELICTA : sans élégant contrasté (graisse Light). Titres Relicta ; corps
    Inter. Palette claire et raffinée. ⚠ licence perso-only (voir note client). */
 .ver-6 {
   --f-serif: 'Relicta', system-ui, sans-serif;
@@ -509,7 +509,7 @@ ul     { list-style: none; }
 .ver-6 .btn { letter-spacing: 0.14em; }
 .ver-6 .eyebrow { letter-spacing: 0.28em; }
 
-/* V7 — DANIEL SANS : manuscrit / marqueur, très chaleureux. Réservé aux titres &
+/* V7 - DANIEL SANS : manuscrit / marqueur, très chaleureux. Réservé aux titres &
    accents (illisible en labeur) ; corps + surtitres en Inter. Crème conviviale.
    ⚠ licence perso-only (voir note client). */
 .ver-7 {

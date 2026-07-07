@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
 
-/* Savoir-faire — VARIANTE V3 « plus de photos ».
+/* Savoir-faire - VARIANTE V3 « plus de photos ».
    Galerie masonry dense : beaucoup de visuels, chacun avec une étiquette
    discrète (catégorie / geste). Un seul bouton en bas vers le contact. */
 
@@ -39,7 +39,7 @@ export default function ServicesGallery() {
         <SectionHeader
           eyebrow="Savoir-faire"
           title={<>Ce que je <Accent>fabrique.</Accent></>}
-          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun — bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste, facilement modifiable jusqu’à ce qu’il vous ressemble."
+          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun : bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste, facilement modifiable jusqu’à ce qu’il vous ressemble."
           leadWidth="60ch"
           style={{ marginBottom: 'clamp(44px, 5.5vw, 72px)' }}
         />
@@ -51,7 +51,7 @@ export default function ServicesGallery() {
               initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportSettings} transition={{ duration: 0.6, delay: Math.min(i * 0.05, 0.3), ease }}
             >
-              <img src={it.img} alt={`${it.tag} — savoir-faire de Renaud Achard, ébéniste dans la vallée de Chamonix`} loading="lazy" decoding="async" />
+              <img src={it.img} alt={`${it.tag}, savoir-faire de Renaud Achard, ébéniste dans la vallée de Chamonix`} loading="lazy" decoding="async" />
               <figcaption className="svg-tag">{it.tag}</figcaption>
             </motion.figure>
           ))}

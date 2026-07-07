@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 
-/* Bandeau MANIFESTE — grande citation sur fond sombre (rupture visuelle forte
+/* Bandeau MANIFESTE - grande citation sur fond sombre (rupture visuelle forte
    au milieu des sections claires). Réutilise le texte poétique validé. */
 export default function Manifesto() {
   return (

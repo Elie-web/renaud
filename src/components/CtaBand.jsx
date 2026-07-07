@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 
-/* Bande CTA pleine largeur (fond accent) — appel à l'action fort, façon bannière. */
+/* Bande CTA pleine largeur (fond accent) - appel à l'action fort, façon bannière. */
 export default function CtaBand() {
   return (
     <section style={{ background: 'var(--c-or)', padding: 'clamp(72px, 10vw, 140px) var(--px)' }}>

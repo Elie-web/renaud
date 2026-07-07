@@ -5,7 +5,7 @@ import SectionHeader, { Accent } from './SectionHeader'
 
 // Vitrine par catégorie de ce que fabrique Renaud (avant les réalisations).
 // TODO Renaud : fournir une vraie photo de CUISINE (aucune dans les assets
-// actuels) — placeholder « bois » en attendant.
+// actuels) - placeholder « bois » en attendant.
 import imgCuisine from '../assets/working/DSC09086-opt.webp'
 import imgMeuble from '../assets/créations renaud/console japo face.webp'
 import imgAmenagement from '../assets/créations renaud/rendu tan.webp'
@@ -52,7 +52,7 @@ function Card({ c, index }) {
         <img
           className="sf-img"
           src={c.img}
-          alt={`${c.cat} — réalisations sur mesure de Renaud Achard, ébéniste dans la vallée de Chamonix`}
+          alt={`${c.cat}, réalisations sur mesure de Renaud Achard, ébéniste dans la vallée de Chamonix`}
           loading="lazy" decoding="async"
         />
       </div>
@@ -106,7 +106,7 @@ export default function Services() {
         <SectionHeader
           eyebrow="Savoir-faire"
           title={<>Ce que je <Accent>fabrique.</Accent></>}
-          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun — bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste de votre pièce, facilement modifiable jusqu’à ce qu’il vous ressemble."
+          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun : bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste de votre pièce, facilement modifiable jusqu’à ce qu’il vous ressemble."
           leadWidth="60ch"
           style={{ marginBottom: 'clamp(44px, 5.5vw, 72px)' }}
         />
@@ -118,7 +118,7 @@ export default function Services() {
             ))}
           </div>
 
-          {/* Flèches (desktop) — masquées si rien à défiler ou en bout de course */}
+          {/* Flèches (desktop) - masquées si rien à défiler ou en bout de course */}
           <button
             type="button"
             className={`sf-arrow sf-arrow--prev${rail.scrollable && !rail.start ? '' : ' is-off'}`}

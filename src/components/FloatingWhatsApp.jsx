@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-// Bouton WhatsApp flottant — même esprit que le site Elie (vert #25D366,
+// Bouton WhatsApp flottant - même esprit que le site Elie (vert #25D366,
 // entrée animée, hover qui grossit), adapté aux conventions de ce projet.
 export default function FloatingWhatsApp() {
   return (

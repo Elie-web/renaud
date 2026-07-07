@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 
-/* À-propos MINIMAL — sans photo, centré, façon éditorial. Alternative au Metier
+/* À-propos MINIMAL - sans photo, centré, façon éditorial. Alternative au Metier
    (grille portrait + texte) pour les versions épurées. */
 const formation = [
   { k: 'CAP', v: 'Ébénisterie' },
@@ -30,7 +30,7 @@ export default function MetierMinimal() {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={viewportSettings} transition={{ duration: 0.7, delay: 0.12 }}
           style={{ fontFamily: 'var(--f-sans)', fontSize: 'clamp(1rem, 1.2vw, 1.12rem)', lineHeight: 1.8, color: 'var(--c-texte-2)', maxWidth: '58ch', margin: '0 auto var(--sp-6)' }}
         >
-          J'ai grandi avec le bois — son odeur, sa chaleur, le temps qu'il faut pour bien le
+          J'ai grandi avec le bois : son odeur, sa chaleur, le temps qu'il faut pour bien le
           travailler. Un seul artisan, du premier croquis à la pose&nbsp;: vous savez toujours qui
           prend soin de votre projet. Vous m'apportez une idée, je la concrétise.
         </motion.p>

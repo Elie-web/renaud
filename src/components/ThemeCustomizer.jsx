@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 /**
- * Panneau de personnalisation LIVE — présent sur toutes les versions.
+ * Panneau de personnalisation LIVE - présent sur toutes les versions.
  * Renaud teste : couleur d'accent, police des titres, image du hero et
  * disposition du hero, sans recharger. « Auto » = garde le choix de la version.
  * Outil de brouillon, pas destiné au site final.
@@ -52,7 +52,7 @@ export default function ThemeCustomizer({ value, onChange, heroes = [], layouts 
     <div className="tc" role="group" aria-label="Personnaliser l'apparence">
       <div className="tc-top">
         <div className="tc-head">
-          <span className="tc-kicker">Test — personnalise</span>
+          <span className="tc-kicker">Test · personnalise</span>
           <span className="tc-title">Couleur, police & hero</span>
         </div>
         <button type="button" className="tc-x" onClick={() => setOpen(false)} aria-label="Fermer">×</button>

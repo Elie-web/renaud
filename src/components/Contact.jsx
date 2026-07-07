@@ -69,7 +69,7 @@ export default function Contact() {
         <SectionHeader
           eyebrow="Votre projet"
           title={<>Parlons de ce que <Accent>vous avez en tête.</Accent></>}
-          lead="Décrivez-moi l'espace, la pièce, le besoin. Choisissez le canal qui vous arrange — téléphone, WhatsApp, e-mail ou formulaire — je réponds sous 24 h, devis gratuit si le projet est clair."
+          lead="Décrivez-moi l'espace, la pièce, le besoin. Choisissez le canal qui vous arrange (téléphone, WhatsApp, e-mail ou formulaire), je réponds sous 24 h, devis gratuit si le projet est clair."
         />
 
         {/* Appel découverte : le point d'entrée le plus simple */}
@@ -79,7 +79,7 @@ export default function Contact() {
           className="contact-call">
           <div className="contact-call-txt">
             <span className="contact-call-eyebrow">Le plus simple pour commencer</span>
-            <p className="contact-call-title">Un <strong>appel découverte offert</strong> — 15 minutes pour parler de votre projet, sans engagement.</p>
+            <p className="contact-call-title">Un <strong>appel découverte offert</strong> : 15 minutes pour parler de votre projet, sans engagement.</p>
           </div>
           <div className="contact-call-actions">
             <a href="tel:+33634084690" className="btn btn--gold" aria-label="Appeler pour un appel découverte de 15 minutes">

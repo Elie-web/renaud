@@ -21,7 +21,7 @@ const steps = [
   {
     n: '03', id: 'rendu', title: 'Le rendu réaliste',
     tagline: 'Vous voyez la pièce avant qu\'elle existe.',
-    desc: "Un rendu 3D fidèle, presque photo. On l'ajuste ensemble — teinte, proportions, détails — jusqu'à ce qu'il vous ressemble, avant la moindre découpe.",
+    desc: "Un rendu 3D fidèle, presque photo. On l'ajuste ensemble (teinte, proportions, détails) jusqu'à ce qu'il vous ressemble, avant la moindre découpe.",
     points: ['Rendu 3D photo-réaliste', 'Modifiable jusqu\'à validation'],
   },
   {

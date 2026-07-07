@@ -24,7 +24,7 @@ const pad = (n) => String(n).padStart(2, '0')
 
 export default function Realisations() {
   const reduce = useReducedMotion()
-  // Table échiquier (index 1) affichée par défaut — c'est la plus belle pièce.
+  // Table échiquier (index 1) affichée par défaut - c'est la plus belle pièce.
   const [active, setActive] = useState(1)
   const count = projects.length
   const p = projects[active]
@@ -118,7 +118,7 @@ export default function Realisations() {
                 {/* La pièce en plein cadre */}
                 <motion.img
                   src={p.img}
-                  alt={`${p.title} — ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Chamonix)`}
+                  alt={`${p.title}, ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Chamonix)`}
                   decoding="async"
                   initial={{ scale: reduce ? 1 : 1.04 }}
                   animate={{ scale: reduce ? 1 : 1.08 }}
@@ -213,7 +213,7 @@ export default function Realisations() {
             })}
           </ul>
 
-          {/* Flèches du rail (mobile) — affichées seulement si on peut aller par là */}
+          {/* Flèches du rail (mobile) - affichées seulement si on peut aller par là */}
           <button
             type="button"
             className={`rail-arrow rail-arrow--prev${rail.scrollable && !rail.start ? '' : ' is-off'}`}
@@ -371,7 +371,7 @@ export default function Realisations() {
           .real-row { width: 132px; }
         }
 
-        /* Flèches du rail — uniquement sur mobile (là où le rail défile) */
+        /* Flèches du rail - uniquement sur mobile (là où le rail défile) */
         @media (max-width: 920px) {
           .rail-arrow {
             display: flex; align-items: center; justify-content: center;

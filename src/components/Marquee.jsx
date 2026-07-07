@@ -1,4 +1,4 @@
-/* Bandeau MARQUEE — défilé horizontal infini de mots-clés (texture graphique
+/* Bandeau MARQUEE - défilé horizontal infini de mots-clés (texture graphique
    très différente des autres sections). Pause au survol. */
 const WORDS = [
   'Cuisines sur mesure', 'Meubles design', 'Bibliothèques', 'Escaliers',

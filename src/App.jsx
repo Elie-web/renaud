@@ -27,7 +27,7 @@ import Marquee from './components/Marquee'
 import CtaBand from './components/CtaBand'
 import MetierMinimal from './components/MetierMinimal'
 
-// Images hero IA (gros plan « explosif » — une par version brouillon)
+// Images hero IA (gros plan « explosif » - une par version brouillon)
 import heroChiselA from './assets/hero ia/Gemini_Generated_Image_ajqtmvajqtmvajqt-clean.webp'
 import heroChiselB from './assets/hero ia/Gemini_Generated_Image_gb5g4vgb5g4vgb5g-clean.webp'
 import heroChiselC from './assets/hero ia/Gemini_Generated_Image_h2avf7h2avf7h2av-clean.webp'
@@ -64,37 +64,37 @@ const VERSIONS = {
     name: 'Actuelle', hero: '/hero.webp', heroLayout: 'center', solidNav: false,
     order: ['services', 'realisations', 'metier', 'imageband', 'processus', 'engagements', 'temoignages', 'faq', 'contact'],
   },
-  // V2 — QUICKSAND (la préférée de Renaud). Structure éditoriale : manifeste + chiffres + bande CTA.
+  // V2 - QUICKSAND (la préférée de Renaud). Structure éditoriale : manifeste + chiffres + bande CTA.
   2: {
     name: 'Quicksand', hero: heroChiselC, heroLayout: 'left', variant: 'clean', solidNav: false,
     order: ['services', 'manifesto', 'realisations', 'stats', 'metier', 'processus', 'faq', 'ctaband', 'contact'],
     overrides: { services: ServicesFewer },
   },
-  // V3 — LEKTON (monospace, studio/architecte), header blanc. Structure moderne : marquee + à-propos minimal.
+  // V3 - LEKTON (monospace, studio/architecte), header blanc. Structure moderne : marquee + à-propos minimal.
   3: {
     name: 'Lekton', hero: heroSander, heroLayout: 'left', variant: 'clean', solidNav: true,
     order: ['marquee', 'services', 'metier', 'realisations', 'stats', 'processus', 'ctaband', 'faq', 'contact'],
     overrides: { metier: MetierMinimal },
   },
-  // V4 — KATAS (display art-déco caps), hero SPLIT. Structure narrative : à-propos d'abord + manifeste.
+  // V4 - KATAS (display art-déco caps), hero SPLIT. Structure narrative : à-propos d'abord + manifeste.
   4: {
     name: 'Katas', hero: heroLathe, heroLayout: 'split', variant: 'clean', solidNav: true,
     order: ['metier', 'services', 'imageband', 'manifesto', 'realisations', 'processus', 'engagements', 'stats', 'faq', 'contact'],
     overrides: { services: ServicesSlider },
   },
-  // V5 — NISABA (display très fin), thème SOMBRE complet, hero ENCADRÉ. Refonte radicale.
+  // V5 - NISABA (display très fin), thème SOMBRE complet, hero ENCADRÉ. Refonte radicale.
   5: {
     name: 'Nisaba', hero: heroChiselA, heroLayout: 'framed', variant: 'clean', solidNav: false,
     order: ['realisations', 'marquee', 'services', 'manifesto', 'stats', 'processus', 'engagements', 'ctaband', 'faq', 'contact'],
     overrides: { services: ServicesGallery },
   },
-  // V6 — RELICTA (sans élégant, clair & raffiné), header blanc. Structure sobre.
+  // V6 - RELICTA (sans élégant, clair & raffiné), header blanc. Structure sobre.
   6: {
     name: 'Relicta', hero: heroRouter, heroLayout: 'left', variant: 'clean', solidNav: true,
     order: ['services', 'realisations', 'metier', 'stats', 'processus', 'engagements', 'ctaband', 'faq', 'contact'],
     overrides: { services: ServicesFewer },
   },
-  // V7 — DANIEL SANS (manuscrit/marqueur), crème conviviale, hero centré.
+  // V7 - DANIEL SANS (manuscrit/marqueur), crème conviviale, hero centré.
   7: {
     name: 'Daniel Sans', hero: heroChiselB, heroLayout: 'center', variant: 'clean', solidNav: false,
     order: ['services', 'metier', 'realisations', 'imageband', 'processus', 'engagements', 'faq', 'contact'],

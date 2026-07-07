@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
 
-/* Savoir-faire — VARIANTE V4 « autre carrousel ».
+/* Savoir-faire - VARIANTE V4 « autre carrousel ».
    Un carrousel plein cadre : une catégorie à la fois, en grand, avec
    flèches + puces. Légende en surimpression bas. Bouton en bas vers contact. */
 
@@ -44,7 +44,7 @@ export default function ServicesSlider() {
         <SectionHeader
           eyebrow="Savoir-faire"
           title={<>Ce que je <Accent>fabrique.</Accent></>}
-          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun — bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste, facilement modifiable jusqu’à ce qu’il vous ressemble."
+          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun : bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste, facilement modifiable jusqu’à ce qu’il vous ressemble."
           leadWidth="60ch"
           style={{ marginBottom: 'clamp(44px, 5.5vw, 72px)' }}
         />
@@ -56,7 +56,7 @@ export default function ServicesSlider() {
         >
           <AnimatePresence>
             <motion.img
-              key={c.cat} src={c.img} alt={`${c.cat} — Achard Créa, ébéniste dans la vallée de Chamonix`}
+              key={c.cat} src={c.img} alt={`${c.cat}, Achard Créa, ébéniste dans la vallée de Chamonix`}
               decoding="async"
               initial={{ opacity: 0, scale: 1.03 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
               transition={{ opacity: { duration: 0.6, ease }, scale: { duration: 6, ease: 'linear' } }}

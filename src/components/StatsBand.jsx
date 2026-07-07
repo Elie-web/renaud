@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 
-/* Bande de CHIFFRES-preuve — grands nombres en serif, façon éditorial.
+/* Bande de CHIFFRES-preuve - grands nombres en serif, façon éditorial.
    Reprend la preuve sociale (2019/CAP, satisfaction, garantie). */
 const stats = [
   { k: '2019', v: 'Dans le bois, CAP d’ébénisterie' },

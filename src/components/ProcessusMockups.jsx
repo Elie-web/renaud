@@ -4,7 +4,7 @@ import imgConception from '../assets/working/DSC09111.webp'
 import imgRendu from '../assets/créations renaud/rendu.webp'
 import imgLivraison from '../assets/créations renaud/console japo face.webp'
 
-/* TODO Renaud — visuels idéaux à fournir :
+/* TODO Renaud - visuels idéaux à fournir :
    · Conception : un croquis / plan ou une capture du logiciel de modélisation.
    · Rendu réaliste : une capture du logiciel de modélisation « en action ».
    · Livraison : une vraie photo de pose / installation chez le client.
@@ -15,7 +15,7 @@ import imgLivraison from '../assets/créations renaud/console japo face.webp'
  * Visuels par étape du process : une vraie photo par étape, dans un cadre
  * incliné avec un halo de couleur derrière et des chips flottantes qui cassent
  * le cadre (même esprit premium qu'avant, mais authentique). Pas de titre dans
- * la carte — il est déjà à côté. Une couleur d'accent par étape : argile (la
+ * la carte - il est déjà à côté. Une couleur d'accent par étape : argile (la
  * rencontre), bleu-plan (la conception), ambre (la fabrication), olive (la pose).
  */
 
@@ -98,13 +98,13 @@ function PillChip({ accent, icon, label, pos, rest, hover, mono }) {
 }
 
 /* ════════════════════════════════════════════════════════════════════════
-   01 — LA RENCONTRE : Renaud en rendez-vous projet avec un client
+   01 - LA RENCONTRE : Renaud en rendez-vous projet avec un client
    ════════════════════════════════════════════════════════════════════════ */
 function RencontreMockup() {
   const a = A.clay
   return (
     <Frame rotate={-2} accent={a} img={imgRencontre}
-      alt="Renaud Achard en rendez-vous projet avec un client à l'atelier — ébéniste, vallée de Chamonix">
+      alt="Renaud Achard en rendez-vous projet avec un client à l'atelier, ébéniste, vallée de Chamonix">
       <PillChip accent={a} icon={<Ear />} label="On en parle"
         pos={{ bottom: '-18px', left: '-22px' }} rest={{ rotate: -3 }} hover={{ x: -10, y: 5, rotate: -6 }} />
       {/* pastille « sans frais » */}
@@ -115,13 +115,13 @@ function RencontreMockup() {
 }
 
 /* ════════════════════════════════════════════════════════════════════════
-   02 — LA CONCEPTION : vrai rendu 3D du meuble
+   02 - LA CONCEPTION : vrai rendu 3D du meuble
    ════════════════════════════════════════════════════════════════════════ */
 function ConceptionMockup() {
   const a = A.clay
   return (
     <Frame rotate={1.5} accent={a} img={imgConception}
-      alt="Prise de cotes et plans à l'atelier — conception d'un meuble sur mesure, Achard Créa">
+      alt="Prise de cotes et plans à l'atelier, conception d'un meuble sur mesure, Achard Créa">
       <PillChip accent={a} icon={<Pencil />} label="Plans & cotes"
         pos={{ top: '-16px', right: '-20px' }} rest={{ rotate: 5 }} hover={{ x: 10, y: -6, rotate: 11 }} />
       {/* nuancier de bois flottant */}
@@ -136,13 +136,13 @@ function ConceptionMockup() {
 }
 
 /* ════════════════════════════════════════════════════════════════════════
-   03 — LE RENDU RÉALISTE : rendu 3D fidèle, modifiable avant fabrication
+   03 - LE RENDU RÉALISTE : rendu 3D fidèle, modifiable avant fabrication
    ════════════════════════════════════════════════════════════════════════ */
 function RenduMockup() {
   const a = A.blue
   return (
     <Frame rotate={-1.5} accent={a} img={imgRendu}
-      alt="Rendu 3D photo-réaliste d'une table basse en noyer, validé avant fabrication — Achard Créa">
+      alt="Rendu 3D photo-réaliste d'une table basse en noyer, validé avant fabrication, Achard Créa">
       <PillChip accent={a} icon={<Pencil />} label="Rendu 3D"
         pos={{ top: '-16px', right: '-20px' }} rest={{ rotate: 5 }} hover={{ x: 10, y: -6, rotate: 11 }} />
       {/* chip « modifiable » (validation verte) */}
@@ -156,13 +156,13 @@ function RenduMockup() {
 }
 
 /* ════════════════════════════════════════════════════════════════════════
-   04 — LA LIVRAISON : pièce finie + garantie
+   04 - LA LIVRAISON : pièce finie + garantie
    ════════════════════════════════════════════════════════════════════════ */
 function LivraisonMockup() {
   const a = A.olive
   return (
     <Frame rotate={1.5} accent={a} img={imgLivraison}
-      alt="Console sur mesure en frêne avec marqueterie, finie et livrée — Achard Créa">
+      alt="Console sur mesure en frêne avec marqueterie, finie et livrée, Achard Créa">
       <PillChip accent={a} mono label="Posé par mes soins"
         pos={{ bottom: '-16px', left: '-18px' }} rest={{ rotate: -4 }} hover={{ x: -8, y: 6, rotate: -10 }} />
       {/* badge garantie 5 ans */}

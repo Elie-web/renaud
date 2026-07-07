@@ -3,7 +3,7 @@ import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
 import imgFeature from '../assets/créations renaud/console japo face.webp'
 
-/* Savoir-faire — VARIANTE V2 « moins de photos ».
+/* Savoir-faire - VARIANTE V2 « moins de photos ».
    Parti pris éditorial : une seule grande image + les 4 familles en liste
    typographique (numérotée). Beaucoup de texte, très peu d'images. */
 
@@ -23,7 +23,7 @@ export default function ServicesFewer() {
         <SectionHeader
           eyebrow="Savoir-faire"
           title={<>Ce que je <Accent>fabrique.</Accent></>}
-          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun — bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste de votre pièce, facilement modifiable jusqu’à ce qu’il vous ressemble."
+          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun : bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste de votre pièce, facilement modifiable jusqu’à ce qu’il vous ressemble."
           leadWidth="60ch"
           style={{ marginBottom: 'clamp(44px, 5.5vw, 72px)' }}
         />
@@ -34,7 +34,7 @@ export default function ServicesFewer() {
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportSettings} transition={{ duration: 0.9, ease }}
           >
-            <img src={imgFeature} alt="Console sur mesure en bois — Achard Créa, ébéniste dans la vallée de Chamonix" loading="lazy" decoding="async" />
+            <img src={imgFeature} alt="Console sur mesure en bois, Achard Créa, ébéniste dans la vallée de Chamonix" loading="lazy" decoding="async" />
           </motion.div>
 
           <div className="svf-list">

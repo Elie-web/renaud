@@ -1,5 +1,5 @@
 /**
- * Sélecteur de versions — outil de BROUILLON (pas destiné au site final).
+ * Sélecteur de versions - outil de BROUILLON (pas destiné au site final).
  * Compact : pastilles numérotées + nom de la version active affiché.
  * Change le hash (#v1…#vN) → App écoute et re-thème toute la page.
  */
