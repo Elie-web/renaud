@@ -4,10 +4,10 @@ import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
 
 const faqs = [
-  { q: 'Combien coûte une création sur mesure ?', a: "Comptez entre 1 500 € et 5 000 € pour un meuble de qualité, davantage pour un agencement complet. Le prix dépend des matériaux, du volume et de la complexité. Vous recevez un devis détaillé et fixe avant tout engagement." },
+  { q: 'Combien coûte une création sur mesure ?', a: "Chaque projet est unique, donc chiffré sur devis — gratuit et sans engagement. Pour donner un ordre d'idée, comptez entre 1 500 € et 5 000 € pour un meuble, davantage pour un agencement complet (cuisine, dressing, escalier). Le devis est détaillé et fixe : le prix annoncé est le prix final." },
   { q: 'Quel est le délai pour un projet ?', a: "Une table prend 3 à 6 semaines, une cuisine complète 2 à 4 mois. Je travaille sur commande, et je vous donne une date précise avant de commencer." },
   { q: 'Comment se passe la première rencontre ?', a: "Je vous reçois chez vous ou à l'atelier. Rien n'est signé ce jour-là : vous repartez avec mes idées et recevez une proposition détaillée sous 5 jours." },
-  { q: 'Quels bois utilisez-vous ?', a: "Des bois massifs français, choisis en scierie selon votre projet. Jamais de panneaux de particules." },
+  { q: 'Travaillez-vous uniquement le bois ?', a: "Le bois est ma matière de prédilection, et je privilégie les projets en bois. Selon l'usage, je travaille aussi bien le massif que le contreplaqué : j'adapte les matériaux à chaque projet pour un résultat solide et durable." },
   { q: "Quelles sont vos zones d'intervention ?", a: "Toute la vallée de Chamonix (Chamonix, Les Houches, Servoz, Argentière, Vallorcine) et plus largement la Haute-Savoie : Sallanches, Passy, Saint-Gervais, Megève, Combloux. Pour le mobilier transportable, je peux intervenir au-delà, parlons-en." },
   { q: 'Proposez-vous une garantie ?', a: "Oui, cinq ans sur les assemblages et les finitions. Si une finition s'altère trop tôt, je viens la reprendre." },
 ]

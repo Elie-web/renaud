@@ -19,7 +19,7 @@ const points = [
   { icon: IcoDevis,    title: 'Devis gratuit et fixe', desc: 'Le prix annoncé est le prix final.' },
   { icon: IcoGarantie, title: 'Garantie 5 ans',        desc: 'Sur les assemblages et finitions. Je reviens si ça bouge.' },
   { icon: Ico3D,       title: 'Validé en 3D',          desc: 'Vous voyez la pièce avant la première découpe.' },
-  { icon: IcoBois,     title: 'Bois français massif',  desc: 'Choisi en scierie. Jamais d\'aggloméré.' },
+  { icon: IcoBois,     title: 'Matériaux adaptés',     desc: 'Bois massif ou contreplaqué, choisi selon l\'usage de chaque projet.' },
 ]
 
 export default function Engagements() {

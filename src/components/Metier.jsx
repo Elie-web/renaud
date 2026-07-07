@@ -34,7 +34,7 @@ export default function Metier() {
             </div>
             <span className="metier-badge">
               <span className="metier-badge-dot" aria-hidden="true" />
-              Ébéniste depuis 2017
+              Ébéniste depuis 2019
             </span>
           </motion.div>
 

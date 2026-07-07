@@ -191,6 +191,14 @@ ul     { list-style: none; }
   }
 }
 
+/* Accent de titre / de phrase — piloté par CLASSE (jamais en style inline) pour
+   pouvoir être re-thémé par version. Sur les versions dont la police n'a pas de
+   vraie italique (Marcellus) ou en capitales (Archivo), l'italique est remplacé
+   par un simple contraste de couleur, droit. Voir surcharges .ver-3 / .ver-5. */
+.i-accent        { font-style: italic; color: var(--c-or-dim); }
+.i-accent--light { font-style: italic; color: var(--c-or-pale); }
+.manifesto-quote { font-style: italic; }
+
 /* ─── Layout utilities ───────────────────────────────────────────────── */
 .container {
   width: 100%;
@@ -382,6 +390,143 @@ ul     { list-style: none; }
   }
   .btn--full { width: 100%; justify-content: center; }
 }
+
+/* ─── Brouillon : les polices proposées par Renaud (V1 = RÉFÉRENCE intouchable) ──
+   Une piste = une des polices que Renaud a envoyées, montée « en vrai » sur tout
+   le site pour qu'il juge le rendu. V2 Quicksand (sa préférée) · V3 Lekton ·
+   V4 Katas · V5 Nisaba · V6 Relicta · V7 Daniel Sans.
+   Quicksand + Lekton viennent de Google Fonts (index.html) ; les 4 autres sont
+   auto-hébergées ci-dessous (fichiers DaFont dans /public/fonts).
+   Aucune n'a de vraie italique de labeur → les accents (.i-accent) passent en
+   droit + couleur, jamais en italique inline. */
+
+/* Polices DaFont auto-hébergées (absentes de Google Fonts) */
+@font-face { font-family: 'Katas';       src: url('/fonts/Katas.ttf') format('truetype');       font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Nisaba';      src: url('/fonts/Nisaba.ttf') format('truetype');      font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Daniel Sans'; src: url('/fonts/DanielSans.ttf') format('truetype');  font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Relicta';     src: url('/fonts/Relicta-Light.otf') format('opentype'); font-weight: 300 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Relicta';     src: url('/fonts/Relicta-UltraboldItalic.otf') format('opentype'); font-weight: 700 800; font-style: italic; font-display: swap; }
+
+/* V2 — QUICKSAND (⭐ la préférée de Renaud) : géométrique arrondie, chaleureuse,
+   moderne. Elle assure titres ET texte → une seule police sur la page. */
+.ver-2 {
+  --f-serif: 'Quicksand', system-ui, sans-serif;
+  --f-sc: 'Quicksand', system-ui, sans-serif;
+  --f-sans: 'Quicksand', system-ui, sans-serif;
+  --c-fond: #F3ECDE; --c-creme: #EDE5D4; --c-blanc: #FBF8F1;
+  --c-or: #A86A30; --c-or-pale: #CF9B52; --c-or-dim: #855223;
+  --or-10: rgba(168,106,48,0.10); --or-15: rgba(168,106,48,0.15); --or-20: rgba(168,106,48,0.20); --or-25: rgba(168,106,48,0.26); --or-40: rgba(168,106,48,0.42);
+  --shadow-clay: 0 14px 44px -14px rgba(168,106,48,0.34);
+}
+.ver-2 .h1, .ver-2 .h2, .ver-2 .h3, .ver-2 .hero-title { font-weight: 600; letter-spacing: -0.01em; }
+.ver-2 .h2 { font-size: clamp(2rem, 3.8vw, 3.6rem); line-height: 1.1; }
+.ver-2 .display { font-weight: 600; }
+.ver-2 .hero-title { font-weight: 600 !important; font-size: clamp(2.4rem, 4.8vw, 4.4rem) !important; letter-spacing: -0.008em; }
+.ver-2 .i-accent, .ver-2 .i-accent--light { font-style: normal; }
+.ver-2 .i-accent { color: var(--c-or); }
+.ver-2 .btn { letter-spacing: 0.1em; font-weight: 600; }
+.ver-2 .eyebrow { letter-spacing: 0.24em; font-weight: 600; }
+
+/* V3 — LEKTON : monospace « atelier / plans / technique ». Titres en Lekton gras ;
+   le corps repasse en Inter (une monospace fatigue en texte long → la 2e police
+   « si ça rentre pas »). Boutons carrés, noyer neutre. */
+.ver-3 {
+  --f-serif: 'Lekton', ui-monospace, monospace;
+  --f-sc: 'Lekton', ui-monospace, monospace;
+  --f-sans: 'Inter', system-ui, sans-serif;
+  --c-fond: #F5F2EC; --c-creme: #EBE7DE; --c-blanc: #FCFBF7;
+  --c-or: #6B4E3D; --c-or-pale: #9A7C64; --c-or-dim: #7A5A45;
+  --or-10: rgba(107,78,61,0.10); --or-15: rgba(107,78,61,0.15); --or-20: rgba(107,78,61,0.20); --or-25: rgba(107,78,61,0.26); --or-40: rgba(107,78,61,0.42);
+  --shadow-clay: 0 14px 44px -14px rgba(107,78,61,0.28);
+}
+.ver-3 .h1, .ver-3 .h2, .ver-3 .h3, .ver-3 .hero-title { font-weight: 700; letter-spacing: 0.01em; }
+.ver-3 .h2 { font-size: clamp(1.9rem, 3.6vw, 3.5rem); line-height: 1.1; }
+.ver-3 .hero-title { font-size: clamp(2rem, 4vw, 3.8rem) !important; line-height: 1.12 !important; letter-spacing: 0.01em; }
+.ver-3 .i-accent, .ver-3 .i-accent--light { font-style: normal; }
+.ver-3 .i-accent { color: var(--c-or); }
+.ver-3 .btn { border-radius: 0; letter-spacing: 0.14em; font-weight: 700; }
+.ver-3 .eyebrow { letter-spacing: 0.26em; font-weight: 700; }
+
+/* V4 — KATAS : display géométrique art-déco en CAPITALES. Titres Katas ; corps
+   Inter (Katas est une police d'affichage). Palette argile racine. */
+.ver-4 {
+  --f-serif: 'Katas', system-ui, sans-serif;
+  --f-sc: 'Katas', system-ui, sans-serif;
+  --f-sans: 'Inter', system-ui, sans-serif;
+}
+.ver-4 .h1, .ver-4 .h2, .ver-4 .h3, .ver-4 .hero-title { text-transform: uppercase; font-weight: 400; letter-spacing: 0.04em; }
+.ver-4 .h2 { font-size: clamp(2rem, 4vw, 4rem); line-height: 1.1; }
+.ver-4 .h3 { letter-spacing: 0.03em; }
+.ver-4 .hero-title { font-size: clamp(2.3rem, 4.4vw, 4.4rem) !important; letter-spacing: 0.05em; line-height: 1.12 !important; }
+.ver-4 .i-accent, .ver-4 .i-accent--light { font-style: normal; }
+.ver-4 .i-accent { color: var(--c-or); }
+.ver-4 .btn { letter-spacing: 0.16em; }
+.ver-4 .eyebrow { letter-spacing: 0.3em; }
+
+/* V5 — NISABA : display très fin, tout en finesse → il éclate sur fond SOMBRE.
+   CAPITALES + corps Inter. Thème nocturne terre cuite. */
+.ver-5 {
+  --f-serif: 'Nisaba', system-ui, sans-serif;
+  --f-sc: 'Inter', system-ui, sans-serif;
+  --f-sans: 'Inter', system-ui, sans-serif;
+  /* surfaces sombres + texte clair */
+  --c-fond: #17120C; --c-creme: #1C160F; --c-blanc: #241D15;
+  --c-texte: #F2EBDD; --c-texte-2: #B4A794; --c-pierre: #39301F; --c-noir: #120D08;
+  --c-or: #C4744A; --c-or-pale: #DB9366; --c-or-dim: #C4744A;
+  --or-10: rgba(196,116,74,0.12); --or-15: rgba(196,116,74,0.16); --or-20: rgba(196,116,74,0.22); --or-25: rgba(196,116,74,0.28); --or-40: rgba(196,116,74,0.45);
+  --cr-35: rgba(242,235,221,0.35); --cr-50: rgba(242,235,221,0.52);
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.5);
+  --shadow-md: 0 6px 18px -6px rgba(0,0,0,0.4), 0 22px 55px -20px rgba(0,0,0,0.6);
+  --shadow-clay: 0 14px 44px -14px rgba(196,116,74,0.4);
+}
+.ver-5 .h1, .ver-5 .h2, .ver-5 .h3, .ver-5 .hero-title { text-transform: uppercase; letter-spacing: 0.08em; font-weight: 400; }
+.ver-5 .h2 { font-size: clamp(2rem, 4.2vw, 4.2rem); line-height: 1.16; }
+.ver-5 .h3 { letter-spacing: 0.06em; }
+.ver-5 .hero-title { font-size: clamp(2.1rem, 4.2vw, 4.2rem) !important; letter-spacing: 0.1em; line-height: 1.16 !important; }
+.ver-5 .i-accent, .ver-5 .i-accent--light, .ver-5 .manifesto-quote,
+.ver-5 .metier-statement em, .ver-5 .metier-story em, .ver-5 .metier-sign-name,
+.ver-5 .contact-call-title strong { font-style: normal; }
+.ver-5 .i-accent { color: var(--c-or-pale); }
+.ver-5 .btn { border-radius: 2px; letter-spacing: 0.2em; }
+.ver-5 .eyebrow { letter-spacing: 0.32em; }
+
+/* V6 — RELICTA : sans élégant contrasté (graisse Light). Titres Relicta ; corps
+   Inter. Palette claire et raffinée. ⚠ licence perso-only (voir note client). */
+.ver-6 {
+  --f-serif: 'Relicta', system-ui, sans-serif;
+  --f-sc: 'Relicta', system-ui, sans-serif;
+  --f-sans: 'Inter', system-ui, sans-serif;
+  --c-fond: #F4F1EA; --c-creme: #ECE8DF; --c-blanc: #FCFBF8;
+  --c-or: #9A6A44; --c-or-pale: #C0906A; --c-or-dim: #7E5334;
+  --or-10: rgba(154,106,68,0.10); --or-15: rgba(154,106,68,0.15); --or-20: rgba(154,106,68,0.20); --or-25: rgba(154,106,68,0.26); --or-40: rgba(154,106,68,0.42);
+  --shadow-clay: 0 14px 44px -14px rgba(154,106,68,0.30);
+}
+.ver-6 .h1, .ver-6 .h2, .ver-6 .h3, .ver-6 .hero-title { font-weight: 400; letter-spacing: 0; }
+.ver-6 .h2 { font-size: clamp(2rem, 4vw, 4rem); line-height: 1.1; }
+.ver-6 .hero-title { font-size: clamp(2.4rem, 4.8vw, 4.8rem) !important; letter-spacing: 0; line-height: 1.12 !important; }
+.ver-6 .i-accent, .ver-6 .i-accent--light { font-style: normal; }
+.ver-6 .i-accent { color: var(--c-or); }
+.ver-6 .btn { letter-spacing: 0.14em; }
+.ver-6 .eyebrow { letter-spacing: 0.28em; }
+
+/* V7 — DANIEL SANS : manuscrit / marqueur, très chaleureux. Réservé aux titres &
+   accents (illisible en labeur) ; corps + surtitres en Inter. Crème conviviale.
+   ⚠ licence perso-only (voir note client). */
+.ver-7 {
+  --f-serif: 'Daniel Sans', 'Segoe Script', cursive;
+  --f-sc: 'Inter', system-ui, sans-serif;
+  --f-sans: 'Inter', system-ui, sans-serif;
+  --c-fond: #F6EFE2; --c-creme: #EFE6D5; --c-blanc: #FDFBF6;
+  --c-or: #B0663A; --c-or-pale: #CF8A57; --c-or-dim: #8F4F29;
+  --or-10: rgba(176,102,58,0.10); --or-15: rgba(176,102,58,0.15); --or-20: rgba(176,102,58,0.20); --or-25: rgba(176,102,58,0.26); --or-40: rgba(176,102,58,0.42);
+  --shadow-clay: 0 14px 44px -14px rgba(176,102,58,0.32);
+}
+.ver-7 .h1, .ver-7 .h2, .ver-7 .h3, .ver-7 .hero-title { font-weight: 400; letter-spacing: 0; line-height: 1.1; }
+.ver-7 .h2 { font-size: clamp(2.2rem, 4.4vw, 4.4rem); }
+.ver-7 .hero-title { font-size: clamp(2.6rem, 5.2vw, 5.4rem) !important; line-height: 1.08 !important; }
+.ver-7 .i-accent, .ver-7 .i-accent--light { font-style: normal; }
+.ver-7 .i-accent { color: var(--c-or); }
+.ver-7 .btn { letter-spacing: 0.12em; }
 
 /* ─── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

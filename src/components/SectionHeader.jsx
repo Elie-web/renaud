@@ -44,5 +44,5 @@ export default function SectionHeader({ eyebrow, title, lead, leadWidth = '48ch'
 
 /* Mot d'accent (italique argile) à insérer dans un titre. */
 export function Accent({ children }) {
-  return <em style={{ fontStyle: 'italic', color: 'var(--c-or-dim)' }}>{children}</em>
+  return <em className="i-accent">{children}</em>
 }

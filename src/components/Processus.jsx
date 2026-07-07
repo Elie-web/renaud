@@ -14,15 +14,15 @@ const steps = [
   },
   {
     n: '02', id: 'conception', title: 'La conception',
-    tagline: 'Vous voyez la pièce avant qu\'elle existe.',
-    desc: "Croquis, puis rendu 3D fidèle. Rien n'est commandé avant votre accord.",
-    points: ['Plan 3D du projet', 'Choix des bois & finitions'],
+    tagline: 'On dessine votre pièce ensemble.',
+    desc: "Croquis, plans et prise de cotes, choix des bois et des matériaux adaptés à l'usage. Rien n'est commandé avant votre accord.",
+    points: ['Plans & prise de cotes', 'Choix des bois & finitions'],
   },
   {
-    n: '03', id: 'fabrication', title: 'La fabrication',
-    tagline: 'Chaque pièce prend forme sous mes mains, à l\'atelier.',
-    desc: "À la main pour les assemblages, à la machine pour les débits. Aucune pièce ne part avant d'être juste.",
-    points: ['Assemblages traditionnels', 'Contrôle à chaque étape'],
+    n: '03', id: 'rendu', title: 'Le rendu réaliste',
+    tagline: 'Vous voyez la pièce avant qu\'elle existe.',
+    desc: "Un rendu 3D fidèle, presque photo. On l'ajuste ensemble — teinte, proportions, détails — jusqu'à ce qu'il vous ressemble, avant la moindre découpe.",
+    points: ['Rendu 3D photo-réaliste', 'Modifiable jusqu\'à validation'],
   },
   {
     n: '04', id: 'livraison', title: 'La livraison',
@@ -79,10 +79,10 @@ function Step({ step, flip }) {
           color: 'var(--c-texte)', lineHeight: 1.06, letterSpacing: '-0.02em', marginBottom: 'var(--sp-4)',
         }}>{step.title}</h3>
 
-        <p style={{
-          fontFamily: 'var(--f-serif)', fontStyle: 'italic',
+        <p className="i-accent" style={{
+          fontFamily: 'var(--f-serif)',
           fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', lineHeight: 1.4,
-          color: 'var(--c-or-dim)', marginBottom: 'var(--sp-5)', maxWidth: '30ch',
+          marginBottom: 'var(--sp-5)', maxWidth: '30ch',
         }}>{step.tagline}</p>
 
         <p style={{
@@ -131,7 +131,7 @@ export default function Processus() {
             letterSpacing: '-0.01em',
           }}
         >
-          Votre projet reste le vôtre, <em style={{ fontStyle: 'italic', color: 'var(--c-or-dim)' }}>du croquis à la pose.</em>
+          Votre projet reste le vôtre, <em className="i-accent">du croquis à la pose.</em>
         </motion.p>
       </div>
 

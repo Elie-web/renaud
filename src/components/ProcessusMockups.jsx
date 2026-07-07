@@ -1,8 +1,15 @@
 import { motion } from 'framer-motion'
 import imgRencontre from '../assets/Renaud/20220522_144203.webp'
-import imgConception from '../assets/créations renaud/rendu 4.webp'
-import imgFabrication from '../assets/working/DSC09111.webp'
+import imgConception from '../assets/working/DSC09111.webp'
+import imgRendu from '../assets/créations renaud/rendu.webp'
 import imgLivraison from '../assets/créations renaud/console japo face.webp'
+
+/* TODO Renaud — visuels idéaux à fournir :
+   · Conception : un croquis / plan ou une capture du logiciel de modélisation.
+   · Rendu réaliste : une capture du logiciel de modélisation « en action ».
+   · Livraison : une vraie photo de pose / installation chez le client.
+   En attendant on utilise une photo d'atelier (conception), un vrai rendu 3D
+   (rendu) et une pièce finie (livraison). */
 
 /**
  * Visuels par étape du process : une vraie photo par étape, dans un cadre
@@ -111,11 +118,11 @@ function RencontreMockup() {
    02 — LA CONCEPTION : vrai rendu 3D du meuble
    ════════════════════════════════════════════════════════════════════════ */
 function ConceptionMockup() {
-  const a = A.blue
+  const a = A.clay
   return (
     <Frame rotate={1.5} accent={a} img={imgConception}
-      alt="Rendu 3D d'un chevet sur mesure en frêne avec marqueterie — conception Achard Créa">
-      <PillChip accent={a} icon={<Pencil />} label="Rendu 3D"
+      alt="Prise de cotes et plans à l'atelier — conception d'un meuble sur mesure, Achard Créa">
+      <PillChip accent={a} icon={<Pencil />} label="Plans & cotes"
         pos={{ top: '-16px', right: '-20px' }} rest={{ rotate: 5 }} hover={{ x: 10, y: -6, rotate: 11 }} />
       {/* nuancier de bois flottant */}
       <motion.div variants={chip({ rotate: -5 }, { x: -8, y: 6, rotate: -11 })} transition={spring}
@@ -129,20 +136,20 @@ function ConceptionMockup() {
 }
 
 /* ════════════════════════════════════════════════════════════════════════
-   03 — LA FABRICATION : Renaud à l'établi, ponçage
+   03 — LE RENDU RÉALISTE : rendu 3D fidèle, modifiable avant fabrication
    ════════════════════════════════════════════════════════════════════════ */
-function FabricationMockup() {
-  const a = A.amber
+function RenduMockup() {
+  const a = A.blue
   return (
-    <Frame rotate={-1.5} accent={a} img={imgFabrication}
-      alt="Montage d'une pièce sur mesure à l'établi — fabrication artisanale, vallée de Chamonix">
-      <PillChip accent={a} icon={<Plane />} label="Fait main"
+    <Frame rotate={-1.5} accent={a} img={imgRendu}
+      alt="Rendu 3D photo-réaliste d'une table basse en noyer, validé avant fabrication — Achard Créa">
+      <PillChip accent={a} icon={<Pencil />} label="Rendu 3D"
         pos={{ top: '-16px', right: '-20px' }} rest={{ rotate: 5 }} hover={{ x: 10, y: -6, rotate: 11 }} />
-      {/* chip « de mes mains » (validation verte) */}
+      {/* chip « modifiable » (validation verte) */}
       <motion.div variants={chip({ rotate: -3 }, { x: -8, y: 6, rotate: -10 })} transition={spring}
         style={{ position: 'absolute', bottom: '-14px', left: '-18px', display: 'flex', alignItems: 'center', gap: '7px', borderRadius: 'var(--r-pill)', background: 'var(--c-ivoire)', border: '1px solid var(--c-pierre)', boxShadow: 'var(--shadow-md)', padding: '6px 13px 6px 6px' }}>
         <span style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'var(--c-vert)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><Check size={12} /></span>
-        <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.7rem', fontWeight: 600, color: 'var(--c-texte)' }}>De mes mains</span>
+        <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.7rem', fontWeight: 600, color: 'var(--c-texte)' }}>Modifiable</span>
       </motion.div>
     </Frame>
   )
@@ -171,7 +178,7 @@ function LivraisonMockup() {
 const MOCKUPS = {
   rencontre: RencontreMockup,
   conception: ConceptionMockup,
-  fabrication: FabricationMockup,
+  rendu: RenduMockup,
   livraison: LivraisonMockup,
 }
 

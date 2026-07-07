@@ -14,7 +14,7 @@ const ease = [0.22, 1, 0.36, 1]
 // quand on passe d'une pièce à l'autre, quel que soit le format de la photo.
 const projects = [
   { id: 1, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',   img: imgConsole },
-  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer & laiton',        img: imgTableJeu },
+  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer massif, plateau réversible', img: imgTableJeu },
   { id: 3, cat: 'Mobilier',    title: 'Chevet « vague & soleil »',  meta: 'Frêne & laque',         img: imgChevet },
   { id: 4, cat: 'Table',       title: "Table d'appoint marquetée",  meta: 'Marqueterie sur frêne', img: imgAppoint },
   { id: 5, cat: 'Mobilier',    title: 'Tréteaux sculptés',          meta: 'Frêne massif',          img: imgTreteaux },

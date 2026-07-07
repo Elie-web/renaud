@@ -47,7 +47,7 @@ export default function ImageBand() {
             textShadow: '0 2px 30px rgba(20,15,9,0.6)',
           }}>
           Tout&nbsp;naît de&nbsp;mes&nbsp;mains.{' '}
-          <em style={{ fontStyle: 'italic', color: 'var(--c-or-pale)' }}>Façonné pour&nbsp;votre&nbsp;intérieur.</em>
+          <em className="i-accent--light">Façonné pour&nbsp;votre&nbsp;intérieur.</em>
         </motion.p>
       </div>
     </section>

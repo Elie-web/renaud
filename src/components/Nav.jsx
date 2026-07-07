@@ -9,9 +9,11 @@ const links = [
   { label: 'Contact',      href: '#contact' },
 ]
 
-export default function Nav() {
+export default function Nav({ solid = false }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  // `solid` = header clair permanent (testé sur une version) ; sinon transparent → clair au scroll
+  const light = scrolled || solid
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -35,10 +37,10 @@ export default function Nav() {
           height: scrolled ? '70px' : '92px',
           padding: '0 var(--px)',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: scrolled ? 'rgba(246,241,231,0.86)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(16px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--c-pierre)' : '1px solid transparent',
+          background: light ? 'rgba(246,241,231,0.9)' : 'transparent',
+          backdropFilter: light ? 'blur(16px)' : 'none',
+          WebkitBackdropFilter: light ? 'blur(16px)' : 'none',
+          borderBottom: light ? '1px solid var(--c-pierre)' : '1px solid transparent',
           transition: 'height .4s var(--ease), background .4s var(--ease), border-color .4s var(--ease)',
         }}
       >
@@ -49,12 +51,12 @@ export default function Nav() {
           <span style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
             <span style={{
               fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.4rem, 2vw, 1.7rem)', fontWeight: 400,
-              color: scrolled ? 'var(--c-texte)' : 'var(--c-ivoire)', lineHeight: 1, letterSpacing: '-0.01em',
+              color: light ? 'var(--c-texte)' : 'var(--c-ivoire)', lineHeight: 1, letterSpacing: '-0.01em',
               transition: 'color .4s var(--ease)',
             }}>Achard Créa</span>
             <span style={{
               fontFamily: 'var(--f-sc)', fontSize: '0.52rem', fontWeight: 500, letterSpacing: '0.24em',
-              color: scrolled ? 'var(--c-or-dim)' : 'var(--c-or-pale)', textTransform: 'uppercase',
+              color: light ? 'var(--c-or-dim)' : 'var(--c-or-pale)', textTransform: 'uppercase',
               transition: 'color .4s var(--ease)',
             }}>Ébéniste · sur mesure</span>
           </span>
@@ -63,12 +65,12 @@ export default function Nav() {
         {/* Liens desktop */}
         <ul className="nav-links" style={{ display: 'flex', gap: 'clamp(22px, 2.6vw, 44px)' }}>
           {links.map((l) => {
-            const base = scrolled ? 'var(--c-texte-2)' : 'rgba(242,235,221,0.82)'
-            const hover = scrolled ? 'var(--c-texte)' : 'var(--c-ivoire)'
+            const base = light ? 'var(--c-texte-2)' : 'rgba(242,235,221,0.82)'
+            const hover = light ? 'var(--c-texte)' : 'var(--c-ivoire)'
             return (
               <li key={l.href}>
                 <a href={l.href} style={{
-                  fontFamily: 'var(--f-sans)', fontSize: '0.92rem', color: base,
+                  fontFamily: 'var(--f-sans)', fontSize: '1.02rem', color: base,
                   transition: 'color .2s ease',
                 }}
                   onMouseEnter={(e) => e.currentTarget.style.color = hover}
@@ -100,7 +102,7 @@ export default function Nav() {
                   opacity: open && i === 1 ? 0 : 1,
                 }}
                 transition={{ duration: 0.3 }}
-                style={{ display: 'block', width: '24px', height: '1.5px', background: open || !scrolled ? 'var(--c-ivoire)' : 'var(--c-texte)' }}
+                style={{ display: 'block', width: '24px', height: '1.5px', background: open || !light ? 'var(--c-ivoire)' : 'var(--c-texte)' }}
               />
             ))}
           </button>
