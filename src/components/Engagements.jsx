@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
-import atelierImg from '../assets/working/DSC09101.webp'
+import atelierImg from '../assets/atelier/gabarit-metal-angle.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 

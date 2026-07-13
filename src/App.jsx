@@ -28,13 +28,13 @@ import CtaBand from './components/CtaBand'
 import MetierMinimal from './components/MetierMinimal'
 
 // Images hero IA (gros plan « explosif » - une par version brouillon)
-import heroChiselA from './assets/hero ia/Gemini_Generated_Image_ajqtmvajqtmvajqt-clean.webp'
-import heroChiselB from './assets/hero ia/Gemini_Generated_Image_gb5g4vgb5g4vgb5g-clean.webp'
-import heroChiselC from './assets/hero ia/Gemini_Generated_Image_h2avf7h2avf7h2av-clean.webp'
-import heroChiselD from './assets/hero ia/Gemini_Generated_Image_x5jq6xx5jq6xx5jq-clean.webp'
-import heroLathe from './assets/hero ia/Gemini_Generated_Image_auvmkzauvmkzauvm-clean.webp'
-import heroSander from './assets/hero ia/Gemini_Generated_Image_hzhctkhzhctkhzhc-clean.webp'
-import heroRouter from './assets/hero ia/Gemini_Generated_Image_ucg8w7ucg8w7ucg8-clean.webp'
+import heroChiselA from './assets/hero/hero-ciseau-01.webp'
+import heroChiselB from './assets/hero/hero-ciseau-02.webp'
+import heroChiselC from './assets/hero/hero-ciseau-03.webp'
+import heroChiselD from './assets/hero/hero-ciseau-04.webp'
+import heroLathe from './assets/hero/hero-tour.webp'
+import heroSander from './assets/hero/hero-ponceuse.webp'
+import heroRouter from './assets/hero/hero-defonceuse.webp'
 
 // Toutes les sections (hors Hero, toujours en premier) adressables par clé.
 const SECTIONS = {

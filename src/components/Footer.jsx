@@ -1,4 +1,4 @@
-import logo from '../assets/logos/logo footer.png'
+import logo from '../assets/logos/logo-footer.png'
 
 const nav = [
   { label: 'Réalisations', href: '#realisations' },

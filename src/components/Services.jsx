@@ -4,12 +4,10 @@ import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
 
 // Vitrine par catégorie de ce que fabrique Renaud (avant les réalisations).
-// TODO Renaud : fournir une vraie photo de CUISINE (aucune dans les assets
-// actuels) - placeholder « bois » en attendant.
-import imgCuisine from '../assets/working/DSC09086-opt.webp'
-import imgMeuble from '../assets/créations renaud/console japo face.webp'
-import imgAmenagement from '../assets/créations renaud/rendu tan.webp'
-import imgObjet from '../assets/créations renaud/TRETEAUX.webp'
+import imgCuisine from '../assets/realisations/cuisine/cuisine-ilot-chene-01.webp'
+import imgMeuble from '../assets/realisations/meuble/commode-chene-cuir-01.webp'
+import imgAmenagement from '../assets/realisations/agencement/bibliotheque-sur-mesure-01.webp'
+import imgObjet from '../assets/realisations/objet/boite-noyer-02.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -20,7 +18,6 @@ const categories = [
     cat: 'Cuisines en bois',
     line: 'Des cuisines dessinées autour de votre façon de cuisiner, du plan de travail aux rangements.',
     img: imgCuisine,
-    todo: true, // photo cuisine à remplacer
   },
   {
     cat: 'Meubles sur mesure',
@@ -146,8 +143,14 @@ export default function Services() {
         .sf-rail-wrap { position: relative; }
         .sf-rail {
           display: flex; gap: clamp(16px, 1.8vw, 26px);
-          overflow-x: auto; scroll-snap-type: x mandatory;
-          padding: 4px 2px 14px;
+          /* overflow-y explicite : sans lui il vaut « auto » (dérivé de overflow-x),
+             le rail capte la molette et la page ne défile plus quand le curseur
+             est sur une carte. Le padding réserve la place du survol (-4px) et de
+             l'ombre ; les marges négatives annulent son effet sur la mise en page. */
+          overflow-x: auto; overflow-y: hidden;
+          scroll-snap-type: x mandatory;
+          padding: 16px 2px 26px;
+          margin: -12px 0 -12px;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
         }

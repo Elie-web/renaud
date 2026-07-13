@@ -7,10 +7,10 @@ import SectionHeader, { Accent } from './SectionHeader'
    Un carrousel plein cadre : une catégorie à la fois, en grand, avec
    flèches + puces. Légende en surimpression bas. Bouton en bas vers contact. */
 
-import imgCuisine from '../assets/working/DSC09086-opt.webp' // TODO photo cuisine
-import imgMeuble from '../assets/créations renaud/console japo face.webp'
-import imgAmenagement from '../assets/créations renaud/rendu tan.webp'
-import imgObjet from '../assets/créations renaud/TRETEAUX.webp'
+import imgCuisine from '../assets/realisations/cuisine/cuisine-ilot-chene-01.webp'
+import imgMeuble from '../assets/realisations/meuble/table-basse-jeu-01.webp'
+import imgAmenagement from '../assets/realisations/agencement/meuble-tasseaux-retroeclaire-02.webp'
+import imgObjet from '../assets/realisations/objet/boite-noyer-03.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 

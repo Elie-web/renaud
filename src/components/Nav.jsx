@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import logo from '../assets/logos/logo principale.png'
+import logo from '../assets/logos/logo-principal.png'
 
 const links = [
   { label: 'Réalisations', href: '#realisations' },

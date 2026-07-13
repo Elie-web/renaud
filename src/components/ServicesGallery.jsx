@@ -6,30 +6,44 @@ import SectionHeader, { Accent } from './SectionHeader'
    Galerie masonry dense : beaucoup de visuels, chacun avec une étiquette
    discrète (catégorie / geste). Un seul bouton en bas vers le contact. */
 
-import img1 from '../assets/créations renaud/console japo face.webp'
-import img2 from '../assets/working/DSC09096.webp'
-import img3 from '../assets/créations renaud/124786510_417682035900216_6567680258826415206_n.webp'
-import img4 from '../assets/créations renaud/rendu tan.webp'
-import img5 from '../assets/working/125923338_379859523234117_6351789028901921509_n.webp'
-import img6 from '../assets/créations renaud/TRETEAUX.webp'
-import img7 from '../assets/working/124979027_5294257680600333_1820063589436393798_n.webp'
-import img8 from '../assets/Renaud/DSC08872.webp'
-import img9 from '../assets/créations renaud/20190302_174312136_iOS.webp'
-import img10 from '../assets/working/DSC09010-opt.webp'
+// Le meilleur de tout le catalogue : pièces récentes, anciennes marqueteries,
+// rendus 3D et gestes d'atelier, mélangés.
+import imgCuisineIlot from '../assets/realisations/cuisine/cuisine-ilot-chene-01.webp'
+import imgCuisineFoncee from '../assets/realisations/cuisine/cuisine-chene-fonce-02.webp'
+import imgBibliotheque from '../assets/realisations/agencement/bibliotheque-sur-mesure-01.webp'
+import imgTasseaux from '../assets/realisations/agencement/meuble-tasseaux-retroeclaire-02.webp'
+import imgDressing from '../assets/realisations/agencement/dressing-epicea-01.webp'
+import imgBanquette from '../assets/realisations/agencement/etagere-banquette-pierre-01.webp'
+import imgCommode from '../assets/realisations/meuble/commode-chene-cuir-01.webp'
+import imgTableBasse from '../assets/realisations/meuble/table-basse-jeu-01.webp'
+import imgConsoleMarq from '../assets/realisations/meuble/console-marqueterie-01.webp'
+import imgChevet from '../assets/realisations/meuble/chevet-vague-rendu-04.webp'
+import imgAppoint from '../assets/realisations/meuble/table-appoint-marqueterie-01.webp'
+import imgTreteaux from '../assets/realisations/objet/treteaux-frene-01.webp'
+import imgBoite from '../assets/realisations/objet/boite-noyer-02.webp'
+import imgTerrasse from '../assets/realisations/exterieur/terrasse-claustra-02.webp'
+import imgSciage from '../assets/atelier/sciage-scie-japonaise.webp'
+import imgTenon from '../assets/atelier/assemblage-tenon-mortaise.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 
 const items = [
-  { img: img1,  tag: 'Meubles sur mesure' },
-  { img: img2,  tag: 'Découpe & cintrage' },
-  { img: img3,  tag: 'Assemblages' },
-  { img: img4,  tag: 'Aménagement intérieur' },
-  { img: img5,  tag: 'Piètement sculpté' },
-  { img: img6,  tag: 'Objets' },
-  { img: img7,  tag: 'Tenons & mortaises' },
-  { img: img8,  tag: "L'atelier" },
-  { img: img9,  tag: 'Marqueterie' },
-  { img: img10, tag: 'Débit & calibrage' },
+  { img: imgCuisineIlot,   tag: 'Cuisines en bois' },
+  { img: imgCommode,       tag: 'Meubles sur mesure' },
+  { img: imgBibliotheque,  tag: 'Aménagement intérieur' },
+  { img: imgConsoleMarq,   tag: 'Marqueterie' },
+  { img: imgTableBasse,    tag: 'Table échiquier' },
+  { img: imgTasseaux,      tag: 'Tasseaux rétroéclairés' },
+  { img: imgBoite,         tag: 'Objets' },
+  { img: imgChevet,        tag: 'Rendu 3D' },
+  { img: imgDressing,      tag: 'Dressings' },
+  { img: imgSciage,        tag: 'Découpe & cintrage' },
+  { img: imgCuisineFoncee, tag: 'Façades chêne foncé' },
+  { img: imgAppoint,       tag: "Table d'appoint" },
+  { img: imgBanquette,     tag: 'Banquettes & étagères' },
+  { img: imgTreteaux,      tag: 'Tréteaux sculptés' },
+  { img: imgTerrasse,      tag: 'Aménagement extérieur' },
+  { img: imgTenon,         tag: 'Tenons & mortaises' },
 ]
 
 export default function ServicesGallery() {

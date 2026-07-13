@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
-import portrait from '../assets/Renaud/DSC09023.webp'
+import portrait from '../assets/atelier/renaud-portrait-mesure-plateau.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 

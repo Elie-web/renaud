@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
-import imgFeature from '../assets/créations renaud/console japo face.webp'
+import imgFeature from '../assets/realisations/agencement/bibliotheque-sur-mesure-01.webp'
 
 /* Savoir-faire - VARIANTE V2 « moins de photos ».
    Parti pris éditorial : une seule grande image + les 4 familles en liste
@@ -34,7 +34,7 @@ export default function ServicesFewer() {
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportSettings} transition={{ duration: 0.9, ease }}
           >
-            <img src={imgFeature} alt="Console sur mesure en bois, Achard Créa, ébéniste dans la vallée de Chamonix" loading="lazy" decoding="async" />
+            <img src={imgFeature} alt="Bibliothèque sur mesure en bois, du sol au plafond, Achard Créa, ébéniste dans la vallée de Chamonix" loading="lazy" decoding="async" />
           </motion.div>
 
           <div className="svf-list">

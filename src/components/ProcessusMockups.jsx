@@ -1,15 +1,14 @@
 import { motion } from 'framer-motion'
-import imgRencontre from '../assets/Renaud/20220522_144203.webp'
-import imgConception from '../assets/working/DSC09111.webp'
-import imgRendu from '../assets/créations renaud/rendu.webp'
-import imgLivraison from '../assets/créations renaud/console japo face.webp'
+import imgRencontre from '../assets/atelier/rencontre-client-atelier.webp'
+import imgConception from '../assets/atelier/assemblage-structure-console.webp'
+import imgRendu from '../assets/realisations/meuble/table-basse-jeu-rendu-01.webp'
+import imgLivraison from '../assets/realisations/cuisine/cuisine-ilot-chene-01.webp'
 
 /* TODO Renaud - visuels idéaux à fournir :
    · Conception : un croquis / plan ou une capture du logiciel de modélisation.
    · Rendu réaliste : une capture du logiciel de modélisation « en action ».
-   · Livraison : une vraie photo de pose / installation chez le client.
-   En attendant on utilise une photo d'atelier (conception), un vrai rendu 3D
-   (rendu) et une pièce finie (livraison). */
+   En attendant on utilise une photo d'atelier (conception) et un vrai rendu 3D
+   (rendu). Livraison = la cuisine posée chez le client. */
 
 /**
  * Visuels par étape du process : une vraie photo par étape, dans un cadre

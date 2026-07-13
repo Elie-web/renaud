@@ -2,22 +2,32 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
-import imgConsole from '../assets/créations renaud/20190302_174312136_iOS.webp'
-import imgTableJeu from '../assets/créations renaud/rendu.webp'
-import imgChevet from '../assets/créations renaud/rendu 7 (6 fermé).webp'
-import imgAppoint from '../assets/créations renaud/20190302_175141500_iOS.webp'
-import imgTreteaux from '../assets/créations renaud/TRETEAUX.webp'
+// Le best-of, sans distinction d'âge : les plus belles pièces de l'atelier,
+// nouvelles photos et anciennes mélangées, une par famille au minimum.
+import imgCuisine from '../assets/realisations/cuisine/cuisine-ilot-chene-01.webp'
+import imgTableJeu from '../assets/realisations/meuble/table-basse-jeu-01.webp'
+import imgCommode from '../assets/realisations/meuble/commode-chene-cuir-01.webp'
+import imgBibliotheque from '../assets/realisations/agencement/bibliotheque-sur-mesure-01.webp'
+import imgConsole from '../assets/realisations/meuble/console-marqueterie-01.webp'
+import imgTasseaux from '../assets/realisations/agencement/meuble-tasseaux-retroeclaire-02.webp'
+import imgChevet from '../assets/realisations/meuble/chevet-vague-rendu-04.webp'
+import imgAppoint from '../assets/realisations/meuble/table-appoint-marqueterie-01.webp'
+import imgBoite from '../assets/realisations/objet/boite-noyer-02.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 
 // Cadre de taille fixe (object-fit: cover) → aucun décalage de mise en page
 // quand on passe d'une pièce à l'autre, quel que soit le format de la photo.
 const projects = [
-  { id: 1, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',   img: imgConsole },
-  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer massif, plateau réversible', img: imgTableJeu },
-  { id: 3, cat: 'Mobilier',    title: 'Chevet « vague & soleil »',  meta: 'Frêne & laque',         img: imgChevet },
-  { id: 4, cat: 'Table',       title: "Table d'appoint marquetée",  meta: 'Marqueterie sur frêne', img: imgAppoint },
-  { id: 5, cat: 'Mobilier',    title: 'Tréteaux sculptés',          meta: 'Frêne massif',          img: imgTreteaux },
+  { id: 1, cat: 'Cuisine',     title: 'Îlot central en chêne',      meta: 'Chêne massif, plan de travail blanc', img: imgCuisine },
+  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer massif, plateaux coulissants',  img: imgTableJeu },
+  { id: 3, cat: 'Meuble',      title: 'Commode à poignées cuir',    meta: 'Chêne massif & cuir',                 img: imgCommode },
+  { id: 4, cat: 'Aménagement', title: 'Bibliothèque sur mesure',    meta: 'Du sol au plafond, alcôves décalées', img: imgBibliotheque },
+  { id: 5, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',                 img: imgConsole },
+  { id: 6, cat: 'Aménagement', title: 'Meuble à tasseaux',          meta: 'Tasseaux rétroéclairés, chêne',       img: imgTasseaux },
+  { id: 7, cat: 'Mobilier',    title: 'Chevet « vague & soleil »',  meta: 'Frêne & laque',                       img: imgChevet },
+  { id: 8, cat: 'Table',       title: "Table d'appoint marquetée",  meta: 'Marqueterie sur frêne',               img: imgAppoint },
+  { id: 9, cat: 'Objet',       title: 'Boîte à couvercle',          meta: 'Noyer & chêne cérusé',                img: imgBoite },
 ]
 
 const pad = (n) => String(n).padStart(2, '0')
@@ -52,6 +62,26 @@ export default function Realisations() {
     const target = li.offsetLeft - (ul.clientWidth - li.offsetWidth) / 2
     ul.scrollTo({ left: Math.max(0, target), behavior: 'smooth' })
   }, [active])
+
+  // Une fois la liste défilée jusqu'en bas, le navigateur « verrouille » la molette
+  // sur elle : il faut relâcher et refaire un geste pour que la page reparte. On
+  // reprend donc la main dès qu'on touche un bord et on transmet le scroll à la page.
+  useEffect(() => {
+    const el = indexRef.current
+    if (!el) return
+    const onWheel = (e) => {
+      if (el.scrollHeight <= el.clientHeight) return // rail horizontal (mobile) : rien à faire
+      const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY
+      const atTop = el.scrollTop <= 0
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1
+      if ((dy > 0 && atBottom) || (dy < 0 && atTop)) {
+        e.preventDefault()
+        window.scrollBy(0, dy)
+      }
+    }
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => el.removeEventListener('wheel', onWheel)
+  }, [])
 
   // Flèches du rail mobile : on n'affiche que celles qui mènent quelque part
   // (rien à gauche si on est tout à gauche, rien à droite si on est au bout).
@@ -264,23 +294,32 @@ export default function Realisations() {
         .real-nav--prev { left: clamp(12px, 1.6vw, 20px); }
         .real-nav--next { right: clamp(12px, 1.6vw, 20px); }
 
-        .real-index-wrap { position: relative; height: 100%; min-width: 0; }
+        /* hauteur figée sur celle de la photo (et non « 100% » de la ligne de grille,
+           qui s'étirerait à la taille du contenu) → la liste défile au lieu de
+           s'allonger sous la photo. */
+        .real-index-wrap { position: relative; height: clamp(440px, 62vh, 660px); min-width: 0; }
         .rail-arrow { display: none; }
         .real-index {
           display: flex; flex-direction: column;
-          gap: 6px; margin: 0; padding: 0; list-style: none;
+          gap: 6px; margin: 0; padding: 0 8px 0 0; list-style: none;
           height: 100%;
+          /* liste défilante : les pièces gardent une hauteur lisible et on fait
+             défiler s'il y en a beaucoup, plutôt que de tout comprimer.
+             Arrivé en bas, la molette repart naturellement sur la page. */
+          overflow-y: auto;
+          scrollbar-width: thin; scrollbar-color: var(--or-40) transparent;
+          -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 40px), transparent 100%);
+          mask-image: linear-gradient(180deg, #000 calc(100% - 40px), transparent 100%);
         }
-        .real-index > li {
-          /* chaque vignette occupe une part égale de la hauteur de l'image
-             → la colonne de droite remplit toute la hauteur, plus de vide */
-          flex: 1 1 0; min-height: 0; display: flex;
-        }
+        .real-index::-webkit-scrollbar { width: 5px; }
+        .real-index::-webkit-scrollbar-thumb { background: var(--or-40); border-radius: 3px; }
+        .real-index::-webkit-scrollbar-track { background: transparent; }
+        .real-index > li { flex: 0 0 auto; display: flex; }
         .real-row {
           position: relative;
-          display: flex; align-items: center; gap: 16px;
-          width: 100%; height: 100%; text-align: left;
-          padding: 10px 14px 10px 18px;
+          display: flex; align-items: center; gap: 14px;
+          width: 100%; text-align: left;
+          padding: 10px 12px 10px 16px;
           border: none; background: transparent; cursor: pointer;
           border-radius: 12px;
           transition: background var(--dur-mid) var(--ease);
@@ -292,8 +331,7 @@ export default function Realisations() {
           width: 3px; border-radius: 3px; background: var(--c-or);
         }
         .real-thumb {
-          flex-shrink: 0; width: 92px; height: 100%;
-          max-height: 104px; min-height: 56px;
+          flex-shrink: 0; width: 92px; height: 66px;
           border-radius: 8px; overflow: hidden; background: var(--c-brun-md);
         }
         .real-thumb img {
@@ -330,6 +368,7 @@ export default function Realisations() {
         @media (max-width: 920px) {
           .real-stage-wrap { grid-template-columns: 1fr !important; }
           .real-stage { height: auto; aspect-ratio: 4 / 5; max-height: 70vh; }
+          .real-index-wrap { height: auto; }
           /* on annule la répartition verticale du desktop : ici c'est un rail horizontal */
           .real-index > li { flex: 0 0 auto; }
           .real-row { height: auto; }
@@ -337,6 +376,7 @@ export default function Realisations() {
             height: auto;
             flex-direction: row;
             overflow-x: auto;
+            overflow-y: hidden; /* sinon le rail capte le scroll vertical de la page */
             scroll-snap-type: x mandatory;
             gap: 10px;
             padding-bottom: 6px;
