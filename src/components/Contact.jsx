@@ -186,7 +186,7 @@ export default function Contact() {
           font-size: clamp(1.15rem, 1.7vw, 1.5rem); line-height: 1.3;
           color: var(--c-texte); max-width: 44ch;
         }
-        .contact-call-title strong { font-weight: 400; color: var(--c-or-dim); font-style: italic; }
+        .contact-call-title strong { font-weight: 400; color: var(--c-or-dim); font-style: normal; }
         .contact-call-actions { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; }
         @media (max-width: 620px) {
           .contact-call { flex-direction: column; align-items: flex-start; }

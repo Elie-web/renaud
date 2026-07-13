@@ -50,7 +50,8 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
   const lay = LAYOUTS[layout] || LAYOUTS.center
   const rowsJustify = (layout === 'center' || boxed) ? 'center' : 'flex-start'
 
-  const innerMaxW = split ? '620px' : boxed ? 'none' : solid ? '1100px' : '1180px'
+  // 1320px (au lieu de 1180) : le titre tient sur deux lignes larges sans se couper.
+  const innerMaxW = split ? '620px' : boxed ? 'none' : solid ? '1100px' : '1320px'
   const innerPad =
     split ? 'clamp(120px, 16vh, 180px) clamp(32px, 5vw, 72px) clamp(48px, 8vh, 90px)'
       : boxed ? '0'
@@ -86,15 +87,17 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
         className="hero-title"
         style={{
           fontFamily: 'var(--f-serif)', fontWeight: 400,
-          fontSize: 'clamp(2.4rem, 5vw, 4.8rem)', lineHeight: 1.1,
-          letterSpacing: '-0.022em', color: 'var(--c-ivoire)',
-          maxWidth: 'none', whiteSpace: 'nowrap',
+          fontSize: 'clamp(2.4rem, 5.4vw, 5.4rem)', lineHeight: 1.12,
+          letterSpacing: '0', color: 'var(--c-ivoire)',
+          // Pas de nowrap : les <br /> donnent la coupe voulue quand la ligne
+          // tient, et le titre se replie de lui-même sur les colonnes étroites
+          // (disposition « split ») au lieu de déborder.
+          maxWidth: 'none',
           paddingBottom: '0.08em', textShadow: '0 1px 2px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.4), 0 4px 30px rgba(20,15,9,0.55)',
         }}
       >
-        Votre intérieur<br />
-        sur mesure,<br />
-        <em className="i-accent--light">par un ébéniste<br />à Chamonix.</em>
+        Votre intérieur sur mesure,<br />
+        <em className="i-accent--light">par un ébéniste à Chamonix.</em>
       </motion.h1>
 
       <motion.p

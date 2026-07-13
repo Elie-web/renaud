@@ -88,7 +88,10 @@ function PillChip({ accent, icon, label, pos, rest, hover, mono }) {
         width: '26px', height: '26px', borderRadius: '50%', flexShrink: 0,
         background: mono ? accent.soft : accent.soft, color: accent.tint,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontFamily: mono ? 'var(--f-serif)' : undefined, fontStyle: mono ? 'italic' : undefined,
+        // Monogramme : en Inter demi-gras. En Relicta (Light seule, sans italique
+        // véritable) ce « R » de 0.78rem était filiforme et faux-penché.
+        fontFamily: mono ? 'var(--f-sc)' : undefined,
+        fontWeight: mono ? 600 : undefined,
         fontSize: mono ? '0.78rem' : undefined,
       }}>{mono ? 'R' : icon}</span>
       <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.72rem', fontWeight: 600, color: 'var(--c-texte)' }}>{label}</span>

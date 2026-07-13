@@ -2,9 +2,9 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
+import { CUISINE_DEFAUT } from '../lib/cuisines'
 // Le best-of, sans distinction d'âge : les plus belles pièces de l'atelier,
 // nouvelles photos et anciennes mélangées, une par famille au minimum.
-import imgCuisine from '../assets/realisations/cuisine/cuisine-ilot-chene-01.webp'
 import imgTableJeu from '../assets/realisations/meuble/table-basse-jeu-01.webp'
 import imgCommode from '../assets/realisations/meuble/commode-chene-cuir-01.webp'
 import imgBibliotheque from '../assets/realisations/agencement/bibliotheque-sur-mesure-01.webp'
@@ -18,9 +18,9 @@ const ease = [0.22, 1, 0.36, 1]
 
 // Cadre de taille fixe (object-fit: cover) → aucun décalage de mise en page
 // quand on passe d'une pièce à l'autre, quel que soit le format de la photo.
-const projects = [
-  { id: 1, cat: 'Cuisine',     title: 'Îlot central en chêne',      meta: 'Chêne massif, plan de travail blanc', img: imgCuisine },
-  { id: 2, cat: 'Table basse', title: 'Table échiquier',            meta: 'Noyer massif, plateaux coulissants',  img: imgTableJeu },
+const buildProjects = (cuisine) => [
+  { id: 1, cat: 'Cuisine',     title: cuisine.title,                meta: cuisine.meta,                                img: cuisine.img },
+  { id: 2, cat: 'Table basse', title: 'Table basse réversible',     meta: 'Noyer massif, plateau jeux de société',      img: imgTableJeu },
   { id: 3, cat: 'Meuble',      title: 'Commode à poignées cuir',    meta: 'Chêne massif & cuir',                 img: imgCommode },
   { id: 4, cat: 'Aménagement', title: 'Bibliothèque sur mesure',    meta: 'Du sol au plafond, alcôves décalées', img: imgBibliotheque },
   { id: 5, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',                 img: imgConsole },
@@ -32,10 +32,13 @@ const projects = [
 
 const pad = (n) => String(n).padStart(2, '0')
 
-export default function Realisations() {
+// `cuisine` : les versions brouillon en passent une différente pour que Renaud
+// puisse comparer les photos en situation (voir VERSIONS dans App.jsx).
+export default function Realisations({ cuisine = CUISINE_DEFAUT }) {
   const reduce = useReducedMotion()
-  // Table échiquier (index 1) affichée par défaut - c'est la plus belle pièce.
+  // Table basse réversible (index 1) affichée par défaut - c'est la plus belle pièce.
   const [active, setActive] = useState(1)
+  const projects = buildProjects(cuisine)
   const count = projects.length
   const p = projects[active]
 

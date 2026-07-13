@@ -137,7 +137,7 @@ export default function Metier() {
           letter-spacing: -0.02em; color: var(--c-texte);
           margin-bottom: var(--sp-6); max-width: 18ch;
         }
-        .metier-statement em { font-style: italic; color: var(--c-or-dim); }
+        .metier-statement em { font-style: normal; color: var(--c-or-dim); }
         .metier-lead {
           font-family: var(--f-sans); font-size: clamp(1rem, 1.2vw, 1.12rem);
           line-height: 1.7; color: var(--c-texte-2); max-width: 42ch;
@@ -149,7 +149,7 @@ export default function Metier() {
           margin-bottom: var(--sp-5);
         }
         .metier-story:last-of-type { margin-bottom: var(--sp-8); }
-        .metier-story em { font-style: italic; color: var(--c-or-dim); }
+        .metier-story em { font-style: normal; color: var(--c-or-dim); }
 
         .metier-parcours {
           display: flex; flex-direction: column; gap: var(--sp-5);
@@ -188,7 +188,8 @@ export default function Metier() {
         }
 
         .metier-sign { display: flex; align-items: center; gap: 16px; }
-        .metier-sign-name { font-family: var(--f-serif); font-style: italic; font-size: 1.6rem; color: var(--c-texte); }
+        /* Pas d'italique : Relicta n'en a pas de vraie (faux-italique sale). */
+        .metier-sign-name { font-family: var(--f-serif); font-style: normal; font-size: 1.6rem; color: var(--c-texte); }
         .metier-sign-rule { width: 34px; height: 1px; background: var(--c-or-dim); flex-shrink: 0; }
         .metier-sign-meta { font-family: var(--f-sc); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-texte-2); }
 

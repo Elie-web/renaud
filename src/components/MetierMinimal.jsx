@@ -51,7 +51,8 @@ export default function MetierMinimal() {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={viewportSettings} transition={{ duration: 0.7, delay: 0.24 }}
           style={{ marginTop: 'var(--sp-8)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}
         >
-          <span style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', fontSize: '1.6rem', color: 'var(--c-texte)' }}>Renaud</span>
+          {/* Pas d'italique : Relicta n'en a pas de vraie, le navigateur en fabriquerait une penchée et sale. */}
+          <span className="metier-sign-name" style={{ fontFamily: 'var(--f-serif)', fontSize: '1.6rem', color: 'var(--c-texte)' }}>Renaud</span>
           <span aria-hidden="true" style={{ width: '34px', height: '1px', background: 'var(--c-or-dim)' }} />
           <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.58rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--c-texte-2)' }}>Dessiné, fabriqué &amp; posé par mes soins</span>
         </motion.div>

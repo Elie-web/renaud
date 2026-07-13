@@ -26,6 +26,7 @@ import StatsBand from './components/StatsBand'
 import Marquee from './components/Marquee'
 import CtaBand from './components/CtaBand'
 import MetierMinimal from './components/MetierMinimal'
+import { CUISINES } from './lib/cuisines'
 
 // Images hero IA (gros plan « explosif » - une par version brouillon)
 import heroChiselA from './assets/hero/hero-ciseau-01.webp'
@@ -54,49 +55,57 @@ const SECTIONS = {
   ctaband: CtaBand,
 }
 
-// Versions brouillon : chacune = une des polices envoyées par Renaud, montée en
-// thème complet (via la classe .ver-N dans index.css), avec une image de hero et
-// un ORDRE de sections différents. Le nom = la police, pour la reconnaître dans
-// le sélecteur de version.
+// Versions brouillon. La police est tranchée (Relicta, voir POLICES.md) et vaut
+// pour tout le site : les versions ne s'en occupent plus. Elles ne servent qu'à
+// comparer des ORGANISATIONS : quelles sections, dans quel ordre, quelle mise en
+// page de hero, quelle photo de cuisine, quelle palette (.ver-N dans index.css).
+// Le nom décrit donc le parti pris, pas la typo.
 const VERSIONS = {
   // V1 = RÉFÉRENCE, NE PAS MODIFIER.
   1: {
     name: 'Actuelle', hero: '/hero.webp', heroLayout: 'center', solidNav: false,
+    cuisine: CUISINES.fonceLarge,
     order: ['services', 'realisations', 'metier', 'imageband', 'processus', 'engagements', 'temoignages', 'faq', 'contact'],
   },
-  // V2 - QUICKSAND (la préférée de Renaud). Structure éditoriale : manifeste + chiffres + bande CTA.
+  // V2 - ÉDITORIALE : manifeste + chiffres + bande CTA. Palette argile chaude.
   2: {
-    name: 'Quicksand', hero: heroChiselC, heroLayout: 'left', variant: 'clean', solidNav: false,
+    name: 'Éditoriale', hero: heroChiselC, heroLayout: 'left', variant: 'clean', solidNav: false,
+    cuisine: CUISINES.foncePortrait,
     order: ['services', 'manifesto', 'realisations', 'stats', 'metier', 'processus', 'faq', 'ctaband', 'contact'],
     overrides: { services: ServicesFewer },
   },
-  // V3 - LEKTON (monospace, studio/architecte), header blanc. Structure moderne : marquee + à-propos minimal.
+  // V3 - STUDIO : bandeau défilant + à-propos minimal, header blanc, boutons carrés.
   3: {
-    name: 'Lekton', hero: heroSander, heroLayout: 'left', variant: 'clean', solidNav: true,
+    name: 'Studio', hero: heroSander, heroLayout: 'left', variant: 'clean', solidNav: true,
+    cuisine: CUISINES.ilot,
     order: ['marquee', 'services', 'metier', 'realisations', 'stats', 'processus', 'ctaband', 'faq', 'contact'],
     overrides: { metier: MetierMinimal },
   },
-  // V4 - KATAS (display art-déco caps), hero SPLIT. Structure narrative : à-propos d'abord + manifeste.
+  // V4 - NARRATIVE : l'homme avant l'ouvrage (à-propos d'abord), hero SPLIT, titres en capitales.
   4: {
-    name: 'Katas', hero: heroLathe, heroLayout: 'split', variant: 'clean', solidNav: true,
+    name: 'Narrative', hero: heroLathe, heroLayout: 'split', variant: 'clean', solidNav: true,
+    cuisine: CUISINES.fonceDetail,
     order: ['metier', 'services', 'imageband', 'manifesto', 'realisations', 'processus', 'engagements', 'stats', 'faq', 'contact'],
     overrides: { services: ServicesSlider },
   },
-  // V5 - NISABA (display très fin), thème SOMBRE complet, hero ENCADRÉ. Refonte radicale.
+  // V5 - NOCTURNE : thème sombre complet, hero ENCADRÉ, réalisations d'entrée. La plus radicale.
   5: {
-    name: 'Nisaba', hero: heroChiselA, heroLayout: 'framed', variant: 'clean', solidNav: false,
+    name: 'Nocturne', hero: heroChiselA, heroLayout: 'framed', variant: 'clean', solidNav: false,
+    cuisine: CUISINES.fonceLarge,
     order: ['realisations', 'marquee', 'services', 'manifesto', 'stats', 'processus', 'engagements', 'ctaband', 'faq', 'contact'],
     overrides: { services: ServicesGallery },
   },
-  // V6 - RELICTA (sans élégant, clair & raffiné), header blanc. Structure sobre.
+  // V6 - SOBRE : structure classique resserrée, header blanc, palette claire et raffinée.
   6: {
-    name: 'Relicta', hero: heroRouter, heroLayout: 'left', variant: 'clean', solidNav: true,
+    name: 'Sobre', hero: heroRouter, heroLayout: 'left', variant: 'clean', solidNav: true,
+    cuisine: CUISINES.foncePortrait,
     order: ['services', 'realisations', 'metier', 'stats', 'processus', 'engagements', 'ctaband', 'faq', 'contact'],
     overrides: { services: ServicesFewer },
   },
-  // V7 - DANIEL SANS (manuscrit/marqueur), crème conviviale, hero centré.
+  // V7 - CHALEUREUSE : hero centré, crème conviviale, galerie de savoir-faire.
   7: {
-    name: 'Daniel Sans', hero: heroChiselB, heroLayout: 'center', variant: 'clean', solidNav: false,
+    name: 'Chaleureuse', hero: heroChiselB, heroLayout: 'center', variant: 'clean', solidNav: false,
+    cuisine: CUISINES.ilot,
     order: ['services', 'metier', 'realisations', 'imageband', 'processus', 'engagements', 'faq', 'contact'],
     overrides: { services: ServicesGallery },
   },
@@ -183,6 +192,8 @@ export default function App() {
         <Hero bg={heroBg} layout={heroLayout} variant={cfg.variant} />
         {cfg.order.map((key) => {
           const Section = (cfg.overrides && cfg.overrides[key]) || SECTIONS[key]
+          // Seule la section Réalisations sait quoi faire d'une cuisine.
+          if (key === 'realisations') return <Section key={key} cuisine={cfg.cuisine} />
           return <Section key={key} />
         })}
       </main>
