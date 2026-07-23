@@ -435,13 +435,12 @@ ul     { list-style: none; }
   .btn--full { width: 100%; justify-content: center; }
 }
 
-/* ─── Brouillon : 7 pistes de mise en page (V1 = RÉFÉRENCE intouchable) ────────
-   La police est tranchée : Renaud a choisi Relicta, elle vaut pour TOUT le site
-   et vit dans :root. Les versions ne s'occupent donc plus de typographie.
-   Elles ne servent plus qu'à comparer des ORGANISATIONS : quelles sections, dans
-   quel ordre, quelle mise en page de hero, quelle photo, quelle palette.
-   L'ordre des sections et le hero vivent dans App.jsx ; ici, les couleurs et les
-   quelques partis pris de forme (capitales, boutons carrés).
+/* ─── Palette et typographie du site ──────────────────────────────────────────
+   Le site est CENTRALISÉ sur l'ancienne V6 « Sobre » : c'est la version que
+   Renaud a retenue et qu'il commente dans ses vocaux du 23/07/2026. Les six
+   autres pistes de mise en page ont été retirées. Elles restent récupérables sur
+   la branche `sauvegarde-7-versions` et sur le tag
+   `versions-1-7-avant-consolidation`.
    Historique des polices essayées : voir POLICES.md.
 
    ⚠ Aucune graisse au-dessus de 400 ici : on ne dispose que de Relicta Light,
@@ -451,61 +450,26 @@ ul     { list-style: none; }
    (Jehoo Creative) → à régler avant mise en ligne, voir POLICES.md. */
 @font-face { font-family: 'Relicta'; src: url('/fonts/Relicta-Light.otf') format('opentype'); font-weight: 300 400; font-style: normal; font-display: swap; }
 
-/* V2 - Argile chaude, la plus solaire des palettes. */
-.ver-2 {
-  --c-fond: #F3ECDE; --c-creme: #EDE5D4; --c-blanc: #FBF8F1;
-  --c-or: #A86A30; --c-or-pale: #CF9B52; --c-or-dim: #855223;
-  --or-10: rgba(168,106,48,0.10); --or-15: rgba(168,106,48,0.15); --or-20: rgba(168,106,48,0.20); --or-25: rgba(168,106,48,0.26); --or-40: rgba(168,106,48,0.42);
-  --shadow-clay: 0 14px 44px -14px rgba(168,106,48,0.34);
-}
-
-/* V3 - Noyer neutre, plus sobre. Boutons carrés : registre « atelier / plans ». */
-.ver-3 {
-  --c-fond: #F5F2EC; --c-creme: #EBE7DE; --c-blanc: #FCFBF7;
-  --c-or: #6B4E3D; --c-or-pale: #9A7C64; --c-or-dim: #7A5A45;
-  --or-10: rgba(107,78,61,0.10); --or-15: rgba(107,78,61,0.15); --or-20: rgba(107,78,61,0.20); --or-25: rgba(107,78,61,0.26); --or-40: rgba(107,78,61,0.42);
-  --shadow-clay: 0 14px 44px -14px rgba(107,78,61,0.28);
-}
-.ver-3 .btn { border-radius: 0; }
-
-/* V4 - Titres en CAPITALES espacées : parti pris art-déco, palette de base. */
-.ver-4 .h1, .ver-4 .h2, .ver-4 .h3, .ver-4 .hero-title { text-transform: uppercase; letter-spacing: 0.05em; }
-.ver-4 .h3 { letter-spacing: 0.03em; }
-.ver-4 .btn { letter-spacing: 0.16em; }
-.ver-4 .eyebrow { letter-spacing: 0.3em; }
-
-/* V5 - Thème NOCTURNE terre cuite + capitales. La refonte la plus radicale. */
-.ver-5 {
-  --c-fond: #17120C; --c-creme: #1C160F; --c-blanc: #241D15;
-  --c-texte: #F2EBDD; --c-texte-2: #B4A794; --c-pierre: #39301F; --c-noir: #120D08;
-  --c-or: #C4744A; --c-or-pale: #DB9366; --c-or-dim: #C4744A;
-  --or-10: rgba(196,116,74,0.12); --or-15: rgba(196,116,74,0.16); --or-20: rgba(196,116,74,0.22); --or-25: rgba(196,116,74,0.28); --or-40: rgba(196,116,74,0.45);
-  --cr-35: rgba(242,235,221,0.35); --cr-50: rgba(242,235,221,0.52);
-  --shadow-sm: 0 2px 6px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.5);
-  --shadow-md: 0 6px 18px -6px rgba(0,0,0,0.4), 0 22px 55px -20px rgba(0,0,0,0.6);
-  --shadow-clay: 0 14px 44px -14px rgba(196,116,74,0.4);
-}
-.ver-5 .h1, .ver-5 .h2, .ver-5 .h3, .ver-5 .hero-title { text-transform: uppercase; letter-spacing: 0.08em; }
-.ver-5 .h3 { letter-spacing: 0.06em; }
-.ver-5 .i-accent { color: var(--c-or-pale); }
-.ver-5 .btn { border-radius: 2px; letter-spacing: 0.2em; }
-.ver-5 .eyebrow { letter-spacing: 0.32em; }
-
-/* V6 - Palette claire et raffinée, la plus proche du rendu que Renaud a validé. */
-.ver-6 {
+/* Palette claire et raffinée (ex-V6). Déclarée APRÈS le :root de base : à
+   spécificité égale, c'est la dernière règle qui l'emporte. */
+:root {
   --c-fond: #F4F1EA; --c-creme: #ECE8DF; --c-blanc: #FCFBF8;
   --c-or: #9A6A44; --c-or-pale: #C0906A; --c-or-dim: #7E5334;
   --or-10: rgba(154,106,68,0.10); --or-15: rgba(154,106,68,0.15); --or-20: rgba(154,106,68,0.20); --or-25: rgba(154,106,68,0.26); --or-40: rgba(154,106,68,0.42);
   --shadow-clay: 0 14px 44px -14px rgba(154,106,68,0.30);
 }
 
-/* V7 - Crème conviviale, la plus chaleureuse. */
-.ver-7 {
-  --c-fond: #F6EFE2; --c-creme: #EFE6D5; --c-blanc: #FDFBF6;
-  --c-or: #B0663A; --c-or-pale: #CF8A57; --c-or-dim: #8F4F29;
-  --or-10: rgba(176,102,58,0.10); --or-15: rgba(176,102,58,0.15); --or-20: rgba(176,102,58,0.20); --or-25: rgba(176,102,58,0.26); --or-40: rgba(176,102,58,0.42);
-  --shadow-clay: 0 14px 44px -14px rgba(176,102,58,0.32);
+/* Titres en CAPITALES : essai demandé par Renaud (« envoie-moi aussi une version
+   en majuscules pour voir ce que ça donne »). Activable depuis le panneau
+   « Personnaliser », donc comparable sans recharger. Même liste de sélecteurs
+   que l'épaississement plus haut, titres posés en style inline compris. */
+.caps-titles .display, .caps-titles .h1, .caps-titles .h2, .caps-titles .h3,
+.caps-titles .hero-title, .caps-titles [style*="--f-serif"] {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
+.caps-titles .h3 { letter-spacing: 0.03em; }
+.caps-titles .eyebrow { letter-spacing: 0.28em; }
 
 /* ─── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
