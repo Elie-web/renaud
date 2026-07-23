@@ -32,8 +32,8 @@ const FONTS = [
 export default function ThemeCustomizer({ value, onChange, heroes = [], layouts = [] }) {
   const [open, setOpen] = useState(false)
   const set = (patch) => onChange({ ...value, ...patch })
-  const reset = () => onChange({ accent: '', font: '', hero: '', layout: '', caps: false })
-  const touched = value.accent || value.font || value.hero || value.layout || value.caps
+  const reset = () => onChange({ accent: '', font: '', hero: '', layout: '' })
+  const touched = value.accent || value.font || value.hero || value.layout
 
   if (!open) {
     return (
@@ -84,15 +84,6 @@ export default function ThemeCustomizer({ value, onChange, heroes = [], layouts 
           <select className="tc-select" value={value.font} onChange={(e) => set({ font: e.target.value })}>
             {FONTS.map((f) => <option key={f.name} value={f.css}>{f.name}</option>)}
           </select>
-        </div>
-
-        {/* Demandé par Renaud : voir ce que donnent les titres tout en capitales. */}
-        <div className="tc-block">
-          <span className="tc-lbl">Casse des titres</span>
-          <div className="tc-chips">
-            <button type="button" className={`tc-chip${!value.caps ? ' is-active' : ''}`} onClick={() => set({ caps: false })}>Normale</button>
-            <button type="button" className={`tc-chip${value.caps ? ' is-active' : ''}`} onClick={() => set({ caps: true })}>MAJUSCULES</button>
-          </div>
         </div>
 
         <div className="tc-block">
