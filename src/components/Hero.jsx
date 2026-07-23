@@ -93,7 +93,11 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
           // tient, et le titre se replie de lui-même sur les colonnes étroites
           // (disposition « split ») au lieu de déborder.
           maxWidth: 'none',
-          paddingBottom: '0.08em', textShadow: '0 1px 2px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.4), 0 4px 30px rgba(20,15,9,0.55)',
+          // Ombre DIFFUSE uniquement. Les deux couches serrées (1px et 2px) qu'il y
+          // avait ici dessinaient un liseré sombre juste sous chaque lettre : c'est
+          // l'effet de « relief » que Renaud ne voulait plus (vocal du 23/07/2026).
+          // Une seule ombre large suffit à décoller le titre de la photo.
+          paddingBottom: '0.08em', textShadow: '0 2px 22px rgba(20,15,9,0.6), 0 4px 48px rgba(20,15,9,0.45)',
         }}
       >
         Votre intérieur sur mesure,<br />

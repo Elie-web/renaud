@@ -164,7 +164,12 @@ ul     { list-style: none; }
 
    Relicta est par ailleurs une sans large : pas de crénage négatif (celui d'avant
    était calé pour Fraunces, il collait les fûts fins). */
-:root { --title-stroke: 0.038em; }
+/* Dose abaissée de 0.038em à 0.022em : à 0.038 le contour empâtait les jonctions
+   de fûts et laissait de petites amorces visibles au gros titre du hero (le
+   « relief » signalé par Renaud, vocal du 23/07/2026). À 0.022 les titres gardent
+   l'essentiel du gain de graisse sans l'artefact. Le correctif définitif reste
+   l'achat de la licence Relicta, qui livre une vraie graisse. */
+:root { --title-stroke: 0.022em; }
 
 /* Tout ce qui rend en Relicta doit être épaissi de la MÊME dose, sinon les titres
    de sections n'ont pas la même graisse d'une section à l'autre.

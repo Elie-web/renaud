@@ -8,27 +8,27 @@ const ease = [0.22, 1, 0.36, 1]
 const steps = [
   {
     n: '01', id: 'rencontre', title: 'La rencontre',
-    tagline: "Je ne dessine rien avant d'avoir compris.",
+    tagline: "Tout part d'une conversation.",
     desc: "Une conversation chez vous ou à l'atelier. Je regarde l'espace, j'écoute ce que vous avez en tête.",
     points: ['Visite & prise de mesures', 'Échange sans engagement'],
   },
   {
     n: '02', id: 'conception', title: 'La conception',
     tagline: 'On dessine votre pièce ensemble.',
-    desc: "Croquis, plans et prise de cotes, choix des bois et des matériaux adaptés à l'usage. Rien n'est commandé avant votre accord.",
-    points: ['Plans & prise de cotes', 'Choix des bois & finitions'],
+    desc: "Croquis, plans et prise de cotes, choix des bois et des matériaux adaptés à l'usage et à vos goûts. Si vous hésitez, je vous propose des idées et des solutions.",
+    points: ['Plans & prise de cotes', 'Conseils & propositions'],
   },
   {
     n: '03', id: 'rendu', title: 'Le rendu réaliste',
     tagline: 'Vous voyez la pièce avant qu\'elle existe.',
-    desc: "Un rendu 3D fidèle, presque photo. On l'ajuste ensemble (teinte, proportions, détails) jusqu'à ce qu'il vous ressemble, avant la moindre découpe.",
-    points: ['Rendu 3D photo-réaliste', 'Modifiable jusqu\'à validation'],
+    desc: "Un rendu 3D fidèle, presque photo. On l'ajuste ensemble (teinte, proportions, détails) jusqu'à ce qu'il vous convienne.",
+    points: ['Rendu 3D photo-réaliste', 'Retouché autant de fois qu\'il faut'],
   },
   {
     n: '04', id: 'livraison', title: 'La livraison',
     tagline: 'Je livre et j\'installe moi-même.',
-    desc: "Je vérifie l'aplomb, les jours, les finitions. Et je reste joignable après la pose.",
-    points: ['Pose soignée sur place', 'Garantie 5 ans'],
+    desc: "Je vérifie l'aplomb, les jours, les finitions. Et je reste joignable après la pose : si quelque chose bouge, je reviens.",
+    points: ['Pose soignée sur place', 'Suivi après la pose'],
   },
 ]
 

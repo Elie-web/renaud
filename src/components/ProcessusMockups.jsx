@@ -158,7 +158,10 @@ function RenduMockup() {
 }
 
 /* ════════════════════════════════════════════════════════════════════════
-   04 - LA LIVRAISON : pièce finie + garantie
+   04 - LA LIVRAISON : pièce finie, posée et suivie
+   Le badge « 5 ans » a été retiré : Renaud ne veut pas promettre de garantie
+   (vocal du 23/07/2026). Les mentions restantes ailleurs sur le site sont en
+   attente de sa décision — voir Engagements, StatsBand et FAQ.
    ════════════════════════════════════════════════════════════════════════ */
 function LivraisonMockup() {
   const a = A.olive
@@ -167,12 +170,8 @@ function LivraisonMockup() {
       alt="Console sur mesure en frêne avec marqueterie, finie et livrée, Achard Créa">
       <PillChip accent={a} mono label="Posé par mes soins"
         pos={{ bottom: '-16px', left: '-18px' }} rest={{ rotate: -4 }} hover={{ x: -8, y: 6, rotate: -10 }} />
-      {/* badge garantie 5 ans */}
-      <motion.div variants={chip({ rotate: 6 }, { x: 8, y: -7, rotate: 14 })} transition={spring}
-        style={{ position: 'absolute', top: '-20px', right: '-16px', width: '60px', height: '60px', borderRadius: '16px', background: 'linear-gradient(135deg,var(--c-or-pale),var(--c-or-dim))', border: '4px solid var(--c-fond)', boxShadow: 'var(--shadow-md)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--c-ivoire)' }}>
-        <span style={{ fontFamily: 'var(--f-serif)', fontSize: '1.15rem', fontWeight: 500, lineHeight: 1 }}>5</span>
-        <span style={{ fontFamily: 'var(--f-sc)', fontSize: '0.42rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: '2px' }}>ans</span>
-      </motion.div>
+      <PillChip accent={a} icon={<Check />} label="Je reste joignable"
+        pos={{ top: '-18px', right: '-16px' }} rest={{ rotate: 5 }} hover={{ x: 8, y: -7, rotate: 12 }} />
     </Frame>
   )
 }

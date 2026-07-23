@@ -10,7 +10,7 @@ import imgFeature from '../assets/realisations/agencement/bibliotheque-sur-mesur
 const ease = [0.22, 1, 0.36, 1]
 
 const cats = [
-  { cat: 'Cuisines en bois',      line: 'Dessinées autour de votre façon de cuisiner, du plan de travail aux rangements.' },
+  { cat: 'Cuisines en bois',      line: 'Dessinées autour de votre façon de cuisiner, du plan de travail aux rangements, selon vos goûts.' },
   { cat: 'Meubles sur mesure',    line: 'Tables, consoles, chevets, bureaux… des pièces uniques, pensées pour votre espace.' },
   { cat: 'Aménagement intérieur', line: 'Bibliothèques, dressings, agencements qui exploitent chaque recoin.' },
   { cat: 'Objets',                line: 'Plateaux, tréteaux, petites pièces du quotidien, travaillés avec le même soin.' },
@@ -23,7 +23,7 @@ export default function ServicesFewer() {
         <SectionHeader
           eyebrow="Savoir-faire"
           title={<>Ce que je <Accent>fabrique.</Accent></>}
-          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun : bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste de votre pièce, facilement modifiable jusqu’à ce qu’il vous ressemble."
+          lead="Meubles, cuisines, agencements ou pièces atypiques : je conçois tout type de projet sur mesure, avec le matériau adapté à chacun, du bois massif au contreplaqué. Je modélise aussi votre pièce en 3D, et je la retouche autant de fois qu’il le faut jusqu’à ce qu’elle vous convienne."
           leadWidth="60ch"
           style={{ marginBottom: 'clamp(44px, 5.5vw, 72px)' }}
         />

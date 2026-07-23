@@ -15,7 +15,7 @@ import imgObjet from '../assets/realisations/objet/boite-noyer-03.webp'
 const ease = [0.22, 1, 0.36, 1]
 
 const cats = [
-  { cat: 'Cuisines en bois',      line: 'Des cuisines dessinées autour de votre façon de cuisiner, du plan de travail aux rangements.', img: imgCuisine },
+  { cat: 'Cuisines en bois',      line: 'Des cuisines dessinées autour de votre façon de cuisiner, du plan de travail aux rangements, selon vos goûts.', img: imgCuisine },
   { cat: 'Meubles sur mesure',    line: 'Tables, consoles, chevets, bureaux… des pièces uniques, pensées pour votre espace.',        img: imgMeuble },
   { cat: 'Aménagement intérieur', line: 'Bibliothèques, dressings, agencements qui exploitent chaque recoin, parfois jusqu’au plafond.', img: imgAmenagement },
   { cat: 'Objets',                line: 'Plateaux, tréteaux, petites pièces du quotidien, travaillés avec le même soin que les grandes.', img: imgObjet },
@@ -44,7 +44,7 @@ export default function ServicesSlider() {
         <SectionHeader
           eyebrow="Savoir-faire"
           title={<>Ce que je <Accent>fabrique.</Accent></>}
-          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun : bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste, facilement modifiable jusqu’à ce qu’il vous ressemble."
+          lead="Meubles, cuisines, agencements ou pièces atypiques : je conçois tout type de projet sur mesure, avec le matériau adapté à chacun, du bois massif au contreplaqué. Je modélise aussi votre pièce en 3D, et je la retouche autant de fois qu’il le faut jusqu’à ce qu’elle vous convienne."
           leadWidth="60ch"
           style={{ marginBottom: 'clamp(44px, 5.5vw, 72px)' }}
         />

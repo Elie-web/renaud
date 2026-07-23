@@ -16,7 +16,7 @@ const ease = [0.22, 1, 0.36, 1]
 const categories = [
   {
     cat: 'Cuisines en bois',
-    line: 'Des cuisines dessinées autour de votre façon de cuisiner, du plan de travail aux rangements.',
+    line: 'Des cuisines dessinées autour de votre façon de cuisiner, du plan de travail aux rangements, selon vos goûts.',
     img: imgCuisine,
   },
   {
@@ -103,7 +103,7 @@ export default function Services() {
         <SectionHeader
           eyebrow="Savoir-faire"
           title={<>Ce que je <Accent>fabrique.</Accent></>}
-          lead="Meubles, cuisines, agencements ou pièces atypiques : j’ai les compétences pour concevoir tout type de projet sur mesure, avec les matériaux adaptés à chacun : bois massif ou contreplaqué selon l’usage. Et avant la moindre découpe, vous validez un rendu 3D réaliste de votre pièce, facilement modifiable jusqu’à ce qu’il vous ressemble."
+          lead="Meubles, cuisines, agencements ou pièces atypiques : je conçois tout type de projet sur mesure, avec le matériau adapté à chacun, du bois massif au contreplaqué. Je modélise aussi votre pièce en 3D, et je la retouche autant de fois qu’il le faut jusqu’à ce qu’elle vous convienne."
           leadWidth="60ch"
           style={{ marginBottom: 'clamp(44px, 5.5vw, 72px)' }}
         />
