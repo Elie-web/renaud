@@ -20,9 +20,10 @@ export default function ServicesFewer() {
   return (
     <section id="savoir-faire" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
+        {/* Un seul titre « Savoir-faire » : Renaud trouvait le surtitre et
+            « Ce que je fabrique » redondants (vocal du 23/07/2026). */}
         <SectionHeader
-          eyebrow="Savoir-faire"
-          title={<>Ce que je <Accent>fabrique.</Accent></>}
+          title={<>Savoir-<Accent>faire.</Accent></>}
           lead="Meubles, cuisines, agencements ou pièces atypiques : je conçois tout type de projet sur mesure, avec le matériau adapté à chacun, du bois massif au contreplaqué. Je modélise aussi votre pièce en 3D, et je la retouche autant de fois qu’il le faut jusqu’à ce qu’elle vous convienne."
           leadWidth="60ch"
           style={{ marginBottom: 'clamp(44px, 5.5vw, 72px)' }}

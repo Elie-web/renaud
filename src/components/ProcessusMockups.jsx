@@ -159,9 +159,10 @@ function RenduMockup() {
 
 /* ════════════════════════════════════════════════════════════════════════
    04 - LA LIVRAISON : pièce finie, posée et suivie
-   Le badge « 5 ans » a été retiré : Renaud ne veut pas promettre de garantie
-   (vocal du 23/07/2026). Les mentions restantes ailleurs sur le site sont en
-   attente de sa décision — voir Engagements, StatsBand et FAQ.
+   Le badge « 5 ans » a été retiré : Renaud ne veut promettre AUCUNE garantie
+   (vocal du 23/07/2026). La mention a disparu de tout le site — Processus,
+   Engagements, StatsBand, FAQ et le JSON-LD FAQPage d'index.html. Ne pas la
+   réintroduire sans son accord explicite.
    ════════════════════════════════════════════════════════════════════════ */
 function LivraisonMockup() {
   const a = A.olive

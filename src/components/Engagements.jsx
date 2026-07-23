@@ -12,12 +12,14 @@ const Ico = ({ d, size = 20 }) => (
 )
 const IcoDevis = <Ico d={<><path d="M20.6 13.4 11 3.8H4v7l9.6 9.6a1.9 1.9 0 0 0 2.7 0l4.3-4.3a1.9 1.9 0 0 0 0-2.7Z" /><circle cx="7.8" cy="7.8" r="1.1" /></>} />
 const Ico3D = <Ico d={<><path d="M21 16V8l-9-5-9 5v8l9 5z" /><path d="M3.3 7 12 12l8.7-5" /><path d="M12 22V12" /></>} />
-const IcoGarantie = <Ico d={<><path d="M12 3 4 6v6c0 4 3.4 7 8 9 4.6-2 8-5 8-9V6z" /><path d="M9 12l2 2 4-4" /></>} />
+const IcoSuivi = <Ico d={<><path d="M12 3 4 6v6c0 4 3.4 7 8 9 4.6-2 8-5 8-9V6z" /><path d="M9 12l2 2 4-4" /></>} />
 const IcoBois = <Ico d={<><path d="M11 21c-4.4 0-7-3-7-8 0-6.6 5.5-10 13-10 0 8.5-3.4 14-13 14z" /><path d="M8 18c1.8-5.5 5-9 9.5-10.5" /></>} />
 
 const points = [
   { icon: IcoDevis,    title: 'Devis gratuit et fixe', desc: 'Le prix annoncé est le prix final.' },
-  { icon: IcoGarantie, title: 'Garantie 5 ans',        desc: 'Sur les assemblages et finitions. Je reviens si ça bouge.' },
+  // Pas de garantie annoncée : Renaud n'en veut pas (vocal du 23/07/2026).
+  // L'engagement porte sur le suivi, qu'il assume, pas sur une durée.
+  { icon: IcoSuivi, title: 'Suivi après la pose',   desc: 'Je reste joignable. Si ça bouge, je reviens.' },
   { icon: Ico3D,       title: 'Validé en 3D',          desc: 'Vous voyez la pièce avant la première découpe.' },
   { icon: IcoBois,     title: 'Matériaux adaptés',     desc: 'Bois massif ou contreplaqué, choisi selon l\'usage de chaque projet.' },
 ]

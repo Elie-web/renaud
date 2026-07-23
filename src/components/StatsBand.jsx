@@ -2,11 +2,14 @@ import { motion } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 
 /* Bande de CHIFFRES-preuve - grands nombres en serif, façon éditorial.
-   Reprend la preuve sociale (2019/CAP, satisfaction, garantie). */
+   Reprend la preuve sociale (2019/CAP, satisfaction, réactivité).
+   La garantie 5 ans qui figurait ici a été retirée : Renaud ne veut annoncer
+   aucune garantie (vocal du 23/07/2026). Le délai de réponse la remplace, il est
+   déjà promis ailleurs sur le site (hero, contact) donc n'engage rien de neuf. */
 const stats = [
   { k: '2019', v: 'Dans le bois, CAP d’ébénisterie' },
   { k: '100 %', v: 'De clients satisfaits' },
-  { k: '5 ans', v: 'De garantie sur les finitions' },
+  { k: '24 h', v: 'Pour répondre à votre demande' },
   { k: '1', v: 'Seul interlocuteur, du croquis à la pose' },
 ]
 

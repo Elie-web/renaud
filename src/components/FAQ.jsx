@@ -9,7 +9,11 @@ const faqs = [
   { q: 'Comment se passe la première rencontre ?', a: "Je vous reçois chez vous ou à l'atelier. Rien n'est signé ce jour-là : vous repartez avec mes idées et recevez une proposition détaillée sous 5 jours." },
   { q: 'Travaillez-vous uniquement le bois ?', a: "Le bois est ma matière de prédilection, et je privilégie les projets en bois. Selon l'usage, je travaille aussi bien le massif que le contreplaqué : j'adapte les matériaux à chaque projet pour un résultat solide et durable." },
   { q: "Quelles sont vos zones d'intervention ?", a: "Toute la vallée de Chamonix (Chamonix, Les Houches, Servoz, Argentière, Vallorcine) et plus largement la Haute-Savoie : Sallanches, Passy, Saint-Gervais, Megève, Combloux. Pour le mobilier transportable, je peux intervenir au-delà, parlons-en." },
-  { q: 'Proposez-vous une garantie ?', a: "Oui, cinq ans sur les assemblages et les finitions. Si une finition s'altère trop tôt, je viens la reprendre." },
+  // Renaud ne veut annoncer AUCUNE garantie (vocal du 23/07/2026) : « je ne sais
+  // pas s'il faut mettre une garantie sur des meubles ». On garde la question,
+  // qui se pose vraiment, mais la réponse ne promet qu'un suivi. ⚠ Toute
+  // modification ici doit être répercutée dans le JSON-LD FAQPage d'index.html.
+  { q: 'Que se passe-t-il après la pose ?', a: "Je reste joignable une fois la pièce installée. Si quelque chose bouge ou demande une reprise, je reviens sur place." },
 ]
 
 function Item({ faq, isOpen, onToggle, index }) {
