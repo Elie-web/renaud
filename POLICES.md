@@ -80,3 +80,19 @@ page et des couleurs** différentes.
 ⚠ **Licence :** Relicta et Daniel Sans sont en **usage personnel uniquement**.
 Elles ne peuvent pas partir sur le site livré sans achat d'une licence
 commerciale. Quicksand, Lekton, Katas et Nisaba sont OK.
+
+## Décision en attente : acheter Relicta ou lui trouver une jumelle libre
+
+Renaud (WhatsApp, 22/07/2026) : « cool si tu trouves une police qui ressemble
+gratuit, sinon je mets le prix ». Les deux voies restent ouvertes :
+
+- **Acheter la licence web** chez Jehoo Creative (~60 €, une fois). Bonus non
+  négligeable : ça livre la **vraie graisse**, et on peut alors supprimer le
+  `-webkit-text-stroke` d'`index.css`.
+- **Substituer une libre au rendu proche**, à choisir dans le tableau plus haut.
+
+Tant qu'on n'a que la Light, les titres sont épaissis optiquement par un contour
+(`--title-stroke` dans `index.css`). Ce contour est un pis-aller : c'est lui qui
+créait les petites amorces sur les lettres que Renaud a appelées du « relief »
+(vocal du 23/07/2026). La dose a été abaissée de 0.038em à 0.022em, mais **le
+vrai correctif est d'obtenir la famille complète**.
