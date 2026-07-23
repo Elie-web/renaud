@@ -507,6 +507,21 @@ ul     { list-style: none; }
   --shadow-clay: 0 14px 44px -14px rgba(176,102,58,0.32);
 }
 
+/* Titres en CAPITALES : essai demandé par Renaud (« envoie-moi aussi une version
+   en majuscules pour voir ce que ça donne », vocal du 23/07/2026). Piloté par la
+   bascule « Casse des titres » du panneau Personnaliser, donc comparable sans
+   recharger et sur n'importe laquelle des 7 versions.
+   Même liste de sélecteurs que l'épaississement plus haut, ce qui inclut les
+   titres posés en style inline par les composants. Déclaré APRÈS les blocs
+   .ver-N pour l'emporter sur les capitales déjà imposées par la V4 et la V5. */
+.caps-titles .display, .caps-titles .h1, .caps-titles .h2, .caps-titles .h3,
+.caps-titles .hero-title, .caps-titles [style*="--f-serif"] {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.caps-titles .h3 { letter-spacing: 0.03em; }
+.caps-titles .eyebrow { letter-spacing: 0.28em; }
+
 /* ─── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

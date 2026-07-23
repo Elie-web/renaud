@@ -168,7 +168,7 @@ const LAYOUT_OPTIONS = [
 export default function App() {
   const [ver, setVer] = useState(readVersion)
   // Personnalisation live, dispo sur TOUTES les versions. '' = auto (thème de la version).
-  const [custom, setCustom] = useState({ accent: '', font: '', hero: '', layout: '' })
+  const [custom, setCustom] = useState({ accent: '', font: '', hero: '', layout: '', caps: false })
 
   useEffect(() => {
     const onHash = () => setVer(readVersion())
@@ -185,7 +185,7 @@ export default function App() {
   const style = customVars(custom)
 
   return (
-    <div className={`site ver-${ver}`} style={style}>
+    <div className={`site ver-${ver}${custom.caps ? ' caps-titles' : ''}`} style={style}>
       <div className="grain" aria-hidden="true" />
       <Nav solid={cfg.solidNav} />
       <main>
