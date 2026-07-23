@@ -35,16 +35,23 @@ export default function ThemeCustomizer({ value, onChange, heroes = [], layouts 
   const reset = () => onChange({ accent: '', font: '', hero: '', layout: '', caps: false })
   const touched = value.accent || value.font || value.hero || value.layout || value.caps
 
+  // ⚠ Le <style> doit être rendu dans les DEUX états. Il vivait auparavant dans
+  // le seul retour « panneau ouvert » : la pastille fermée sortait donc sans
+  // aucune règle CSS, perdait son position:fixed et atterrissait tout en bas du
+  // document, invisible. Personne ne pouvait ouvrir le panneau.
   if (!open) {
     return (
-      <button type="button" className="tc-fab" onClick={() => setOpen(true)} aria-label="Personnaliser l'apparence">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <circle cx="13.5" cy="6.5" r="1.5" /><circle cx="17.5" cy="10.5" r="1.5" /><circle cx="8.5" cy="7.5" r="1.5" /><circle cx="6.5" cy="12.5" r="1.5" />
-          <path d="M12 2a10 10 0 1 0 0 20c1 0 1.5-.8 1.5-1.5 0-1.5-1.5-1.5-1.5-3 0-1 1-1.5 2-1.5h1.5A4.5 4.5 0 0 0 20 11 8 8 0 0 0 12 2z" />
-        </svg>
-        <span className="tc-fab-txt">Personnaliser</span>
-        {touched ? <span className="tc-dot" aria-hidden="true" /> : null}
-      </button>
+      <>
+        <button type="button" className="tc-fab" onClick={() => setOpen(true)} aria-label="Personnaliser l'apparence">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="13.5" cy="6.5" r="1.5" /><circle cx="17.5" cy="10.5" r="1.5" /><circle cx="8.5" cy="7.5" r="1.5" /><circle cx="6.5" cy="12.5" r="1.5" />
+            <path d="M12 2a10 10 0 1 0 0 20c1 0 1.5-.8 1.5-1.5 0-1.5-1.5-1.5-1.5-3 0-1 1-1.5 2-1.5h1.5A4.5 4.5 0 0 0 20 11 8 8 0 0 0 12 2z" />
+          </svg>
+          <span className="tc-fab-txt">Personnaliser</span>
+          {touched ? <span className="tc-dot" aria-hidden="true" /> : null}
+        </button>
+        <style>{CSS}</style>
+      </>
     )
   }
 
@@ -132,7 +139,12 @@ export default function ThemeCustomizer({ value, onChange, heroes = [], layouts 
         <button type="button" className="tc-reset" onClick={reset}>Réinitialiser</button>
       ) : null}
 
-      <style>{`
+      <style>{CSS}</style>
+    </div>
+  )
+}
+
+const CSS = `
         .tc-fab {
           position: fixed; z-index: 1100; left: 20px; bottom: 20px;
           display: inline-flex; align-items: center; gap: 9px;
@@ -203,7 +215,4 @@ export default function ThemeCustomizer({ value, onChange, heroes = [], layouts 
           .tc-fab { bottom: 62px; }
           .tc-fab-txt { display: none; }
         }
-      `}</style>
-    </div>
-  )
-}
+`
