@@ -2,8 +2,12 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <!-- Icônes aux bonnes tailles. L'ancien favicon unique était un PNG de
+         1394x1397 pesant 92 Ko, téléchargé à chaque visite pour être affiché
+         en 16 px. -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#161109" />
 
@@ -16,11 +20,14 @@
     <link rel="alternate" hreflang="fr" href="https://achard-crea.fr/" />
     <link rel="alternate" hreflang="x-default" href="https://achard-crea.fr/" />
 
-    <!-- Géolocalisation (référencement local Chamonix) -->
+    <!-- Géolocalisation. Le point déclaré est celui de l'ATELIER (Sallanches), pas
+         celui de la zone desservie : Chamonix et la vallée sont couvertes par
+         "areaServed" dans le JSON-LD, ce qui est la façon correcte de viser une zone
+         sans déclarer une adresse que l'entreprise n'occupe pas. -->
     <meta name="geo.region" content="FR-74" />
-    <meta name="geo.placename" content="Chamonix-Mont-Blanc" />
-    <meta name="geo.position" content="45.92375;6.86943" />
-    <meta name="ICBM" content="45.92375, 6.86943" />
+    <meta name="geo.placename" content="Sallanches" />
+    <meta name="geo.position" content="45.9366;6.6317" />
+    <meta name="ICBM" content="45.9366, 6.6317" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -43,14 +50,18 @@
 
     <!-- Préchargement de l'image du hero (LCP) : le navigateur la télécharge dès le HTML, sans attendre le bundle JS -->
     <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
+    <!-- Police auto-hébergée des titres : préchargée pour qu'elle arrive avant le
+         premier rendu du H1 (le titre du hero, qui est aussi le LCP). -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/Relicta-Light.woff2" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Titres : Relicta (auto-hébergée, @font-face dans index.css). Labeur : Inter.
-         DM Sans ne sert plus qu'aux outils de brouillon (sélecteur de versions). -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
-    <!-- Polices proposées par le sélecteur « Personnaliser » (outil de brouillon) -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Marcellus&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet" />
+         UNE SEULE famille distante, et uniquement les graisses réellement posées
+         dans le CSS. Les 7 autres familles chargées ici auparavant (DM Sans,
+         Playfair, Jost, Cormorant, Archivo, Marcellus, Bricolage) ne servaient
+         qu'au panneau « Personnaliser » : il les charge lui-même à l'ouverture,
+         elles ne bloquent donc plus le rendu des visiteurs. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
     <!--
       Données structurées (JSON-LD) en @graph :
@@ -60,6 +71,23 @@
       - FAQPage : alimente la citation par les moteurs IA (ChatGPT, Perplexity, AI Overviews).
         Note : depuis août 2023, FAQPage ne génère plus de rich results Google pour les
         sites commerciaux ; conservé ici pour le bénéfice de citation IA / GEO.
+
+      ⚠ DEUX CHAMPS RESTENT À COMPLÉTER, ce sont les plus rentables du fichier :
+
+      1. "sameAs" sur le LocalBusiness : la liste des profils qui prouvent que
+         l'entreprise existe ailleurs que sur son propre site. Sans lui, Google
+         n'a aucun moyen de relier ce site au compte Instagram de Renaud ni à sa
+         fiche Google Business. À ajouter juste après "numberOfEmployees" :
+           "sameAs": [
+             "https://www.instagram.com/<compte de Renaud>",
+             "https://www.google.com/maps/place/<fiche Google Business>"
+           ],
+
+      2. "aggregateRating" / "review" : VOLONTAIREMENT ABSENTS. Déclarer une note
+         moyenne sans avis réels et vérifiables est un faux avis : sanctionné par
+         Google (perte des rich results, voire pénalité manuelle) et interdit par
+         le code de la consommation. À n'ajouter que le jour où la fiche Google
+         Business de Renaud porte de vrais avis, et en recopiant les vrais chiffres.
     -->
     <script type="application/ld+json">
     {
@@ -72,13 +100,29 @@
           "alternateName": "Achard Créa · Ébéniste",
           "url": "https://achard-crea.fr/",
           "description": "Ébéniste à Chamonix. Mobilier, cuisines, bibliothèques et escaliers sur mesure, dessinés, fabriqués et posés à l'atelier dans la vallée de Chamonix.",
-          "image": "https://achard-crea.fr/hero.webp",
-          "logo": "https://achard-crea.fr/favicon.png",
+          "slogan": "Votre intérieur sur mesure, par un ébéniste en Haute-Savoie.",
+          "image": ["https://achard-crea.fr/hero.webp"],
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://achard-crea.fr/logo-512.png",
+            "width": 512,
+            "height": 513
+          },
           "telephone": "+33634084690",
           "email": "contact@achard-crea.fr",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Devis et renseignements",
+            "telephone": "+33634084690",
+            "email": "contact@achard-crea.fr",
+            "availableLanguage": "French",
+            "areaServed": "FR"
+          },
           "foundingDate": "2019",
           "priceRange": "€€€",
           "currenciesAccepted": "EUR",
+          "paymentAccepted": "Virement, chèque, espèces",
+          "numberOfEmployees": { "@type": "QuantitativeValue", "value": 1 },
           "areaServed": [
             { "@type": "City", "name": "Chamonix-Mont-Blanc" },
             { "@type": "City", "name": "Les Houches" },
@@ -93,17 +137,23 @@
             { "@type": "AdministrativeArea", "name": "Vallée de Chamonix" },
             { "@type": "AdministrativeArea", "name": "Haute-Savoie" }
           ],
+          "identifier": {
+            "@type": "PropertyValue",
+            "propertyID": "SIRET",
+            "value": "92020890700013"
+          },
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Chamonix-Mont-Blanc",
-            "postalCode": "74400",
+            "streetAddress": "371 route de la Vigne",
+            "addressLocality": "Sallanches",
+            "postalCode": "74700",
             "addressRegion": "Auvergne-Rhône-Alpes",
             "addressCountry": "FR"
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": 45.92375,
-            "longitude": 6.86943
+            "latitude": 45.9366,
+            "longitude": 6.6317
           },
           "openingHoursSpecification": [
             {
@@ -119,11 +169,11 @@
             "@type": "OfferCatalog",
             "name": "Créations sur mesure",
             "itemListElement": [
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobilier sur mesure" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cuisine sur mesure" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bibliothèques sur mesure" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Escaliers & garde-corps" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Portes & menuiseries" } }
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cuisine sur mesure", "serviceType": "Fabrication et pose de cuisines en bois sur mesure", "provider": { "@id": "https://achard-crea.fr/#business" }, "areaServed": { "@type": "AdministrativeArea", "name": "Haute-Savoie" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobilier sur mesure", "serviceType": "Conception et fabrication de meubles sur mesure (tables, consoles, commodes, bureaux)", "provider": { "@id": "https://achard-crea.fr/#business" }, "areaServed": { "@type": "AdministrativeArea", "name": "Haute-Savoie" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aménagement intérieur sur mesure", "serviceType": "Bibliothèques, dressings et agencements sur mesure", "provider": { "@id": "https://achard-crea.fr/#business" }, "areaServed": { "@type": "AdministrativeArea", "name": "Haute-Savoie" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Escaliers & garde-corps", "serviceType": "Fabrication d'escaliers et de garde-corps en bois", "provider": { "@id": "https://achard-crea.fr/#business" }, "areaServed": { "@type": "AdministrativeArea", "name": "Haute-Savoie" } } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Portes & menuiseries", "serviceType": "Portes et menuiseries intérieures sur mesure", "provider": { "@id": "https://achard-crea.fr/#business" }, "areaServed": { "@type": "AdministrativeArea", "name": "Haute-Savoie" } } }
             ]
           }
         },
@@ -148,6 +198,27 @@
           "name": "Achard Créa",
           "inLanguage": "fr-FR",
           "publisher": { "@id": "https://achard-crea.fr/#business" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://achard-crea.fr/#webpage",
+          "url": "https://achard-crea.fr/",
+          "name": "Ébéniste à Chamonix · Mobilier & agencement sur mesure · Achard Créa",
+          "description": "Ébéniste à Chamonix : mobilier, cuisines, bibliothèques et escaliers sur mesure, fabriqués à l'atelier dans la vallée de Chamonix et en Haute-Savoie.",
+          "isPartOf": { "@id": "https://achard-crea.fr/#website" },
+          "about": { "@id": "https://achard-crea.fr/#business" },
+          "inLanguage": "fr-FR",
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://achard-crea.fr/hero.webp",
+            "width": 1920,
+            "height": 1280,
+            "caption": "Atelier d'ébénisterie Achard Créa, mobilier en bois massif en cours de fabrication"
+          },
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".hero-title", ".hero-sub"]
+          }
         },
         {
           "@type": "FAQPage",
@@ -209,11 +280,12 @@
     -->
     <noscript>
       <main style="max-width:720px;margin:0 auto;padding:3rem 1.25rem;font-family:system-ui,-apple-system,sans-serif;color:#221a10;line-height:1.6">
-        <h1>Achard Créa · Mobilier sur mesure dans la vallée de Chamonix</h1>
+        <h1>Achard Créa · Mobilier sur mesure par un ébéniste en Haute-Savoie</h1>
         <p>
           <strong>Renaud Achard</strong>, ébéniste depuis 2019, conçoit, fabrique et pose
           du mobilier, des cuisines, des bibliothèques, des escaliers et des menuiseries
-          sur mesure à l'atelier, dans la vallée de Chamonix (Haute-Savoie).
+          sur mesure. Atelier dans la vallée de Chamonix (Haute-Savoie), interventions
+          dans tout le département et au-delà pour les pièces transportables.
         </p>
         <h2>Créations</h2>
         <ul>
