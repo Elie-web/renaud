@@ -24,7 +24,7 @@ export default function Footer() {
             <div style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.6rem, 2.4vw, 2.1rem)', color: 'var(--c-ivoire)', lineHeight: 1, marginBottom: '4px' }}>Achard Créa</div>
             <div style={{ fontFamily: 'var(--f-sc)', fontSize: '0.56rem', fontWeight: 500, letterSpacing: '0.22em', color: 'var(--c-or-pale)', textTransform: 'uppercase', marginBottom: 'var(--sp-6)' }}>Ébéniste · sur mesure</div>
             <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', lineHeight: 1.7, color: 'var(--cr-50)', maxWidth: '30ch', marginBottom: 'var(--sp-6)' }}>
-              Mobilier, cuisines et escaliers sur mesure, dessinés et fabriqués à l'atelier dans la vallée de Chamonix.
+              Mobilier, cuisines et escaliers sur mesure, dessinés et fabriqués à l'atelier de Sallanches, posés dans toute la vallée de Chamonix.
             </p>
             <a href="#contact" className="btn btn--gold" style={{ padding: '13px 28px', fontSize: '0.64rem' }}>
               <span>Demander un devis</span><span className="arrow" />
@@ -52,7 +52,7 @@ export default function Footer() {
               {[
                 { label: '06 34 08 46 90', href: 'tel:+33634084690' },
                 { label: 'contact@achard-crea.fr', href: 'mailto:contact@achard-crea.fr' },
-                { label: 'Vallée de Chamonix', href: null },
+                { label: 'Sallanches · vallée de Chamonix', href: null },
               ].map((c) => (
                 <li key={c.label}>
                   {c.href

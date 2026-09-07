@@ -51,7 +51,7 @@ function Card({ c, index }) {
         <img
           className="sf-img"
           src={c.img}
-          alt={`${c.cat}, réalisations sur mesure de Renaud Achard, ébéniste dans la vallée de Chamonix`}
+          alt={`${c.cat}, réalisations sur mesure de Renaud Achard, ébéniste à Sallanches`}
           loading="lazy" decoding="async"
         />
       </div>

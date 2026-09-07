@@ -35,7 +35,7 @@ export default function ImageBand() {
           initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8 }}
           style={{ marginBottom: 'var(--sp-5)' }}>
-          <span className="eyebrow eyebrow--light">L'atelier · Vallée de Chamonix</span>
+          <span className="eyebrow eyebrow--light">L'atelier · Sallanches</span>
         </motion.div>
 
         <motion.p

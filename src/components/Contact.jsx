@@ -24,7 +24,7 @@ const WA_HREF = "https://wa.me/33634084690?text=Bonjour%20Renaud%2C%20j'aimerais
 const infos = [
   { label: 'Téléphone', val: '06 34 08 46 90',            href: 'tel:+33634084690',            icon: IcoPhone, nowrap: true },
   { label: 'Email',     val: 'contact@achard-crea.fr',    href: 'mailto:contact@achard-crea.fr', icon: IcoMail },
-  { label: 'Atelier',   val: 'Vallée de Chamonix, sur RDV', href: null,                        icon: IcoPin },
+  { label: 'Atelier',   val: 'Sallanches, sur RDV', href: null,                        icon: IcoPin },
   { label: 'Horaires',  val: 'Lun. au ven., 8h30–17h',    href: null,                          icon: IcoClock },
 ]
 

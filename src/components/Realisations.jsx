@@ -160,7 +160,7 @@ export default function Realisations() {
                 ) : (
                   <motion.img
                     src={p.img}
-                    alt={`${p.title}, ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Chamonix)`}
+                    alt={`${p.title}, ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Sallanches)`}
                     decoding="async"
                     initial={{ scale: reduce ? 1 : 1.04 }}
                     animate={{ scale: reduce ? 1 : 1.08 }}

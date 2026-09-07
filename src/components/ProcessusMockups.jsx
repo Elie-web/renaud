@@ -107,7 +107,7 @@ function RencontreMockup() {
   const a = A.clay
   return (
     <Frame rotate={-2} accent={a} img={imgRencontre}
-      alt="Renaud Achard en rendez-vous projet avec un client à l'atelier, ébéniste, vallée de Chamonix">
+      alt="Renaud Achard en rendez-vous projet avec un client à l'atelier, ébéniste à Sallanches">
       <PillChip accent={a} icon={<Ear />} label="On en parle"
         pos={{ bottom: '-18px', left: '-22px' }} rest={{ rotate: -3 }} hover={{ x: -10, y: 5, rotate: -6 }} />
       {/* pastille « sans frais » */}
