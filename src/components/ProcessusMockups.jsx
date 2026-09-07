@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
-import imgRencontre from '../assets/atelier/rencontre-client-atelier.webp'
-import imgConception from '../assets/atelier/assemblage-structure-console.webp'
-import imgRendu from '../assets/realisations/meuble/table-basse-jeu-rendu-01.webp'
-import imgLivraison from '../assets/realisations/cuisine/cuisine-ilot-chene-01.webp'
+// Variantes `-mockup` : ces visuels sont affichés dans un cadre de 360 px max.
+import imgRencontre from '../assets/atelier/rencontre-client-atelier-mockup.webp'
+import imgConception from '../assets/atelier/assemblage-structure-console-mockup.webp'
+import imgRendu from '../assets/realisations/meuble/table-basse-jeu-rendu-01-mockup.webp'
+import imgLivraison from '../assets/realisations/cuisine/cuisine-ilot-chene-01-mockup.webp'
 
 /* TODO Renaud - visuels idéaux à fournir :
    · Conception : un croquis / plan ou une capture du logiciel de modélisation.

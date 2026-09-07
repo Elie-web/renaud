@@ -2,43 +2,36 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
-import { CUISINE_DEFAUT } from '../lib/cuisines'
-// Le best-of, sans distinction d'âge : les plus belles pièces de l'atelier,
-// nouvelles photos et anciennes mélangées, une par famille au minimum.
-import imgTableJeu from '../assets/realisations/meuble/table-basse-jeu-01.webp'
-import imgCommode from '../assets/realisations/meuble/commode-chene-cuir-01.webp'
-import imgBibliotheque from '../assets/realisations/agencement/bibliotheque-sur-mesure-01.webp'
-import imgConsole from '../assets/realisations/meuble/console-marqueterie-01.webp'
-import imgTasseaux from '../assets/realisations/agencement/meuble-tasseaux-retroeclaire-02.webp'
-import imgChevet from '../assets/realisations/meuble/chevet-vague-rendu-04.webp'
-import imgAppoint from '../assets/realisations/meuble/table-appoint-marqueterie-01.webp'
-import imgBoite from '../assets/realisations/objet/boite-noyer-02.webp'
+// Liste de secours, écrite en dur : embarquée dans le bundle, donc affichée dès
+// le premier rendu sans aller-retour réseau. Voir src/lib/realisations.js.
+import { REALISATIONS, PIECE_OUVERTE } from '../lib/realisations'
+// Si un CMS est configuré, il remplace la liste ci-dessus une fois chargé.
+import { chargerPieces } from '../lib/galerie'
 
 const ease = [0.22, 1, 0.36, 1]
 
-// Cadre de taille fixe (object-fit: cover) → aucun décalage de mise en page
-// quand on passe d'une pièce à l'autre, quel que soit le format de la photo.
-const buildProjects = (cuisine) => [
-  { id: 1, cat: 'Cuisine',     title: cuisine.title,                meta: cuisine.meta,                                img: cuisine.img },
-  { id: 2, cat: 'Table basse', title: 'Table basse réversible',     meta: 'Noyer massif, plateau jeux de société',      img: imgTableJeu },
-  { id: 3, cat: 'Meuble',      title: 'Commode à poignées cuir',    meta: 'Chêne massif & cuir',                 img: imgCommode },
-  { id: 4, cat: 'Aménagement', title: 'Bibliothèque sur mesure',    meta: 'Du sol au plafond, alcôves décalées', img: imgBibliotheque },
-  { id: 5, cat: 'Console',     title: 'Console marquetée',          meta: 'Frêne & marqueterie',                 img: imgConsole },
-  { id: 6, cat: 'Aménagement', title: 'Meuble à tasseaux',          meta: 'Tasseaux rétroéclairés, chêne',       img: imgTasseaux },
-  { id: 7, cat: 'Mobilier',    title: 'Chevet « vague & soleil »',  meta: 'Frêne & laque',                       img: imgChevet },
-  { id: 8, cat: 'Table',       title: "Table d'appoint marquetée",  meta: 'Marqueterie sur frêne',               img: imgAppoint },
-  { id: 9, cat: 'Objet',       title: 'Boîte à couvercle',          meta: 'Noyer & chêne cérusé',                img: imgBoite },
-]
-
 const pad = (n) => String(n).padStart(2, '0')
 
-// `cuisine` : les versions brouillon en passent une différente pour que Renaud
-// puisse comparer les photos en situation (voir VERSIONS dans App.jsx).
-export default function Realisations({ cuisine = CUISINE_DEFAUT }) {
+export default function Realisations() {
   const reduce = useReducedMotion()
-  // Table basse réversible (index 1) affichée par défaut - c'est la plus belle pièce.
-  const [active, setActive] = useState(1)
-  const projects = buildProjects(cuisine)
+  const [active, setActive] = useState(PIECE_OUVERTE)
+
+  // On part TOUJOURS de la liste locale, puis on bascule sur celle du CMS si
+  // elle arrive. Jamais l'inverse : sinon la section serait vide le temps de la
+  // requête, et resterait vide si le CMS ne répond pas.
+  const [projects, setProjects] = useState(REALISATIONS)
+  useEffect(() => {
+    const ctrl = new AbortController()
+    chargerPieces({ signal: ctrl.signal }).then((pieces) => {
+      if (!pieces) return
+      setProjects(pieces)
+      // La pièce ouverte par défaut peut ne plus exister si Renaud a raccourci
+      // sa liste : on se recale sur la première plutôt que d'afficher du vide.
+      setActive((i) => (i < pieces.length ? i : 0))
+    })
+    return () => ctrl.abort()
+  }, [])
+
   const count = projects.length
   const p = projects[active]
 
@@ -141,23 +134,40 @@ export default function Realisations({ cuisine = CUISINE_DEFAUT }) {
           >
             <AnimatePresence>
               <motion.div
-                key={p.id}
+                key={active}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ opacity: { duration: 0.7, ease } }}
                 style={{ position: 'absolute', inset: 0 }}
               >
-                {/* La pièce en plein cadre */}
-                <motion.img
-                  src={p.img}
-                  alt={`${p.title}, ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Chamonix)`}
-                  decoding="async"
-                  initial={{ scale: reduce ? 1 : 1.04 }}
-                  animate={{ scale: reduce ? 1 : 1.08 }}
-                  transition={{ scale: { duration: 7.5, ease: 'linear' } }}
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
-                />
+                {/* La pièce en plein cadre. Si elle porte une vidéo, c'est la
+                    vidéo qui joue ; la photo sert alors d'image d'attente
+                    (`poster`), ce qui évite un rectangle vide au chargement.
+                    Pas de zoom lent sur une vidéo : elle a déjà son mouvement. */}
+                {p.video ? (
+                  <video
+                    src={p.video}
+                    poster={p.img}
+                    autoPlay={!reduce}
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    aria-label={`${p.title}, ${p.meta}. Vidéo de la pièce en situation.`}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+                  />
+                ) : (
+                  <motion.img
+                    src={p.img}
+                    alt={`${p.title}, ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Chamonix)`}
+                    decoding="async"
+                    initial={{ scale: reduce ? 1 : 1.04 }}
+                    animate={{ scale: reduce ? 1 : 1.08 }}
+                    transition={{ scale: { duration: 7.5, ease: 'linear' } }}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+                  />
+                )}
               </motion.div>
             </AnimatePresence>
 
@@ -171,7 +181,7 @@ export default function Realisations({ cuisine = CUISINE_DEFAUT }) {
             <div aria-hidden="true" style={{ position: 'absolute', top: 'clamp(14px, 2vw, 26px)', right: 'clamp(16px, 2.4vw, 30px)', zIndex: 2, display: 'flex', alignItems: 'baseline', gap: '4px' }}>
               <AnimatePresence mode="wait">
                 <motion.span
-                  key={p.id}
+                  key={active}
                   initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.4, ease }}
                   style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(2.4rem, 5vw, 4rem)', lineHeight: 1, color: 'var(--c-ivoire)', textShadow: '0 2px 20px rgba(20,15,9,0.85), 0 1px 3px rgba(20,15,9,0.9)' }}
@@ -186,7 +196,7 @@ export default function Realisations({ cuisine = CUISINE_DEFAUT }) {
             <div className="real-caption" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 2, padding: 'clamp(20px, 3vw, 40px)' }}>
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={p.id}
+                  key={active}
                   initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.45, ease }}
                 >
@@ -212,7 +222,7 @@ export default function Realisations({ cuisine = CUISINE_DEFAUT }) {
             {projects.map((proj, i) => {
               const isActive = i === active
               return (
-                <li key={proj.id} style={{ margin: 0 }}>
+                <li key={proj.title} style={{ margin: 0 }}>
                   <button
                     type="button"
                     role="tab"
@@ -231,7 +241,7 @@ export default function Realisations({ cuisine = CUISINE_DEFAUT }) {
                       />
                     )}
                     <span className="real-thumb">
-                      <img src={proj.img} alt="" loading="lazy" decoding="async" />
+                      <img src={proj.thumb} alt="" width="220" height="165" loading="lazy" decoding="async" />
                     </span>
                     <span className="real-row-text">
                       <span className="real-row-top">
@@ -400,9 +410,10 @@ export default function Realisations({ cuisine = CUISINE_DEFAUT }) {
           .real-row-text { width: 100%; }
           .real-title { font-size: 0.92rem; white-space: normal; }
 
-          /* Flèches sans contour : on devine juste qu'on peut slider */
+          /* Flèches sans contour : on devine juste qu'on peut slider.
+             La taille reste à 44px (cible tactile minimale) même sans fond. */
           .real-nav {
-            width: 40px; height: 40px;
+            width: 44px; height: 44px;
             background: transparent; border: none; backdrop-filter: none;
           }
           .real-nav:hover { background: transparent; border-color: transparent; }
@@ -419,7 +430,8 @@ export default function Realisations({ cuisine = CUISINE_DEFAUT }) {
           .rail-arrow {
             display: flex; align-items: center; justify-content: center;
             position: absolute; top: 55px; transform: translateY(-50%);
-            z-index: 4; width: 38px; height: 38px; border-radius: 50%;
+            /* 44px : cible tactile minimale recommandée (WCAG 2.5.8). */
+            z-index: 4; width: 44px; height: 44px; border-radius: 50%;
             border: 1px solid var(--or-20);
             background: rgba(247,242,232,0.92); backdrop-filter: blur(4px);
             color: var(--c-texte); cursor: pointer;

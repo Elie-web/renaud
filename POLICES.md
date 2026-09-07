@@ -3,24 +3,51 @@
 Mémo de correspondance, à garder. Si Renaud revient un jour en disant
 « finalement je préfère la 4 », c'est ici qu'on retrouve de quoi il parle.
 
-## ⚠ Le choix actuel : Relicta (l'ancienne V6 du sélecteur de versions)
+## ⚠ Le choix actuel : Relicta — licence commerciale À ACHETER
 
-Renaud a dit « j'ai choisi la 6 » en parlant de la **V6 du sélecteur de
-versions**, pas du n°6 de la page ci-dessous. Vérifié sur capture : c'est bien la
-sans élégante contrastée, Relicta. Elle est aujourd'hui appliquée à tout le site
-(`--f-serif` / `--f-sc` dans `src/index.css`), avec Inter en texte courant.
+Les titres du site sont en **Relicta**, auto-hébergée
+(`public/fonts/Relicta-Light.woff2`, 33 Ko), avec Inter en texte courant.
 
 **Relicta est sous licence usage personnel** : © 2025 Jehoo Creative, dessinée
 par Anwar Patihan (behance.net/jehoocreative). Le fichier vient de DaFont et ne
-peut pas partir sur un site client facturé en l'état. Avant mise en ligne, il
-faut soit **acheter la licence commerciale** auprès de Jehoo Creative, soit lui
-substituer une police libre au rendu proche. Tant qu'on est en brouillon, ça ne
-pose pas de problème.
+peut pas partir sur un site client facturé en l'état.
+
+**Décision d'Elie (13/08/2026) : on garde Relicta et on fait acheter la licence
+commerciale à Renaud** (~60 €). C'est le dernier point à régler côté droits avant
+la mise en ligne.
 
 Seules deux graisses ont été livrées : Light (300-400) et UltraboldItalic. Le
-site n'utilise que la Light — d'où l'absence de tout `font-weight` au-dessus de
-400 dans le CSS, et les accents de titre marqués par la couleur plutôt que par
-l'italique.
+site n'utilise que la Light, d'où l'absence de tout `font-weight` au-dessus de
+400 dans le CSS, l'épaississement optique par `--title-stroke: 0.022em`, et les
+accents de titre marqués par la couleur plutôt que par l'italique.
+Acheter la licence livre la famille complète et permet de supprimer ce contour.
+
+### Substitution libre : essayée, écartée
+
+Le 13/08/2026, Relicta a été remplacée par **Josefin Sans** (SIL OFL, libre en
+usage commercial) pour supprimer le problème de licence. **Elie a rejeté le rendu
+et fait marche arrière le jour même.**
+
+⚠ **Ne pas retenter une substitution sans validation visuelle d'Elie.** Le sujet
+est tranché : c'est Relicta, on paie.
+
+Pour mémoire, si la question revenait, voici ce que la recherche avait donné.
+22 polices libres comparées, en deux temps :
+
+1. Comparaison des métriques (x-height / hauteur de capitale, rondeur du « o »,
+   largeurs de o/H/O). Ça faisait remonter des géométriques monolinéaires du type
+   Outfit, Lexend, Urbanist.
+2. **Rendu visuel des échantillons**, qui invalidait le premier tri : Relicta a
+   des pleins et déliés et des fûts légèrement évasés, qu'aucune monolinéaire ne
+   reproduit. La bonne famille est celle des géométriques d'affichage à x-height
+   basse, façon Art déco.
+
+Finalistes : **Josefin Sans** (testée, rejetée), **Poiret One** (plus proche du
+caractère décoratif mais une seule graisse, tracé plus fin, registre « boutique
+de mode » plutôt qu'artisan), **Gruppo** (plus plate, un peu techno).
+
+Les fichiers de l'essai sont conservés dans
+`_brouillon/polices-inutilisees/JosefinSans-var.woff2`.
 
 ## Page envoyée au client : `/polices.html` (20 propositions)
 
@@ -81,15 +108,17 @@ page et des couleurs** différentes.
 Elles ne peuvent pas partir sur le site livré sans achat d'une licence
 commerciale. Quicksand, Lekton, Katas et Nisaba sont OK.
 
-## Décision en attente : acheter Relicta ou lui trouver une jumelle libre
+## Décision PRISE : on achète la licence Relicta
 
 Renaud (WhatsApp, 22/07/2026) : « cool si tu trouves une police qui ressemble
-gratuit, sinon je mets le prix ». Les deux voies restent ouvertes :
+gratuit, sinon je mets le prix ». La voie « gratuite » a été essayée le 13/08/2026
+(Josefin Sans) et **rejetée par Elie le jour même**. La décision est donc close :
 
-- **Acheter la licence web** chez Jehoo Creative (~60 €, une fois). Bonus non
-  négligeable : ça livre la **vraie graisse**, et on peut alors supprimer le
-  `-webkit-text-stroke` d'`index.css`.
-- **Substituer une libre au rendu proche**, à choisir dans le tableau plus haut.
+**→ Acheter la licence web chez Jehoo Creative (~60 €, une fois), à faire payer
+par Renaud.** Bonus non négligeable : ça livre la **vraie graisse**, et on peut
+alors supprimer le `-webkit-text-stroke` d'`index.css`.
+
+⚠ Ne pas rouvrir le sujet d'une substitution libre sans qu'Elie le demande.
 
 Tant qu'on n'a que la Light, les titres sont épaissis optiquement par un contour
 (`--title-stroke` dans `index.css`). Ce contour est un pis-aller : c'est lui qui

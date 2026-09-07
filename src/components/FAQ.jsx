@@ -21,11 +21,18 @@ function Item({ faq, isOpen, onToggle, index }) {
   const panelId = `faq-panel-${index}`
   return (
     <motion.div variants={staggerItem} style={{ borderTop: '1px solid var(--c-pierre)' }}>
-      <button id={btnId} onClick={onToggle} aria-expanded={isOpen} aria-controls={panelId}
-        style={{ width: '100%', textAlign: 'left', padding: 'var(--sp-5) 0', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 'var(--sp-4)', background: 'none', cursor: 'pointer' }}>
-        <span style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.3rem, 1.9vw, 1.65rem)', fontWeight: 400, color: 'var(--c-texte)', lineHeight: 1.3, flex: 1 }}>{faq.q}</span>
-        <motion.span aria-hidden="true" animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.3 }} style={{ color: 'var(--c-or-dim)', fontSize: '1.7rem', lineHeight: 1, flexShrink: 0, marginTop: '2px' }}>+</motion.span>
-      </button>
+      {/* La question est un vrai <h3> qui enveloppe le bouton : c'est le motif
+          d'accordéon recommandé (ARIA Authoring Practices). Elle était posée en
+          <span>, donc invisible pour le plan du document. Six questions que ni
+          un lecteur d'écran en navigation par titres, ni un moteur analysant la
+          structure de la page ne voyaient comme des questions. */}
+      <h3 style={{ margin: 0 }}>
+        <button id={btnId} onClick={onToggle} aria-expanded={isOpen} aria-controls={panelId}
+          style={{ width: '100%', textAlign: 'left', padding: 'var(--sp-5) 0', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 'var(--sp-4)', background: 'none', cursor: 'pointer', font: 'inherit', color: 'inherit' }}>
+          <span style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.3rem, 1.9vw, 1.65rem)', fontWeight: 400, color: 'var(--c-texte)', lineHeight: 1.3, flex: 1 }}>{faq.q}</span>
+          <motion.span aria-hidden="true" animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.3 }} style={{ color: 'var(--c-or-dim)', fontSize: '1.7rem', lineHeight: 1, flexShrink: 0, marginTop: '2px' }}>+</motion.span>
+        </button>
+      </h3>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div id={panelId} role="region" aria-labelledby={btnId}

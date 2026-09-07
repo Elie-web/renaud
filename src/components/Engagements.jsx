@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
-import atelierImg from '../assets/atelier/gabarit-metal-angle.webp'
+// Variante `-med` : l'image ne dépasse pas ~380 px de large.
+import atelierImg from '../assets/atelier/gabarit-metal-angle-med.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 

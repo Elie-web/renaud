@@ -11,9 +11,16 @@
   --c-brun-md: #3A2D20;   /* brun moyen - fond image placeholder */
 
   /* Accent - argile / terracotta sourde (remplace l'or) */
-  --c-or:      #A85D3C;   /* argile - accent principal, boutons, marques */
+  --c-or:      #A85D3C;   /* argile - accent principal, filets, marques */
   --c-or-pale: #C2744E;   /* argile claire - hover */
   --c-or-dim:  #8A4A2C;   /* terre cuite foncée - eyebrows sur fond clair */
+
+  /* Argile des BOUTONS PLEINS, à peine plus sombre que --c-or.
+     En texte ivoire sur --c-or on tombait à 4,12:1, sous le minimum WCAG AA de
+     4,5:1 exigé pour du petit texte : les libellés de boutons font 0.64 à 0.7rem.
+     Ce ton donne 4,74:1. L'écart est invisible à l'œil, l'accent de marque
+     (--c-or) reste inchangé partout ailleurs. */
+  --c-or-cta:  #9C5436;
 
   /* Or des étoiles d'avis - doré chaud, contraste ≥ 3:1 sur blanc (WCAG 1.4.11) */
   --c-etoile:  #C58415;
@@ -47,14 +54,24 @@
   --or-25: rgba(168,93,60,0.26);
   --or-40: rgba(168,93,60,0.42);
 
-  /* Ivoire en surimpression (sur fond sombre) */
-  --cr-35: rgba(242,235,221,0.35);
-  --cr-50: rgba(242,235,221,0.52);
-  --cr-65: rgba(242,235,221,0.68);
+  /* Ivoire en surimpression (sur fond sombre).
+     --cr-35 valait 0.35 : sur l'encre du pied de page, ça donnait 2,91:1, très
+     en dessous des 4,5:1 requis. Or ce ton porte les libellés de colonnes, le
+     copyright ET les liens « Mentions légales » et « Confidentialité » : des
+     liens obligatoires qu'il faut pouvoir lire. Remonté à 0.58 → 5,26:1.
+     Le nom du jeton est conservé pour ne pas casser les usages non textuels
+     (bordures de .btn--outline-light, .btn-circle--light). */
+  --cr-35: rgba(242,235,221,0.58);
+  --cr-50: rgba(242,235,221,0.62);
+  --cr-65: rgba(242,235,221,0.78);
 
-  /* Fonts - Relicta (titres) + Inter (tout le reste) : le choix de Renaud, ex-V6.
-     ⚠ Relicta est sous licence usage personnel (Jehoo Creative). À régler avant
-     la mise en ligne : voir POLICES.md.
+  /* Fonts - Relicta (titres) + Inter (tout le reste) : le choix de Renaud.
+
+     ⚠ Relicta est sous licence USAGE PERSONNEL (Jehoo Creative). Elle a été
+     remplacée un temps par Josefin Sans (libre), mais le rendu ne convenait pas :
+     Elie a rétabli Relicta le 13/08/2026, avec pour plan de faire acheter la
+     licence commerciale à Renaud. Voir POLICES.md. Ne pas retenter la
+     substitution sans validation visuelle d'Elie.
 
      --f-sc (surtitres, boutons, labels, numéros) est en INTER, pas en Relicta :
      on ne dispose que de la Light, or ces éléments font 0.42 à 0.72rem et
@@ -154,29 +171,23 @@ ul     { list-style: none; }
 }
 
 /* ÉPAISSISSEMENT DES TITRES — lire avant de toucher.
-   Relicta n'est livrée qu'en Light : il n'existe AUCUNE graisse droite plus
-   épaisse à charger, et un font-weight: 700 ne produirait qu'un faux-gras
-   synthétique, baveux et irrégulier. On épaissit donc les fûts optiquement, par
-   un contour de la même couleur que le texte (currentColor) : le tracé reste net
-   et la lettre garde son dessin. --title-stroke règle la dose d'un seul endroit.
-   ⚠ Le vrai correctif est d'obtenir la famille complète chez Jehoo Creative, qui
-   vient avec la licence commerciale à acheter de toute façon (voir POLICES.md).
+   Relicta n'existe qu'en Light : il n'y a AUCUNE graisse plus épaisse à charger,
+   et un font-weight: 700 ne donnerait qu'un faux-gras synthétique. On épaissit
+   donc les fûts optiquement, par un contour de la couleur du texte.
 
-   Relicta est par ailleurs une sans large : pas de crénage négatif (celui d'avant
-   était calé pour Fraunces, il collait les fûts fins). */
-/* Dose abaissée de 0.038em à 0.022em : à 0.038 le contour empâtait les jonctions
-   de fûts et laissait de petites amorces visibles au gros titre du hero (le
-   « relief » signalé par Renaud, vocal du 23/07/2026). À 0.022 les titres gardent
-   l'essentiel du gain de graisse sans l'artefact. Le correctif définitif reste
-   l'achat de la licence Relicta, qui livre une vraie graisse. */
+   Dose à 0.022em et pas plus : à 0.038em le contour empâtait les jonctions de
+   fûts et laissait de petites amorces au gros titre du hero, ce que Renaud
+   appelait du « relief » (vocal du 23/07/2026).
+   Le correctif définitif est d'acheter la licence Relicta, qui livre la famille
+   complète avec de vraies graisses. */
 :root { --title-stroke: 0.022em; }
 
-/* Tout ce qui rend en Relicta doit être épaissi de la MÊME dose, sinon les titres
+/* Tout ce qui rend dans la police d'affichage était épaissi de la MÊME dose, sinon les titres
    de sections n'ont pas la même graisse d'une section à l'autre.
    Les classes ci-dessous couvrent les titres définis en CSS ; le sélecteur
    [style*="--f-serif"] attrape ceux que les composants posent en style inline
    (Hero, Nav, Processus, Realisations, Footer, FAQ...). Il se maintient seul :
-   tout nouveau titre inline en Relicta sera épaissi sans rien avoir à ajouter. */
+   tout nouveau titre inline suivra la règle sans rien avoir à ajouter. */
 .display, .h1, .h2, .h3, .hero-title,
 .metier-statement, .metier-story, .metier-sign-name, .metier-diploma-k,
 .contact-call-title, .eng-title, .sf-title, .real-title, .mq-item,
@@ -232,8 +243,7 @@ ul     { list-style: none; }
   }
 }
 
-/* Accent de titre / de phrase - piloté par CLASSE (jamais en style inline) pour
-   pouvoir être re-thémé par version.
+/* Accent de titre / de phrase - piloté par CLASSE (jamais en style inline).
    Relicta n'a pas d'italique de labeur (son seul style oblique est une Ultrabold
    d'affichage) : un italique ici donnerait un faux-italique penché et sale. On
    marque donc l'accent par un simple contraste de couleur, en droit. */
@@ -284,7 +294,7 @@ ul     { list-style: none; }
 
 /* Argile plein - CTA primaire */
 .btn--gold {
-  background: var(--c-or);
+  background: var(--c-or-cta);
   color: var(--c-ivoire);
 }
 .btn--gold:hover {
@@ -301,9 +311,9 @@ ul     { list-style: none; }
   border: 1px solid var(--or-40);
 }
 .btn--outline:hover {
-  background: var(--c-or);
+  background: var(--c-or-cta);
   color: var(--c-ivoire);
-  border-color: var(--c-or);
+  border-color: var(--c-or-cta);
   transform: translateY(-2px);
 }
 
@@ -435,85 +445,36 @@ ul     { list-style: none; }
   .btn--full { width: 100%; justify-content: center; }
 }
 
-/* ─── Brouillon : 7 pistes de mise en page (V1 = RÉFÉRENCE intouchable) ────────
-   La police est tranchée : Renaud a choisi Relicta, elle vaut pour TOUT le site
-   et vit dans :root. Les versions ne s'occupent donc plus de typographie.
-   Elles ne servent plus qu'à comparer des ORGANISATIONS : quelles sections, dans
-   quel ordre, quelle mise en page de hero, quelle photo, quelle palette.
-   L'ordre des sections et le hero vivent dans App.jsx ; ici, les couleurs et les
-   quelques partis pris de forme (capitales, boutons carrés).
+/* ─── Typographie du site ─────────────────────────────────────────────────────
+   Renaud a retenu la V1 « Actuelle » (vocal du 13/08/2026) : les 6 autres mises
+   en page brouillon et leurs palettes `.ver-N` ont été retirées. Sauvegarde hors
+   dépôt dans `_brouillon/`, et tout est dans l'historique git.
    Historique des polices essayées : voir POLICES.md.
 
-   ⚠ Aucune graisse au-dessus de 400 ici : on ne dispose que de Relicta Light,
-   donc un font-weight: 600/700 donnerait un faux-gras synthétique. */
+   ⚠ Aucune graisse au-dessus de 400 : on ne dispose que de Relicta Light, donc
+   un font-weight: 600/700 donnerait un faux-gras synthétique. */
+/* Relicta : auto-hébergée (absente de Google Fonts).
+   ⚠ LICENCE USAGE PERSONNEL (Jehoo Creative) → à régler avant la mise en ligne.
+   Plan retenu : faire acheter la licence commerciale à Renaud. Voir POLICES.md.
 
-/* Relicta : auto-hébergée (absente de Google Fonts). Licence usage personnel
-   (Jehoo Creative) → à régler avant mise en ligne, voir POLICES.md. */
-@font-face { font-family: 'Relicta'; src: url('/fonts/Relicta-Light.otf') format('opentype'); font-weight: 300 400; font-style: normal; font-display: swap; }
-
-/* V2 - Argile chaude, la plus solaire des palettes. */
-.ver-2 {
-  --c-fond: #F3ECDE; --c-creme: #EDE5D4; --c-blanc: #FBF8F1;
-  --c-or: #A86A30; --c-or-pale: #CF9B52; --c-or-dim: #855223;
-  --or-10: rgba(168,106,48,0.10); --or-15: rgba(168,106,48,0.15); --or-20: rgba(168,106,48,0.20); --or-25: rgba(168,106,48,0.26); --or-40: rgba(168,106,48,0.42);
-  --shadow-clay: 0 14px 44px -14px rgba(168,106,48,0.34);
-}
-
-/* V3 - Noyer neutre, plus sobre. Boutons carrés : registre « atelier / plans ». */
-.ver-3 {
-  --c-fond: #F5F2EC; --c-creme: #EBE7DE; --c-blanc: #FCFBF7;
-  --c-or: #6B4E3D; --c-or-pale: #9A7C64; --c-or-dim: #7A5A45;
-  --or-10: rgba(107,78,61,0.10); --or-15: rgba(107,78,61,0.15); --or-20: rgba(107,78,61,0.20); --or-25: rgba(107,78,61,0.26); --or-40: rgba(107,78,61,0.42);
-  --shadow-clay: 0 14px 44px -14px rgba(107,78,61,0.28);
-}
-.ver-3 .btn { border-radius: 0; }
-
-/* V4 - Titres en CAPITALES espacées : parti pris art-déco, palette de base. */
-.ver-4 .h1, .ver-4 .h2, .ver-4 .h3, .ver-4 .hero-title { text-transform: uppercase; letter-spacing: 0.05em; }
-.ver-4 .h3 { letter-spacing: 0.03em; }
-.ver-4 .btn { letter-spacing: 0.16em; }
-.ver-4 .eyebrow { letter-spacing: 0.3em; }
-
-/* V5 - Thème NOCTURNE terre cuite + capitales. La refonte la plus radicale. */
-.ver-5 {
-  --c-fond: #17120C; --c-creme: #1C160F; --c-blanc: #241D15;
-  --c-texte: #F2EBDD; --c-texte-2: #B4A794; --c-pierre: #39301F; --c-noir: #120D08;
-  --c-or: #C4744A; --c-or-pale: #DB9366; --c-or-dim: #C4744A;
-  --or-10: rgba(196,116,74,0.12); --or-15: rgba(196,116,74,0.16); --or-20: rgba(196,116,74,0.22); --or-25: rgba(196,116,74,0.28); --or-40: rgba(196,116,74,0.45);
-  --cr-35: rgba(242,235,221,0.35); --cr-50: rgba(242,235,221,0.52);
-  --shadow-sm: 0 2px 6px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.5);
-  --shadow-md: 0 6px 18px -6px rgba(0,0,0,0.4), 0 22px 55px -20px rgba(0,0,0,0.6);
-  --shadow-clay: 0 14px 44px -14px rgba(196,116,74,0.4);
-}
-.ver-5 .h1, .ver-5 .h2, .ver-5 .h3, .ver-5 .hero-title { text-transform: uppercase; letter-spacing: 0.08em; }
-.ver-5 .h3 { letter-spacing: 0.06em; }
-.ver-5 .i-accent { color: var(--c-or-pale); }
-.ver-5 .btn { border-radius: 2px; letter-spacing: 0.2em; }
-.ver-5 .eyebrow { letter-spacing: 0.32em; }
-
-/* V6 - Palette claire et raffinée, la plus proche du rendu que Renaud a validé. */
-.ver-6 {
-  --c-fond: #F4F1EA; --c-creme: #ECE8DF; --c-blanc: #FCFBF8;
-  --c-or: #9A6A44; --c-or-pale: #C0906A; --c-or-dim: #7E5334;
-  --or-10: rgba(154,106,68,0.10); --or-15: rgba(154,106,68,0.15); --or-20: rgba(154,106,68,0.20); --or-25: rgba(154,106,68,0.26); --or-40: rgba(154,106,68,0.42);
-  --shadow-clay: 0 14px 44px -14px rgba(154,106,68,0.30);
-}
-
-/* V7 - Crème conviviale, la plus chaleureuse. */
-.ver-7 {
-  --c-fond: #F6EFE2; --c-creme: #EFE6D5; --c-blanc: #FDFBF6;
-  --c-or: #B0663A; --c-or-pale: #CF8A57; --c-or-dim: #8F4F29;
-  --or-10: rgba(176,102,58,0.10); --or-15: rgba(176,102,58,0.15); --or-20: rgba(176,102,58,0.20); --or-25: rgba(176,102,58,0.26); --or-40: rgba(176,102,58,0.42);
-  --shadow-clay: 0 14px 44px -14px rgba(176,102,58,0.32);
+   Servie en WOFF2 (33 Ko) plutôt qu'en OTF (64 Ko) : même dessin, moitié moins
+   lourd, et c'est le seul format que les navigateurs préchargent correctement.
+   `font-display: swap` → le texte s'affiche tout de suite en Inter puis bascule,
+   ce qui évite un titre invisible pendant le chargement (mauvais LCP). */
+@font-face {
+  font-family: 'Relicta';
+  src: url('/fonts/Relicta-Light.woff2') format('woff2');
+  font-weight: 300 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* Titres en CAPITALES : essai demandé par Renaud (« envoie-moi aussi une version
    en majuscules pour voir ce que ça donne », vocal du 23/07/2026). Piloté par la
    bascule « Casse des titres » du panneau Personnaliser, donc comparable sans
-   recharger et sur n'importe laquelle des 7 versions.
+   recharger la page.
    Même liste de sélecteurs que l'épaississement plus haut, ce qui inclut les
-   titres posés en style inline par les composants. Déclaré APRÈS les blocs
-   .ver-N pour l'emporter sur les capitales déjà imposées par la V4 et la V5. */
+   titres posés en style inline par les composants. */
 .caps-titles .display, .caps-titles .h1, .caps-titles .h2, .caps-titles .h3,
 .caps-titles .hero-title, .caps-titles [style*="--f-serif"] {
   text-transform: uppercase;

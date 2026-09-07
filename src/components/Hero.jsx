@@ -8,9 +8,14 @@ const PHONE_HREF = 'tel:+33634084690'
 
 const HERO_BG = '/hero.webp'
 
+// Deux preuves, toutes deux vérifiables. « 100 % de clients satisfaits » a été
+// retiré : le chiffre ne repose sur rien de mesuré, et une allégation chiffrée
+// invérifiable en haut de page est exactement ce que la DGCCRF sanctionne. Le
+// remplaçant dit la même chose en mieux, parce que c'est ce qui distingue
+// vraiment Renaud d'une menuiserie : il n'y a personne d'autre sur le projet.
 const proofs = [
   { strong: 'Depuis 2019', rest: 'dans le bois, CAP d’ébénisterie' },
-  { strong: '100 %', rest: 'de clients satisfaits' },
+  { strong: 'Dessiné, fabriqué et posé', rest: 'par le même artisan' },
 ]
 
 // Dispositions testées d'une version à l'autre (grosses différences visuelles).
@@ -101,7 +106,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
         }}
       >
         Votre intérieur sur mesure,<br />
-        <em className="i-accent--light">par un ébéniste à Chamonix.</em>
+        <em className="i-accent--light">par un ébéniste en Haute-Savoie.</em>
       </motion.h1>
 
       <motion.p
@@ -115,7 +120,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
         }}
       >
         Mobilier, cuisines et escaliers sur mesure, dessinés, fabriqués et
-        posés par mes soins dans la vallée de Chamonix et toute la Haute-Savoie.
+        posés par mes soins en Haute-Savoie et partout ailleurs.
       </motion.p>
 
       <motion.div

@@ -111,7 +111,7 @@ export default function Processus() {
         <SectionHeader
           eyebrow="Comment je travaille"
           title={<>Votre projet, <Accent>pas à pas.</Accent></>}
-          lead="Quatre temps, sans précipitation. Un seul interlocuteur du premier croquis à la pose chez vous."
+          lead="Quatre temps, sans précipitation. Et la même personne en face de vous à chaque étape."
           style={{ marginBottom: 'clamp(64px, 9vw, 130px)' }}
         />
 
@@ -131,7 +131,7 @@ export default function Processus() {
             letterSpacing: '-0.01em',
           }}
         >
-          Votre projet reste le vôtre, <em className="i-accent">du croquis à la pose.</em>
+          Vous validez chaque étape <em className="i-accent">avant que je passe à la suivante.</em>
         </motion.p>
       </div>
 

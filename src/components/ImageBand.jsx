@@ -46,8 +46,8 @@ export default function ImageBand() {
             lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--c-ivoire)', maxWidth: '20ch', margin: '0 auto',
             textShadow: '0 2px 30px rgba(20,15,9,0.6)',
           }}>
-          Tout&nbsp;naît de&nbsp;mes&nbsp;mains.{' '}
-          <em className="i-accent--light">Façonné pour&nbsp;votre&nbsp;intérieur.</em>
+          Rien ne sort de&nbsp;l'atelier{' '}
+          <em className="i-accent--light">avant que je l'aie posé moi-même.</em>
         </motion.p>
       </div>
     </section>

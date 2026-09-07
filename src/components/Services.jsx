@@ -4,10 +4,12 @@ import { viewportSettings } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
 
 // Vitrine par catégorie de ce que fabrique Renaud (avant les réalisations).
-import imgCuisine from '../assets/realisations/cuisine/cuisine-ilot-chene-01.webp'
-import imgMeuble from '../assets/realisations/meuble/commode-chene-cuir-01.webp'
-import imgAmenagement from '../assets/realisations/agencement/bibliotheque-sur-mesure-01.webp'
-import imgObjet from '../assets/realisations/objet/boite-noyer-02.webp'
+// Variantes `-card` : les cartes ne dépassent jamais 330 px de large, inutile de
+// leur servir les photos en 1800 px (la boîte en noyer pesait 439 Ko à elle seule).
+import imgCuisine from '../assets/realisations/cuisine/cuisine-ilot-chene-01-card.webp'
+import imgMeuble from '../assets/realisations/meuble/commode-chene-cuir-01-card.webp'
+import imgAmenagement from '../assets/realisations/agencement/bibliotheque-sur-mesure-01-card.webp'
+import imgObjet from '../assets/realisations/objet/boite-noyer-02-card.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -100,8 +102,13 @@ export default function Services() {
   return (
     <section id="savoir-faire" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
+        {/* Le titre de section portait « Savoir-faire. », qui ne dit à personne
+            (ni à un lecteur, ni à un moteur) ce que Renaud fabrique. Le mot est
+            passé en surtitre et le H2 nomme les quatre métiers : c'est la seule
+            phrase de la page qui liste les prestations. */}
         <SectionHeader
-          title={<>Savoir-<Accent>faire.</Accent></>}
+          eyebrow="Savoir-faire"
+          title={<>Cuisines, meubles et <Accent>agencements sur mesure.</Accent></>}
           lead="Meubles, cuisines, agencements ou pièces atypiques : je conçois tout type de projet sur mesure, avec le matériau adapté à chacun, du bois massif au contreplaqué. Je modélise aussi votre pièce en 3D, et je la retouche autant de fois qu’il le faut jusqu’à ce qu’elle vous convienne."
           leadWidth="60ch"
           style={{ marginBottom: 'clamp(44px, 5.5vw, 72px)' }}

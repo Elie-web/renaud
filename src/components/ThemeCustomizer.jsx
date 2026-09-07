@@ -1,11 +1,68 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+// Images hero de rechange. Elles vivent ICI et non dans App : comme le panneau
+// est chargé à la demande, ces ~1,4 Mo partent dans le même fichier séparé et
+// aucun visiteur du site ne les télécharge jamais.
+import heroChiselA from '../assets/hero/hero-ciseau-01.webp'
+import heroChiselB from '../assets/hero/hero-ciseau-02.webp'
+import heroChiselC from '../assets/hero/hero-ciseau-03.webp'
+import heroChiselD from '../assets/hero/hero-ciseau-04.webp'
+import heroLathe from '../assets/hero/hero-tour.webp'
+import heroSander from '../assets/hero/hero-ponceuse.webp'
+import heroRouter from '../assets/hero/hero-defonceuse.webp'
 
 /**
- * Panneau de personnalisation LIVE - présent sur toutes les versions.
- * Renaud teste : couleur d'accent, police des titres, image du hero et
- * disposition du hero, sans recharger. « Auto » = garde le choix de la version.
- * Outil de brouillon, pas destiné au site final.
+ * Panneau de personnalisation LIVE. OUTIL DE TRAVAIL, pas une fonctionnalité du
+ * site livré. Renaud y teste couleur d'accent, police des titres, image et
+ * disposition du hero, sans recharger. « Auto » = valeur d'origine du site.
+ *
+ * Visible seulement en `npm run dev` ou sur `…/#perso` en ligne (voir App.jsx).
  */
+
+const HEROS = [
+  { label: 'Atelier (actuelle)', src: '/hero.webp' },
+  { label: 'Ciseau 1', src: heroChiselA },
+  { label: 'Ciseau 2', src: heroChiselB },
+  { label: 'Ciseau 3', src: heroChiselC },
+  { label: 'Ciseau 4', src: heroChiselD },
+  { label: 'Tour à bois', src: heroLathe },
+  { label: 'Ponceuse', src: heroSander },
+  { label: 'Défonceuse', src: heroRouter },
+]
+
+const LAYOUTS = [
+  { key: 'center', label: 'Centré' },
+  { key: 'left', label: 'Gauche' },
+  { key: 'bottom', label: 'Bas' },
+  { key: 'split', label: 'Split' },
+  { key: 'boxed', label: 'Carte' },
+  { key: 'framed', label: 'Encadré' },
+  { key: 'solid', label: 'Typo' },
+]
+
+// Les polices proposées ci-dessous ne servent QU'À CE PANNEAU. Elles étaient
+// autrefois chargées par index.html sur toutes les visites : 3 feuilles de style
+// bloquantes pour 7 familles que le site n'emploie pas. On les injecte désormais
+// au premier affichage du panneau, donc jamais pour un visiteur.
+const FONTS_HREF =
+  'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400' +
+  '&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400' +
+  '&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400' +
+  '&family=Marcellus&family=Jost:wght@400;500;600' +
+  '&family=Archivo:wght@400;500;600;700' +
+  '&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600' +
+  '&display=swap'
+
+function useCustomizerFonts() {
+  useEffect(() => {
+    if (document.getElementById('tc-fonts')) return
+    const link = document.createElement('link')
+    link.id = 'tc-fonts'
+    link.rel = 'stylesheet'
+    link.href = FONTS_HREF
+    document.head.appendChild(link)
+  }, [])
+}
 
 const SWATCHES = [
   { name: 'Argile',    hex: '#A85D3C' },
@@ -19,7 +76,7 @@ const SWATCHES = [
 ]
 
 const FONTS = [
-  { name: 'Auto (version)',       css: '' },
+  { name: 'Auto (Relicta)',       css: '' },
   { name: 'Fraunces',             css: "'Fraunces', Georgia, serif" },
   { name: 'Playfair Display',     css: "'Playfair Display', Georgia, serif" },
   { name: 'Cormorant Garamond',   css: "'Cormorant Garamond', Georgia, serif" },
@@ -29,10 +86,12 @@ const FONTS = [
   { name: 'Bricolage Grotesque',  css: "'Bricolage Grotesque', system-ui, sans-serif" },
 ]
 
-export default function ThemeCustomizer({ value, onChange, heroes = [], layouts = [] }) {
+export default function ThemeCustomizer({ value, onChange, onReset }) {
   const [open, setOpen] = useState(false)
+  useCustomizerFonts()
   const set = (patch) => onChange({ ...value, ...patch })
-  const reset = () => onChange({ accent: '', font: '', hero: '', layout: '', caps: false })
+  const heroes = HEROS
+  const layouts = LAYOUTS
   const touched = value.accent || value.font || value.hero || value.layout || value.caps
 
   // ⚠ Le <style> doit être rendu dans les DEUX états. Il vivait auparavant dans
@@ -93,8 +152,7 @@ export default function ThemeCustomizer({ value, onChange, heroes = [], layouts 
           </select>
         </div>
 
-        {/* Demandé par Renaud : voir ce que donnent les titres tout en capitales.
-            Marche sur les 7 versions, comme le reste du panneau. */}
+        {/* Demandé par Renaud : voir ce que donnent les titres tout en capitales. */}
         <div className="tc-block">
           <span className="tc-lbl">Casse des titres</span>
           <div className="tc-chips">
@@ -136,7 +194,7 @@ export default function ThemeCustomizer({ value, onChange, heroes = [], layouts 
       </div>
 
       {touched ? (
-        <button type="button" className="tc-reset" onClick={reset}>Réinitialiser</button>
+        <button type="button" className="tc-reset" onClick={onReset}>Réinitialiser</button>
       ) : null}
 
       <style>{CSS}</style>
@@ -153,7 +211,7 @@ const CSS = `
           -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
           border: 1px solid rgba(242,235,221,0.16);
           box-shadow: 0 14px 40px -10px rgba(0,0,0,0.55);
-          font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.78rem; font-weight: 600;
+          font-family: 'Inter', system-ui, sans-serif; font-size: 0.78rem; font-weight: 600;
           cursor: pointer;
         }
         .tc-fab-txt { letter-spacing: 0.02em; }
@@ -168,7 +226,7 @@ const CSS = `
           -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
           border: 1px solid rgba(242,235,221,0.16);
           box-shadow: 0 14px 40px -10px rgba(0,0,0,0.6);
-          color: #F2EBDD; font-family: 'DM Sans', system-ui, sans-serif;
+          color: #F2EBDD; font-family: 'Inter', system-ui, sans-serif;
         }
         .tc-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
         .tc-head { display: flex; flex-direction: column; gap: 2px; }

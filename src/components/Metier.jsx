@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { viewportSettings } from '../lib/motion'
-import portrait from '../assets/atelier/renaud-portrait-mesure-plateau.webp'
+// Variante `-med` : le portrait ne dépasse pas ~490 px de large dans la grille.
+import portrait from '../assets/atelier/renaud-portrait-mesure-plateau-med.webp'
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -64,9 +65,9 @@ export default function Metier() {
               </p>
 
               <p className="metier-story">
-                Création artisanale pure. Je travaille à la lumière du jour, sur
-                des pièces qui trouvent leur place chez vous pour vous accompagner. Vous
-                m'apportez une idée, je la concrétise.
+                Je travaille à la lumière du jour, à l'établi, sur une pièce à la
+                fois. Vous m'apportez une idée, parfois juste une photo ou un
+                croquis sur un coin de table, et je la fabrique.
               </p>
             </div>
 

@@ -1,0 +1,19 @@
+{
+  "name": "achard-crea-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Interface d'administration des réalisations pour Achard Créa",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "sanity": "^3.68.0",
+    "sanity-plugin-cloudinary": "^1.4.0",
+    "styled-components": "^6.1.0"
+  }
+}

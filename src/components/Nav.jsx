@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import logo from '../assets/logos/logo-principal.png'
+// Version 120 px (3 Ko) : le logo s'affiche en 40x40. L'original fait 1394x1397
+// et pesait 92 Ko, chargés en haut de page sur chaque visite.
+import logo from '../assets/logos/logo-principal-120.png'
 
 const links = [
   { label: 'Réalisations', href: '#realisations' },
@@ -9,11 +11,12 @@ const links = [
   { label: 'Contact',      href: '#contact' },
 ]
 
-export default function Nav({ solid = false }) {
+export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  // `solid` = header clair permanent (testé sur une version) ; sinon transparent → clair au scroll
-  const light = scrolled || solid
+  // Header transparent en haut de page → fond clair dès qu'on descend. Le fond
+  // clair permanent a été testé puis écarté par Renaud (call de juillet 2026).
+  const light = scrolled
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
