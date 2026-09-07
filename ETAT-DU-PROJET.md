@@ -107,23 +107,13 @@ Article L.616-1 du code de la consommation, obligatoire pour un artisan qui vend
 à des particuliers. C'est le **seul champ « à compléter » qui reste** sur
 l'ensemble du site (dans les mentions légales).
 
-### 🟠 Décision à prendre — c'est un choix, pas une tâche
+### ✅ Tranché le 07/09/2026 — l'atelier est situé à Sallanches
 
-**4. « Ébéniste à Chamonix » alors que l'atelier est à Sallanches.**
-
-Le title, la meta description, le H1, la FAQ, le footer et plusieurs textes alt
-disent Chamonix et « fabriqué à l'atelier dans la vallée de Chamonix ».
-L'atelier est à Sallanches, ~20 km plus bas, dans la vallée de l'Arve.
-
-Les données machine ont été corrigées (JSON-LD, meta geo, llms.txt) ; **les textes
-visibles n'ont volontairement pas été touchés.**
-
-Le risque concret : une fiche Google Business créée à Sallanches contredirait un
-site qui revendique Chamonix, et Google suspend les fiches pour incohérence
-d'adresse. Deux sorties possibles :
-- garder la cible Chamonix mais reformuler en « ébéniste en vallée de l'Arve,
-  intervient à Chamonix » — honnête et toujours bien positionné ;
-- assumer Sallanches en localité principale, Chamonix restant en zone desservie.
+Le site plaçait l'atelier « dans la vallée de Chamonix ». Il est à Sallanches.
+Seules les phrases qui **situent** l'atelier ont changé ; Chamonix reste partout
+où il s'agit de la **zone desservie**, ce qui est vrai et reste la cible.
+Title, meta description, og, JSON-LD, textes visibles et alt sont alignés.
+Commit `60e47fd`, revert en une commande si besoin.
 
 ### 🟡 Important, mais ne bloque pas la mise en ligne
 
