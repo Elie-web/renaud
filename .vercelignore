@@ -1,0 +1,20 @@
+# Ce qui n'a rien a faire dans l'upload de deploiement.
+# Sans ce fichier, la CLI envoyait 88 Mo de video a chaque deploiement et la
+# connexion TLS lachait avant la fin.
+
+# Videos sources : commitees mais importees nulle part, elles ne partent pas
+# dans le build. Voir le commentaire dans src/lib/realisations.js si on veut
+# en rebrancher une un jour.
+src/assets/videos/
+
+# Versions ecartees du site, gardees en sauvegarde locale.
+_brouillon/
+
+# Sortie de build locale : Vercel rebuild de son cote.
+dist/
+
+# Sanity Studio : projet separe, pas encore branche.
+studio/
+
+# Scripts de traitement d'images, utilises en local uniquement.
+scripts/
