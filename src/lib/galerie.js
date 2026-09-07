@@ -15,6 +15,15 @@
 //
 //  Aucune dépendance ajoutée : on interroge l'API de Sanity avec un simple fetch.
 //
+//  ⚠ ÉTAT DE VÉRIFICATION (07/09/2026)
+//  La transformation est testée : réponse Sanity réaliste en entrée, URLs
+//  Cloudinary valides en sortie, pièce sans photo écartée, et les 4 modes de
+//  panne (réseau coupé, HTTP 500, document absent, liste vide) renvoient bien
+//  `null` pour retomber sur la liste en dur.
+//  N'est PAS vérifié, faute de comptes : la forme exacte de l'objet rendu par
+//  `sanity-plugin-cloudinary`, et l'autorisation CORS côté Sanity. Voir
+//  l'étape 2 bis de studio/README.md.
+//
 //  ── Configuration ──────────────────────────────────────────────────────────
 //  Créer un fichier `.env` à la racine (voir `.env.example`) :
 //     VITE_SANITY_PROJECT_ID=xxxxxxxx
@@ -50,9 +59,9 @@ function urlCloudinary(asset, { largeur, video = false }) {
   // la forme de l'objet change côté Sanity.
   if (!id) return asset.secure_url || asset.url || null
   const type = video ? 'video' : 'image'
-  const transformations = video
-    ? `f_auto,q_auto,w_${largeur},c_limit`
-    : `f_auto,q_auto,w_${largeur},c_limit`
+  // Mêmes transformations pour l'image et la vidéo : Cloudinary sait faire les
+  // deux avec `f_auto`/`q_auto`. Seuls le segment d'URL et l'extension changent.
+  const transformations = `f_auto,q_auto,w_${largeur},c_limit`
   const ext = video ? 'mp4' : (asset.format || 'jpg')
   return `https://res.cloudinary.com/${CLOUD}/${type}/upload/${transformations}/${id}.${ext}`
 }

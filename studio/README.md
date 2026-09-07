@@ -38,6 +38,24 @@ VITE_SANITY_DATASET=production
 VITE_CLOUDINARY_CLOUD=le-cloud-name
 ```
 
+## 2 bis. Autoriser le site à lire les données (CORS) — NE PAS SAUTER
+
+Sans cette étape, le navigateur bloque la requête, **le code avale l'erreur en
+silence** et la galerie ne se met jamais à jour : le site continue d'afficher les
+pièces en dur, sans le moindre message d'erreur. C'est le piège classique de
+Sanity, et il coûte une heure à diagnostiquer.
+
+Dans https://sanity.io/manage → le projet → **API** → **CORS origins**,
+ajouter, sans cocher « Allow credentials » (le dataset est public, aucun jeton
+n'est envoyé) :
+
+- `http://localhost:5173` — le site en développement
+- `https://achardebenisteries.vercel.app` — la préproduction
+- `https://achard-crea.fr` — le domaine définitif, dès qu'il est réservé
+
+Pour vérifier que c'est bon : ouvrir le site, console du navigateur, aucune
+erreur `CORS` ne doit apparaître et la galerie doit se recharger.
+
 ## 3. Installer et tester en local
 
 ```bash
