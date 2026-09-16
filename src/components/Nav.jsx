@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 // Version 120 px (3 Ko) : le logo s'affiche en 40x40. L'original fait 1394x1397
 // et pesait 92 Ko, chargés en haut de page sur chaque visite.
@@ -24,9 +24,29 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const burgerRef = useRef(null)
+  const drawerRef = useRef(null)
+
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
+  }, [open])
+
+  // Comportement attendu d'un panneau modal : Échap le referme, le focus entre
+  // dedans a l'ouverture et revient sur le bouton a la fermeture. Sans ca, un
+  // utilisateur au clavier reste coince derriere le panneau.
+  useEffect(() => {
+    if (!open) return
+    const onEchap = (e) => { if (e.key === 'Escape') setOpen(false) }
+    document.addEventListener('keydown', onEchap)
+    const t = setTimeout(() => drawerRef.current?.focus(), 60)
+    return () => { document.removeEventListener('keydown', onEchap); clearTimeout(t) }
+  }, [open])
+
+  const premierRendu = useRef(true)
+  useEffect(() => {
+    if (premierRendu.current) { premierRendu.current = false; return }
+    if (!open) burgerRef.current?.focus()
   }, [open])
 
   return (
@@ -93,7 +113,11 @@ export default function Nav() {
           </a>
           <button
             className="nav-burger"
+            ref={burgerRef}
+            type="button"
             aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={open}
+            aria-controls={open ? 'menu-mobile' : undefined}
             onClick={() => setOpen(!open)}
             style={{ flexDirection: 'column', gap: '5px', padding: '8px', display: 'none' }}
           >
@@ -116,6 +140,12 @@ export default function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="menu-mobile"
+            ref={drawerRef}
+            tabIndex={-1}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
             initial={{ clipPath: 'inset(0 0 100% 0)' }}
             animate={{ clipPath: 'inset(0 0 0% 0)' }}
             exit={{ clipPath: 'inset(0 0 100% 0)' }}
