@@ -84,14 +84,23 @@ technique, performance, accessibilité, données structurées, pages légales.
 
 ### 🔴 Bloquants — le site ne peut pas être mis en ligne sans ça
 
-**1. Réserver le domaine `achard-crea.fr` et créer la boîte mail.** (~15 €/an)
+~~**1. Réserver le domaine.**~~ ✅ **FAIT le 16/09/2026.**
 
-Vérifié au DNS le 07/09/2026 : le domaine **n'existe pas** (NXDOMAIN, aucun MX).
-Or `contact@achard-crea.fr` est affiché dans le hero, la section contact, le
-footer, les mentions légales et le JSON-LD, et c'est la cible du formulaire.
-**En l'état, tout message envoyé par un visiteur part dans le vide.**
-Le canonical, le sitemap, l'Open Graph et le schema pointent tous sur ce domaine :
-tant qu'il n'existe pas, rien ne peut être indexé correctement.
+Renaud a pris **achard-créa.fr**, avec l'accent. Sa forme ASCII est
+`xn--achard-cra-j7a.fr`. Le site est en ligne dessus, HTTPS actif, `www` redirige
+vers la racine en 308.
+
+- DNS chez Gandi : `A @ 76.76.21.21` et `A www 76.76.21.21`. L'enregistrement de
+  parking de Gandi (217.70.184.38) a été supprimé, il entrait en conflit. Le CNAME
+  `www` vers webredir.vip.gandi.net a été remplacé. **MX, SPF, DKIM et SRV intacts.**
+  Un instantané de la zone a été sauvegardé chez Gandi avant modification.
+- Le code a basculé : punycode partout où une machine lit l'adresse (canonical,
+  hreflang, OG, JSON-LD, sitemap, robots), forme accentuée dans le texte affiché.
+- ⚠️ **L'email reste à créer.** `contact@achard-créa.fr` est affiché sur le site mais
+  **aucune boîte n'existe**. Gandi ne fournit plus de boîte gratuite : il faut soit en
+  acheter une, soit poser une simple redirection vers l'adresse personnelle de Renaud.
+  Tant que ce n'est pas fait, les messages se perdent. Le lien `mailto:` pointe sur le
+  punycode pour que même les vieux clients mail le comprennent.
 
 **2. Acheter la licence Relicta.** (~60 €, une fois, Jehoo Creative)
 
