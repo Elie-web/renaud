@@ -1,11 +1,45 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+
   "redirects": [
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.xn--achard-cra-j7a.fr" }],
       "destination": "https://xn--achard-cra-j7a.fr/$1",
       "permanent": true
+    }
+  ],
+
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000" }
+      ]
+    },
+    {
+      "source": "/(hero|og|og-16x9|og-4x3|og-1x1|logo-512|favicon|favicon-32|apple-touch-icon)\\.(webp|jpg|png)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
     }
   ]
 }
