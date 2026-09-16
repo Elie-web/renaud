@@ -3,7 +3,7 @@ import { viewportSettings } from '../lib/motion'
 
 /* En-tête de section centré, façon VM Producers :
    eyebrow centré → titre centré (mot d'accent en italique argile) → lead centré resserré. */
-export default function SectionHeader({ eyebrow, title, lead, leadWidth = '48ch', children, style }) {
+export default function SectionHeader({ eyebrow, title, titleId, lead, leadWidth = '48ch', children, style }) {
   return (
     <div style={{ textAlign: 'center', maxWidth: '60ch', margin: '0 auto clamp(44px, 5vw, 76px)', ...style }}>
       {eyebrow && (
@@ -18,6 +18,7 @@ export default function SectionHeader({ eyebrow, title, lead, leadWidth = '48ch'
       )}
 
       <motion.h2
+        id={titleId}
         className="h2"
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={viewportSettings} transition={{ duration: 0.8, delay: 0.05 }}

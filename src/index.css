@@ -14,6 +14,7 @@
   --c-or:      #A85D3C;   /* argile - accent principal, filets, marques */
   --c-or-pale: #C2744E;   /* argile claire - hover */
   --c-or-dim:  #8A4A2C;   /* terre cuite foncée - eyebrows sur fond clair */
+  --c-or-clair:#E8AC8A;   /* argile claire - surtitres sur PHOTO sombre (voir .eyebrow--light) */
 
   /* Argile des BOUTONS PLEINS, à peine plus sombre que --c-or.
      En texte ivoire sur --c-or on tombait à 4,12:1, sous le minimum WCAG AA de
@@ -158,7 +159,16 @@ ul     { list-style: none; }
   text-transform: uppercase;
   color: var(--c-or);
 }
-.eyebrow--light { color: var(--c-or-pale); opacity: 0.92; }
+/* Sur une photo, le voile ne descend qu'à 61 % d'opacité à la hauteur du
+   surtitre : --c-or-pale (#C2744E) y tombait à 3,1:1 dans un cas moyen, et bien
+   plus bas sur une photo claire, pour un texte de 11 px. L'opacité de 0,92
+   aggravait encore. On passe donc sur une argile claire, et on ajoute l'ombre
+   portée que ses voisins (titre et matière) avaient déjà et qui manquait ici.
+   Mesuré après correction : 6,0:1. */
+.eyebrow--light {
+  color: var(--c-or-clair);
+  text-shadow: 0 1px 10px rgba(20, 15, 9, 0.8);
+}
 .eyebrow--dark  { color: var(--c-or-dim); }
 
 .display {

@@ -4,28 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="Mentions légales d'Achard Créa, ébéniste à Sallanches : éditeur, hébergeur, assurance professionnelle et médiation de la consommation." />
+    <link rel="canonical" href="https://xn--achard-cra-j7a.fr/mentions-legales.html" />
     <title>Mentions légales · Achard Créa</title>
-    <link rel="icon" type="image/png" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#161109" />
+    <!-- Mêmes polices que le site : Relicta auto-hébergée pour les titres, Inter
+         pour le texte. Ces pages chargeaient encore Fraunces et DM Sans, les
+         polices d'avant le changement : deux familles distantes téléchargées
+         pour rien, et un rendu qui ne ressemblait pas au reste du site. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     <style>
+      @font-face {
+        font-family: 'Relicta';
+        src: url('/fonts/Relicta-Light.woff2') format('woff2');
+        font-weight: 300 400;
+        font-style: normal;
+        font-display: swap;
+      }
       :root {
-        --fond: #F6F1E7; --blanc: #FCFBF8; --texte: #231C15; --texte2: #6E6253;
-        --or-dim: #8A4A2C; --pierre: #DBD1BF; --serif: 'Fraunces', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif;
+        --fond: #F6F2EC; --blanc: #FDFCFA; --texte: #231C15; --texte2: #6E6253;
+        --or: #A85D3C; --or-dim: #8A4A2C; --pierre: #E5DFD4;
+        --serif: 'Relicta', system-ui, sans-serif;
+        --sans: 'Inter', system-ui, sans-serif;
       }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body { font-family: var(--sans); background: var(--fond); color: var(--texte); line-height: 1.7; -webkit-font-smoothing: antialiased; }
       .wrap { max-width: 760px; margin: 0 auto; padding: clamp(48px, 9vw, 110px) clamp(24px, 6vw, 48px) clamp(64px, 9vw, 120px); }
       a { color: var(--or-dim); text-decoration: none; border-bottom: 1px solid currentColor; }
-      a:hover { opacity: 0.75; }
+      a:hover { color: var(--or); }
+      a:focus-visible { outline: 2px solid var(--or-dim); outline-offset: 3px; border-radius: 2px; }
       .back { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border: none; margin-bottom: clamp(32px, 5vw, 56px); }
-      h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.1rem, 5vw, 3.2rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: clamp(28px, 4vw, 44px); }
-      h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.01em; margin: clamp(32px, 5vw, 48px) 0 12px; }
-      p, li { font-size: 1rem; color: var(--texte2); margin-bottom: 12px; }
+      /* Même épaississement optique des titres que sur le site : Relicta n'est
+         livrée qu'en Light. Voir POLICES.md. */
+      h1, h2 { font-family: var(--serif); font-weight: 400; -webkit-text-stroke: 0.022em currentColor; paint-order: stroke fill; }
+      h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: clamp(28px, 4vw, 44px); text-wrap: balance; }
+      h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.01em; margin: clamp(32px, 5vw, 48px) 0 12px; text-wrap: balance; }
+      p, li { font-size: 1rem; color: var(--texte2); margin-bottom: 12px; text-wrap: pretty; }
       strong { color: var(--texte); font-weight: 500; }
       ul { padding-left: 1.2em; }
-      .meta { font-family: 'Fraunces', serif; font-size: 0.8rem; color: var(--texte2); margin-top: clamp(48px, 7vw, 80px); padding-top: 24px; border-top: 1px solid var(--pierre); }
+      sup { font-size: 0.7em; }
+      .meta { font-family: var(--sans); font-size: 0.82rem; color: var(--texte2); margin-top: clamp(48px, 7vw, 80px); padding-top: 24px; border-top: 1px solid var(--pierre); }
+      .autres { margin-top: 18px; font-size: 0.9rem; }
       .todo { background: #FBEEDF; border: 1px dashed var(--or-dim); border-radius: 8px; padding: 2px 8px; color: var(--or-dim); font-size: 0.85rem; }
     </style>
   </head>
@@ -90,6 +114,11 @@
         de recourir gratuitement à un médiateur de la consommation en vue de la résolution amiable
         d'un litige. Médiateur compétent : <span class="todo">à compléter — adhésion à un médiateur
         agréé à souscrire</span>.
+      </p>
+
+      <p class="autres">
+        Voir aussi la <a href="/confidentialite.html">politique de confidentialité</a> ·
+        <a href="/#contact">Me contacter</a>
       </p>
 
       <p class="meta">Dernière mise à jour : septembre 2026.</p>

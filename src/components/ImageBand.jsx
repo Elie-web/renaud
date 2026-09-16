@@ -8,7 +8,7 @@ export default function ImageBand() {
   const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
 
   return (
-    <section ref={ref} style={{
+    <section ref={ref} aria-label="L'atelier" style={{
       position: 'relative', overflow: 'hidden',
       minHeight: 'clamp(380px, 58vh, 600px)', display: 'flex', alignItems: 'center',
       background: 'var(--c-noir)',

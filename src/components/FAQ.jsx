@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
 
@@ -33,14 +33,26 @@ function Item({ faq, isOpen, onToggle, index }) {
           <motion.span aria-hidden="true" animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.3 }} style={{ color: 'var(--c-or-dim)', fontSize: '1.7rem', lineHeight: 1, flexShrink: 0, marginTop: '2px' }}>+</motion.span>
         </button>
       </h3>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div id={panelId} role="region" aria-labelledby={btnId}
-            initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }} style={{ overflow: 'hidden' }}>
-            <p style={{ fontFamily: 'var(--f-sans)', fontSize: 'clamp(1.02rem, 1.2vw, 1.15rem)', lineHeight: 1.72, color: 'var(--c-texte-2)', paddingBottom: 'var(--sp-5)', maxWidth: '60ch' }}>{faq.a}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Le panneau reste TOUJOURS monté, même replié. Auparavant il n'était
+          rendu que lorsqu'il était ouvert : le bouton portait alors un
+          `aria-controls` désignant un identifiant absent du document, ce qu'un
+          lecteur d'écran signale comme une référence cassée.
+          La visibilité ne bascule qu'à la FIN de l'animation (`transitionEnd`),
+          pour que le repli reste animé tout en retirant le texte replié du
+          parcours clavier et de l'arbre d'accessibilité. */}
+      <motion.div
+        id={panelId} role="region" aria-labelledby={btnId}
+        initial={false}
+        animate={{
+          height: isOpen ? 'auto' : 0,
+          opacity: isOpen ? 1 : 0,
+          transitionEnd: { visibility: isOpen ? 'visible' : 'hidden' },
+        }}
+        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+        style={{ overflow: 'hidden', visibility: isOpen ? 'visible' : 'hidden' }}
+      >
+        <p style={{ fontFamily: 'var(--f-sans)', fontSize: 'clamp(1.02rem, 1.2vw, 1.15rem)', lineHeight: 1.72, color: 'var(--c-texte-2)', paddingBottom: 'var(--sp-5)', maxWidth: '60ch' }}>{faq.a}</p>
+      </motion.div>
     </motion.div>
   )
 }
@@ -48,9 +60,10 @@ function Item({ faq, isOpen, onToggle, index }) {
 export default function FAQ() {
   const [open, setOpen] = useState(0)
   return (
-    <section style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
+    <section aria-labelledby="titre-faq" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <SectionHeader
+          titleId="titre-faq"
           title={<>Ce que mes clients <Accent>me demandent souvent.</Accent></>}
         />
 

@@ -37,6 +37,20 @@ export default function Realisations() {
 
   const select = useCallback((i) => setActive(((i % count) + count) % count), [count])
 
+  // Flèches, Début et Fin dans la liste des pièces. Les onglets restent tous
+  // atteignables à la tabulation : on ajoute un raccourci, on n'enlève rien.
+  const onTablistKeyDown = useCallback((e) => {
+    const pas = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]
+    let cible = null
+    if (pas) cible = (((active + pas) % count) + count) % count
+    else if (e.key === 'Home') cible = 0
+    else if (e.key === 'End') cible = count - 1
+    if (cible === null) return
+    e.preventDefault()
+    setActive(cible)
+    document.getElementById(`real-tab-${cible}`)?.focus()
+  }, [active, count])
+
   // Swipe au doigt sur mobile
   const touchX = useRef(null)
   const onTouchStart = (e) => { touchX.current = e.touches[0].clientX }
@@ -103,9 +117,10 @@ export default function Realisations() {
   }
 
   return (
-    <section id="realisations" style={{ background: 'var(--c-creme)', padding: 'var(--section-py) var(--px)' }}>
+    <section aria-labelledby="titre-realisations" id="realisations" style={{ background: 'var(--c-creme)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <SectionHeader
+          titleId="titre-realisations"
           eyebrow="Réalisations"
           title={<>Quelques pièces <Accent>sorties de l'atelier.</Accent></>}
         />
@@ -122,8 +137,14 @@ export default function Realisations() {
           }}
         >
           {/* ── Scène : la pièce en grand ── */}
+          {/* La liste de vignettes se declare `tablist` et chaque vignette `tab`.
+              Il manquait la contrepartie : le panneau que ces onglets pilotent.
+              Un lecteur d'ecran annoncait donc des onglets ne commandant rien. */}
           <div
             className="real-stage"
+            id="real-stage-panel"
+            role="tabpanel"
+            aria-labelledby={`real-tab-${active}`}
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
             style={{
@@ -218,7 +239,11 @@ export default function Realisations() {
 
           {/* ── Index : vignettes navigables ── */}
           <div className="real-index-wrap">
-          <ul className="real-index" ref={indexRef} onScroll={updateRail} role="tablist" aria-label="Pièces de l'atelier">
+          <ul
+            className="real-index" ref={indexRef} onScroll={updateRail}
+            role="tablist" aria-label="Pièces de l'atelier"
+            onKeyDown={onTablistKeyDown}
+          >
             {projects.map((proj, i) => {
               const isActive = i === active
               return (
@@ -226,6 +251,8 @@ export default function Realisations() {
                   <button
                     type="button"
                     role="tab"
+                    id={`real-tab-${i}`}
+                    aria-controls="real-stage-panel"
                     aria-selected={isActive}
                     className={`real-row${isActive ? ' is-active' : ''}`}
                     onMouseEnter={() => select(i)}
@@ -361,7 +388,7 @@ export default function Realisations() {
         .real-row-top { display: flex; align-items: baseline; gap: 10px; }
         .real-num {
           font-family: var(--f-sc); font-size: 0.62rem; font-weight: 500;
-          letter-spacing: 0.12em; color: var(--c-or-dim); opacity: 0.7;
+          letter-spacing: 0.12em; color: var(--c-or-dim);
           flex-shrink: 0;
         }
         .real-title {
@@ -373,9 +400,14 @@ export default function Realisations() {
         }
         .real-row:hover .real-title,
         .real-row.is-active .real-title { color: var(--c-texte); }
+        /* Ni ce libelle ni le numero ci-dessus ne portent plus d'opacite : a
+           0,72 le sous-titre tombait a 2,9:1 sur la ligne active et le numero a
+           3,1:1, sous le minimum de 4,5:1 exige pour du petit texte. La mise en
+           retrait passe deja par la couleur (--c-texte-2 contre --c-texte), il
+           n'y avait pas besoin de l'accentuer par la transparence. */
         .real-sub {
           font-family: var(--f-sans); font-size: 0.78rem; color: var(--c-texte-2);
-          opacity: 0.72; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
         @media (max-width: 920px) {

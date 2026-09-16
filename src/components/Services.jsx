@@ -100,13 +100,14 @@ export default function Services() {
   }
 
   return (
-    <section id="savoir-faire" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
+    <section aria-labelledby="titre-savoir-faire" id="savoir-faire" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         {/* Le titre de section portait « Savoir-faire. », qui ne dit à personne
             (ni à un lecteur, ni à un moteur) ce que Renaud fabrique. Le mot est
             passé en surtitre et le H2 nomme les quatre métiers : c'est la seule
             phrase de la page qui liste les prestations. */}
         <SectionHeader
+          titleId="titre-savoir-faire"
           eyebrow="Savoir-faire"
           title={<>Cuisines, meubles et <Accent>agencements sur mesure.</Accent></>}
           lead="Meubles, cuisines, agencements ou pièces atypiques : je conçois tout type de projet sur mesure, avec le matériau adapté à chacun, du bois massif au contreplaqué. Je modélise aussi votre pièce en 3D, et je la retouche autant de fois qu’il le faut jusqu’à ce qu’elle vous convienne."

@@ -105,10 +105,11 @@ function Step({ step, flip }) {
 
 export default function Processus() {
   return (
-    <section id="processus" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)', overflow: 'hidden' }}>
+    <section aria-labelledby="titre-processus" id="processus" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)', overflow: 'hidden' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
 
         <SectionHeader
+          titleId="titre-processus"
           eyebrow="Comment je travaille"
           title={<>Votre projet, <Accent>pas à pas.</Accent></>}
           lead="Quatre temps, sans précipitation. Et la même personne en face de vous à chaque étape."

@@ -14,7 +14,7 @@ const formation = [
 
 export default function Metier() {
   return (
-    <section id="metier" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
+    <section id="metier" aria-labelledby="titre-metier" style={{ background: 'var(--c-blanc)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <div className="metier-grid" style={{
           display: 'grid', gridTemplateColumns: '0.82fr 1fr',
@@ -48,7 +48,7 @@ export default function Metier() {
             <div className="metier-head">
               <span className="metier-kicker">Renaud Achard · Ébéniste</span>
 
-              <h2 className="metier-statement">
+              <h2 id="titre-metier" className="metier-statement">
                 Le&nbsp;bois, ma&nbsp;matière.{' '}
                 <em>Votre&nbsp;intérieur, ma&nbsp;raison.</em>
               </h2>

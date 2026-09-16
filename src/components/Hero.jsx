@@ -174,7 +174,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
   // ── Disposition BOXED : carte translucide centrée sur la photo ──
   if (boxed) {
     return (
-      <section id="top" ref={ref} style={{ position: 'relative', overflow: 'hidden', minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'var(--c-noir)' }}>
+      <section id="top" aria-label="Achard Créa, ébéniste" ref={ref} style={{ position: 'relative', overflow: 'hidden', minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'var(--c-noir)' }}>
         <motion.div style={{ position: 'absolute', inset: '-8% 0', zIndex: 0, y: reduce ? 0 : bgY }}>
           <img src={bg} alt="Atelier d'ébénisterie Achard Créa : mobilier en bois massif en cours de fabrication"
             fetchpriority="high" decoding="async"
@@ -200,7 +200,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
   // ── Disposition SPLIT : panneau sombre à gauche + photo à droite ──
   if (split) {
     return (
-      <section id="top" ref={ref} className="hero-split" style={{ position: 'relative', minHeight: '100dvh', display: 'grid', gridTemplateColumns: '1.05fr 1fr', background: 'var(--c-noir)' }}>
+      <section id="top" aria-label="Achard Créa, ébéniste" ref={ref} className="hero-split" style={{ position: 'relative', minHeight: '100dvh', display: 'grid', gridTemplateColumns: '1.05fr 1fr', background: 'var(--c-noir)' }}>
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', zIndex: 2 }}>
           {Content}
         </div>
@@ -223,7 +223,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
   // ── Disposition FRAMED : photo encadrée (marge autour), légende en bas ──
   if (framed) {
     return (
-      <section id="top" ref={ref} style={{ position: 'relative', minHeight: '100dvh', background: 'var(--c-noir)', display: 'flex', padding: 'clamp(88px, 11vh, 128px) clamp(16px, 3.5vw, 48px) clamp(20px, 4vh, 44px)' }}>
+      <section id="top" aria-label="Achard Créa, ébéniste" ref={ref} style={{ position: 'relative', minHeight: '100dvh', background: 'var(--c-noir)', display: 'flex', padding: 'clamp(88px, 11vh, 128px) clamp(16px, 3.5vw, 48px) clamp(20px, 4vh, 44px)' }}>
         <div style={{ position: 'relative', flex: 1, borderRadius: '22px', overflow: 'hidden', display: 'flex' }}>
           <motion.div style={{ position: 'absolute', inset: '-8% 0', zIndex: 0, y: reduce ? 0 : bgY }}>
             <img src={bg} alt="Atelier d'ébénisterie Achard Créa : mobilier en bois massif en cours de fabrication"
@@ -242,7 +242,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
   // ── Disposition SOLID : typographie sur fond plein sombre + médaillon photo ──
   if (solid) {
     return (
-      <section id="top" ref={ref} style={{ position: 'relative', overflow: 'hidden', minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'radial-gradient(100% 70% at 18% 24%, var(--or-15), transparent 60%), var(--c-noir)' }}>
+      <section id="top" aria-label="Achard Créa, ébéniste" ref={ref} style={{ position: 'relative', overflow: 'hidden', minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'radial-gradient(100% 70% at 18% 24%, var(--or-15), transparent 60%), var(--c-noir)' }}>
         <div aria-hidden="true" className="hero-medallion" style={{ position: 'absolute', right: 'clamp(20px, 4vw, 64px)', bottom: 'clamp(20px, 4vw, 64px)', width: 'clamp(150px, 20vw, 300px)', aspectRatio: '4 / 5', borderRadius: '18px', overflow: 'hidden', border: '1px solid rgba(242,235,221,0.18)', boxShadow: 'var(--shadow-md)', zIndex: 1 }}>
           <img src={bg} alt="" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
@@ -258,6 +258,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
   return (
     <section
       id="top"
+      aria-label="Achard Créa, ébéniste"
       ref={ref}
       style={{ position: 'relative', overflow: 'hidden', minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'var(--c-noir)' }}
     >

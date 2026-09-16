@@ -64,9 +64,10 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" style={{ background: 'var(--c-creme)', padding: 'var(--section-py) var(--px)' }}>
+    <section aria-labelledby="titre-contact" id="contact" style={{ background: 'var(--c-creme)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <SectionHeader
+          titleId="titre-contact"
           eyebrow="Votre projet"
           title={<>Parlons de ce que <Accent>vous avez en tête.</Accent></>}
           lead="Décrivez-moi l'espace, la pièce, le besoin. Choisissez le canal qui vous arrange (téléphone, WhatsApp, e-mail ou formulaire), je réponds sous 24 h, devis gratuit si le projet est clair."
@@ -136,10 +137,10 @@ export default function Contact() {
           ) : (
             <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-5)' }}>
               <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-5)' }}>
-                <Field label="Votre nom"><input name="nom" type="text" required placeholder="Sophie Martin" value={form.nom} onChange={change} style={inputStyle} onFocus={focus} onBlur={blur} /></Field>
-                <Field label="Téléphone"><input name="tel" type="tel" placeholder="06 12 34 56 78" value={form.tel} onChange={change} style={inputStyle} onFocus={focus} onBlur={blur} /></Field>
+                <Field label="Votre nom"><input name="nom" type="text" required autoComplete="name" placeholder="Sophie Martin" value={form.nom} onChange={change} style={inputStyle} onFocus={focus} onBlur={blur} /></Field>
+                <Field label="Téléphone"><input name="tel" type="tel" autoComplete="tel" inputMode="tel" placeholder="06 12 34 56 78" value={form.tel} onChange={change} style={inputStyle} onFocus={focus} onBlur={blur} /></Field>
               </div>
-              <Field label="Votre email"><input name="email" type="email" required placeholder="sophie@exemple.fr" value={form.email} onChange={change} style={inputStyle} onFocus={focus} onBlur={blur} /></Field>
+              <Field label="Votre email"><input name="email" type="email" required autoComplete="email" inputMode="email" placeholder="sophie@exemple.fr" value={form.email} onChange={change} style={inputStyle} onFocus={focus} onBlur={blur} /></Field>
               <Field label="Type de projet">
                 <select name="projet" value={form.projet} onChange={change}
                   style={{ ...inputStyle, color: form.projet ? 'var(--c-texte)' : 'var(--c-texte-2)', appearance: 'none', cursor: 'pointer' }} onFocus={focus} onBlur={blur}>

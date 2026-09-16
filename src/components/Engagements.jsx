@@ -27,9 +27,10 @@ const points = [
 
 export default function Engagements() {
   return (
-    <section style={{ background: 'var(--c-creme)', padding: 'var(--section-py) var(--px)' }}>
+    <section aria-labelledby="titre-engagements" style={{ background: 'var(--c-creme)', padding: 'var(--section-py) var(--px)' }}>
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <SectionHeader
+          titleId="titre-engagements"
           eyebrow="Pourquoi me confier votre projet"
           title={<>Du sur-mesure, <Accent>sans mauvaise surprise.</Accent></>}
         />
