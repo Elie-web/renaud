@@ -49,7 +49,7 @@ export default function Nav() {
       >
         {/* Logo */}
         <a href="#top" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src={logo} alt="Logo Achard Créa" width="40" height="40"
+          <img src={logo} alt="" width="40" height="40"
             style={{ height: 'clamp(34px, 4vw, 44px)', width: 'auto', display: 'block', flexShrink: 0 }} />
           <span style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
             <span style={{

@@ -176,7 +176,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
     return (
       <section id="top" aria-label="Achard Créa, ébéniste" ref={ref} style={{ position: 'relative', overflow: 'hidden', minHeight: '100dvh', display: 'flex', flexDirection: 'column', background: 'var(--c-noir)' }}>
         <motion.div style={{ position: 'absolute', inset: '-8% 0', zIndex: 0, y: reduce ? 0 : bgY }}>
-          <img src={bg} alt="Atelier d'ébénisterie Achard Créa : mobilier en bois massif en cours de fabrication"
+          <img src={bg} alt="Renaud Achard ponçant une pièce de bois à son établi, atelier Achard Créa à Sallanches"
             fetchpriority="high" decoding="async"
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
         </motion.div>
@@ -205,7 +205,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
           {Content}
         </div>
         <div className="hero-split-media" style={{ position: 'relative', overflow: 'hidden', background: 'var(--c-brun-md)' }}>
-          <img src={bg} alt="Atelier d'ébénisterie Achard Créa : mobilier en bois massif en cours de fabrication"
+          <img src={bg} alt="Renaud Achard ponçant une pièce de bois à son établi, atelier Achard Créa à Sallanches"
             fetchpriority="high" decoding="async"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
@@ -226,7 +226,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
       <section id="top" aria-label="Achard Créa, ébéniste" ref={ref} style={{ position: 'relative', minHeight: '100dvh', background: 'var(--c-noir)', display: 'flex', padding: 'clamp(88px, 11vh, 128px) clamp(16px, 3.5vw, 48px) clamp(20px, 4vh, 44px)' }}>
         <div style={{ position: 'relative', flex: 1, borderRadius: '22px', overflow: 'hidden', display: 'flex' }}>
           <motion.div style={{ position: 'absolute', inset: '-8% 0', zIndex: 0, y: reduce ? 0 : bgY }}>
-            <img src={bg} alt="Atelier d'ébénisterie Achard Créa : mobilier en bois massif en cours de fabrication"
+            <img src={bg} alt="Renaud Achard ponçant une pièce de bois à son établi, atelier Achard Créa à Sallanches"
               fetchpriority="high" decoding="async"
               style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
           </motion.div>
@@ -265,7 +265,7 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
       <motion.div style={{ position: 'absolute', inset: '-8% 0', zIndex: 0, y: reduce ? 0 : bgY }}>
         <img
           src={bg}
-          alt="Atelier d'ébénisterie Achard Créa : mobilier en bois massif en cours de fabrication"
+          alt="Renaud Achard ponçant une pièce de bois à son établi, atelier Achard Créa à Sallanches"
           fetchpriority="high" decoding="async"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
         />

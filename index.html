@@ -34,10 +34,17 @@
     <meta property="og:url" content="https://xn--achard-cra-j7a.fr/" />
     <meta property="og:title" content="Ébéniste à Sallanches et Chamonix · Mobilier sur mesure" />
     <meta property="og:description" content="Mobilier, cuisines, bibliothèques et escaliers sur mesure. De l'esquisse au rendu 3D, dessinés et fabriqués par Renaud Achard, ébéniste à Sallanches, posés dans toute la vallée de Chamonix." />
-    <meta property="og:image" content="https://xn--achard-cra-j7a.fr/hero.webp" />
-    <meta property="og:image:width" content="1920" />
-    <meta property="og:image:height" content="1280" />
-    <meta property="og:image:alt" content="Atelier d'ébénisterie Achard Créa, mobilier en bois massif en fabrication" />
+    <!-- Image de partage dediee, et non la photo du hero. Deux raisons mesurees :
+         le WebP n'est que partiellement gere par WhatsApp et LinkedIn, alors que
+         le JPEG passe partout ; et le hero est en 3:2 quand les plateformes
+         attendent du 1,91:1, donc elles le recadraient elles-memes, sans qu'on
+         maitrise ce qui etait coupe. 1200x630, 122 Ko, sous la limite de 600 Ko
+         de WhatsApp. -->
+    <meta property="og:image" content="https://xn--achard-cra-j7a.fr/og.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Renaud Achard ponçant une pièce de bois à son établi, atelier Achard Créa à Sallanches" />
     <meta property="og:site_name" content="Achard Créa" />
     <meta property="og:locale" content="fr_FR" />
 
@@ -45,8 +52,8 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Ébéniste à Sallanches et Chamonix · Mobilier sur mesure" />
     <meta name="twitter:description" content="Ébéniste à Sallanches. Mobilier, cuisines, bibliothèques et escaliers sur mesure, posés dans toute la vallée de Chamonix. Devis gratuit sous 24 h." />
-    <meta name="twitter:image" content="https://xn--achard-cra-j7a.fr/hero.webp" />
-    <meta name="twitter:image:alt" content="Atelier d'ébénisterie Achard Créa, mobilier en bois massif en fabrication" />
+    <meta name="twitter:image" content="https://xn--achard-cra-j7a.fr/og.jpg" />
+    <meta name="twitter:image:alt" content="Renaud Achard ponçant une pièce de bois à son établi, atelier Achard Créa à Sallanches" />
 
     <!-- Préchargement de l'image du hero (LCP) : le navigateur la télécharge dès le HTML, sans attendre le bundle JS -->
     <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
@@ -101,7 +108,11 @@
           "url": "https://xn--achard-cra-j7a.fr/",
           "description": "Ébéniste à Sallanches. Mobilier, cuisines, bibliothèques et escaliers sur mesure, dessinés et fabriqués à l'atelier, posés dans toute la vallée de Chamonix et en Haute-Savoie.",
           "slogan": "Votre intérieur sur mesure, par un ébéniste en Haute-Savoie.",
-          "image": ["https://xn--achard-cra-j7a.fr/hero.webp"],
+          "image": [
+            "https://xn--achard-cra-j7a.fr/og-16x9.webp",
+            "https://xn--achard-cra-j7a.fr/og-4x3.webp",
+            "https://xn--achard-cra-j7a.fr/og-1x1.webp"
+          ],
           "logo": {
             "@type": "ImageObject",
             "url": "https://xn--achard-cra-j7a.fr/logo-512.png",
@@ -213,7 +224,7 @@
             "url": "https://xn--achard-cra-j7a.fr/hero.webp",
             "width": 1920,
             "height": 1280,
-            "caption": "Atelier d'ébénisterie Achard Créa, mobilier en bois massif en cours de fabrication"
+            "caption": "Renaud Achard ponçant une pièce de bois à son établi, atelier Achard Créa à Sallanches"
           },
           "speakable": {
             "@type": "SpeakableSpecification",

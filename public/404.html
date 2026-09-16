@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="Cette page n'existe pas sur le site d'Achard Créa, ébéniste à Sallanches." />
+    <title>Page introuvable · Achard Créa</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#161109" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      @font-face {
+        font-family: 'Relicta';
+        src: url('/fonts/Relicta-Light.woff2') format('woff2');
+        font-weight: 300 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      :root {
+        --fond: #F6F2EC; --texte: #231C15; --texte2: #6E6253;
+        --or: #A85D3C; --or-dim: #8A4A2C; --pierre: #E5DFD4;
+        --serif: 'Relicta', system-ui, sans-serif;
+        --sans: 'Inter', system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: var(--sans); background: var(--fond); color: var(--texte);
+        line-height: 1.7; -webkit-font-smoothing: antialiased;
+        min-height: 100dvh; display: flex; align-items: center; justify-content: center;
+        padding: clamp(24px, 6vw, 48px);
+      }
+      .wrap { max-width: 540px; text-align: center; }
+      .code {
+        font-family: var(--sans); font-size: 0.7rem; font-weight: 500;
+        letter-spacing: 0.28em; text-transform: uppercase; color: var(--or-dim);
+        margin-bottom: clamp(16px, 3vw, 24px);
+      }
+      h1 {
+        font-family: var(--serif); font-weight: 400;
+        font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -0.02em;
+        -webkit-text-stroke: 0.022em currentColor; paint-order: stroke fill;
+        margin-bottom: clamp(14px, 2.5vw, 20px); text-wrap: balance;
+      }
+      p { color: var(--texte2); margin-bottom: clamp(28px, 5vw, 40px); text-wrap: pretty; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-height: 48px; padding: 0 24px; border-radius: 999px;
+        font-size: 0.92rem; font-weight: 500; text-decoration: none;
+        transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+      }
+      .btn--plein { background: #9C5436; color: #FDFCFA; }
+      .btn--plein:hover { background: var(--or-dim); }
+      .btn--ligne { border: 1px solid var(--pierre); color: var(--texte); }
+      .btn--ligne:hover { border-color: var(--or); color: var(--or-dim); }
+      .btn:focus-visible { outline: 2px solid var(--or-dim); outline-offset: 3px; }
+      .pied {
+        margin-top: clamp(36px, 6vw, 56px); padding-top: 22px;
+        border-top: 1px solid var(--pierre); font-size: 0.86rem; color: var(--texte2);
+      }
+      .pied a { color: var(--or-dim); text-decoration: none; border-bottom: 1px solid currentColor; }
+      .pied a:hover { color: var(--or); }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <p class="code">Erreur 404</p>
+      <h1>Cette page n'existe pas.</h1>
+      <p>
+        Le lien est peut-être incomplet, ou la page a changé d'adresse.
+        Tout se trouve sur la page d'accueil.
+      </p>
+      <div class="actions">
+        <a class="btn btn--plein" href="/">Retour à l'accueil</a>
+        <a class="btn btn--ligne" href="/#realisations">Voir les réalisations</a>
+      </div>
+      <p class="pied">
+        Une question&nbsp;? <a href="tel:+33634084690">06&nbsp;34&nbsp;08&nbsp;46&nbsp;90</a>
+        ou <a href="mailto:contact@xn--achard-cra-j7a.fr">contact@achard-créa.fr</a>
+      </p>
+    </main>
+  </body>
+</html>
