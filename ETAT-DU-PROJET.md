@@ -1,8 +1,9 @@
 # Achard Créa — où en est le projet
 
-Document unique de suivi. Mis à jour le **7 septembre 2026**.
+Document unique de suivi. Mis à jour le **16 septembre 2026**.
 Si tu ne dois lire qu'une chose avant de reprendre le dossier, c'est ce fichier.
 
+- **En ligne** : https://achard-créa.fr (forme technique `xn--achard-cra-j7a.fr`)
 - **Préproduction** : https://achardebenisteries.vercel.app
 - **Dépôt** : github.com/Elie-web/renaud (branche `main`)
 - **Projet Vercel** : `achard_ebenisteries` — ⚠ **pas relié à GitHub**, le
@@ -13,13 +14,14 @@ Si tu ne dois lire qu'une chose avant de reprendre le dossier, c'est ce fichier.
 
 ---
 
-## Réponse courte : le site est-il prêt à être mis en ligne et indexé ?
+## Réponse courte : où en est le site ?
 
-**Non — mais ce qui reste ne relève presque plus du code.** Il reste trois achats
-(environ 100 € au total), une décision de positionnement, et un branchement.
+**Le site est en ligne sur le domaine du client, et le code est terminé.**
+Il ne reste aucune tâche de développement bloquante.
 
-Le code, lui, est terminé : design validé par le client, contenu réel, SEO
-technique, performance, accessibilité, données structurées, pages légales.
+Ce qui reste dépend de Renaud : la boîte mail, la licence de la police, le
+médiateur, et les liens Google Business / Instagram. Plus un branchement de
+compte côté Elie pour la galerie.
 
 ---
 
@@ -70,6 +72,39 @@ technique, performance, accessibilité, données structurées, pages légales.
   par l'article 13 du RGPD, il manquait), hébergeur nommé, transfert hors UE encadré.
 - **JSON-LD, meta geo et llms.txt** : l'adresse déclarée était « Chamonix-Mont-Blanc
   74400 », où l'entreprise n'a aucun local. Corrigée en Sallanches, SIRET ajouté.
+
+### Finition et qualité (passe du 16/09/2026, mesurée dans le navigateur)
+
+**Accessibilité.** Les 9 sections ont un nom accessible. L'accordéon FAQ garde
+ses panneaux montés (ils n'existaient pas quand ils étaient repliés, donc les
+boutons désignaient un identifiant absent). Le carrousel a un vrai `tabpanel`
+associé à ses onglets, plus la navigation aux flèches, Début et Fin. Le menu
+mobile annonce son état, se ferme à Échap, prend le focus et le rend au bouton.
+Le formulaire a l'autocomplétion. Le logo de la nav est décoratif, son texte
+était déjà dans le même lien.
+
+**Contraste.** Trois échecs réels au seuil AA corrigés : deux opacités qui
+écrasaient des couleurs déjà secondaires, et le surtitre de catégorie sur photo
+(argile foncée, 11 px, seul des trois libellés sans ombre portée, sur un voile
+à 61 % seulement). Nouveau jeton `--c-or-clair`. **Plus aucun échec sur la page.**
+
+**Partage social.** `og.jpg` dédié en 1200x630 : le WebP n'est que partiellement
+géré par WhatsApp et LinkedIn, et le 3:2 du hero n'est pas le 1,91:1 attendu.
+Trois variantes 16:9 / 4:3 / 1:1 déclarées dans le JSON-LD, comme Google le
+recommande pour les résultats enrichis.
+
+**En-têtes.** Vercel servait tout en `max-age=0`, y compris les fichiers hachés
+par Vite dont le nom porte déjà une empreinte : chaque visiteur qui revenait
+revalidait tout. Corrigé, plus les en-têtes de sécurité usuels.
+
+**Page 404** à la marque du site, au lieu de la page générique de Vercel.
+
+**Repli sans JavaScript** : il affirmait encore que l'atelier est à Chamonix.
+Corrigé, et il renvoie maintenant vers les pages légales.
+
+**Mesures :** CLS à 0, 495 Ko au total, DOM prêt en 256 ms, zéro erreur de
+console, zéro lien interne cassé sur les 4 pages, 24 images toutes avec alt,
+un seul h1 et aucun saut de niveau de titre.
 
 ### Prêt mais pas branché
 
