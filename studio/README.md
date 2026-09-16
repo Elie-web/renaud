@@ -3,42 +3,49 @@
 Interface où Renaud gère ses réalisations. À installer une seule fois.
 
 ⚠ **Ce dossier n'a pas encore été exécuté.** Il a été écrit sans les identifiants
-des deux comptes, qui n'existaient pas au moment de l'écriture. Le premier
-`npm run dev` est donc aussi le premier test réel : prévoir de le faire avant de
-donner l'adresse à Renaud.
+du compte, qui n'existait pas au moment de l'écriture. Le premier `npm run dev`
+est donc aussi le premier test réel : prévoir de le faire avant de donner
+l'adresse à Renaud.
 
-## 1. Créer les deux comptes (Elie, 10 minutes)
+La logique de lecture côté site (`src/lib/galerie.js`) est testée, elle : réponse
+Sanity réaliste en entrée, URL d'images valides en sortie, pièces sans photo ou à
+référence cassée écartées, et les quatre modes de panne retombent sur la liste
+en dur.
+
+## 1. Créer le compte (Elie, 5 minutes)
 
 **Sanity** — https://www.sanity.io, connexion avec Google.
 Créer un projet nommé `Achard Créa`, dataset `production`, visibilité **public**
 (le site lit les données sans clé ; rien de confidentiel n'y est stocké).
 Noter le **Project ID**, visible dans les réglages du projet.
 
-**Cloudinary** — https://cloudinary.com, plan gratuit.
-Noter le **Cloud name**, en haut du tableau de bord.
-Puis Settings → Upload → Upload presets → créer un preset en mode **Unsigned**,
-et noter son nom.
+C'est tout. Un seul compte.
+
+> **Pourquoi plus de Cloudinary ?** La première version stockait les médias sur
+> Cloudinary pour les optimiser. C'était inutile : le CDN d'images de Sanity fait
+> déjà le redimensionnement, la conversion automatique en WebP/AVIF et la
+> compression, sans surcoût ni limite de transformations sur le plan gratuit.
+> Cloudinary n'était vraiment justifié que pour la **vidéo**, dont le site ne se
+> sert pas. Le retirer supprime un compte, un plugin, et une fenêtre d'envoi de
+> plus pour Renaud.
 
 ## 2. Configurer
 
-Créer `studio/.env` :
-
-```
-SANITY_STUDIO_PROJECT_ID=le-project-id
-SANITY_STUDIO_DATASET=production
-SANITY_STUDIO_CLOUDINARY_CLOUD_NAME=le-cloud-name
-SANITY_STUDIO_CLOUDINARY_UPLOAD_PRESET=le-nom-du-preset
-```
-
-Et à la racine du site, `.env` (voir `.env.example`) :
+À la racine du site, créer `.env` (voir `.env.example`) :
 
 ```
 VITE_SANITY_PROJECT_ID=le-project-id
 VITE_SANITY_DATASET=production
-VITE_CLOUDINARY_CLOUD=le-cloud-name
 ```
 
-## 2 bis. Autoriser le site à lire les données (CORS) — NE PAS SAUTER
+Et `studio/.env` :
+
+```
+SANITY_STUDIO_PROJECT_ID=le-project-id
+SANITY_STUDIO_DATASET=production
+```
+
+## 3. Autoriser le site à lire les données (CORS) — NE PAS SAUTER
 
 Sans cette étape, le navigateur bloque la requête, **le code avale l'erreur en
 silence** et la galerie ne se met jamais à jour : le site continue d'afficher les
@@ -51,12 +58,12 @@ n'est envoyé) :
 
 - `http://localhost:5173` — le site en développement
 - `https://achardebenisteries.vercel.app` — la préproduction
-- `https://achard-crea.fr` — le domaine définitif, dès qu'il est réservé
+- `https://xn--achard-cra-j7a.fr` — le domaine définitif
 
 Pour vérifier que c'est bon : ouvrir le site, console du navigateur, aucune
 erreur `CORS` ne doit apparaître et la galerie doit se recharger.
 
-## 3. Installer et tester en local
+## 4. Installer et tester en local
 
 ```bash
 cd studio
@@ -67,11 +74,12 @@ npm run dev
 Le studio s'ouvre sur http://localhost:3333. Vérifier :
 
 - une seule entrée « Réalisations » dans le menu de gauche
-- le bouton d'ajout d'une pièce ouvre bien la fenêtre Cloudinary
-- une photo envoyée s'affiche dans l'aperçu de la ligne
+- une photo se dépose par glisser-déposer dans le champ Photo
+- en cliquant sur la photo déposée, **l'éditeur de point d'intérêt** s'ouvre
+  (un cercle déplaçable). C'est lui qui pilote le cadrage des vignettes du site.
 - les lignes se déplacent au glisser-déposer
 
-## 4. Mettre le studio en ligne
+## 5. Mettre le studio en ligne
 
 ```bash
 npm run deploy
@@ -81,7 +89,7 @@ Sanity demande un nom de sous-domaine, par exemple `achard-crea`.
 L'adresse devient **https://achard-crea.sanity.studio**, c'est celle à donner
 à Renaud.
 
-## 5. Donner l'accès à Renaud
+## 6. Donner l'accès à Renaud
 
 Dans les réglages du projet Sanity, inviter son adresse email en rôle
 **Editor**. Il se connecte avec Google ou par lien email, sans mot de passe à
@@ -89,7 +97,7 @@ retenir.
 
 Lui envoyer ensuite `NOTICE-RENAUD.md`, écrite pour lui.
 
-## 6. Reprendre les 9 pièces existantes
+## 7. Reprendre les 9 pièces existantes
 
 À la première ouverture, la liste du studio est vide et **le site continue
 d'afficher les 9 pièces écrites en dur** dans `src/lib/realisations.js`. C'est
@@ -104,10 +112,25 @@ injoignable, et c'est elle que lisent les moteurs de recherche dans le HTML.
 
 ## Comment ça marche, en deux lignes
 
-Sanity garde le texte et l'ordre. Cloudinary garde les photos et les vidéos, et
-les optimise tout seul : une photo de 8 Mo sortie d'un téléphone est servie
-autour de 200 Ko, une vidéo est ré-encodée pour le web. C'est ce point qui a
-motivé les deux services plutôt qu'un seul : sans Cloudinary, un fichier brut de
-70 Mo partirait tel quel sur le site.
+Sanity garde le texte, l'ordre, les photos et leur point d'intérêt. Son CDN sert
+chaque image à la bonne taille et dans le meilleur format que sait lire le
+navigateur : une photo de 8 Mo sortie d'un téléphone arrive autour de 100 Ko.
 
-Renaud, lui, ne voit que le studio.
+Le site demande deux versions de chaque photo : la grande sans rognage, et une
+vignette en 4/3 **rognée sur le point d'intérêt** que Renaud a placé. Sans point
+d'intérêt défini, Sanity choisit tout seul la zone la plus riche de l'image
+(`crop=entropy`).
+
+## Points de vigilance
+
+**HEIC.** La documentation de Sanity est ambiguë : la page des assets annonce
+HEIF supporté, celle du type image ne liste que JPG, PNG, GIF, TIFF et SVG à
+l'envoi. Les iPhone produisent du HEIC par défaut. La notice de Renaud lui
+demande donc de passer son appareil photo en « Le plus compatible », ce qui règle
+la question sans rien avoir à tester.
+
+**Vidéo.** Le champ a été retiré : Sanity ne transcode pas la vidéo sur le plan
+gratuit, et déposer un fichier brut de 70 Mo serait pire que tout. Le composant
+`Realisations.jsx` sait toujours afficher une vidéo pour les pièces écrites en
+dur. Si Renaud en veut vraiment un jour, rebrancher Cloudinary **uniquement**
+pour ça.

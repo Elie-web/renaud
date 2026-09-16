@@ -1,7 +1,7 @@
 # Gérer vos réalisations
 
-Vous pouvez ajouter vos photos et vos vidéos vous-même, quand vous voulez, depuis
-votre ordinateur. Aucun logiciel à installer.
+Vous pouvez ajouter vos photos vous-même, quand vous voulez, depuis votre
+ordinateur ou votre téléphone. Aucun logiciel à installer.
 
 ## Se connecter
 
@@ -17,16 +17,30 @@ apparaissent.
 2. **Nom de la pièce** : ce qui s'affiche en grand. Exemple : Table basse réversible.
 3. **Type de pièce** : choisissez dans la liste (Cuisine, Meuble, Objet...).
 4. **Bois et détails** : la petite ligne sous le nom. Exemple : Noyer massif, plateau jeux de société.
-5. **Photo** : cliquez, puis glissez votre photo dans la fenêtre qui s'ouvre.
-   Prenez la photo telle qu'elle sort de votre téléphone ou de votre appareil,
-   elle est allégée automatiquement. Vous n'avez rien à redimensionner.
-6. **Vidéo** : facultatif. Si vous en mettez une, c'est elle qui s'affiche à la
-   place de la photo, en boucle et sans son. Mettez quand même une photo : c'est
-   ce qu'on voit pendant que la vidéo se charge.
+5. **Photo** : glissez votre photo dans le cadre. Prenez-la telle qu'elle sort de
+   votre appareil, elle est allégée automatiquement. Vous n'avez rien à
+   redimensionner.
+6. **Cadrez le cercle** (voir juste en dessous).
 7. Cliquez sur **Publish** en bas à droite.
 
 Comptez une minute pour que ça apparaisse sur le site. Actualisez la page du
 site si vous ne voyez rien tout de suite.
+
+## Le cercle de cadrage, à faire à chaque photo
+
+Une fois la photo envoyée, cliquez dessus : un **cercle** apparaît, que vous
+pouvez déplacer et redimensionner.
+
+**Posez-le sur ce qu'il ne faut surtout pas couper**, en général le meuble.
+
+Pourquoi c'est important : sur le site, votre photo est affichée en grand, mais
+aussi en toute petite vignette dans la liste à côté. La vignette ne peut pas
+montrer toute l'image, elle doit forcément en couper une partie. Le cercle dit
+au site quelle partie garder.
+
+Sans le cercle, le site coupe au petit bonheur, et vous pouvez vous retrouver
+avec une vignette qui montre le mur plutôt que le meuble. Cinq secondes de
+travail, une bonne fois par photo.
 
 ## Changer l'ordre
 
@@ -43,6 +57,16 @@ Pour supprimer : les trois points à droite de la ligne, puis **Remove**.
 
 Dans les deux cas, pensez à **Publish** ensuite. Tant que vous n'avez pas
 publié, le site ne bouge pas.
+
+## Si vous photographiez avec un iPhone
+
+Faites ce réglage une fois pour toutes, ça évite des refus à l'envoi :
+
+**Réglages → Appareil photo → Formats → Le plus compatible**
+
+Par défaut, l'iPhone enregistre dans un format récent que tous les sites ne
+savent pas lire. Ce réglage lui fait produire des photos classiques, lisibles
+partout. La qualité ne change pas.
 
 ## Bon à savoir
 

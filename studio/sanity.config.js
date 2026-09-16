@@ -1,7 +1,5 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
-import { cloudinarySchemaPlugin, cloudinaryAssetSourcePlugin } from 'sanity-plugin-cloudinary'
-
 import galerie from './schemas/galerie'
 import piece from './schemas/piece'
 
@@ -32,12 +30,6 @@ export default defineConfig({
               ),
           ]),
     }),
-    // Les deux plugins Cloudinary vont ensemble : le premier déclare le type de
-    // champ `cloudinary.asset`, le second ajoute le bouton d'envoi qui ouvre la
-    // fenêtre Cloudinary depuis le studio. Renaud n'a donc jamais à se connecter
-    // à Cloudinary lui-même.
-    cloudinarySchemaPlugin(),
-    cloudinaryAssetSourcePlugin(),
   ],
 
   schema: {

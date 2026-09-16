@@ -45,31 +45,20 @@ export default {
     {
       name: 'photo',
       title: 'Photo',
-      type: 'cloudinary.asset',
+      type: 'image',
+      // `hotspot` ajoute l'éditeur de point d'intérêt : Renaud déplace un cercle
+      // sur la partie importante de la photo, et TOUS les recadrages du site le
+      // respectent (la grande image comme la petite vignette). C'est ce qui
+      // évite une vignette qui coupe le meuble quand la photo est décentrée ou
+      // prise en portrait. Sans lui, le rognage se ferait au centre, à l'aveugle.
+      options: { hotspot: true },
       description:
-        'Glissez votre photo. Peu importe son poids, elle est optimisée automatiquement.',
+        'Glissez votre photo ici. Peu importe son poids, elle est optimisée ' +
+        'automatiquement. Cadrez ensuite le cercle sur la partie à ne pas couper.',
       validation: (Rule) => Rule.required().warning('Il faut une photo.'),
-    },
-    {
-      name: 'video',
-      title: 'Vidéo (facultatif)',
-      type: 'cloudinary.asset',
-      description:
-        "Si vous en ajoutez une, elle remplace la photo et tourne en boucle, sans son. " +
-        "La photo reste utile : c'est elle qui s'affiche pendant le chargement.",
     },
   ],
   preview: {
     select: { title: 'titre', subtitle: 'matiere', media: 'photo' },
-    prepare({ title, subtitle, media }) {
-      return {
-        title: title || 'Sans nom',
-        subtitle,
-        // Le plugin Cloudinary ne fournit pas d'aperçu natif : on pose l'URL.
-        media: media?.secure_url
-          ? { asset: { url: media.secure_url } }
-          : undefined,
-      }
-    },
   },
 }
