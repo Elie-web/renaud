@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://achard-crea.fr/</loc>
+    <loc>https://xn--achard-cra-j7a.fr/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://achard-crea.fr/hero.webp</image:loc>
+      <image:loc>https://xn--achard-cra-j7a.fr/hero.webp</image:loc>
       <image:title>Atelier d'ébénisterie Achard Créa</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://achard-crea.fr/mentions-legales.html</loc>
+    <loc>https://xn--achard-cra-j7a.fr/mentions-legales.html</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.1</priority>
   </url>
   <url>
-    <loc>https://achard-crea.fr/confidentialite.html</loc>
+    <loc>https://xn--achard-cra-j7a.fr/confidentialite.html</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.1</priority>

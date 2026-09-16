@@ -23,7 +23,7 @@ const WA_HREF = "https://wa.me/33634084690?text=Bonjour%20Renaud%2C%20j'aimerais
 
 const infos = [
   { label: 'Téléphone', val: '06 34 08 46 90',            href: 'tel:+33634084690',            icon: IcoPhone, nowrap: true },
-  { label: 'Email',     val: 'contact@achard-crea.fr',    href: 'mailto:contact@achard-crea.fr', icon: IcoMail },
+  { label: 'Email',     val: 'contact@achard-créa.fr',    href: 'mailto:contact@xn--achard-cra-j7a.fr', icon: IcoMail },
   { label: 'Atelier',   val: 'Sallanches, sur RDV', href: null,                        icon: IcoPin },
   { label: 'Horaires',  val: 'Lun. au ven., 8h30–17h',    href: null,                          icon: IcoClock },
 ]
@@ -59,7 +59,7 @@ export default function Contact() {
       `Type de projet : ${form.projet || 'non précisé'}\n\n` +
       `${form.message}`
     window.location.href =
-      `mailto:contact@achard-crea.fr?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`
+      `mailto:contact@xn--achard-cra-j7a.fr?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`
     setSent(true)
   }
 
@@ -128,7 +128,7 @@ export default function Contact() {
               </p>
               <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.85rem', color: 'var(--c-texte-2)' }}>
                 Rien ne s'est ouvert ?{' '}
-                <a href="mailto:contact@achard-crea.fr" style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)' }}>Écrivez-moi directement</a>
+                <a href="mailto:contact@xn--achard-cra-j7a.fr" style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)' }}>Écrivez-moi directement</a>
                 {' '}ou appelez le{' '}
                 <a href="tel:+33634084690" style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)' }}>06 34 08 46 90</a>.
               </p>

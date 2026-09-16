@@ -43,4 +43,4 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://achard-crea.fr/sitemap.xml
+Sitemap: https://xn--achard-cra-j7a.fr/sitemap.xml

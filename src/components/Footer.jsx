@@ -51,7 +51,7 @@ export default function Footer() {
             <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)' }}>
               {[
                 { label: '06 34 08 46 90', href: 'tel:+33634084690' },
-                { label: 'contact@achard-crea.fr', href: 'mailto:contact@achard-crea.fr' },
+                { label: 'contact@achard-créa.fr', href: 'mailto:contact@xn--achard-cra-j7a.fr' },
                 { label: 'Sallanches · vallée de Chamonix', href: null },
               ].map((c) => (
                 <li key={c.label}>
