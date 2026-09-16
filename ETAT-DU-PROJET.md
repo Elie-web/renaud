@@ -73,10 +73,12 @@ technique, performance, accessibilité, données structurées, pages légales.
 
 ### Prêt mais pas branché
 
-- **CMS galerie** : Sanity (textes et ordre) + Cloudinary (médias optimisés). Le
-  code est écrit et se dégrade proprement — sans variables d'environnement, le
-  site affiche la liste en dur et ne casse jamais. La notice client est rédigée
-  (`studio/NOTICE-RENAUD.md`). Il manque **la création des deux comptes**.
+- **CMS galerie** : **Sanity seul** (Cloudinary retiré le 16/09/2026, inutile pour
+  les images). Le champ photo a un **hotspot** : Renaud pose un cercle sur ce qu'il
+  ne faut pas couper, les vignettes sont rognées dessus. Le code est écrit et
+  **testé**, et se dégrade proprement : sans variables d'environnement, le site
+  affiche les 9 pièces en dur et ne casse jamais. Notice client rédigée
+  (`studio/NOTICE-RENAUD.md`). Il manque **la création du compte** (~5 min).
 
 ---
 
@@ -135,8 +137,10 @@ d'`index.html` (Instagram + fiche Google). Sans `sameAs`, Google ne relie pas le
 site à l'entité qu'il connaît déjà. C'est le meilleur rapport effort/effet SEO
 local du dossier. Un commentaire dans le fichier explique où et comment.
 
-**7. Ouvrir les comptes Sanity et Cloudinary** pour que Renaud gère ses photos
-seul. Le code est prêt, la notice aussi.
+**7. Ouvrir le compte Sanity** pour que Renaud gère ses photos seul (~40 min en
+comptant le déploiement du studio et les origines CORS). Le code est prêt et testé,
+la notice aussi. ⚠ Ne pas sauter l'étape CORS : sans elle la galerie ne se met
+jamais à jour, en silence.
 
 **8. Relier le projet Vercel à GitHub**, pour que `git push` déploie. Aujourd'hui
 c'est manuel, et la préprod avait 3 semaines de retard sans que ça se voie.
