@@ -147,11 +147,18 @@ substitution libre a été essayée et rejetée. Voir `POLICES.md`.
 Bonus : la licence livre la vraie graisse, ce qui permettra de supprimer le
 `-webkit-text-stroke` qui sert aujourd'hui de pis-aller.
 
-**3. Adhérer à un médiateur de la consommation.** (~25-40 €/an)
+**3. Médiateur de la consommation.** (50 à 500 €/an) — **refusé pour l'instant
+par Renaud, 17/09/2026.**
 
-Article L.616-1 du code de la consommation, obligatoire pour un artisan qui vend
-à des particuliers. C'est le **seul champ « à compléter » qui reste** sur
-l'ensemble du site (dans les mentions légales).
+Il estime ne pas être concerné tant qu'il ne vend pas d'objets. C'est inexact et
+le lui a été dit : l'article L. 612-1 s'applique dès qu'on contracte avec un
+particulier, **pour un bien comme pour un service**, et une cuisine posée chez un
+client en est un. Vérifié sur Légifrance, amende jusqu'à 3 000 € (L. 641-1),
+aucune dispense selon la taille. La décision lui appartient, ne pas relancer.
+
+**Le site n'affiche plus de champ en attente** : la section a été retirée de
+l'affichage, son contenu et la marche à suivre restent en commentaire dans
+`public/mentions-legales.html`. C'est cosmétique, pas une mise en conformité.
 
 ### ✅ Tranché le 07/09/2026 — l'atelier est situé à Sallanches
 
