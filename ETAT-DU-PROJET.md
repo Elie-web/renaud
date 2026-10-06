@@ -1,6 +1,6 @@
 # Achard Créa — où en est le projet
 
-Document unique de suivi. Mis à jour le **16 septembre 2026**.
+Document unique de suivi. Mis à jour le **6 octobre 2026**.
 Si tu ne dois lire qu'une chose avant de reprendre le dossier, c'est ce fichier.
 
 - **En ligne** : https://achard-créa.fr (forme technique `xn--achard-cra-j7a.fr`)
@@ -16,12 +16,47 @@ Si tu ne dois lire qu'une chose avant de reprendre le dossier, c'est ce fichier.
 
 ## Réponse courte : où en est le site ?
 
-**Le site est en ligne sur le domaine du client, et le code est terminé.**
-Il ne reste aucune tâche de développement bloquante.
+**Le site est en ligne, la police est payée, le code est terminé.** Visio de
+clôture avec Renaud le 06/10/2026 : il valide le site (« franchement, il y a
+rien à redire »).
 
-Ce qui reste dépend de Renaud : la boîte mail, la licence de la police, le
-médiateur, et les liens Google Business / Instagram. Plus un branchement de
-compte côté Elie pour la galerie.
+Il reste quatre branchements, tous prêts côté code, qui attendent une valeur ou
+un compte. Voir « Ce qui RESTE » : le formulaire, le flux Instagram, la galerie
+Sanity, et la confirmation de son adresse Gmail.
+
+---
+
+## Visio du 06/10/2026 : ce qu'il a demandé, ce qui est fait
+
+| Demande | État |
+|---|---|
+| Mettre la police achetée | ✅ Relicta Regular, contour supprimé partout. Voir `POLICES.md` |
+| Centrer « Achard Créa / Ébéniste · sur mesure » à côté du logo | ✅ Les deux lignes sont centrées l'une sous l'autre (`Nav.jsx`) |
+| Email affiché : son Gmail, pas de boîte pro pour l'instant | ⏳ Code prêt, **adresse exacte à confirmer** (voir plus bas) |
+| Mettre son Instagram | ⏳ Lien prêt (contact, pied de page, `sameAs`), **identifiant à récupérer** |
+| Une section qui affiche ses derniers posts Instagram | ⏳ `Instagram.jsx` écrit et testé, **flux Behold à créer** |
+| Brancher le formulaire sur sa boîte mail | ⏳ Code Web3Forms écrit et testé, **clé à créer** |
+| Galerie où il met ses photos et vidéos | ⏳ Inchangé : compte Sanity à ouvrir. **Les vidéos passent par Instagram** |
+| Domaine en punycode quand on copie le lien | Accepté par Renaud, rien à faire. Changer de domaine serait payant |
+
+> 🔴 **L'adresse Gmail n'est pas sûre.** La transcription de la visio donne
+> « renaud.hachard@gmail.com », puis Elie lit sur WhatsApp « reno.char » et
+> Renaud confirme « reno.char@gmail.com ». Les deux se prononcent presque
+> pareil. Une adresse fausse sur le site perd les demandes en silence, comme
+> `contact@achard-créa.fr` qui n'a jamais existé. **Ne la poser qu'une fois lue
+> par écrit.**
+
+### Pourquoi les vidéos passent par Instagram et pas par la galerie
+
+Renaud veut pouvoir ajouter des vidéos. Sanity stocke les fichiers mais ne les
+convertit pas : une vidéo d'iPhone (HEVC, `.mov`) ne se lit pas dans Chrome ni
+Firefox sous Windows, et pèse des dizaines de Mo. Il faudrait rebrancher
+Cloudinary rien que pour ça (voir `src/lib/galerie.js`).
+
+La section Instagram règle le problème sans rien ajouter : ses Reels arrivent sur
+le site avec leur vignette, et le clic ouvre la vidéo sur Instagram. Il poste une
+fois, ça sort aux deux endroits, ce qui est exactement ce qu'il a décrit. **La
+galerie Sanity reste pour les photos** des réalisations finies.
 
 ---
 
@@ -106,6 +141,30 @@ Corrigé, et il renvoie maintenant vers les pages légales.
 console, zéro lien interne cassé sur les 4 pages, 24 images toutes avec alt,
 un seul h1 et aucun saut de niveau de titre.
 
+### Passe légale du 06/10/2026
+
+**Pas de CGV sur le site, et c'est normal.** Rien ne se vend en ligne : aucune
+loi n'impose de CGV sur un site vitrine. Ce qui compte pour Renaud, c'est son
+**devis**, qui doit porter ses conditions (acompte, délais, paiement). Si on lui
+en rédige un jour, c'est un document à joindre à ses devis, pas une page.
+
+Corrigé dans les pages légales :
+- **Inter venait de Google Fonts**, donc chaque visite envoyait l'adresse IP du
+  visiteur à Google, et la politique de confidentialité ne le disait pas. Inter
+  est maintenant auto-hébergée. Plus aucune requête vers un tiers au chargement.
+- **Base légale** : la politique citait consentement ET intérêt légitime pour
+  le même traitement. Remplacé par l'article 6.1.b (demande de devis).
+- **Droits** : ajout de la portabilité, des directives post-mortem et du délai
+  de réponse d'un mois. « Saisir la CNIL » devient « adresser une réclamation ».
+- **Mentions légales** : une note de travail était visible (« Le numéro à faire
+  figurer est le SIRET ci-dessus »). Remplacée par la mention RNE + SIREN.
+  Ajout des crédits typographiques (Relicta sous licence commerciale, Inter OFL).
+- Paragraphes Web3Forms et Behold **prêts en commentaire**, à activer avec leur
+  service (voir plus bas).
+
+Toujours non réglé, et c'est la décision de Renaud : le **médiateur de la
+consommation** (voir plus bas, ne pas relancer).
+
 ### Prêt mais pas branché
 
 - **CMS galerie** : **Sanity seul** (Cloudinary retiré le 16/09/2026, inutile pour
@@ -133,19 +192,15 @@ vers la racine en 308.
   Un instantané de la zone a été sauvegardé chez Gandi avant modification.
 - Le code a basculé : punycode partout où une machine lit l'adresse (canonical,
   hreflang, OG, JSON-LD, sitemap, robots), forme accentuée dans le texte affiché.
-- ⚠️ **L'email reste à créer.** `contact@achard-créa.fr` est affiché sur le site mais
-  **aucune boîte n'existe**. Gandi ne fournit plus de boîte gratuite : il faut soit en
-  acheter une, soit poser une simple redirection vers l'adresse personnelle de Renaud.
-  Tant que ce n'est pas fait, les messages se perdent. Le lien `mailto:` pointe sur le
-  punycode pour que même les vieux clients mail le comprennent.
+- ✅ **L'email : Renaud garde son Gmail** (visio du 06/10/2026, « l'email pro,
+  c'est pas obligé »). `contact@achard-créa.fr` n'a jamais existé et ne doit plus
+  apparaître. S'il veut un jour une adresse sur son domaine, une simple
+  redirection Gandi suffit, et on change `EMAIL` dans `src/lib/coordonnees.js`
+  plus les pages statiques listées en tête de ce fichier-là.
 
-**2. Acheter la licence Relicta.** (~60 €, une fois, Jehoo Creative)
-
-La police des titres est en licence usage personnel. Elle ne peut pas partir sur
-un site client facturé. Décision déjà prise et fermée : **on paie**, la
-substitution libre a été essayée et rejetée. Voir `POLICES.md`.
-Bonus : la licence livre la vraie graisse, ce qui permettra de supprimer le
-`-webkit-text-stroke` qui sert aujourd'hui de pis-aller.
+~~**2. Acheter la licence Relicta.**~~ ✅ **FAIT le 06/10/2026.** Renaud a payé
+et envoyé Light + Regular. Les titres sont en Regular, le contour est supprimé.
+Voir `POLICES.md`.
 
 **3. Médiateur de la consommation.** (50 à 500 €/an) — **refusé pour l'instant
 par Renaud, 17/09/2026.**
@@ -170,19 +225,52 @@ Commit `60e47fd`, revert en une commande si besoin.
 
 ### 🟡 Important, mais ne bloque pas la mise en ligne
 
-**5. Brancher le formulaire de contact.** Il est en `mailto:` : il ouvre la
-messagerie du visiteur. Ceux qui n'ont pas de client mail configuré (une bonne
-partie des visiteurs mobiles) ne peuvent pas envoyer. Piste évoquée : Google Sheets.
+Toutes les valeurs se posent dans **`src/lib/coordonnees.js`**, le seul fichier
+à toucher côté React. Une valeur vide désactive proprement ce qui en dépend.
 
-**6. Créer la fiche Google Business**, puis renseigner `sameAs` dans le JSON-LD
-d'`index.html` (Instagram + fiche Google). Sans `sameAs`, Google ne relie pas le
-site à l'entité qu'il connaît déjà. C'est le meilleur rapport effort/effet SEO
-local du dossier. Un commentaire dans le fichier explique où et comment.
+**5. Le formulaire : Web3Forms** (formule gratuite, aucun compte à créer).
+Le code est écrit et testé (envoi réussi, envoi refusé, message conservé en cas
+d'erreur). Sans clé, le formulaire garde l'ancien `mailto:`.
+1. Sur web3forms.com, taper **le Gmail de Renaud** dans le champ de la page
+   d'accueil, puis « Create Access Key ».
+2. La clé arrive **dans sa boîte**, pas dans celle d'Elie. Il la transfère.
+3. La poser dans `WEB3FORMS_CLE`.
+4. Dans `public/confidentialite.html`, remplacer le paragraphe « Le formulaire de
+   contact ouvre votre logiciel de messagerie » par le bloc commenté juste en
+   dessous. ⚠ Ne pas l'oublier : sinon la page décrit un fonctionnement qui
+   n'existe plus.
+5. Faire un vrai envoi de test et vérifier qu'il arrive chez Renaud, pas en
+   indésirables.
+
+Pourquoi Web3Forms et pas un service à compte (Formspree…) : pas de compte à
+créer ni de collaborateur à inviter, Renaud n'a qu'un mail à transférer.
+
+**6. Instagram : identifiant puis flux Behold.**
+1. Récupérer son identifiant, le poser dans `INSTAGRAM`. Le lien apparaît dans
+   le contact (5e tuile) et le pied de page. L'ajouter aussi à la main dans
+   `sameAs` d'`index.html` et dans `public/llms.txt`.
+2. Sur behold.so, **Renaud** connecte son compte Instagram (c'est son mot de
+   passe), crée un flux de type JSON, et envoie l'adresse
+   `https://feeds.behold.so/…`. Si Behold refuse le compte, il faut le passer en
+   compte professionnel « Créateur » dans les réglages Instagram : gratuit, une
+   minute, rien ne change pour ses abonnés.
+3. La poser dans `BEHOLD_FEED`. La section « L'atelier, au jour le jour »
+   apparaît entre la bande photo de l'atelier et le processus.
+4. Dans `public/confidentialite.html`, décommenter le paragraphe Behold.
+
+Formule gratuite de Behold : 6 publications, mise à jour une fois par jour,
+1 200 affichages par mois. Le flux n'est demandé qu'à l'approche de la section,
+donc un visiteur qui ne descend pas ne consomme rien. Au delà du quota, la
+grille disparaît et il reste le bouton vers son compte.
+
+**6 bis. Fiche Google Business.** Toujours à créer, puis à ajouter dans
+`sameAs`. C'est le meilleur rapport effort/effet SEO local du dossier.
 
 **7. Ouvrir le compte Sanity** pour que Renaud gère ses photos seul (~40 min en
 comptant le déploiement du studio et les origines CORS). Le code est prêt et testé,
 la notice aussi. ⚠ Ne pas sauter l'étape CORS : sans elle la galerie ne se met
-jamais à jour, en silence.
+jamais à jour, en silence. ⚠ Une fois branché, les photos viennent de
+`cdn.sanity.io` : ajouter une ligne à la politique de confidentialité.
 
 **8. Relier le projet Vercel à GitHub**, pour que `git push` déploie. Aujourd'hui
 c'est manuel, et la préprod avait 3 semaines de retard sans que ça se voie.
