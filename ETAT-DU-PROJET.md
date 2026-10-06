@@ -6,8 +6,10 @@ Si tu ne dois lire qu'une chose avant de reprendre le dossier, c'est ce fichier.
 - **En ligne** : https://achard-créa.fr (forme technique `xn--achard-cra-j7a.fr`)
 - **Préproduction** : https://achardebenisteries.vercel.app
 - **Dépôt** : github.com/Elie-web/renaud (branche `main`)
-- **Projet Vercel** : `achard_ebenisteries` — ⚠ **pas relié à GitHub**, le
-  déploiement est manuel : `vercel --prod` depuis la racine du dossier.
+- **Projet Vercel** : `achard_ebenisteries`, **relié à GitHub** : chaque
+  `git push` sur `main` part en production, sans validation. Constaté le
+  06/10/2026 (alias `git-main` sur les déploiements). ⚠ Ne pousser que ce qui
+  peut être en ligne.
 - **Client** : Renaud Achard de Leluardière, micro-entreprise, SIRET 920 208 907 00013.
   Siège 242 chemin des Combes, 74170 Saint-Gervais-les-Bains. Atelier 371 route de
   la Vigne, 74700 Sallanches. Tél 06 34 08 46 90.
@@ -270,8 +272,8 @@ la notice aussi. ⚠ Ne pas sauter l'étape CORS : sans elle la galerie ne se me
 jamais à jour, en silence. ⚠ Une fois branché, les photos viennent de
 `cdn.sanity.io` : ajouter une ligne à la politique de confidentialité.
 
-**8. Relier le projet Vercel à GitHub**, pour que `git push` déploie. Aujourd'hui
-c'est manuel, et la préprod avait 3 semaines de retard sans que ça se voie.
+~~**8. Relier le projet Vercel à GitHub.**~~ ✅ Fait : constaté le 06/10/2026,
+un `git push` a déclenché un déploiement en production.
 
 ### ⚪ À signaler à Renaud — hors site
 
