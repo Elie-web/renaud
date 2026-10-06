@@ -71,7 +71,10 @@ export default function Nav() {
         <a href="#top" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <img src={logo} alt="" width="40" height="40"
             style={{ height: 'clamp(34px, 4vw, 44px)', width: 'auto', display: 'block', flexShrink: 0 }} />
-          <span style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          {/* Nom et métier centrés l'un sous l'autre : demandé par Renaud en
+              visio le 06/10/2026. Avant, les deux lignes partaient à gauche et
+              la ligne du dessous s'arrêtait plus tôt que le nom. */}
+          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
             <span style={{
               fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.4rem, 2vw, 1.7rem)', fontWeight: 400,
               color: light ? 'var(--c-texte)' : 'var(--c-ivoire)', lineHeight: 1, letterSpacing: '-0.01em',
@@ -79,6 +82,9 @@ export default function Nav() {
             }}>Achard Créa</span>
             <span style={{
               fontFamily: 'var(--f-sc)', fontSize: '0.52rem', fontWeight: 500, letterSpacing: '0.24em',
+              // L'interlettrage s'ajoute aussi après la dernière lettre : sans
+              // cette marge négative, la ligne paraît décalée vers la gauche.
+              marginRight: '-0.24em',
               color: light ? 'var(--c-or-dim)' : 'var(--c-or-pale)', textTransform: 'uppercase',
               transition: 'color .4s var(--ease)',
             }}>Ébéniste · sur mesure</span>
