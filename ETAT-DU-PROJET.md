@@ -20,9 +20,9 @@ Si tu ne dois lire qu'une chose avant de reprendre le dossier, c'est ce fichier.
 clôture avec Renaud le 06/10/2026 : il valide le site (« franchement, il y a
 rien à redire »).
 
-Il reste quatre branchements, tous prêts côté code, qui attendent une valeur ou
-un compte. Voir « Ce qui RESTE » : le formulaire, le flux Instagram, la galerie
-Sanity, et la confirmation de son adresse Gmail.
+Il reste trois branchements, tous prêts côté code, qui attendent une valeur ou
+un compte. Voir « Ce qui RESTE » : le formulaire, Instagram (identifiant puis
+flux), et la galerie Sanity.
 
 ---
 
@@ -32,19 +32,17 @@ Sanity, et la confirmation de son adresse Gmail.
 |---|---|
 | Mettre la police achetée | ✅ Relicta Regular, contour supprimé partout. Voir `POLICES.md` |
 | Centrer « Achard Créa / Ébéniste · sur mesure » à côté du logo | ✅ Les deux lignes sont centrées l'une sous l'autre (`Nav.jsx`) |
-| Email affiché : son Gmail, pas de boîte pro pour l'instant | ⏳ Code prêt, **adresse exacte à confirmer** (voir plus bas) |
+| Email affiché : son Gmail, pas de boîte pro pour l'instant | ✅ `renaud.achard@gmail.com`, confirmée par écrit par Elie, posée partout |
 | Mettre son Instagram | ⏳ Lien prêt (contact, pied de page, `sameAs`), **identifiant à récupérer** |
 | Une section qui affiche ses derniers posts Instagram | ⏳ `Instagram.jsx` écrit et testé, **flux Behold à créer** |
 | Brancher le formulaire sur sa boîte mail | ⏳ Code Web3Forms écrit et testé, **clé à créer** |
 | Galerie où il met ses photos et vidéos | ⏳ Inchangé : compte Sanity à ouvrir. **Les vidéos passent par Instagram** |
 | Domaine en punycode quand on copie le lien | Accepté par Renaud, rien à faire. Changer de domaine serait payant |
 
-> 🔴 **L'adresse Gmail n'est pas sûre.** La transcription de la visio donne
-> « renaud.hachard@gmail.com », puis Elie lit sur WhatsApp « reno.char » et
-> Renaud confirme « reno.char@gmail.com ». Les deux se prononcent presque
-> pareil. Une adresse fausse sur le site perd les demandes en silence, comme
-> `contact@achard-créa.fr` qui n'a jamais existé. **Ne la poser qu'une fois lue
-> par écrit.**
+> ✅ **L'adresse Gmail a été confirmée par écrit** : `renaud.achard@gmail.com`.
+> La transcription de la visio hésitait entre « renaud.hachard » et
+> « reno.char ». Elle est dans `src/lib/coordonnees.js`, le JSON-LD, le repli
+> sans JavaScript, les deux pages légales, la 404 et `llms.txt`.
 
 ### Pourquoi les vidéos passent par Instagram et pas par la galerie
 

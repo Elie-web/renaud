@@ -18,10 +18,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 /* Email affiché aux visiteurs. Renaud a choisi son Gmail en visio le
-   06/10/2026 : « l'email pro, c'est pas obligé ». S'il crée un jour une boîte
-   sur son domaine, c'est ici qu'on la change.
+   06/10/2026 : « l'email pro, c'est pas obligé ». Adresse confirmée par écrit
+   par Elie le même jour (la transcription de la visio hésitait entre deux).
+   S'il crée un jour une boîte sur son domaine, c'est ici qu'on la change.
    `contact@achard-créa.fr` n'a jamais existé : les messages s'y perdaient. */
-export const EMAIL = 'contact@achard-créa.fr'
+export const EMAIL = 'renaud.achard@gmail.com'
 
 /* Identifiant Instagram, sans le @. */
 export const INSTAGRAM = ''
