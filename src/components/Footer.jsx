@@ -1,4 +1,5 @@
 import logo from '../assets/logos/logo-footer.png'
+import { EMAIL, EMAIL_LIEN, INSTAGRAM, INSTAGRAM_URL } from '../lib/coordonnees'
 
 const nav = [
   { label: 'Réalisations', href: '#realisations' },
@@ -51,12 +52,14 @@ export default function Footer() {
             <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)' }}>
               {[
                 { label: '06 34 08 46 90', href: 'tel:+33634084690' },
-                { label: 'contact@achard-créa.fr', href: 'mailto:contact@xn--achard-cra-j7a.fr' },
+                { label: EMAIL, href: EMAIL_LIEN },
+                INSTAGRAM && { label: `Instagram · @${INSTAGRAM}`, href: INSTAGRAM_URL, external: true },
                 { label: 'Sallanches · vallée de Chamonix', href: null },
-              ].map((c) => (
+              ].filter(Boolean).map((c) => (
                 <li key={c.label}>
                   {c.href
-                    ? <a href={c.href} style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', color: 'var(--cr-50)', transition: 'color .2s' }}
+                    ? <a href={c.href} target={c.external ? '_blank' : undefined} rel={c.external ? 'noopener noreferrer' : undefined}
+                        style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', color: 'var(--cr-50)', transition: 'color .2s', overflowWrap: 'anywhere' }}
                         onMouseEnter={(e) => e.currentTarget.style.color = 'var(--c-or-pale)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--cr-50)'}>{c.label}</a>
                     : <span style={{ fontFamily: 'var(--f-sans)', fontSize: '0.9rem', color: 'var(--cr-50)' }}>{c.label}</span>}
                 </li>

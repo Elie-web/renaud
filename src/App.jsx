@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import Services from './components/Services'
 import Realisations from './components/Realisations'
 import ImageBand from './components/ImageBand'
+import Instagram from './components/Instagram'
 import Metier from './components/Metier'
 import Processus from './components/Processus'
 import Engagements from './components/Engagements'
@@ -89,6 +90,9 @@ export default function App() {
         <Realisations />
         <Metier />
         <ImageBand />
+        {/* L'atelier vu sur Instagram, juste après la photo d'atelier. Ne s'affiche
+            que lorsque le flux Behold est branché : voir lib/coordonnees.js. */}
+        <Instagram />
         <Processus />
         <Engagements />
         {/* La section « Ce qu'en disent mes clients » est RETIRÉE tant que Renaud

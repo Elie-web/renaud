@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { viewportSettings, staggerContainer, staggerItem } from '../lib/motion'
 import SectionHeader, { Accent } from './SectionHeader'
+import { EMAIL, EMAIL_LIEN, INSTAGRAM, INSTAGRAM_URL, WEB3FORMS_CLE } from '../lib/coordonnees'
 
 const reassurance = ['Réponse sous 24 h', 'Devis gratuit', 'Sans engagement']
 
@@ -13,6 +14,7 @@ const IcoPhone = <Ico d={<path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0
 const IcoMail = <Ico d={<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>} />
 const IcoPin = <Ico d={<><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></>} />
 const IcoClock = <Ico d={<><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>} />
+const IcoInsta = <Ico d={<><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><path d="M17.5 6.5h.01" /></>} />
 const IcoWa = (
   <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.004c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zM12.04 20.13h-.003a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23a8.2 8.2 0 0 1 8.23 8.24c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43l-.48-.01c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z" />
@@ -21,12 +23,17 @@ const IcoWa = (
 
 const WA_HREF = "https://wa.me/33634084690?text=Bonjour%20Renaud%2C%20j'aimerais%20parler%20d'un%20projet."
 
+// Les canaux d'abord (on peut cliquer), les informations pratiques ensuite.
+// Instagram demandé par Renaud en visio le 06/10/2026 : « je suis en train de
+// le développer, il est pas mal, et je le tiens à jour ».
 const infos = [
   { label: 'Téléphone', val: '06 34 08 46 90',            href: 'tel:+33634084690',            icon: IcoPhone, nowrap: true },
-  { label: 'Email',     val: 'contact@achard-créa.fr',    href: 'mailto:contact@xn--achard-cra-j7a.fr', icon: IcoMail },
+  // <wbr> avant l'arobase : une adresse longue se coupe là, pas au milieu d'un mot.
+  { label: 'Email',     val: <>{EMAIL.split('@')[0]}<wbr />@{EMAIL.split('@')[1]}</>, href: EMAIL_LIEN, icon: IcoMail },
+  INSTAGRAM && { label: 'Instagram', val: `@${INSTAGRAM}`, href: INSTAGRAM_URL, icon: IcoInsta, external: true },
   { label: 'Atelier',   val: 'Sallanches, sur RDV', href: null,                        icon: IcoPin },
   { label: 'Horaires',  val: 'Lun. au ven., 8h30–17h',    href: null,                          icon: IcoClock },
-]
+].filter(Boolean)
 
 const inputStyle = {
   fontFamily: 'var(--f-sans)', fontSize: '1rem', color: 'var(--c-texte)', background: 'var(--c-fond)',
@@ -45,22 +52,68 @@ function Field({ label, children }) {
   )
 }
 
+// L'envoi du formulaire.
+//
+// Avec une clé Web3Forms (voir lib/coordonnees.js), la demande part par le
+// réseau et arrive dans la boîte mail de Renaud : le visiteur n'a rien d'autre
+// à faire. C'est ce qui manquait : en `mailto:`, un visiteur sans logiciel de
+// messagerie configuré (une bonne partie des téléphones) ne pouvait pas écrire.
+//
+// Sans clé, on garde l'ancien fonctionnement, qui ouvre la messagerie du
+// visiteur avec le message pré-rempli. Le site marche dans les deux cas.
+const ENVOI_DIRECT = Boolean(WEB3FORMS_CLE)
+
 export default function Contact() {
-  const [sent, setSent] = useState(false)
+  // saisie → envoi → envoye | erreur ; ou saisie → ouvert (mode mailto)
+  const [etat, setEtat] = useState('saisie')
   const [form, setForm] = useState({ nom: '', email: '', tel: '', projet: '', message: '' })
   const change = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
+    const formEl = e.currentTarget
+    if (etat === 'envoi') return
     const sujet = `Demande de devis - ${form.projet || 'projet sur mesure'} - ${form.nom}`
-    const corps =
-      `Nom : ${form.nom}\n` +
-      `Téléphone : ${form.tel || 'non renseigné'}\n` +
-      `Email : ${form.email}\n` +
-      `Type de projet : ${form.projet || 'non précisé'}\n\n` +
-      `${form.message}`
-    window.location.href =
-      `mailto:contact@xn--achard-cra-j7a.fr?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`
-    setSent(true)
+
+    if (!ENVOI_DIRECT) {
+      const corps =
+        `Nom : ${form.nom}\n` +
+        `Téléphone : ${form.tel || 'non renseigné'}\n` +
+        `Email : ${form.email}\n` +
+        `Type de projet : ${form.projet || 'non précisé'}\n\n` +
+        `${form.message}`
+      window.location.href =
+        `${EMAIL_LIEN}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`
+      setEtat('ouvert')
+      return
+    }
+
+    setEtat('envoi')
+    try {
+      const rep = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_CLE,
+          subject: sujet,
+          from_name: 'Site Achard Créa',
+          // `email` sert d'adresse de réponse : Renaud clique sur « Répondre »
+          // et écrit directement au visiteur.
+          email: form.email,
+          // Ces libellés sont ceux qui s'affichent dans le mail que reçoit Renaud.
+          'Nom': form.nom,
+          'Téléphone': form.tel || 'non renseigné',
+          'Type de projet': form.projet || 'non précisé',
+          'Message': form.message || '(pas de message)',
+          // Case piège invisible : un humain ne la coche jamais, un robot si.
+          // Web3Forms écarte la demande quand elle est cochée.
+          botcheck: formEl.elements.botcheck?.checked || false,
+        }),
+      })
+      const data = await rep.json().catch(() => ({}))
+      setEtat(rep.ok && data.success ? 'envoye' : 'erreur')
+    } catch {
+      setEtat('erreur')
+    }
   }
 
   return (
@@ -95,7 +148,7 @@ export default function Contact() {
         {/* Coordonnées en tuiles */}
         <motion.div
           variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportSettings}
-          className="contact-infos">
+          className={`contact-infos${infos.length === 5 ? ' contact-infos--5' : ''}`}>
           {infos.map((it) => {
             const inner = (
               <>
@@ -120,22 +173,42 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportSettings} transition={{ duration: 0.9 }}
           style={{ maxWidth: '640px', margin: '0 auto', background: 'var(--c-blanc)', border: '1px solid var(--c-pierre)', borderRadius: '20px', padding: 'clamp(28px, 4vw, 48px)', boxShadow: 'var(--shadow-md)' }}>
-          {sent ? (
-            <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', padding: 'clamp(28px, 4vw, 56px) 0' }}>
-              <div style={{ fontSize: '2rem', color: 'var(--c-or-dim)', marginBottom: 'var(--sp-4)' }}>✉</div>
-              <h3 style={{ fontFamily: 'var(--f-serif)', fontSize: '1.6rem', color: 'var(--c-texte)', marginBottom: 'var(--sp-3)' }}>Votre messagerie s'ouvre</h3>
-              <p style={{ fontFamily: 'var(--f-sans)', color: 'var(--c-texte-2)', maxWidth: '38ch', margin: '0 auto var(--sp-5)' }}>
-                Votre message est pré-rempli dans votre logiciel d'email. <strong style={{ color: 'var(--c-texte)', fontWeight: 600 }}>Cliquez sur « Envoyer »</strong> pour finaliser. Je vous réponds sous 24 h.
-              </p>
-              <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.85rem', color: 'var(--c-texte-2)' }}>
-                Rien ne s'est ouvert ?{' '}
-                <a href="mailto:contact@xn--achard-cra-j7a.fr" style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)' }}>Écrivez-moi directement</a>
-                {' '}ou appelez le{' '}
-                <a href="tel:+33634084690" style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)' }}>06 34 08 46 90</a>.
-              </p>
+          {etat === 'envoye' || etat === 'ouvert' ? (
+            <motion.div role="status" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', padding: 'clamp(28px, 4vw, 56px) 0' }}>
+              <div aria-hidden="true" style={{ fontSize: '2rem', color: 'var(--c-or-dim)', marginBottom: 'var(--sp-4)' }}>✉</div>
+              {etat === 'envoye' ? (
+                <>
+                  <h3 style={{ fontFamily: 'var(--f-serif)', fontSize: '1.6rem', color: 'var(--c-texte)', marginBottom: 'var(--sp-3)' }}>Message bien reçu</h3>
+                  <p style={{ fontFamily: 'var(--f-sans)', color: 'var(--c-texte-2)', maxWidth: '38ch', margin: '0 auto var(--sp-5)' }}>
+                    Merci {form.nom.split(' ')[0]}. Je vous réponds sous 24 h, à l'adresse que vous m'avez laissée.
+                  </p>
+                  <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.85rem', color: 'var(--c-texte-2)' }}>
+                    C'est urgent ? Appelez-moi au{' '}
+                    <a href="tel:+33634084690" style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)' }}>06 34 08 46 90</a>.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h3 style={{ fontFamily: 'var(--f-serif)', fontSize: '1.6rem', color: 'var(--c-texte)', marginBottom: 'var(--sp-3)' }}>Votre messagerie s'ouvre</h3>
+                  <p style={{ fontFamily: 'var(--f-sans)', color: 'var(--c-texte-2)', maxWidth: '38ch', margin: '0 auto var(--sp-5)' }}>
+                    Votre message est pré-rempli dans votre logiciel d'email. <strong style={{ color: 'var(--c-texte)', fontWeight: 600 }}>Cliquez sur « Envoyer »</strong> pour finaliser. Je vous réponds sous 24 h.
+                  </p>
+                  <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.85rem', color: 'var(--c-texte-2)' }}>
+                    Rien ne s'est ouvert ?{' '}
+                    <a href={EMAIL_LIEN} style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)' }}>Écrivez-moi directement</a>
+                    {' '}ou appelez le{' '}
+                    <a href="tel:+33634084690" style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)' }}>06 34 08 46 90</a>.
+                  </p>
+                </>
+              )}
             </motion.div>
           ) : (
             <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-5)' }}>
+              {/* Case piège pour les robots, invisible et hors tabulation. */}
+              {ENVOI_DIRECT && (
+                <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true"
+                  style={{ display: 'none' }} />
+              )}
               <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-5)' }}>
                 <Field label="Votre nom"><input name="nom" type="text" required autoComplete="name" placeholder="Sophie Martin" value={form.nom} onChange={change} style={inputStyle} onFocus={focus} onBlur={blur} /></Field>
                 <Field label="Téléphone"><input name="tel" type="tel" autoComplete="tel" inputMode="tel" placeholder="06 12 34 56 78" value={form.tel} onChange={change} style={inputStyle} onFocus={focus} onBlur={blur} /></Field>
@@ -152,8 +225,21 @@ export default function Contact() {
                 <textarea name="message" rows={4} placeholder="Un espace de 3 m × 4 m, j'aimerais une bibliothèque qui monte jusqu'au plafond…" value={form.message} onChange={change}
                   style={{ ...inputStyle, resize: 'none', lineHeight: 1.6 }} onFocus={focus} onBlur={blur} />
               </Field>
-              <button type="submit" className="btn btn--gold btn--full" style={{ marginTop: 'var(--sp-2)' }}>
-                <span>Envoyer ma demande</span><span className="arrow" />
+              {/* L'erreur garde tout ce que le visiteur a tapé, et lui donne deux
+                  autres chemins plutôt qu'un simple « réessayez ». */}
+              <div aria-live="polite">
+                {etat === 'erreur' && (
+                  <p style={{ fontFamily: 'var(--f-sans)', fontSize: '0.92rem', lineHeight: 1.6, color: 'var(--c-texte)', background: 'var(--or-10)', border: '1px solid var(--or-20)', borderRadius: '10px', padding: '12px 16px' }}>
+                    L'envoi n'a pas abouti, votre message est toujours là. Réessayez, ou contactez-moi au{' '}
+                    <a href="tel:+33634084690" style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)', whiteSpace: 'nowrap' }}>06 34 08 46 90</a>
+                    {' '}ou à{' '}
+                    <a href={EMAIL_LIEN} style={{ color: 'var(--c-or-dim)', borderBottom: '1px solid var(--c-or-dim)' }}>{EMAIL}</a>.
+                  </p>
+                )}
+              </div>
+              <button type="submit" className="btn btn--gold btn--full" disabled={etat === 'envoi'}
+                style={{ marginTop: 'var(--sp-2)', opacity: etat === 'envoi' ? 0.7 : 1, cursor: etat === 'envoi' ? 'wait' : undefined }}>
+                <span>{etat === 'envoi' ? 'Envoi en cours…' : 'Envoyer ma demande'}</span><span className="arrow" />
               </button>
               <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 'var(--sp-2) var(--sp-5)' }}>
                 {reassurance.map((r) => (
@@ -233,10 +319,23 @@ export default function Contact() {
           }
         }
 
-        @media (max-width: 760px) { .contact-infos { grid-template-columns: 1fr 1fr; } }
+        /* Cinq tuiles quand Instagram est renseigné : trois canaux en haut,
+           les deux informations pratiques centrées en dessous. Une grille de 5
+           colonnes écrasait l'adresse email ; une grille de 3 laissait un trou. */
+        .contact-infos--5 {
+          display: flex; flex-wrap: wrap; justify-content: center;
+          max-width: 1000px;
+        }
+        .contact-infos--5 > * { flex: 0 0 calc((100% - 2 * clamp(12px, 1.4vw, 18px)) / 3); min-width: 0; }
+
+        @media (max-width: 760px) {
+          .contact-infos { grid-template-columns: 1fr 1fr; }
+          .contact-infos--5 > * { flex-basis: calc((100% - clamp(12px, 1.4vw, 18px)) / 2); }
+        }
         @media (max-width: 520px) {
           .form-row { grid-template-columns: 1fr !important; }
           .contact-infos { grid-template-columns: 1fr; max-width: 420px; }
+          .contact-infos--5 > * { flex-basis: 100%; }
         }
       `}</style>
     </section>
