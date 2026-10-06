@@ -10,14 +10,18 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#161109" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     <style>
       @font-face {
         font-family: 'Relicta';
-        src: url('/fonts/Relicta-Light.woff2') format('woff2');
-        font-weight: 300 400;
+        src: url('/fonts/Relicta-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-latin.woff2') format('woff2');
+        font-weight: 100 900;
         font-style: normal;
         font-display: swap;
       }
@@ -43,7 +47,7 @@
       h1 {
         font-family: var(--serif); font-weight: 400;
         font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -0.02em;
-        -webkit-text-stroke: 0.022em currentColor; paint-order: stroke fill;
+       
         margin-bottom: clamp(14px, 2.5vw, 20px); text-wrap: balance;
       }
       p { color: var(--texte2); margin-bottom: clamp(28px, 5vw, 40px); text-wrap: pretty; }

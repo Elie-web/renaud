@@ -59,16 +59,13 @@
     <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
     <!-- Police auto-hébergée des titres : préchargée pour qu'elle arrive avant le
          premier rendu du H1 (le titre du hero, qui est aussi le LCP). -->
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/Relicta-Light.woff2" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Titres : Relicta (auto-hébergée, @font-face dans index.css). Labeur : Inter.
-         UNE SEULE famille distante, et uniquement les graisses réellement posées
-         dans le CSS. Les 7 autres familles chargées ici auparavant (DM Sans,
-         Playfair, Jost, Cormorant, Archivo, Marcellus, Bricolage) ne servaient
-         qu'au panneau « Personnaliser » : il les charge lui-même à l'ouverture,
-         elles ne bloquent donc plus le rendu des visiteurs. -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/Relicta-Regular.woff2" crossorigin />
+    <!-- Inter (texte courant) est auto-hébergée elle aussi, depuis octobre 2026.
+         Chargée chez Google Fonts, elle transmettait l'adresse IP de chaque
+         visiteur à Google, aux États-Unis, sans que la politique de
+         confidentialité le dise. Une police chez soi : plus de tiers, une
+         connexion de moins, et le même fichier (Inter 4, variable). -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/Inter-latin.woff2" crossorigin />
 
     <!--
       Données structurées (JSON-LD) en @graph :

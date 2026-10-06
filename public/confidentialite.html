@@ -11,18 +11,20 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#161109" />
-    <!-- Mêmes polices que le site : Relicta auto-hébergée pour les titres, Inter
-         pour le texte. Ces pages chargeaient encore Fraunces et DM Sans, les
-         polices d'avant le changement : deux familles distantes téléchargées
-         pour rien, et un rendu qui ne ressemblait pas au reste du site. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Mêmes polices que le site, toutes deux auto-hébergées : Relicta pour
+         les titres, Inter pour le texte. Aucune requête vers Google. -->
     <style>
       @font-face {
         font-family: 'Relicta';
-        src: url('/fonts/Relicta-Light.woff2') format('woff2');
-        font-weight: 300 400;
+        src: url('/fonts/Relicta-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-latin.woff2') format('woff2');
+        font-weight: 100 900;
         font-style: normal;
         font-display: swap;
       }
@@ -39,9 +41,7 @@
       a:hover { color: var(--or); }
       a:focus-visible { outline: 2px solid var(--or-dim); outline-offset: 3px; border-radius: 2px; }
       .back { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border: none; margin-bottom: clamp(32px, 5vw, 56px); }
-      /* Même épaississement optique des titres que sur le site : Relicta n'est
-         livrée qu'en Light. Voir POLICES.md. */
-      h1, h2 { font-family: var(--serif); font-weight: 400; -webkit-text-stroke: 0.022em currentColor; paint-order: stroke fill; }
+      h1, h2 { font-family: var(--serif); font-weight: 400; }
       h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: clamp(28px, 4vw, 44px); text-wrap: balance; }
       h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.01em; margin: clamp(32px, 5vw, 48px) 0 12px; text-wrap: balance; }
       p, li { font-size: 1rem; color: var(--texte2); margin-bottom: 12px; text-wrap: pretty; }
@@ -78,7 +78,10 @@
         recueillies sont : votre nom, votre adresse email, votre numéro de téléphone (facultatif), le type
         de projet et le message que vous rédigez.
       </p>
-      <p>Le site n'utilise <strong>ni cookie de suivi, ni outil de mesure d'audience</strong>.</p>
+      <p>
+        Le site ne dépose <strong>aucun cookie</strong>, ne stocke rien sur votre appareil et
+        n'utilise <strong>aucun outil de mesure d'audience</strong>.
+      </p>
 
       <h2>Finalité</h2>
       <p>
@@ -87,9 +90,12 @@
       </p>
 
       <h2>Base légale</h2>
+      <!-- Deux bases légales étaient citées pour le même traitement
+           (consentement ET intérêt légitime), ce qui n'en fait aucune de
+           claire. Une demande de devis relève de l'article 6.1.b. -->
       <p>
-        Le traitement repose sur votre consentement, donné au moment de l'envoi du formulaire, et sur l'intérêt
-        légitime d'Achard Créa à répondre à une demande de devis.
+        Vous demandez un devis ou un renseignement : vos coordonnées servent à y répondre. Le traitement
+        repose donc sur les mesures précontractuelles prises à votre demande (article 6.1.b du RGPD).
       </p>
 
       <h2>Durée de conservation</h2>
@@ -99,13 +105,17 @@
       </p>
 
       <h2>Vos droits</h2>
-      <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur vos données.</p>
+      <p>
+        Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation,
+        d'opposition et de portabilité sur vos données. Vous pouvez aussi définir des directives sur leur sort
+        après votre décès.
+      </p>
       <ul>
-        <li>Pour exercer ces droits : <a href="mailto:contact@xn--achard-cra-j7a.fr">contact@achard-créa.fr</a></li>
-        <li>En cas de litige, vous pouvez saisir la CNIL : <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a></li>
+        <li>Pour exercer ces droits : <a href="mailto:contact@xn--achard-cra-j7a.fr">contact@achard-créa.fr</a>. Je réponds dans un délai d'un mois au plus.</li>
+        <li>Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL : <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a></li>
       </ul>
 
-      <h2>Hébergement et transmission des messages</h2>
+      <h2>Hébergement et services tiers</h2>
       <p>
         Le site est hébergé par <strong>Vercel Inc.</strong> (440 N Barranca Ave #4133, Covina, CA 91723,
         États-Unis), qui héberge les fichiers de la page et enregistre des journaux techniques de connexion.
@@ -113,9 +123,42 @@
         Commission européenne.
       </p>
       <p>
+        Les polices de caractères sont hébergées sur le site lui-même : votre navigateur n'interroge ni
+        Google ni aucun autre fournisseur pour les afficher.
+      </p>
+      <p>
         Le formulaire de contact ouvre votre logiciel de messagerie : le message est donc envoyé directement
         depuis votre boîte email vers <a href="mailto:contact@xn--achard-cra-j7a.fr">contact@achard-créa.fr</a>,
         sans transiter par une base de données du site.
+      </p>
+      <!--
+        FORMULAIRE BRANCHÉ SUR WEB3FORMS : remplacer le paragraphe ci-dessus par
+        celui-ci LE JOUR OÙ la clé est posée dans src/lib/coordonnees.js.
+        Tant qu'elle est vide, le formulaire ouvre la messagerie du visiteur et
+        le paragraphe ci-dessus est le seul exact.
+
+      <p>
+        Le message envoyé par le formulaire transite par <strong>Web3Forms</strong>
+        (web3forms.com), un service d'envoi de formulaires qui le transmet par email
+        à Achard Créa. Il ne sert qu'à vous répondre.
+      </p>
+      -->
+      <!--
+        SECTION INSTAGRAM BRANCHÉE : ajouter ce paragraphe LE JOUR OÙ le flux
+        Behold est posé dans src/lib/coordonnees.js (la section n'existe pas
+        sans lui).
+
+      <p>
+        Les dernières publications Instagram d'Achard Créa sont affichées par le
+        service <strong>Behold</strong> (behold.so, États-Unis), qui fournit les
+        images depuis ses serveurs. Votre navigateur lui transmet donc votre adresse
+        IP au moment de l'affichage, comme à tout site consulté. Aucun cookie n'est
+        déposé.
+      </p>
+      -->
+      <p>
+        Les liens vers WhatsApp et Instagram ne transmettent rien tant que vous ne cliquez pas dessus.
+        Ensuite, ce sont les règles de confidentialité de ces services qui s'appliquent.
       </p>
 
       <p class="autres">
@@ -123,7 +166,7 @@
         <a href="/#contact">Me contacter</a>
       </p>
 
-      <p class="meta">Dernière mise à jour : septembre 2026.</p>
+      <p class="meta">Dernière mise à jour : octobre 2026.</p>
     </main>
   </body>
 </html>

@@ -3,24 +3,36 @@
 Mémo de correspondance, à garder. Si Renaud revient un jour en disant
 « finalement je préfère la 4 », c'est ici qu'on retrouve de quoi il parle.
 
-## ⚠ Le choix actuel : Relicta — licence commerciale À ACHETER
+## Le choix actuel : Relicta, licence commerciale ACHETÉE (octobre 2026)
 
-Les titres du site sont en **Relicta**, auto-hébergée
-(`public/fonts/Relicta-Light.woff2`, 33 Ko), avec Inter en texte courant.
+Les titres du site sont en **Relicta Regular**, auto-hébergée
+(`public/fonts/Relicta-Regular.woff2`, 33 Ko), avec **Inter** en texte courant,
+auto-hébergée elle aussi (`public/fonts/Inter-latin.woff2`, 48 Ko, variable).
 
-**Relicta est sous licence usage personnel** : © 2025 Jehoo Creative, dessinée
-par Anwar Patihan (behance.net/jehoocreative). Le fichier vient de DaFont et ne
-peut pas partir sur un site client facturé en l'état.
+**Renaud a acheté la licence commerciale** chez Jehoo Creative et a envoyé les
+fichiers le 06/10/2026 : `Relicta-Light.otf` et `Relicta-Regular.otf`. Les
+originaux OTF ne sont pas dans le dépôt, seulement leurs WOFF2.
+⚠ Les zips ne contenaient **aucun document de licence**. La preuve d'achat est
+le reçu de Renaud : lui demander de le garder.
 
-**Décision d'Elie (13/08/2026) : on garde Relicta et on fait acheter la licence
-commerciale à Renaud** (~60 €). C'est le dernier point à régler côté droits avant
-la mise en ligne.
+Deux graisses, pas plus : Light (300) et Regular (400). La Light achetée est
+identique au fichier DaFont utilisé jusque là (même version 1.000, mêmes 585
+glyphes) : l'achat n'a rien changé au dessin, il a apporté la Regular et le
+droit de s'en servir.
 
-Seules deux graisses ont été livrées : Light (300-400) et UltraboldItalic. Le
-site n'utilise que la Light, d'où l'absence de tout `font-weight` au-dessus de
-400 dans le CSS, l'épaississement optique par `--title-stroke: 0.022em`, et les
-accents de titre marqués par la couleur plutôt que par l'italique.
-Acheter la licence livre la famille complète et permet de supprimer ce contour.
+### Le contour a été supprimé
+
+Tant qu'on n'avait que la Light, les titres étaient épaissis par un
+`-webkit-text-stroke: 0.022em`. C'est lui qui créait les petites amorces sur les
+lettres que Renaud appelait du « relief » (vocal du 23/07/2026).
+
+Mesuré dans les fichiers, le fût du « l » fait **70 unités en Light, environ 92
+avec l'ancien contour, et 96 en Regular**. La Regular donne donc le même gris
+que ce que le contour simulait, dessiné par le créateur. Le contour a été retiré
+du site, des pages légales et de la 404. **Ne pas le remettre.**
+
+La Regular est un peu plus large (chasse du « H » : 656 → 673). Vérifié en
+capture à 1440 et 390 px : aucun titre ne change de nombre de lignes.
 
 ### Substitution libre : essayée, écartée
 
@@ -104,24 +116,13 @@ Depuis le choix de la police, les 7 versions partagent toutes la **même** polic
 et ne servent plus qu'à comparer des **organisations de sections, des mises en
 page et des couleurs** différentes.
 
-⚠ **Licence :** Relicta et Daniel Sans sont en **usage personnel uniquement**.
-Elles ne peuvent pas partir sur le site livré sans achat d'une licence
-commerciale. Quicksand, Lekton, Katas et Nisaba sont OK.
+⚠ **Licence :** Daniel Sans est en **usage personnel uniquement**. Relicta
+l'était aussi, jusqu'à l'achat de la licence par Renaud en octobre 2026.
+Quicksand, Lekton, Katas et Nisaba sont OK.
 
-## Décision PRISE : on achète la licence Relicta
+## Décision PRISE et APPLIQUÉE : licence Relicta achetée
 
 Renaud (WhatsApp, 22/07/2026) : « cool si tu trouves une police qui ressemble
-gratuit, sinon je mets le prix ». La voie « gratuite » a été essayée le 13/08/2026
-(Josefin Sans) et **rejetée par Elie le jour même**. La décision est donc close :
-
-**→ Acheter la licence web chez Jehoo Creative (~60 €, une fois), à faire payer
-par Renaud.** Bonus non négligeable : ça livre la **vraie graisse**, et on peut
-alors supprimer le `-webkit-text-stroke` d'`index.css`.
-
-⚠ Ne pas rouvrir le sujet d'une substitution libre sans qu'Elie le demande.
-
-Tant qu'on n'a que la Light, les titres sont épaissis optiquement par un contour
-(`--title-stroke` dans `index.css`). Ce contour est un pis-aller : c'est lui qui
-créait les petites amorces sur les lettres que Renaud a appelées du « relief »
-(vocal du 23/07/2026). La dose a été abaissée de 0.038em à 0.022em, mais **le
-vrai correctif est d'obtenir la famille complète**.
+gratuit, sinon je mets le prix ». La voie gratuite a été essayée le 13/08/2026
+(Josefin Sans) et rejetée par Elie le jour même. Renaud a payé la licence et
+envoyé les fichiers le 06/10/2026. Le sujet est clos.

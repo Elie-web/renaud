@@ -68,17 +68,13 @@
 
   /* Fonts - Relicta (titres) + Inter (tout le reste) : le choix de Renaud.
 
-     ⚠ Relicta est sous licence USAGE PERSONNEL (Jehoo Creative). Elle a été
-     remplacée un temps par Josefin Sans (libre), mais le rendu ne convenait pas :
-     Elie a rétabli Relicta le 13/08/2026, avec pour plan de faire acheter la
-     licence commerciale à Renaud. Voir POLICES.md. Ne pas retenter la
-     substitution sans validation visuelle d'Elie.
+     Relicta (Jehoo Creative) est sous LICENCE COMMERCIALE, achetée par Renaud
+     en octobre 2026. Il a reçu deux graisses : Light (300) et Regular (400).
+     Les titres sont en Regular. Voir POLICES.md.
 
-     --f-sc (surtitres, boutons, labels, numéros) est en INTER, pas en Relicta :
-     on ne dispose que de la Light, or ces éléments font 0.42 à 0.72rem et
-     demandent des graisses 500 à 700. En Relicta ils tombaient tous en Light et
-     devenaient illisibles (le numéro de téléphone du hero, par exemple).
-     Relicta est une police d'affichage : la réserver aux grands titres. */
+     --f-sc (surtitres, boutons, labels, numéros) reste en INTER : ces éléments
+     font 0.42 à 0.72rem et demandent des graisses 500 à 700, que Relicta n'a
+     pas. Relicta est une police d'affichage : la réserver aux grands titres. */
   --f-serif: 'Relicta', system-ui, sans-serif;
   --f-sc:    'Inter', system-ui, sans-serif;
   --f-sans:  'Inter', system-ui, sans-serif;
@@ -180,32 +176,15 @@ ul     { list-style: none; }
   text-wrap: balance;
 }
 
-/* ÉPAISSISSEMENT DES TITRES — lire avant de toucher.
-   Relicta n'existe qu'en Light : il n'y a AUCUNE graisse plus épaisse à charger,
-   et un font-weight: 700 ne donnerait qu'un faux-gras synthétique. On épaissit
-   donc les fûts optiquement, par un contour de la couleur du texte.
-
-   Dose à 0.022em et pas plus : à 0.038em le contour empâtait les jonctions de
-   fûts et laissait de petites amorces au gros titre du hero, ce que Renaud
-   appelait du « relief » (vocal du 23/07/2026).
-   Le correctif définitif est d'acheter la licence Relicta, qui livre la famille
-   complète avec de vraies graisses. */
-:root { --title-stroke: 0.022em; }
-
-/* Tout ce qui rend dans la police d'affichage était épaissi de la MÊME dose, sinon les titres
-   de sections n'ont pas la même graisse d'une section à l'autre.
-   Les classes ci-dessous couvrent les titres définis en CSS ; le sélecteur
-   [style*="--f-serif"] attrape ceux que les composants posent en style inline
-   (Hero, Nav, Processus, Realisations, Footer, FAQ...). Il se maintient seul :
-   tout nouveau titre inline suivra la règle sans rien avoir à ajouter. */
-.display, .h1, .h2, .h3, .hero-title,
-.metier-statement, .metier-story, .metier-sign-name, .metier-diploma-k,
-.contact-call-title, .eng-title, .sf-title, .real-title, .mq-item,
-.sb-k, .svs-cat, .svs-index, .svf-cat, .mm-k, .mm-diploma, .avis-avatar,
-[style*="--f-serif"] {
-  -webkit-text-stroke: var(--title-stroke) currentColor;
-  paint-order: stroke fill;
-}
+/* GRAISSE DES TITRES — lire avant de toucher.
+   Jusqu'en octobre 2026, seule la Light était disponible, et les titres étaient
+   épaissis par un contour (`-webkit-text-stroke: 0.022em`). Ce contour laissait
+   de petites amorces aux jonctions des fûts, ce que Renaud appelait du
+   « relief » (vocal du 23/07/2026).
+   Il est supprimé : la licence achetée livre la vraie Regular. Mesuré dans les
+   fichiers, le fût du « l » fait 70 unités en Light, 92 avec l'ancien contour,
+   et 96 en Regular. Même gris typographique, dessiné par le créateur au lieu
+   d'être simulé. Ne pas remettre de contour. */
 
 .h1 {
   font-family: var(--f-serif);
@@ -461,20 +440,41 @@ ul     { list-style: none; }
    dépôt dans `_brouillon/`, et tout est dans l'historique git.
    Historique des polices essayées : voir POLICES.md.
 
-   ⚠ Aucune graisse au-dessus de 400 : on ne dispose que de Relicta Light, donc
-   un font-weight: 600/700 donnerait un faux-gras synthétique. */
-/* Relicta : auto-hébergée (absente de Google Fonts).
-   ⚠ LICENCE USAGE PERSONNEL (Jehoo Creative) → à régler avant la mise en ligne.
-   Plan retenu : faire acheter la licence commerciale à Renaud. Voir POLICES.md.
+   ⚠ Aucune graisse au-dessus de 400 en Relicta : la famille achetée s'arrête à
+   la Regular, donc un font-weight: 600/700 donnerait un faux-gras synthétique. */
+/* Relicta : auto-hébergée (absente de Google Fonts), licence commerciale
+   achetée par Renaud en octobre 2026. Voir POLICES.md.
 
    Servie en WOFF2 (33 Ko) plutôt qu'en OTF (64 Ko) : même dessin, moitié moins
    lourd, et c'est le seul format que les navigateurs préchargent correctement.
    `font-display: swap` → le texte s'affiche tout de suite en Inter puis bascule,
-   ce qui évite un titre invisible pendant le chargement (mauvais LCP). */
+   ce qui évite un titre invisible pendant le chargement (mauvais LCP).
+
+   Tous les titres sont en 400, donc seule la Regular est téléchargée. La Light
+   reste déclarée pour un usage en 300 : le navigateur ne la charge que si une
+   règle la demande. */
+@font-face {
+  font-family: 'Relicta';
+  src: url('/fonts/Relicta-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: 'Relicta';
   src: url('/fonts/Relicta-Light.woff2') format('woff2');
-  font-weight: 300 400;
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter, texte courant : auto-hébergée depuis octobre 2026 (elle venait de
+   Google Fonts, voir index.html). Fichier variable, sous-ensemble latin de
+   Google, qui couvre tout le français (é, œ, ’, « », €). Licence SIL OFL. */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-latin.woff2') format('woff2');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -483,8 +483,8 @@ ul     { list-style: none; }
    en majuscules pour voir ce que ça donne », vocal du 23/07/2026). Piloté par la
    bascule « Casse des titres » du panneau Personnaliser, donc comparable sans
    recharger la page.
-   Même liste de sélecteurs que l'épaississement plus haut, ce qui inclut les
-   titres posés en style inline par les composants. */
+   Le sélecteur [style*="--f-serif"] attrape aussi les titres posés en style
+   inline par les composants. */
 .caps-titles .display, .caps-titles .h1, .caps-titles .h2, .caps-titles .h3,
 .caps-titles .hero-title, .caps-titles [style*="--f-serif"] {
   text-transform: uppercase;
