@@ -151,8 +151,22 @@ l'envoi. Les iPhone produisent du HEIC par défaut. La notice de Renaud lui
 demande donc de passer son appareil photo en « Le plus compatible », ce qui règle
 la question sans rien avoir à tester.
 
-**Vidéo.** Le champ a été retiré : Sanity ne transcode pas la vidéo sur le plan
-gratuit, et déposer un fichier brut de 70 Mo serait pire que tout. Le composant
-`Realisations.jsx` sait toujours afficher une vidéo pour les pièces écrites en
-dur. Si Renaud en veut vraiment un jour, rebrancher Cloudinary **uniquement**
-pour ça.
+**Vidéo.** Le champ existe depuis le 23/10/2026 (décision d'Elie : pas de
+troisième compte pour Renaud). Sanity **ne transcode pas** : le fichier est servi
+tel quel, d'où les garde-fous.
+
+- Le schéma **avertit** (sans bloquer) si le fichier est un `.mov` ou dépasse
+  50 Mo. Avertir et pas bloquer : mieux vaut une vidéo lourde en ligne qu'un
+  refus que Renaud ne saurait pas lever seul.
+- Côté site, `src/lib/galerie.js` expose `videoAuto`, vrai si le fichier fait
+  **5 Mo ou moins**. En dessous, la vidéo se lance seule, en boucle et muette
+  (le rendu d'origine). Au-dessus, `MediaScene` affiche la photo avec un bouton
+  Lecture et `preload="none"` : **zéro octet** n'est téléchargé avant le clic.
+  Mesuré, pas supposé.
+- Si le navigateur ne sait pas lire le fichier, `onError` fait retomber sur la
+  photo. La page reste correcte.
+- Le CDN de Sanity répond aux requêtes partielles (HTTP 206), donc la lecture et
+  le déplacement dans la timeline fonctionnent.
+- ⚠ Le `play()` du bouton est appelé **dans le gestionnaire de clic**. Un appel
+  différé (effet, `setTimeout`) serait refusé en silence par la politique de
+  lecture automatique des navigateurs, puisque la vidéo a du son.

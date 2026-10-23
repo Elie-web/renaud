@@ -57,6 +57,40 @@ export default {
         'automatiquement. Cadrez ensuite le cercle sur la partie à ne pas couper.',
       validation: (Rule) => Rule.required().warning('Il faut une photo.'),
     },
+    {
+      name: 'video',
+      title: 'Vidéo (facultatif)',
+      type: 'file',
+      options: { accept: 'video/mp4,video/quicktime' },
+      description:
+        "Facultatif. Si vous en mettez une, c'est elle qui s'affiche en grand à " +
+        'la place de la photo, mais la photo reste obligatoire : elle sert ' +
+        "d'image d'attente. ⚠ Réglez d'abord votre iPhone sur Réglages > " +
+        'Appareil photo > Formats > « Le plus compatible », sinon la vidéo ne se ' +
+        "lira pas sur les ordinateurs Windows. Visez moins d'une minute.",
+      validation: (Rule) =>
+        Rule.custom(async (value, context) => {
+          const ref = value?.asset?._ref
+          if (!ref) return true
+          // On va chercher le fichier envoyé pour contrôler son format et son
+          // poids. Ce sont des AVERTISSEMENTS et pas des erreurs : mieux vaut
+          // une vidéo lourde en ligne qu'un blocage que Renaud ne saurait pas
+          // lever tout seul.
+          const asset = await context
+            .getClient({ apiVersion: '2024-01-01' })
+            .fetch('*[_id == $ref][0]{extension, size, mimeType}', { ref })
+          if (!asset) return true
+
+          const mo = asset.size / (1024 * 1024)
+          if (asset.extension && asset.extension.toLowerCase() === 'mov') {
+            return 'Cette vidéo est un fichier .mov : elle risque de ne pas se lire sur Windows. Réglez votre iPhone sur « Le plus compatible » et refilmez, ou demandez à Elie de la convertir.'
+          }
+          if (mo > 50) {
+            return `Cette vidéo pèse ${Math.round(mo)} Mo. Au-dessus de 50 Mo elle sera longue à charger pour vos visiteurs : raccourcissez-la.`
+          }
+          return true
+        }).warning(),
+    },
   ],
   preview: {
     select: { title: 'titre', subtitle: 'matiere', media: 'photo' },

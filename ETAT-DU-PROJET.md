@@ -38,7 +38,7 @@ flux), et la galerie Sanity.
 | Mettre son Instagram | ✅ `@woody_woodien`, posé le 23/10/2026 (contact, pied de page, `sameAs`, `llms.txt`) |
 | Une section qui affiche ses derniers posts Instagram | ⏳ `Instagram.jsx` écrit et testé, **flux Behold à créer** |
 | Brancher le formulaire sur sa boîte mail | ⏳ Code Web3Forms écrit et testé, **clé à créer** |
-| Galerie où il met ses photos et vidéos | ✅ **Branchée le 23/10/2026** : https://achard-crea.sanity.studio. **Les vidéos passent par Instagram** |
+| Galerie où il met ses photos et vidéos | ✅ **Branchée le 23/10/2026**, https://achard-crea.sanity.studio. **Les vidéos aussi**, voir plus bas |
 | Domaine en punycode quand on copie le lien | Accepté par Renaud, rien à faire. Changer de domaine serait payant |
 
 > ✅ **L'adresse Gmail a été confirmée par écrit** : `renaud.achard@gmail.com`.
@@ -46,7 +46,28 @@ flux), et la galerie Sanity.
 > « reno.char ». Elle est dans `src/lib/coordonnees.js`, le JSON-LD, le repli
 > sans JavaScript, les deux pages légales, la 404 et `llms.txt`.
 
-### Pourquoi les vidéos passent par Instagram et pas par la galerie
+### Les vidéos : finalement dans Sanity, pas sur Instagram (23/10/2026)
+
+**Décision d'Elie : pas de troisième compte pour Renaud.** La section Instagram
+« derniers posts » est abandonnée (elle imposait un compte Behold et la
+connexion de son Instagram). Les vidéos vont donc dans la galerie Sanity, avec
+des garde-fous, parce que Sanity ne transcode pas.
+
+- Champ **Vidéo** facultatif sur chaque pièce. La photo reste obligatoire : elle
+  sert d'image d'attente et c'est elle que Google référence.
+- Le studio **avertit** si le fichier est un `.mov` ou dépasse 50 Mo.
+- Sur le site : **5 Mo ou moins** → la vidéo se lance seule, en boucle et muette.
+  **Au-dessus** → la photo s'affiche avec un bouton Lecture, et **rien n'est
+  téléchargé avant le clic** (`preload="none"`, vérifié à 0 octet).
+- Si le navigateur ne sait pas lire le fichier, on retombe sur la photo.
+- La notice de Renaud explique tout ça (`studio/NOTICE-RENAUD.md`).
+
+⚠ Le point faible reste le format : un iPhone mal réglé produit du HEVC que
+Windows ne lit pas. Le réglage « Le plus compatible » est dans sa notice, et le
+studio l'avertit, mais rien ne l'empêche d'envoyer un fichier illisible. Si ça
+arrive, la page ne casse pas, elle affiche la photo.
+
+### Archive : pourquoi on avait d'abord mis les vidéos sur Instagram
 
 Renaud veut pouvoir ajouter des vidéos. Sanity stocke les fichiers mais ne les
 convertit pas : une vidéo d'iPhone (HEVC, `.mov`) ne se lit pas dans Chrome ni

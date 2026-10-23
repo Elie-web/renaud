@@ -51,8 +51,17 @@ export const cmsConfigure = Boolean(PROJET)
 const REQUETE = `*[_type == "galerie"][0].pieces[]{
   titre, categorie, matiere,
   "photoId": photo.asset->_id,
-  "hotspot": photo.hotspot
+  "hotspot": photo.hotspot,
+  "video": video.asset->{url, size, mimeType}
 }`
+
+// Au-dessus de ce poids, la vidéo ne se lance plus toute seule : on affiche la
+// photo avec un bouton Lecture, et le fichier n'est téléchargé qu'au clic.
+// Les vidéos préparées à la main font ~2 Mo et gardent donc la lecture
+// automatique d'origine ; celles que Renaud sortira de son téléphone sans les
+// convertir pèsent des dizaines de Mo et ne doivent surtout pas partir toutes
+// seules dans la connexion d'un visiteur sur mobile.
+const VIDEO_AUTO_MAX = 5 * 1024 * 1024
 
 /**
  * Décompose la référence d'un fichier Sanity.
@@ -110,7 +119,22 @@ function normaliser(p) {
     // Vignette : cadrage 4/3 fixe. 560 px de large parce que sur mobile la
     // vignette passe en pleine largeur (elle fait 92 px seulement sur desktop).
     thumb: urlImage(fichier, { largeur: 560, hauteur: 420, hotspot: p.hotspot, qualite: 70 }),
+    ...videoDe(p.video),
   }
+}
+
+/**
+ * Prépare la vidéo d'une pièce, si elle en a une.
+ * Renvoie un objet vide quand il n'y en a pas : la pièce reste une photo.
+ *
+ * `videoAuto` dit au composant s'il peut la lancer tout seul. On se fie au
+ * poids réel du fichier plutôt qu'à une promesse : une vidéo d'iPhone non
+ * convertie fait 15 à 70 Mo, et la lancer en automatique mangerait le forfait
+ * data du visiteur avant même qu'il ait décidé de la regarder.
+ */
+function videoDe(v) {
+  if (!v?.url) return {}
+  return { video: v.url, videoAuto: typeof v.size === 'number' && v.size <= VIDEO_AUTO_MAX }
 }
 
 /**

@@ -12,6 +12,115 @@ const ease = [0.22, 1, 0.36, 1]
 
 const pad = (n) => String(n).padStart(2, '0')
 
+const PLEIN_CADRE = {
+  position: 'absolute', inset: 0, width: '100%', height: '100%',
+  objectFit: 'cover', objectPosition: 'center',
+}
+
+/**
+ * Le média plein cadre de la scène : une photo, ou une vidéo.
+ *
+ * Trois cas, et le poids du fichier décide :
+ *
+ *  - pas de vidéo            → la photo, avec son zoom lent
+ *  - vidéo légère (< 5 Mo)   → elle se lance seule, en boucle et sans son.
+ *    C'est le rendu voulu à l'origine, celui des vidéos préparées à la main.
+ *  - vidéo lourde            → la photo avec un bouton Lecture par dessus, et
+ *    `preload="none"` : RIEN n'est téléchargé tant que le visiteur ne clique
+ *    pas. Une vidéo sortie d'un téléphone fait des dizaines de Mo ; la lancer
+ *    toute seule viderait le forfait data d'un visiteur sur mobile avant même
+ *    qu'il ait décidé de la regarder.
+ *
+ * `videoAuto` n'existe que sur les pièces venues du CMS. Les pièces écrites en
+ * dur n'ont pas ce champ, donc `!== false` les laisse sur l'ancien
+ * comportement.
+ *
+ * Si le navigateur ne sait pas lire le fichier (un .mov en HEVC sorti d'un
+ * iPhone mal réglé, typiquement), `onError` fait retomber sur la photo. La
+ * page reste correcte, elle perd seulement la vidéo.
+ */
+function MediaScene({ p, reduce }) {
+  const ref = useRef(null)
+  const [lance, setLance] = useState(false)
+  const [illisible, setIllisible] = useState(false)
+
+  useEffect(() => { setLance(false); setIllisible(false) }, [p.img, p.video])
+
+  const auto = p.videoAuto !== false
+  const video = Boolean(p.video) && !illisible
+
+  // Vidéo légère : exactement le rendu d'origine, elle se lance toute seule.
+  if (video && auto) {
+    return (
+      <video
+        src={p.video}
+        poster={p.img}
+        autoPlay={!reduce}
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        onError={() => setIllisible(true)}
+        aria-label={`${p.title}, ${p.meta}. Vidéo de la pièce en situation.`}
+        style={PLEIN_CADRE}
+      />
+    )
+  }
+
+  // Vidéo lourde : l'élément est bien là, mais `preload="none"` fait que RIEN
+  // n'est téléchargé. C'est l'attribut `poster` qui affiche la photo. Le clic
+  // appelle `play()` dans le gestionnaire lui-même : une lecture avec le son
+  // n'est autorisée par le navigateur que pendant un vrai geste de
+  // l'utilisateur, un appel différé dans un effet serait refusé en silence.
+  if (video) {
+    return (
+      <>
+        <video
+          ref={ref}
+          src={p.video}
+          poster={p.img}
+          controls
+          playsInline
+          preload="none"
+          onPlay={() => setLance(true)}
+          onError={() => setIllisible(true)}
+          aria-label={`${p.title}, ${p.meta}. Vidéo de la pièce en situation.`}
+          style={PLEIN_CADRE}
+        />
+        {!lance && (
+          <button
+            type="button"
+            onClick={() => {
+              setLance(true)
+              // Si le navigateur refuse quand même, les contrôles natifs
+              // restent affichés : le visiteur a toujours un moyen de lire.
+              ref.current?.play().catch(() => {})
+            }}
+            aria-label={`Lire la vidéo de ${p.title}`}
+            className="real-lecture"
+          >
+            <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">
+              <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+            </svg>
+          </button>
+        )}
+      </>
+    )
+  }
+
+  return (
+    <motion.img
+      src={p.img}
+      alt={`${p.title}, ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Sallanches)`}
+      decoding="async"
+      initial={{ scale: reduce ? 1 : 1.04 }}
+      animate={{ scale: reduce ? 1 : 1.08 }}
+      transition={{ scale: { duration: 7.5, ease: 'linear' } }}
+      style={PLEIN_CADRE}
+    />
+  )
+}
+
 export default function Realisations() {
   const reduce = useReducedMotion()
   const [active, setActive] = useState(PIECE_OUVERTE)
@@ -162,33 +271,7 @@ export default function Realisations() {
                 transition={{ opacity: { duration: 0.7, ease } }}
                 style={{ position: 'absolute', inset: 0 }}
               >
-                {/* La pièce en plein cadre. Si elle porte une vidéo, c'est la
-                    vidéo qui joue ; la photo sert alors d'image d'attente
-                    (`poster`), ce qui évite un rectangle vide au chargement.
-                    Pas de zoom lent sur une vidéo : elle a déjà son mouvement. */}
-                {p.video ? (
-                  <video
-                    src={p.video}
-                    poster={p.img}
-                    autoPlay={!reduce}
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    aria-label={`${p.title}, ${p.meta}. Vidéo de la pièce en situation.`}
-                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
-                  />
-                ) : (
-                  <motion.img
-                    src={p.img}
-                    alt={`${p.title}, ${p.meta}, création sur mesure de l'ébéniste Achard Créa (Sallanches)`}
-                    decoding="async"
-                    initial={{ scale: reduce ? 1 : 1.04 }}
-                    animate={{ scale: reduce ? 1 : 1.08 }}
-                    transition={{ scale: { duration: 7.5, ease: 'linear' } }}
-                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
-                  />
-                )}
+                <MediaScene p={p} reduce={reduce} />
               </motion.div>
             </AnimatePresence>
 
@@ -319,6 +402,28 @@ export default function Realisations() {
            de sa colonne, même sur un écran large mais peu haut. Sinon le ratio
            1/1 + max-height rétrécissait l'image en petit carré, laissant un vide. */
         .real-stage { height: clamp(440px, 62vh, 660px); }
+
+        /* Bouton Lecture des vidéos lourdes. Au-dessus du voile de légende
+           (z-index 1), assez grand pour le pouce (56 px, le minimum
+           confortable étant 44). */
+        .real-lecture {
+          position: absolute; z-index: 2;
+          top: 50%; left: 50%; transform: translate(-50%, -50%);
+          width: 56px; height: 56px; border-radius: 50%;
+          display: grid; place-items: center;
+          padding: 0; cursor: pointer;
+          color: var(--c-brun-fonce, #2a2118);
+          background: rgba(252, 250, 246, 0.92);
+          border: 1px solid rgba(252, 250, 246, 0.6);
+          box-shadow: 0 6px 22px rgba(20, 15, 9, 0.35);
+          transition: transform 0.25s ease, background 0.25s ease;
+        }
+        .real-lecture svg { margin-left: 3px; } /* centre optique du triangle */
+        .real-lecture:hover { background: #fff; transform: translate(-50%, -50%) scale(1.07); }
+        .real-lecture:focus-visible { outline: 3px solid var(--c-argile, #a4603f); outline-offset: 3px; }
+        @media (prefers-reduced-motion: reduce) {
+          .real-lecture, .real-lecture:hover { transition: none; transform: translate(-50%, -50%); }
+        }
 
         .real-nav {
           position: absolute; top: 50%; transform: translateY(-50%);

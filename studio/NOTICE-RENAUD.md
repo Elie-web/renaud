@@ -21,7 +21,8 @@ apparaissent.
    votre appareil, elle est allégée automatiquement. Vous n'avez rien à
    redimensionner.
 6. **Cadrez le cercle** (voir juste en dessous).
-7. Cliquez sur **Publish** en bas à droite.
+7. **Vidéo** : facultatif, voir plus bas.
+8. Cliquez sur **Publish** en bas à droite.
 
 Comptez une minute pour que ça apparaisse sur le site. Actualisez la page du
 site si vous ne voyez rien tout de suite.
@@ -41,6 +42,35 @@ au site quelle partie garder.
 Sans le cercle, le site coupe au petit bonheur, et vous pouvez vous retrouver
 avec une vignette qui montre le mur plutôt que le meuble. Cinq secondes de
 travail, une bonne fois par photo.
+
+## Mettre une vidéo sur une pièce
+
+Le champ **Vidéo** est facultatif. Si vous en mettez une, c'est elle qui
+s'affiche en grand à la place de la photo quand on arrive sur la pièce.
+
+**La photo reste obligatoire**, même avec une vidéo : c'est elle qu'on voit
+avant que la vidéo démarre, et c'est elle que Google référence.
+
+Trois choses à respecter, sinon la vidéo ne se lira pas chez tout le monde :
+
+**1. Réglez votre iPhone d'abord.** Réglages → Appareil photo → Formats →
+**Le plus compatible**. Sans ce réglage, votre iPhone filme dans un format que
+les ordinateurs Windows ne savent pas lire : la vidéo s'affichera noire pour une
+partie de vos visiteurs. Le studio vous prévient s'il détecte un fichier à
+risque, mais le réglage vaut mieux que l'avertissement.
+
+**2. Faites court.** Moins d'une minute, idéalement vingt ou trente secondes.
+Un plan qui tourne autour de la pièce suffit.
+
+**3. Ne dépassez pas 50 Mo.** Au-delà, le studio vous le signale. Si votre vidéo
+est trop longue ou trop lourde, raccourcissez-la directement dans l'application
+Photos de l'iPhone (Modifier, puis tirez les poignées de début et de fin).
+
+À savoir : au-dessus de 5 Mo, le site n'affiche pas la vidéo tout de suite. Il
+montre votre photo avec un **bouton Lecture** par dessus, et la vidéo ne se
+charge qu'au clic du visiteur. C'est voulu : ça évite de consommer le forfait
+mobile de quelqu'un qui passait juste voir vos pièces. Une vidéo légère, elle,
+démarre toute seule, en boucle et sans le son.
 
 ## Changer l'ordre
 
