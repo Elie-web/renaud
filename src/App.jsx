@@ -90,9 +90,6 @@ export default function App() {
         <Realisations />
         <Metier />
         <ImageBand />
-        {/* L'atelier vu sur Instagram, juste après la photo d'atelier. Ne s'affiche
-            que lorsque le flux Behold est branché : voir lib/coordonnees.js. */}
-        <Instagram />
         <Processus />
         <Engagements />
         {/* La section « Ce qu'en disent mes clients » est RETIRÉE tant que Renaud
@@ -106,6 +103,11 @@ export default function App() {
             valeurs de la fiche Google Business, réimporter ici, et seulement à ce
             moment-là ajouter `aggregateRating` au JSON-LD d'index.html. */}
         <FAQ />
+        {/* Les derniers posts Instagram, juste avant le contact : on finit sur
+            l'atelier vivant avant de demander le devis. Ne s'affiche que lorsque
+            l'identifiant ET le flux Behold sont renseignés dans
+            lib/coordonnees.js ; sans flux, la section n'existe pas du tout. */}
+        <Instagram />
         <Contact />
       </main>
       <Footer />
