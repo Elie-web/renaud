@@ -25,7 +25,7 @@
 export const EMAIL = 'renaud.achard@gmail.com'
 
 /* Identifiant Instagram, sans le @. */
-export const INSTAGRAM = ''
+export const INSTAGRAM = 'woody_woodien'
 export const INSTAGRAM_URL = INSTAGRAM ? `https://www.instagram.com/${INSTAGRAM}/` : ''
 
 /* Flux Instagram, fourni par Behold (behold.so), formule gratuite :

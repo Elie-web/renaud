@@ -78,14 +78,11 @@
 
       ⚠ DEUX CHAMPS RESTENT À COMPLÉTER, ce sont les plus rentables du fichier :
 
-      1. "sameAs" sur le LocalBusiness : la liste des profils qui prouvent que
-         l'entreprise existe ailleurs que sur son propre site. Sans lui, Google
-         n'a aucun moyen de relier ce site au compte Instagram de Renaud ni à sa
-         fiche Google Business. À ajouter juste après "numberOfEmployees" :
-           "sameAs": [
-             "https://www.instagram.com/<compte de Renaud>",
-             "https://www.google.com/maps/place/<fiche Google Business>"
-           ],
+      1. "sameAs" : l'Instagram de Renaud y est depuis le 23/10/2026.
+         MANQUE ENCORE la fiche Google Business, qui n'existe pas. Le jour où
+         elle est créée, ajouter son URL dans le tableau "sameAs" ci-dessous :
+           "https://www.google.com/maps/place/<fiche Google Business>"
+         C'est ce qui permet à Google de relier ce site à l'entité qu'il connaît.
 
       2. "aggregateRating" / "review" : VOLONTAIREMENT ABSENTS. Déclarer une note
          moyenne sans avis réels et vérifiables est un faux avis : sanctionné par
@@ -131,6 +128,7 @@
           "currenciesAccepted": "EUR",
           "paymentAccepted": "Virement, chèque, espèces",
           "numberOfEmployees": { "@type": "QuantitativeValue", "value": 1 },
+          "sameAs": ["https://www.instagram.com/woody_woodien/"],
           "areaServed": [
             { "@type": "City", "name": "Chamonix-Mont-Blanc" },
             { "@type": "City", "name": "Les Houches" },

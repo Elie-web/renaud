@@ -1,6 +1,6 @@
 # Achard Créa — où en est le projet
 
-Document unique de suivi. Mis à jour le **6 octobre 2026**.
+Document unique de suivi. Mis à jour le **23 octobre 2026**.
 Si tu ne dois lire qu'une chose avant de reprendre le dossier, c'est ce fichier.
 
 - **En ligne** : https://achard-créa.fr (forme technique `xn--achard-cra-j7a.fr`)
@@ -35,10 +35,10 @@ flux), et la galerie Sanity.
 | Mettre la police achetée | ✅ Relicta Regular, contour supprimé partout. Voir `POLICES.md` |
 | Centrer « Achard Créa / Ébéniste · sur mesure » à côté du logo | ✅ Les deux lignes sont centrées l'une sous l'autre (`Nav.jsx`) |
 | Email affiché : son Gmail, pas de boîte pro pour l'instant | ✅ `renaud.achard@gmail.com`, confirmée par écrit par Elie, posée partout |
-| Mettre son Instagram | ⏳ Lien prêt (contact, pied de page, `sameAs`), **identifiant à récupérer** |
+| Mettre son Instagram | ✅ `@woody_woodien`, posé le 23/10/2026 (contact, pied de page, `sameAs`, `llms.txt`) |
 | Une section qui affiche ses derniers posts Instagram | ⏳ `Instagram.jsx` écrit et testé, **flux Behold à créer** |
 | Brancher le formulaire sur sa boîte mail | ⏳ Code Web3Forms écrit et testé, **clé à créer** |
-| Galerie où il met ses photos et vidéos | ⏳ Inchangé : compte Sanity à ouvrir. **Les vidéos passent par Instagram** |
+| Galerie où il met ses photos et vidéos | ✅ **Branchée le 23/10/2026** : https://achard-crea.sanity.studio. **Les vidéos passent par Instagram** |
 | Domaine en punycode quand on copie le lien | Accepté par Renaud, rien à faire. Changer de domaine serait payant |
 
 > ✅ **L'adresse Gmail a été confirmée par écrit** : `renaud.achard@gmail.com`.
@@ -266,11 +266,22 @@ grille disparaît et il reste le bouton vers son compte.
 **6 bis. Fiche Google Business.** Toujours à créer, puis à ajouter dans
 `sameAs`. C'est le meilleur rapport effort/effet SEO local du dossier.
 
-**7. Ouvrir le compte Sanity** pour que Renaud gère ses photos seul (~40 min en
-comptant le déploiement du studio et les origines CORS). Le code est prêt et testé,
-la notice aussi. ⚠ Ne pas sauter l'étape CORS : sans elle la galerie ne se met
-jamais à jour, en silence. ⚠ Une fois branché, les photos viennent de
-`cdn.sanity.io` : ajouter une ligne à la politique de confidentialité.
+~~**7. Ouvrir le compte Sanity.**~~ ✅ **FAIT le 23/10/2026.**
+
+- Projet Sanity `e74r8e4d`, dataset `production` (public, lecture seule).
+- **Studio en ligne : https://achard-crea.sanity.studio** — c'est l'adresse de
+  Renaud. Il se connecte avec son Gmail, invité en rôle **Editor**.
+- Les 3 origines CORS sont posées (localhost:5173, la préprod, le domaine).
+- **Variables déclarées chez Vercel** (`VITE_SANITY_PROJECT_ID`,
+  `VITE_SANITY_DATASET`) : sans elles le build de production ignore le CMS.
+- Il a fallu créer `studio/sanity.cli.ts`, qui n'existait pas : sans lui toutes
+  les commandes `sanity` échouent. En `.ts` et pas `.js` à cause du
+  `"type": "module"` du paquet, voir le commentaire en tête du fichier.
+
+⚠ **Reste à faire sur ce point** : les photos viennent maintenant de
+`cdn.sanity.io`, il faut ajouter une ligne à la politique de confidentialité.
+Et recopier les 9 pièces en dur dans le studio (non bloquant : tant qu'il est
+vide, le site sert la liste en dur).
 
 ~~**8. Relier le projet Vercel à GitHub.**~~ ✅ Fait : constaté le 06/10/2026,
 un `git push` a déclenché un déploiement en production.

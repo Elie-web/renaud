@@ -45,6 +45,28 @@ SANITY_STUDIO_PROJECT_ID=le-project-id
 SANITY_STUDIO_DATASET=production
 ```
 
+## 2 bis. Déclarer la variable chez Vercel — SANS ÇA LE SITE EN LIGNE N'EN SAIT RIEN
+
+Le `.env` de la racine ne sert qu'à la machine d'Elie. Vercel construit le site
+sur ses propres serveurs : si la variable n'y est pas, `cmsConfigure` vaut false
+dans le build de production et **le site en ligne continue d'afficher les 9
+pièces en dur**, quoi que Renaud publie. Rien ne le signale, puisque c'est le
+comportement de repli prévu.
+
+Constaté le 20/10/2026 : le projet `achard_ebenisteries` n'avait aucune variable
+d'environnement.
+
+```bash
+vercel env add VITE_SANITY_PROJECT_ID production
+vercel env add VITE_SANITY_DATASET production
+```
+
+Ou dans le tableau de bord Vercel, projet `achard_ebenisteries` → Settings →
+Environment Variables. Valeurs : l'ID du projet et `production`.
+
+⚠ Une variable ajoutée ne s'applique qu'au **prochain déploiement**. Il faut
+donc repousser (ou relancer un déploiement) pour que ça prenne effet.
+
 ## 3. Autoriser le site à lire les données (CORS) — NE PAS SAUTER
 
 Sans cette étape, le navigateur bloque la requête, **le code avale l'erreur en
