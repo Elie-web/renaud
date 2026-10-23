@@ -278,10 +278,16 @@ grille disparaît et il reste le bouton vers son compte.
   les commandes `sanity` échouent. En `.ts` et pas `.js` à cause du
   `"type": "module"` du paquet, voir le commentaire en tête du fichier.
 
-⚠ **Reste à faire sur ce point** : les photos viennent maintenant de
-`cdn.sanity.io`, il faut ajouter une ligne à la politique de confidentialité.
-Et recopier les 9 pièces en dur dans le studio (non bloquant : tant qu'il est
-vide, le site sert la liste en dur).
+- ✅ **Les 9 pièces ont été importées dans le studio** par
+  `studio/scripts/importer-realisations.mjs`. C'était nécessaire, pas cosmétique :
+  dès qu'UNE pièce est publiée, le site bascule entièrement sur le CMS. Sans
+  import préalable, la première photo de Renaud aurait fait disparaître les 9
+  autres. Maintenant, ajouter une pièce est additif.
+- ✅ **Politique de confidentialité à jour** : paragraphe sur `cdn.sanity.io`.
+
+⚠ **Les photos n'ont pas de point d'intérêt** (hotspot) : les vignettes sont
+donc cadrées par `crop=entropy`, Sanity choisit seul. Pour reprendre la main,
+ouvrir une pièce dans le studio, cliquer la photo et déplacer le cercle.
 
 ~~**8. Relier le projet Vercel à GitHub.**~~ ✅ Fait : constaté le 06/10/2026,
 un `git push` a déclenché un déploiement en production.

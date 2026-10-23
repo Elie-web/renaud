@@ -1,0 +1,56 @@
+[
+  {
+    "categorie": "Cuisine",
+    "titre": "Cuisine en chêne foncé",
+    "matiere": "Chêne massif brossé, plan de travail clair",
+    "photo": "cuisine/cuisine-chene-fonce-03.webp"
+  },
+  {
+    "categorie": "Table basse",
+    "titre": "Table basse réversible",
+    "matiere": "Noyer massif, plateau jeux de société",
+    "photo": "meuble/table-basse-jeu-01.webp"
+  },
+  {
+    "categorie": "Meuble",
+    "titre": "Commode à poignées cuir",
+    "matiere": "Chêne massif & cuir",
+    "photo": "meuble/commode-chene-cuir-01.webp"
+  },
+  {
+    "categorie": "Aménagement",
+    "titre": "Bibliothèque sur mesure",
+    "matiere": "Du sol au plafond, alcôves décalées",
+    "photo": "agencement/bibliotheque-sur-mesure-01.webp"
+  },
+  {
+    "categorie": "Console",
+    "titre": "Console marquetée",
+    "matiere": "Frêne & marqueterie",
+    "photo": "meuble/console-marqueterie-01.webp"
+  },
+  {
+    "categorie": "Aménagement",
+    "titre": "Meuble à tasseaux",
+    "matiere": "Tasseaux rétroéclairés, chêne",
+    "photo": "agencement/meuble-tasseaux-retroeclaire-02.webp"
+  },
+  {
+    "categorie": "Mobilier",
+    "titre": "Chevet « vague & soleil »",
+    "matiere": "Frêne & laque",
+    "photo": "meuble/chevet-vague-rendu-04.webp"
+  },
+  {
+    "categorie": "Table",
+    "titre": "Table d'appoint marquetée",
+    "matiere": "Marqueterie sur frêne",
+    "photo": "meuble/table-appoint-marqueterie-01.webp"
+  },
+  {
+    "categorie": "Objet",
+    "titre": "Boîte à couvercle",
+    "matiere": "Noyer & chêne cérusé",
+    "photo": "objet/boite-noyer-02.webp"
+  }
+]
