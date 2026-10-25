@@ -39,7 +39,7 @@ export const BEHOLD_FEED = ''
    La clé se crée sur la page d'accueil de web3forms.com en tapant l'adresse
    qui doit RECEVOIR les demandes : elle arrive par email à cette adresse.
    Les messages partent donc chez Renaud, pas chez Elie. */
-export const WEB3FORMS_CLE = ''
+export const WEB3FORMS_CLE = '8df06091-4651-4b05-83f7-d2e89feb9f7a'
 
 /* Lien `mailto:`. Le domaine accentué est écrit en punycode pour que les
    vieux logiciels de messagerie le comprennent. */

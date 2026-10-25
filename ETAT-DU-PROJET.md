@@ -249,22 +249,36 @@ Commit `60e47fd`, revert en une commande si besoin.
 Toutes les valeurs se posent dans **`src/lib/coordonnees.js`**, le seul fichier
 à toucher côté React. Une valeur vide désactive proprement ce qui en dépend.
 
-**5. Le formulaire : Web3Forms** (formule gratuite, aucun compte à créer).
-Le code est écrit et testé (envoi réussi, envoi refusé, message conservé en cas
-d'erreur). Sans clé, le formulaire garde l'ancien `mailto:`.
-1. Sur web3forms.com, taper **le Gmail de Renaud** dans le champ de la page
-   d'accueil, puis « Create Access Key ».
-2. La clé arrive **dans sa boîte**, pas dans celle d'Elie. Il la transfère.
-3. La poser dans `WEB3FORMS_CLE`.
-4. Dans `public/confidentialite.html`, remplacer le paragraphe « Le formulaire de
-   contact ouvre votre logiciel de messagerie » par le bloc commenté juste en
-   dessous. ⚠ Ne pas l'oublier : sinon la page décrit un fonctionnement qui
-   n'existe plus.
-5. Faire un vrai envoi de test et vérifier qu'il arrive chez Renaud, pas en
-   indésirables.
+~~**5. Le formulaire : Web3Forms.**~~ ✅ **BRANCHÉ le 25/10/2026.**
 
-Pourquoi Web3Forms et pas un service à compte (Formspree…) : pas de compte à
-créer ni de collaborateur à inviter, Renaud n'a qu'un mail à transférer.
+- Clé `8df06091-4651-4b05-83f7-d2e89feb9f7a`, posée dans `src/lib/coordonnees.js`.
+  Elle est **publique par conception** et part dans le code du navigateur.
+- Compte Web3Forms **d'Elie** (elie@elieageron.com), formule gratuite,
+  250 envois/mois. Formulaire nommé « site renaud ».
+- Réglages faits : objet par défaut « Demande de devis - site achard-créa.fr »,
+  expéditeur « Site Achard Créa », filtre anti-spam actif, **pas de captcha**
+  (le site n'en envoie pas, l'activer casserait le formulaire), conservation
+  des demandes **3 ans**, ce qui correspond à ce qu'annonce la politique de
+  confidentialité. Le texte d'intro des emails reste en anglais : c'est une
+  option payante, jugée cosmétique.
+- Politique de confidentialité basculée : le paragraphe décrit Web3Forms et
+  non plus le `mailto:`.
+- Envoi de test réel effectué depuis le formulaire : accepté par l'API.
+
+⚠ **IL RESTE UNE ÉTAPE, et elle dépend de Renaud.** Les demandes arrivent
+aujourd'hui chez **Elie**, pas chez Renaud. Pour basculer :
+
+1. Renaud doit cliquer le lien de vérification envoyé à `renaud.achard@gmail.com`
+   (relancé le 25/10/2026 depuis Linked Emails). Tant qu'il ne l'a pas fait, son
+   adresse reste « unverified » et **ne peut pas être choisie comme destinataire**.
+2. Une fois vérifiée : app.web3forms.com → formulaire « site renaud » → Settings →
+   Email Configuration → **Recipient Emails** → remplacer l'adresse d'Elie par
+   celle de Renaud. La formule gratuite n'autorise **qu'un seul destinataire**
+   (1/1), et le CC est payant : c'est l'un ou l'autre.
+
+En attendant, les demandes ne sont pas perdues : elles arrivent chez Elie, qui
+les transfère. Un filtre Gmail sur l'objet « Demande de devis » permet de les
+isoler, chez l'un comme chez l'autre.
 
 **6. Instagram : identifiant puis flux Behold.**
 1. Récupérer son identifiant, le poser dans `INSTAGRAM`. Le lien apparaît dans
