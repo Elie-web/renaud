@@ -265,20 +265,16 @@ Toutes les valeurs se posent dans **`src/lib/coordonnees.js`**, le seul fichier
   non plus le `mailto:`.
 - Envoi de test réel effectué depuis le formulaire : accepté par l'API.
 
-⚠ **IL RESTE UNE ÉTAPE, et elle dépend de Renaud.** Les demandes arrivent
-aujourd'hui chez **Elie**, pas chez Renaud. Pour basculer :
+✅ **Destinataire basculé sur Renaud le 28/10/2026.** Il a validé son adresse
+(`renaud.achard@gmail.com` est « verified » dans Linked Emails), et c'est elle
+qui est désormais seule dans Recipient Emails. Vérifié après rechargement de la
+page, puis par un envoi réel depuis le site en ligne, accepté par l'API.
 
-1. Renaud doit cliquer le lien de vérification envoyé à `renaud.achard@gmail.com`
-   (relancé le 25/10/2026 depuis Linked Emails). Tant qu'il ne l'a pas fait, son
-   adresse reste « unverified » et **ne peut pas être choisie comme destinataire**.
-2. Une fois vérifiée : app.web3forms.com → formulaire « site renaud » → Settings →
-   Email Configuration → **Recipient Emails** → remplacer l'adresse d'Elie par
-   celle de Renaud. La formule gratuite n'autorise **qu'un seul destinataire**
-   (1/1), et le CC est payant : c'est l'un ou l'autre.
-
-En attendant, les demandes ne sont pas perdues : elles arrivent chez Elie, qui
-les transfère. Un filtre Gmail sur l'objet « Demande de devis » permet de les
-isoler, chez l'un comme chez l'autre.
+⚠ Le gratuit n'autorise **qu'un seul destinataire** (1/1) et le CC est payant :
+Elie ne reçoit donc plus rien. Pour qu'il revoie passer les demandes, il faudrait
+soit repasser son adresse en destinataire (et Renaud ne recevrait plus), soit
+payer. Le compte Web3Forms reste au nom d'Elie : **si un jour il ferme ce compte,
+le formulaire de Renaud s'arrête.** À transférer si la relation se termine.
 
 **6. Instagram : identifiant puis flux Behold.**
 1. Récupérer son identifiant, le poser dans `INSTAGRAM`. Le lien apparaît dans
