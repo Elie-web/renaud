@@ -1,4 +1,4 @@
-# Achard Créa — Renaud Achard, ébéniste
+# Achard Créa · Renaud Achard, ébéniste
 
 > Ébéniste installé à Sallanches, en Haute-Savoie. Conçoit, fabrique
 > et pose du mobilier, des cuisines, des bibliothèques, des escaliers et des
@@ -18,13 +18,13 @@
 
 ## Prestations
 
-- **Cuisines en bois sur mesure** — plan de travail, rangements, façades, îlots
-- **Meubles sur mesure** — tables, consoles, chevets, bureaux, commodes
-- **Aménagement intérieur** — bibliothèques, dressings, agencements sur mesure,
+- **Cuisines en bois sur mesure** : plan de travail, rangements, façades, îlots
+- **Meubles sur mesure** : tables, consoles, chevets, bureaux, commodes
+- **Aménagement intérieur** : bibliothèques, dressings, agencements sur mesure,
   y compris du sol au plafond et dans les recoins difficiles
 - **Escaliers et garde-corps en bois**
 - **Portes et menuiseries**
-- **Objets** — plateaux, tréteaux, boîtes, petites pièces
+- **Objets** : plateaux, tréteaux, boîtes, petites pièces
 
 Matériaux : bois massif (chêne, noyer, frêne, épicéa) et contreplaqué, choisis
 selon l'usage de chaque projet. Techniques : marqueterie, placage cintré,
@@ -39,12 +39,12 @@ la Haute-Savoie.
 
 ## Comment se passe un projet
 
-1. **La rencontre** — visite chez vous ou à l'atelier, prise de mesures, échange
+1. **La rencontre** : visite chez vous ou à l'atelier, prise de mesures, échange
    sans engagement.
-2. **La conception** — croquis, plans, choix des bois et des matériaux.
-3. **Le rendu réaliste** — une modélisation 3D quasi photographique, ajustée
-   autant de fois que nécessaire avant la moindre découpe.
-4. **La livraison** — pose par Renaud lui-même, puis suivi : s'il faut revenir
+2. **La conception** : croquis, plans, choix des bois et des matériaux.
+3. **Le rendu réaliste** : une modélisation 3D quasi photographique, retouchée
+   autant de fois qu'il faut.
+4. **La livraison** : pose par Renaud lui-même, puis suivi. S'il faut revenir
    après l'installation, il revient.
 
 ## Questions fréquentes
@@ -83,7 +83,7 @@ quelque chose bouge ou demande une reprise.
 
 ## Pages
 
-- [Site (page unique)](https://achard-créa.fr/) — présentation, savoir-faire,
+- [Site (page unique)](https://achard-créa.fr/) : présentation, savoir-faire,
   réalisations, parcours de l'artisan, déroulé d'un projet, questions
   fréquentes, contact
 - [Mentions légales](https://achard-créa.fr/mentions-legales.html)

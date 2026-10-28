@@ -57,7 +57,7 @@ function Item({ faq, isOpen, onToggle, index }) {
              enchaînements de clics. Le conteneur de l'accordéon est un
              `staggerContainer` et chaque question un `staggerItem` : tout
              `motion` imbriqué là-dedans dépend de l'orchestration du parent.
-             La cause exacte n'a pas été isolée — une partie des mesures a été
+             La cause exacte n'a pas été isolée - une partie des mesures a été
              faussée par un onglet en arrière-plan, qui gèle les animations.
              Elle n'a pas été creusée davantage : la dépendance elle-même était
              le problème.

@@ -176,7 +176,7 @@ ul     { list-style: none; }
   text-wrap: balance;
 }
 
-/* GRAISSE DES TITRES — lire avant de toucher.
+/* GRAISSE DES TITRES - lire avant de toucher.
    Jusqu'en octobre 2026, seule la Light était disponible, et les titres étaient
    épaissis par un contour (`-webkit-text-stroke: 0.022em`). Ce contour laissait
    de petites amorces aux jonctions des fûts, ce que Renaud appelait du
@@ -195,7 +195,7 @@ ul     { list-style: none; }
   text-wrap: balance;
 }
 
-/* Plafond à 3.5rem (56 px) et non 4rem (64 px) — mesuré, pas estimé.
+/* Plafond à 3.5rem (56 px) et non 4rem (64 px) - mesuré, pas estimé.
    La colonne des en-têtes de section (SectionHeader) est fixe : elle ne suit
    pas la largeur de l'écran, alors que `4vw` la suit. Au-delà de ~1350 px de
    fenêtre le titre le plus long du site débordait sur une troisième ligne.

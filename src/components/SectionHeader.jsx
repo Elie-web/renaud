@@ -4,7 +4,7 @@ import { viewportSettings } from '../lib/motion'
 /* En-tête de section centré, façon VM Producers :
    eyebrow centré → titre centré (mot d'accent en italique argile) → lead centré resserré.
 
-   LARGEUR DE LA COLONNE — lire avant de la resserrer.
+   LARGEUR DE LA COLONNE - lire avant de la resserrer.
    Elle était à 60ch, soit 606 px FIXES : `ch` se résout sur l'Inter 16 px du
    bloc, il ne suit donc pas la largeur de l'écran. Le titre, lui, est en `4vw`
    et grossit avec elle. Passé ~1350 px de fenêtre, « Cuisines, meubles et

@@ -92,12 +92,12 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
         className="hero-title"
         style={{
           fontFamily: 'var(--f-serif)', fontWeight: 400,
-          // Plafond à 4rem (64 px) et non 5.4rem (86 px) — mesuré dans le
+          // Plafond à 4rem (64 px) et non 5.4rem (86 px) - mesuré dans le
           // navigateur à chaque largeur, pas estimé.
           //
           // À 86 px, « par un ébéniste en Haute-Savoie. » demande 1375 px pour
           // 1320 px disponibles. Le navigateur coupait alors sur le trait
-          // d'union — « Haute- » / « Savoie. » — et le titre tombait sur QUATRE
+          // d'union - « Haute- » / « Savoie. » - et le titre tombait sur QUATRE
           // lignes.
           //
           // Le cas qui commande n'est PAS le 1920, c'est l'écran très large. La
