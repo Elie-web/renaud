@@ -92,13 +92,21 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
         className="hero-title"
         style={{
           fontFamily: 'var(--f-serif)', fontWeight: 400,
-          // Plafond à 4.25rem (68 px) et non 5.4rem (86 px) — mesuré en ligne,
-          // pas estimé.
+          // Plafond à 4rem (64 px) et non 5.4rem (86 px) — mesuré dans le
+          // navigateur à chaque largeur, pas estimé.
           //
           // À 86 px, « par un ébéniste en Haute-Savoie. » demande 1375 px pour
           // 1320 px disponibles. Le navigateur coupait alors sur le trait
           // d'union — « Haute- » / « Savoie. » — et le titre tombait sur QUATRE
-          // lignes. 68 px est la plus grande taille qui tienne en deux lignes.
+          // lignes.
+          //
+          // Le cas qui commande n'est PAS le 1920, c'est l'écran très large. La
+          // marge intérieure du bloc est `var(--px)`, soit 6vw plafonné à
+          // 132 px : au-delà de ~2200 px de fenêtre la largeur utile se fige à
+          // 1320 − 264 = 1056 px. Mesuré à 2560 px : à 68 px la ligne demandait
+          // 1081 px pour 1056 px, il manquait 25 px et le titre repassait à
+          // trois lignes. À 64 px elle demande 1017 px, soit 39 px de marge
+          // dans le pire cas et 73 px à 1920 px.
           //
           // Le défaut de fond est ancien : la taille suit la largeur de l'écran
           // (`5.4vw`), le bloc qui la contient non. Mais le passage de la
@@ -106,7 +114,11 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
           // 2,2 % de largeur gagnés font franchir le seuil de coupure. Rejoué
           // sur le site en ligne à 1920 px : Light → 3 lignes, Regular →
           // 4 lignes. La police a bien ajouté la quatrième.
-          fontSize: 'clamp(2.4rem, 5.4vw, 4.25rem)', lineHeight: 1.12,
+          //
+          // ⚠ Le plancher de ce clamp ne sert à rien en dessous de 860 px : la
+          // règle `.hero-title` de la feuille en bas de ce fichier reprend la
+          // main avec `!important`. C'est LÀ que se règle le téléphone.
+          fontSize: 'clamp(2.4rem, 5.4vw, 4rem)', lineHeight: 1.12,
           letterSpacing: '0', color: 'var(--c-ivoire)',
           // Pas de nowrap : les <br /> donnent la coupe voulue quand la ligne
           // tient, et le titre se replie de lui-même sur les colonnes étroites
@@ -120,12 +132,17 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
         }}
       >
         Votre intérieur sur mesure,<br />
-        {/* « Haute-Savoie » dans un span insécable : un trait d'union est un
-            point de coupe légitime pour le navigateur, et le nom propre se
-            retrouvait scindé en « Haute- » / « Savoie. ». Ceinture et
-            bretelles avec le plafond de taille ci-dessus. */}
+        {/* « en Haute-Savoie. » forme un seul groupe insécable, et pas
+            seulement « Haute-Savoie. ».
+            Deux raisons, mesurées : le trait d'union est un point de coupe
+            légitime pour le navigateur, qui scindait le nom propre en
+            « Haute- » / « Savoie. » ; et sur téléphone, « en » restait seul sur
+            sa ligne. En liant les trois mots, le repli mobile donne
+            « par un ébéniste » / « en Haute-Savoie. », sans orpheline.
+            Le groupe demande 253 px à la taille plancher, pour 264 px utiles
+            sur un écran de 320 px : il tient partout. */}
         <em className="i-accent--light">
-          par un ébéniste en <span style={{ whiteSpace: 'nowrap' }}>Haute-Savoie.</span>
+          par un ébéniste <span style={{ whiteSpace: 'nowrap' }}>en Haute-Savoie.</span>
         </em>
       </motion.h1>
 
@@ -323,7 +340,19 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
             text-align: center !important;
           }
           .hero-eyebrow { display: none !important; }
-          .hero-title { font-size: clamp(2.4rem, 9vw, 3.4rem) !important; line-height: 1.12 !important; max-width: none !important; white-space: normal !important; }
+          /* Plancher à 1.85rem (29,6 px) et non 2.4rem (38,4 px). C'est cette
+             règle, et pas le clamp posé en style inline, qui décide de la
+             taille du titre sur téléphone.
+             Ce qui commande est le groupe insécable « en Haute-Savoie. » face
+             à la largeur utile, qui vaut la fenêtre moins 2 x --px (28 px au
+             plancher), soit 264 px sur un écran de 320. Mesuré : à 38,4 px le
+             groupe demandait 312 px et débordait ; à 32 px, 260 px, il ne
+             restait que 2 px de chaque côté ; à 29,6 px il demande 240 px et
+             laisse 12 px de part et d'autre.
+             Le plancher ne mord qu'en dessous de 329 px de fenêtre : au-delà
+             c'est 9vw qui l'emporte, donc le rendu des téléphones courants
+             (360, 375, 390, 414) n'est pas touché. */
+          .hero-title { font-size: clamp(1.85rem, 9vw, 3.4rem) !important; line-height: 1.12 !important; max-width: none !important; white-space: normal !important; }
           .hero-sub   { font-size: 0.98rem !important; line-height: 1.6 !important; max-width: 38ch !important; }
           .hero-cta-row {
             flex-direction: column !important;

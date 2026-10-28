@@ -30,7 +30,10 @@ function Item({ faq, isOpen, onToggle, index }) {
         <button id={btnId} onClick={onToggle} aria-expanded={isOpen} aria-controls={panelId}
           style={{ width: '100%', textAlign: 'left', padding: 'var(--sp-5) 0', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 'var(--sp-4)', background: 'none', cursor: 'pointer', font: 'inherit', color: 'inherit' }}>
           <span style={{ fontFamily: 'var(--f-serif)', fontSize: 'clamp(1.3rem, 1.9vw, 1.65rem)', fontWeight: 400, color: 'var(--c-texte)', lineHeight: 1.3, flex: 1 }}>{faq.q}</span>
-          <motion.span aria-hidden="true" animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.3 }} style={{ color: 'var(--c-or-dim)', fontSize: '1.7rem', lineHeight: 1, flexShrink: 0, marginTop: '2px' }}>+</motion.span>
+          {/* Rotation en CSS et non en framer-motion, pour la même raison que
+              le panneau ci-dessous : tout ce qui s'anime ici est pris dans
+              l'orchestration du conteneur et part avec du retard. */}
+          <span aria-hidden="true" style={{ color: 'var(--c-or-dim)', fontSize: '1.7rem', lineHeight: 1, flexShrink: 0, marginTop: '2px', display: 'inline-block', transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform .3s cubic-bezier(.25,.1,.25,1)' }}>+</span>
         </button>
       </h3>
       {/* Le panneau reste TOUJOURS monté, même replié. Auparavant il n'était
@@ -38,32 +41,54 @@ function Item({ faq, isOpen, onToggle, index }) {
           `aria-controls` désignant un identifiant absent du document, ce qu'un
           lecteur d'écran signale comme une référence cassée.
 
-          ⚠ NE PAS confier `visibility` à framer-motion — ni par `style`, ni
-          par `transitionEnd`, ni dans l'objet `animate`. Dès qu'il a posé la
-          valeur une fois, il en devient propriétaire et ignore ce que React
-          lui passe ensuite ; combinée à `height: 'auto'`, qui demande une
-          mesure, la bascule devient non déterministe. C'est le bug du
-          16/09/2026, resté six semaines en ligne : seule la première question
-          affichait sa réponse, les cinq autres ouvraient un panneau vide qui
-          poussait la page. Un rafistolage du 28/10 a encore laissé deux
-          questions sur six en échec, au hasard des enchaînements de clics.
+          ⚠ CE PANNEAU NE DOIT PAS S'ANIMER AVEC FRAMER-MOTION. Deux raisons,
+          toutes deux constatées en production :
 
-          Le repli replie donc UNIQUEMENT la hauteur et l'opacité, que
-          framer-motion sait animer. Le texte replié sort de l'arbre
-          d'accessibilité par `aria-hidden`, piloté par React seul : une valeur
-          booléenne, aucune animation, aucun état à synchroniser.
-          Ce panneau ne contient aucun élément focalisable (un seul <p>), donc
-          `aria-hidden` n'y piège aucun arrêt de tabulation. */}
-      <motion.div
+          1. `visibility` confiée à framer-motion (par `style`, par
+             `transitionEnd` ou dans `animate`) : dès qu'il a posé la valeur une
+             fois, il en devient propriétaire et ignore ce que React lui passe
+             ensuite. La visibilité restait figée sur l'état du montage. Bug du
+             16/09/2026, six semaines en ligne : seule la première question
+             affichait sa réponse, les cinq autres ouvraient un panneau vide qui
+             poussait la page.
+          2. Le correctif suivant (hauteur et opacité en `animate`, visibilité
+             confiée à `aria-hidden`) s'est encore montré instable à la mesure :
+             des panneaux déclarés ouverts restaient à hauteur zéro selon les
+             enchaînements de clics. Le conteneur de l'accordéon est un
+             `staggerContainer` et chaque question un `staggerItem` : tout
+             `motion` imbriqué là-dedans dépend de l'orchestration du parent.
+             La cause exacte n'a pas été isolée — une partie des mesures a été
+             faussée par un onglet en arrière-plan, qui gèle les animations.
+             Elle n'a pas été creusée davantage : la dépendance elle-même était
+             le problème.
+
+          D'où le repli en CSS pur : `grid-template-rows` de 0fr à 1fr est la
+          façon standard d'animer vers une hauteur « auto » sans mesure et sans
+          JavaScript. Aucune orchestration, aucun état à synchroniser, le même
+          comportement au premier clic qu'au vingtième. Les six questions ont
+          été vérifiées une à une, puis en clics rapides, dans un Chrome au
+          premier plan.
+          Le texte replié sort de l'arbre d'accessibilité par `aria-hidden`,
+          piloté par React seul. Ce panneau ne contient aucun élément
+          focalisable (un seul <p>), donc `aria-hidden` n'y piège aucun arrêt de
+          tabulation. */}
+      <div
         id={panelId} role="region" aria-labelledby={btnId}
         aria-hidden={!isOpen}
-        initial={false}
-        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-        style={{ overflow: 'hidden' }}
+        style={{
+          display: 'grid',
+          gridTemplateRows: isOpen ? '1fr' : '0fr',
+          opacity: isOpen ? 1 : 0,
+          transition: 'grid-template-rows .4s cubic-bezier(.25,.1,.25,1), opacity .4s cubic-bezier(.25,.1,.25,1)',
+        }}
       >
-        <p style={{ fontFamily: 'var(--f-sans)', fontSize: 'clamp(1.02rem, 1.2vw, 1.15rem)', lineHeight: 1.72, color: 'var(--c-texte-2)', paddingBottom: 'var(--sp-5)', maxWidth: '60ch' }}>{faq.a}</p>
-      </motion.div>
+        {/* `minHeight: 0` est indispensable : sans lui, un élément de grille
+            garde sa hauteur de contenu minimale et la ligne ne retombe jamais
+            à zéro. */}
+        <div style={{ overflow: 'hidden', minHeight: 0 }}>
+          <p style={{ fontFamily: 'var(--f-sans)', fontSize: 'clamp(1.02rem, 1.2vw, 1.15rem)', lineHeight: 1.72, color: 'var(--c-texte-2)', paddingBottom: 'var(--sp-5)', maxWidth: '60ch' }}>{faq.a}</p>
+        </div>
+      </div>
     </motion.div>
   )
 }
