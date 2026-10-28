@@ -92,7 +92,21 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
         className="hero-title"
         style={{
           fontFamily: 'var(--f-serif)', fontWeight: 400,
-          fontSize: 'clamp(2.4rem, 5.4vw, 5.4rem)', lineHeight: 1.12,
+          // Plafond à 4.25rem (68 px) et non 5.4rem (86 px) — mesuré en ligne,
+          // pas estimé.
+          //
+          // À 86 px, « par un ébéniste en Haute-Savoie. » demande 1375 px pour
+          // 1320 px disponibles. Le navigateur coupait alors sur le trait
+          // d'union — « Haute- » / « Savoie. » — et le titre tombait sur QUATRE
+          // lignes. 68 px est la plus grande taille qui tienne en deux lignes.
+          //
+          // Le défaut de fond est ancien : la taille suit la largeur de l'écran
+          // (`5.4vw`), le bloc qui la contient non. Mais le passage de la
+          // Relicta Light à la Regular le 06/10/2026 n'est PAS neutre : les
+          // 2,2 % de largeur gagnés font franchir le seuil de coupure. Rejoué
+          // sur le site en ligne à 1920 px : Light → 3 lignes, Regular →
+          // 4 lignes. La police a bien ajouté la quatrième.
+          fontSize: 'clamp(2.4rem, 5.4vw, 4.25rem)', lineHeight: 1.12,
           letterSpacing: '0', color: 'var(--c-ivoire)',
           // Pas de nowrap : les <br /> donnent la coupe voulue quand la ligne
           // tient, et le titre se replie de lui-même sur les colonnes étroites
@@ -106,7 +120,13 @@ export default function Hero({ bg = HERO_BG, layout = 'center', variant = 'full'
         }}
       >
         Votre intérieur sur mesure,<br />
-        <em className="i-accent--light">par un ébéniste en Haute-Savoie.</em>
+        {/* « Haute-Savoie » dans un span insécable : un trait d'union est un
+            point de coupe légitime pour le navigateur, et le nom propre se
+            retrouvait scindé en « Haute- » / « Savoie. ». Ceinture et
+            bretelles avec le plafond de taille ci-dessus. */}
+        <em className="i-accent--light">
+          par un ébéniste en <span style={{ whiteSpace: 'nowrap' }}>Haute-Savoie.</span>
+        </em>
       </motion.h1>
 
       <motion.p

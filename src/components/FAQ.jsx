@@ -37,19 +37,30 @@ function Item({ faq, isOpen, onToggle, index }) {
           rendu que lorsqu'il était ouvert : le bouton portait alors un
           `aria-controls` désignant un identifiant absent du document, ce qu'un
           lecteur d'écran signale comme une référence cassée.
-          La visibilité ne bascule qu'à la FIN de l'animation (`transitionEnd`),
-          pour que le repli reste animé tout en retirant le texte replié du
-          parcours clavier et de l'arbre d'accessibilité. */}
+
+          ⚠ NE PAS confier `visibility` à framer-motion — ni par `style`, ni
+          par `transitionEnd`, ni dans l'objet `animate`. Dès qu'il a posé la
+          valeur une fois, il en devient propriétaire et ignore ce que React
+          lui passe ensuite ; combinée à `height: 'auto'`, qui demande une
+          mesure, la bascule devient non déterministe. C'est le bug du
+          16/09/2026, resté six semaines en ligne : seule la première question
+          affichait sa réponse, les cinq autres ouvraient un panneau vide qui
+          poussait la page. Un rafistolage du 28/10 a encore laissé deux
+          questions sur six en échec, au hasard des enchaînements de clics.
+
+          Le repli replie donc UNIQUEMENT la hauteur et l'opacité, que
+          framer-motion sait animer. Le texte replié sort de l'arbre
+          d'accessibilité par `aria-hidden`, piloté par React seul : une valeur
+          booléenne, aucune animation, aucun état à synchroniser.
+          Ce panneau ne contient aucun élément focalisable (un seul <p>), donc
+          `aria-hidden` n'y piège aucun arrêt de tabulation. */}
       <motion.div
         id={panelId} role="region" aria-labelledby={btnId}
+        aria-hidden={!isOpen}
         initial={false}
-        animate={{
-          height: isOpen ? 'auto' : 0,
-          opacity: isOpen ? 1 : 0,
-          transitionEnd: { visibility: isOpen ? 'visible' : 'hidden' },
-        }}
+        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-        style={{ overflow: 'hidden', visibility: isOpen ? 'visible' : 'hidden' }}
+        style={{ overflow: 'hidden' }}
       >
         <p style={{ fontFamily: 'var(--f-sans)', fontSize: 'clamp(1.02rem, 1.2vw, 1.15rem)', lineHeight: 1.72, color: 'var(--c-texte-2)', paddingBottom: 'var(--sp-5)', maxWidth: '60ch' }}>{faq.a}</p>
       </motion.div>

@@ -125,7 +125,13 @@ export default function Nav() {
             aria-expanded={open}
             aria-controls={open ? 'menu-mobile' : undefined}
             onClick={() => setOpen(!open)}
-            style={{ flexDirection: 'column', gap: '5px', padding: '8px', display: 'none' }}
+            /* 44 × 44 px minimum : les trois barres ne font que 24 × 14,5 px,
+               et avec 8 px de marge intérieure la cible tombait à 40 × 31 px.
+               C'est le seul bouton du site sous le seuil tactile recommandé,
+               et c'est celui qui ouvre la navigation sur mobile. Le dessin ne
+               bouge pas, seule la zone cliquable s'élargit autour. */
+            style={{ flexDirection: 'column', gap: '5px', padding: '8px', display: 'none',
+                     minWidth: '44px', minHeight: '44px', alignItems: 'center', justifyContent: 'center' }}
           >
             {[0, 1, 2].map((i) => (
               <motion.span key={i}

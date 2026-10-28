@@ -195,9 +195,16 @@ ul     { list-style: none; }
   text-wrap: balance;
 }
 
+/* Plafond à 3.5rem (56 px) et non 4rem (64 px) — mesuré, pas estimé.
+   La colonne des en-têtes de section (SectionHeader) est fixe : elle ne suit
+   pas la largeur de l'écran, alors que `4vw` la suit. Au-delà de ~1350 px de
+   fenêtre le titre le plus long du site débordait sur une troisième ligne.
+   56 px est la plus grande taille qui tienne en deux lignes dans les 68ch de
+   la colonne. En dessous de 1400 px de fenêtre, `4vw` passe sous le plafond :
+   le rendu sur portable et sur tablette est donc inchangé. */
 .h2 {
   font-family: var(--f-serif);
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0;
